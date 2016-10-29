@@ -73,7 +73,7 @@ public abstract class BaseStep implements Step {
 
     protected void mbRun() {
         TextParse textParse = getTextParse();
-        if (textParse != null && (base))
+        if (textParse != null && (mb))
             textParse.baseRun();
     }
 }

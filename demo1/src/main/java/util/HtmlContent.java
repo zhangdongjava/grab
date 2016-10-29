@@ -156,18 +156,19 @@ public class HtmlContent {
      *
      * @param name
      */
-    public void linkName(String name, boolean like) {
+    public boolean linkName(String name, boolean like) {
         vailte();
         String url = getUrl(name, like);
         if (url == null) {
             cick_jx();
             url = getUrl(name, like);
             if (url != null) {
-                linkUrl(url);
+                return linkUrl(url);
             }
         } else {
-            linkUrl(url);
+            return linkUrl(url);
         }
+        return false;
     }
 
     /**
@@ -175,18 +176,19 @@ public class HtmlContent {
      *
      * @param name
      */
-    public void linkName(String name, String notName) {
+    public boolean linkName(String name, String notName) {
         vailte();
         String url = getUrl(name, notName);
         if (url == null) {
             cick_jx();
             url = getUrl(name, notName);
             if (url != null) {
-                linkUrl(url);
+                return linkUrl(url);
             }
         } else {
-            linkUrl(url);
+            return linkUrl(url);
         }
+        return false;
     }
 
     private void cick_jx() {
@@ -203,15 +205,16 @@ public class HtmlContent {
     }
 
 
-    public void linkUrl(String url) {
-        linkUrl(url, 0);
+    public boolean linkUrl(String url) {
+        return linkUrl(url, 0);
     }
 
-    private void linkUrl(String url, int count) {
-        if (count > LINE_COUNT) return;
+    private boolean linkUrl(String url, int count) {
+        if (count > LINE_COUNT) return false;
         try {
             await();
             document = Jsoup.parse(new URL(url), 2000);
+            document.getElementsByTag("form").remove();
             urlMap.clear();
             mainWindow.setHtml(document.html());
         } catch (Exception e) {
@@ -219,6 +222,7 @@ public class HtmlContent {
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);
         }
+        return true;
     }
 
     private void await() throws InterruptedException {

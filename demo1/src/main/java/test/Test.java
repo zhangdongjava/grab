@@ -21,15 +21,14 @@ public class Test {
         String str = TextParse.class.getResource("/").getPath() + "dbc";
         File file = new File(str);
         MainWindow mainWindow = new MainWindow();
-        HtmlContent content = HtmlContent.initHtmlContent("http://xfhero1.yytou.com/gCmd.do?cmd=77c2&sid=25pq4s3bj1h3667y06scnl", mainWindow);
+        HtmlContent content = HtmlContent.initHtmlContent("http://xfhero45.yytou.com/gCmd.do?cmd=a&sid=epf90c3bjj03n2c5vrd85", mainWindow);
         new Thread(() -> {
             TextParse textParse = null;
             try {
                 textParse = TextParse.getInstance(file, content);
-                for (int i = 0; i < 103; i++) {
-                    textParse.run();
-                }
-                System.out.println("脚本结束!!");
+               while (true){
+                   textParse.run();
+               }
             } catch (Exception e) {
                 System.out.println("解析脚本 文件失败!" + e.toString());
             }

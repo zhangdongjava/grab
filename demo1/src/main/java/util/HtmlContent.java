@@ -17,7 +17,7 @@ import java.util.Map;
  * Created by dell_2 on 2016/10/29.
  */
 public class HtmlContent {
-    private static int LINE_COUNT = 10;
+    private static int LINE_COUNT = 120;
     private Document document;
     public static String baseUrl;
     public static int TIME_WAIT = 900;
@@ -248,7 +248,7 @@ public class HtmlContent {
     }
 
     private boolean linkUrl(String url, int count) {
-        if (count > LINE_COUNT) return false;
+        if (count > LINE_COUNT) throw new RuntimeException("链接断开!");
         try {
             await();
             url = cleckUrl(url);
@@ -259,7 +259,6 @@ public class HtmlContent {
             buildAelements();
             mainWindow.setHtml(document.html());
         } catch (Exception e) {
-            e.printStackTrace();
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);
         }

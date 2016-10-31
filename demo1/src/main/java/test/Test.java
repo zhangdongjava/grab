@@ -26,10 +26,11 @@ public class Test {
 
     public static void run(HtmlContent content, String[] files) {
         //testRun(content);
-        scriptRun(content,files);
+        testScript(content);
+        //scriptRun(content, files);
     }
 
-    public static void  testRun(HtmlContent content){
+    public static void testRun(HtmlContent content) {
         new Thread(() -> {
             GoodsSale lcClear = new GoodsSale("柳虫_柳虫残骸");
             lcClear.setHtmlContent(content);
@@ -38,7 +39,20 @@ public class Test {
 
     }
 
-    public static void scriptRun(HtmlContent content, String[] files){
+    public static void testScript(HtmlContent content) {
+        new Thread(() -> {
+            try {
+                TextParse textParse = TextParse.getInstance("fresh", content);
+               while (true){
+                   textParse.run();
+               }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    public static void scriptRun(HtmlContent content, String[] files) {
         new Thread(() -> {
             TextParse textParse = null;
             try {

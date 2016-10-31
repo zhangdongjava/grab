@@ -21,6 +21,9 @@ import setp.impl.BaseStep;
 import test.Test;
 import util.HtmlContent;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * Created by dell_2 on 2016/10/29.
  */
@@ -62,7 +65,7 @@ public class HtmlPanel extends JFXPanel {
             VBox box = new VBox(10);
             HBox urlBox = new HBox(10);
             final TextField urlTextField = new TextField();
-            urlTextField.setText("http://xfhero1.yytou.com/gCmd.do?cmd=508f&sid=15ini53bmbu34i1yewqb9");
+            urlTextField.setText("http://xfhero1.yytou.com/gCmd.do?cmd=121a&sid=bc9m5a3bmih39n3gkutss");
             Button go = new Button("go");
             stop = new Button("stop");
             urlTextField.setPrefWidth(WIDTH - 150);
@@ -75,7 +78,11 @@ public class HtmlPanel extends JFXPanel {
             box.getChildren().add(view);
             root.getChildren().add(box);
             go.setOnAction(event -> {
-                content = HtmlContent.initHtmlContent(urlTextField.getText(), mainWindow);
+                try {
+                    content = HtmlContent.initHtmlContent(urlTextField.getText(), mainWindow);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 Test.run(content, MainWindow.scripts);
             });
             stop.setOnAction(event -> stopGoon());

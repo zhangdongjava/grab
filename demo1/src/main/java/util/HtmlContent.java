@@ -5,9 +5,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import setp.TextParse;
 import ui.MainWindow;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.HashMap;
@@ -40,25 +43,20 @@ public class HtmlContent {
      */
     public Elements delForms;
 
+    /**
+     * 解决战斗中
+     */
+    private static TextParse zdz;
+
     private HtmlContent(String url, MainWindow mainWindow) {
         setBaseUrl(url);
         this.mainWindow = mainWindow;
         linkUrl(url, 0);
     }
 
-    public static HtmlContent initHtmlContent(String url, MainWindow window) {
-        HtmlContent htmlContent = threadLocal.get();
-        if (htmlContent != null) {
-            return htmlContent;
-        }
-        synchronized (HtmlContent.class) {
-            htmlContent = threadLocal.get();
-            if (htmlContent == null) {
-                htmlContent = new HtmlContent(url, window);
-                htmlContent.goodsUtil = new GoodsUtil(window);
-                threadLocal.set(htmlContent);
-            }
-        }
+    public static HtmlContent initHtmlContent(String url, MainWindow window) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
+        HtmlContent htmlContent = new HtmlContent(url, window);
+        zdz = TextParse.getInstance("zdz", htmlContent);
         return htmlContent;
     }
 
@@ -241,6 +239,8 @@ public class HtmlContent {
         validate = true;
         if (exitsName("解除验证", false)) {
             ValidationKill.getValidationKill(this).kill();
+        } else if (document.text().contains("战斗中，不能参战")) {
+            zdz.run();
         }
         validate = false;
     }

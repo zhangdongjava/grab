@@ -69,6 +69,8 @@ public class TextParse {
                 manyStep = StepUtil.getManny(line.substring(4));
                 inMang = true;
                 baseList.add(manyStep);
+                manyStep.setStep(this);
+                manyStep.setHtmlContent(htmlContent);
             } else {
                 step = StepUtil.getStep(line.substring(4));
                 step.setHtmlContent(htmlContent);
@@ -94,6 +96,8 @@ public class TextParse {
             step = new GoodsSale(line.substring(4));
         } else if (line.endsWith("{")) {
             manyStep = StepUtil.getManny(line);
+            manyStep.setStep(this);
+            manyStep.setHtmlContent(htmlContent);
             inMang = true;
             linkedList.add(manyStep);
         } else if (line.equals("}")) {

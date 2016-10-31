@@ -23,6 +23,7 @@ public class StepUtil {
         map.put("whileNot", WhileNotTextStep.class);
         manymap.put("first{", FirstStep.class);
         manymap.put("many{", ManyStep.class);
+        manymap.put("fresh{", TimeStep.class);
     }
 
     public static Step getStep(String line) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {

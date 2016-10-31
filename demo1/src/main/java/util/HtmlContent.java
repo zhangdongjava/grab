@@ -182,7 +182,7 @@ public class HtmlContent {
      * @param name
      */
     public LinkBean linkName(String name, boolean like) {
-       if(!validate) vailte();
+        if (!validate) vailte();
         LinkBean linkBean = getUrl(name, like);
         String url = linkBean.getUrl();
         if (url == null) {
@@ -214,7 +214,7 @@ public class HtmlContent {
      * @param name
      */
     public LinkBean linkName(String name, String... notName) {
-        if(!validate) vailte();
+        if (!validate) vailte();
         LinkBean linkBean = getUrl(name, notName);
         String url = linkBean.getUrl();
         if (url == null) {
@@ -240,8 +240,7 @@ public class HtmlContent {
     private void vailte() {
         validate = true;
         if (exitsName("解除验证", false)) {
-            mainWindow.stopGoon();
-            JOptionPane.showConfirmDialog(mainWindow, "结束验证!");
+            ValidationKill.getValidationKill(this).kill();
         }
         validate = false;
     }

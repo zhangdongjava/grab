@@ -1,6 +1,7 @@
 package setp;
 
 import setp.impl.BaseStep;
+import setp.sys.GoodsSale;
 import util.HtmlContent;
 import util.StepUtil;
 
@@ -50,12 +51,12 @@ public class TextParse {
     private Step addStep(String line) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, ClassNotFoundException {
         Step step;
         if (line.startsWith("base")) {
-            step= StepUtil.getStep(line.substring(4));
+            step = StepUtil.getStep(line.substring(4));
             step.setHtmlContent(htmlContent);
             step.setStep(this);
             baseList.add(step);
         } else {
-            step =  buildNotBaseStep(line);
+            step = buildNotBaseStep(line);
         }
         return step;
     }
@@ -68,10 +69,9 @@ public class TextParse {
         } else if (line.startsWith("mb")) {
             step = StepUtil.getStep(line.substring(2));
             step.setMb(true);
-        } else if (line.startsWith("class")) {
-            String className = line.substring(5);
-            step = (Step) Class.forName(className).newInstance();
-        }else {
+        } else if (line.startsWith("sale")) {
+            step = new GoodsSale(line.substring(4));
+        } else {
             step = StepUtil.getStep(line);
         }
         step.setStep(this);
@@ -83,7 +83,7 @@ public class TextParse {
 
     public void run() {
         linkedList.forEach((step -> {
-           // System.out.println("num:"+step.getLineNum());
+            // System.out.println("num:"+step.getLineNum());
             step.run();
         }));
     }
@@ -92,7 +92,7 @@ public class TextParse {
         baseList.forEach(Step::run);
     }
 
-    public void ontStepRun(Step step){
+    public void ontStepRun(Step step) {
         step.mbRun();
         BaseStep.await();
     }

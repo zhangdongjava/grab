@@ -1,13 +1,11 @@
 package test;
 
 import setp.TextParse;
-import setp.sys.LcClear;
-import sun.font.ScriptRun;
+import setp.sys.GoodsSale;
 import ui.MainWindow;
 import util.HtmlContent;
 
 import javax.swing.*;
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
@@ -33,7 +31,7 @@ public class Test {
 
     public static void  testRun(HtmlContent content){
         new Thread(() -> {
-            LcClear lcClear = new LcClear();
+            GoodsSale lcClear = new GoodsSale("柳虫_柳虫残骸");
             lcClear.setHtmlContent(content);
             lcClear.run();
         }).start();

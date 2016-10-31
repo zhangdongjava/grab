@@ -45,4 +45,8 @@ public class MainWindow extends JFrame {
         stringBuffer.deleteCharAt(stringBuffer.length()-1);
         jLabel.setText(stringBuffer.toString());
     }
+
+    public void stopGoon(){
+        htmlPanel.stopGoon();
+    }
 }

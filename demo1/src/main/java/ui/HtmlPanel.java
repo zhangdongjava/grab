@@ -36,6 +36,7 @@ public class HtmlPanel extends JFXPanel {
     private MainWindow mainWindow;
 
     private WebView view;
+    private Button stop;
 
     public HtmlPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -63,12 +64,12 @@ public class HtmlPanel extends JFXPanel {
             final TextField urlTextField = new TextField();
             urlTextField.setText("http://xfhero45.yytou.com/gCmd.do?cmd=565b&sid=4q0txn3blvkfn7hquvl7m");
             Button go = new Button("go");
-            Button stop = new Button("stop");
+            stop = new Button("stop");
             urlTextField.setPrefWidth(WIDTH - 150);
-            urlBox.getChildren().addAll(urlTextField, go,stop);
-            view.setMinSize(widthDouble, heightDouble-100);
-            view.setMaxSize(widthDouble, heightDouble-50);
-            view.setPrefSize(widthDouble, heightDouble-50);
+            urlBox.getChildren().addAll(urlTextField, go, stop);
+            view.setMinSize(widthDouble, heightDouble - 100);
+            view.setMaxSize(widthDouble, heightDouble - 50);
+            view.setPrefSize(widthDouble, heightDouble - 50);
             root.getChildren().add(view);
             box.getChildren().add(urlBox);
             box.getChildren().add(view);
@@ -77,31 +78,30 @@ public class HtmlPanel extends JFXPanel {
                 content = HtmlContent.initHtmlContent(urlTextField.getText(), mainWindow);
                 Test.run(content, MainWindow.scripts);
             });
-            stop.setOnAction(event -> StopGoon(event));
+            stop.setOnAction(event -> stopGoon());
         });
     }
 
     /**
      * 暂停或继续
-     *
-     * @param event
      */
-    private void StopGoon(ActionEvent event) {
-        Button stop = (Button) event.getSource();
-        if (BaseStep.IS_WAIT) {
-            WebEngine engine = view.getEngine();
-            String location = engine.getLocation();
-            if(location != null && !"".equals(location)){
-                System.out.println(location);
-                content.linkUrl(location);
+    public void stopGoon() {
+        Platform.runLater(() -> {
+            if (BaseStep.IS_WAIT) {
+                WebEngine engine = view.getEngine();
+                String location = engine.getLocation();
+                if (location != null && !"".equals(location)) {
+                    System.out.println(location);
+                    content.linkUrl(location);
+                }
+                BaseStep.IS_WAIT = false;
+                stop.setText("stop");
+                BaseStep.anotify();
+            } else {
+                BaseStep.IS_WAIT = true;
+                stop.setText("go on");
             }
-            BaseStep.IS_WAIT = false;
-            stop.setText("stop");
-            BaseStep.anotify();
-        } else {
-            BaseStep.IS_WAIT = true;
-            stop.setText("go on");
-        }
+        });
     }
 
 }

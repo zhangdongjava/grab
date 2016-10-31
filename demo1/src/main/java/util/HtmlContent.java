@@ -98,7 +98,7 @@ public class HtmlContent {
         if (linkBean != null) return linkBean;
         linkBean = new LinkBean();
         Elements elements = document.getElementsByTag("a");
-        Element element = getAelementNotName(elements, name, linkBean,notName);
+        Element element = getAelementNotName(elements, name, linkBean, notName);
         if (element != null) {
             String url = element.attr("href");
             linkBean.setUrl(url);
@@ -131,7 +131,7 @@ public class HtmlContent {
     private Element getAelementNotName(Elements elements, String name, LinkBean linkBean, String... notName) {
         for (Element element : elements) {
             String text = element.text();
-            if (text.contains(name) && !textContainArray(text,notName)) {
+            if (text.contains(name) && !textContainArray(text, notName)) {
                 linkBean.setClickName(text);
                 if (text.contains("x1")) {
                     goodsUtil.addGoods(text);
@@ -142,11 +142,11 @@ public class HtmlContent {
         return null;
     }
 
-    private boolean textContainArray(String text,String... notNames){
+    private boolean textContainArray(String text, String... notNames) {
         for (String notName : notNames) {
-            if(notName!= null){
-                if(text.contains(notName)){
-                    return  true;
+            if (notName != null) {
+                if (text.contains(notName)) {
+                    return true;
                 }
             }
         }
@@ -237,8 +237,8 @@ public class HtmlContent {
 
     private void vailte() {
         if (exitsName("解除验证", false)) {
+            mainWindow.stopGoon();
             JOptionPane.showConfirmDialog(mainWindow, "结束验证!");
-            throw new RuntimeException("解除验证");
         }
     }
 

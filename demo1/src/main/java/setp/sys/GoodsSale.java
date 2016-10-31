@@ -25,7 +25,10 @@ public class GoodsSale extends BaseStep {
             if (val != null && !"".equals(val.trim())) {
                 String[] vvs = val.split("_");
                 if (vvs.length > 0) {
-                    maps.put(vvs[0], vvs[1]);
+                    String desc = null;
+                    if (vvs.length == 2)
+                        desc = vvs[1];
+                    maps.put(vvs[0], desc);
                 }
             }
         }

@@ -39,7 +39,6 @@ public class GoodsSale extends BaseStep {
     public void run() {
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("物品");
-        htmlContent.linkName("其它");
         do {
             salePage();
         } while (htmlContent.linkName("下.页").isSuccess());

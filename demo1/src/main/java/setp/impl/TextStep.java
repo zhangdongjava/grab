@@ -27,10 +27,10 @@ public class TextStep extends BaseStep {
         return testStep;
     }
 
-    public void run() {
+    public boolean run() {
         baseRun();
         textParse.ontStepRun(this);
-        htmlContent.linkName(text, like);
+        return htmlContent.linkName(text, like).isSuccess();
     }
 
     @Override

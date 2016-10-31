@@ -7,7 +7,7 @@ import util.HtmlContent;
  */
 public interface Step {
 
-    void run();
+    boolean run();
 
     void setStep(TextParse textParse);
 

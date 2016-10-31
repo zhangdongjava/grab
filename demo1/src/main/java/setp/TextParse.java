@@ -1,6 +1,8 @@
 package setp;
 
 import setp.impl.BaseStep;
+import setp.impl.FirstStep;
+import setp.impl.ManyStep;
 import setp.sys.GoodsSale;
 import util.HtmlContent;
 import util.StepUtil;
@@ -14,6 +16,12 @@ import java.util.LinkedList;
  */
 public class TextParse {
 
+    public final int NORMAL = 0;
+    public final int BASE = 1;
+    public final int TIME = 2;
+
+    public int statu = 0;
+
     private LinkedList<Step> linkedList;
     private LinkedList<Step> baseList;
 
@@ -21,6 +29,10 @@ public class TextParse {
 
 
     private HtmlContent htmlContent;
+
+    private ManyStep manyStep;
+
+    private boolean inMang = false;
 
     public TextParse() {
         linkedList = new LinkedList<>();
@@ -43,7 +55,9 @@ public class TextParse {
         int index = 0;
         while (line != null) {
             Step step = addStep(line.trim());
-            step.setLineNum(++index);
+            if (step != null) {
+                step.setLineNum(++index);
+            }
             line = reader.readLine();
         }
     }
@@ -62,7 +76,7 @@ public class TextParse {
     }
 
     private Step buildNotBaseStep(String line) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, ClassNotFoundException, InstantiationException {
-        Step step;
+        Step step = null;
         if (line.startsWith("b")) {
             step = StepUtil.getStep(line.substring(1));
             step.setBase(true);
@@ -71,12 +85,26 @@ public class TextParse {
             step.setMb(true);
         } else if (line.startsWith("sale")) {
             step = new GoodsSale(line.substring(4));
+        } else if (line.endsWith("{")) {
+            manyStep = StepUtil.getManny(line);
+            inMang = true;
+        } else if (line.equals("}")) {
+            inMang = false;
+            linkedList.add(manyStep);
+            manyStep = null;
         } else {
             step = StepUtil.getStep(line);
         }
-        step.setStep(this);
-        step.setHtmlContent(htmlContent);
-        linkedList.add(step);
+        if (step != null) {
+            step.setStep(this);
+            step.setHtmlContent(htmlContent);
+            if (!inMang) {
+                linkedList.add(step);
+            } else {
+                manyStep.addStep(step);
+            }
+        }
+
         return step;
     }
 
@@ -89,7 +117,11 @@ public class TextParse {
     }
 
     public void baseRun() {
-        baseList.forEach(Step::run);
+        if (statu == NORMAL) {
+            statu = BASE;
+            baseList.forEach(Step::run);
+            statu = NORMAL;
+        }
     }
 
     public void ontStepRun(Step step) {

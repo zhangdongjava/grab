@@ -8,7 +8,6 @@ public class WhileNotConditionStep extends BaseStep {
     private String whileText;
 
 
-
     private WhileNotConditionStep() {
     }
 
@@ -33,13 +32,16 @@ public class WhileNotConditionStep extends BaseStep {
         return whileStep;
     }
 
-    public void run() {
+    public boolean run() {
         baseRun();
+        boolean res = false;
         while (htmlContent.exitsName(whileText, like)) {
             textParse.ontStepRun(this);
             htmlContent.linkName(whileText, like);
+            res = true;
         }
 
+        return res;
     }
 
     @Override

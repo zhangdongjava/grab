@@ -40,13 +40,16 @@ public class WhileNotTextStep extends BaseStep {
         return notTextStep;
     }
 
-    public void run() {
+    public boolean run() {
+        boolean res = false;
         baseRun();
         while (htmlContent.exitsName(whileText, notText)) {
+            res = true;
             textParse.ontStepRun(this);
             htmlContent.linkName(whileText, notText);
         }
 
+        return res;
     }
 
     @Override

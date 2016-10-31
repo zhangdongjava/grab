@@ -48,14 +48,17 @@ public class ForStep extends BaseStep {
         return forStep;
     }
 
-    public void run() {
+    public boolean run() {
+        boolean res = false;
         baseRun();
         for (int i = 0; i < forCount; i++) {
             if (!htmlContent.exitsName(whileText, like))
-                return;
+                return res;
+            res = true;
             textParse.ontStepRun(this);
             htmlContent.linkName(whileText, like);
         }
+        return res;
     }
 
     @Override

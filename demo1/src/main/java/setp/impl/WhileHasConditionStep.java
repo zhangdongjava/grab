@@ -1,5 +1,7 @@
 package setp.impl;
 
+import bean.LinkBean;
+
 /**
  * Created by dell_2 on 2016/10/29.
  */
@@ -64,15 +66,20 @@ public class WhileHasConditionStep extends BaseStep {
         return whileStep;
     }
 
-    public void run() {
+    public boolean run() {
+        boolean res = false;
         baseRun();
         while (!htmlContent.exitsName(triggerText, triggerLike)
-                &&htmlContent.exitsName(whileText, whileLike)) {
+                && htmlContent.exitsName(whileText, whileLike)) {
+            res = true;
             textParse.ontStepRun(this);
             htmlContent.linkName(whileText, whileLike);
         }
         textParse.ontStepRun(this);
-        htmlContent.linkName(triggerText, triggerLike);
+        LinkBean r = htmlContent.linkName(triggerText, triggerLike);
+        if (res)
+            return res;
+        return r.isSuccess();
     }
 
     @Override

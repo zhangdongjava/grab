@@ -62,7 +62,7 @@ public class HtmlPanel extends JFXPanel {
             VBox box = new VBox(10);
             HBox urlBox = new HBox(10);
             final TextField urlTextField = new TextField();
-            urlTextField.setText("http://xfhero45.yytou.com/gCmd.do?cmd=565b&sid=4q0txn3blvkfn7hquvl7m");
+            urlTextField.setText("http://xfhero1.yytou.com/gCmd.do?cmd=508f&sid=15ini53bmbu34i1yewqb9");
             Button go = new Button("go");
             stop = new Button("stop");
             urlTextField.setPrefWidth(WIDTH - 150);

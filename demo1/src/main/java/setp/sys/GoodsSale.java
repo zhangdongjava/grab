@@ -36,7 +36,7 @@ public class GoodsSale extends BaseStep {
     }
 
     @Override
-    public void run() {
+    public boolean run() {
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("物品");
         do {
@@ -48,6 +48,7 @@ public class GoodsSale extends BaseStep {
         System.out.println("结束!!");
         System.out.println("结束!!");
 
+        return false;
     }
 
 

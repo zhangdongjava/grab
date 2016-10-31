@@ -1,6 +1,5 @@
 package setp.impl;
 
-import org.jsoup.select.Elements;
 import setp.Step;
 import setp.TextParse;
 import util.HtmlContent;
@@ -8,7 +7,7 @@ import util.HtmlContent;
 /**
  * Created by dell_2 on 2016/10/29.
  */
-public  class BaseStep implements Step {
+public class BaseStep implements Step {
 
     public static boolean IS_WAIT = false;
 
@@ -30,7 +29,6 @@ public  class BaseStep implements Step {
     protected boolean like = false;
 
 
-
     public void setLike(boolean like) {
         this.like = like;
     }
@@ -44,8 +42,8 @@ public  class BaseStep implements Step {
     }
 
     @Override
-    public void run() {
-
+    public boolean run() {
+        return false;
     }
 
     @Override

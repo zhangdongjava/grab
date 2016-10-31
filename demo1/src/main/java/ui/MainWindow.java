@@ -8,20 +8,20 @@ import java.util.Map;
  */
 public class MainWindow extends JFrame {
 
-    private  HtmlPanel htmlPanel;
+    private HtmlPanel htmlPanel;
 
     private JLabel jLabel = new JLabel("暂无物品!");
 
-    public static String[] scripts={"clear"};
+    public static String[] scripts = {"first"};
 
-    public MainWindow(){
-        this.setSize(320,600);
+    public MainWindow() {
+        this.setSize(320, 600);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         htmlPanel = new HtmlPanel(this);
-        htmlPanel.setBounds(0,40,HtmlPanel.WIDTH,HtmlPanel.HEIGHT);
-        jLabel.setBounds(5,5,650,40);
+        htmlPanel.setBounds(0, 40, HtmlPanel.WIDTH, HtmlPanel.HEIGHT);
+        jLabel.setBounds(5, 5, 650, 40);
         this.add(htmlPanel);
         this.add(jLabel);
         this.setVisible(true);
@@ -32,21 +32,21 @@ public class MainWindow extends JFrame {
         new MainWindow();
     }
 
-    public void setHtml(String html){
+    public void setHtml(String html) {
         htmlPanel.setHtml(html);
     }
 
     public void showGoods(Map<String, Integer> goods) {
         StringBuffer stringBuffer = new StringBuffer();
         for (Map.Entry<String, Integer> entry : goods.entrySet()) {
-            stringBuffer.append(entry.getKey()+":"+entry.getValue()+",");
+            stringBuffer.append(entry.getKey() + ":" + entry.getValue() + ",");
         }
-        if(stringBuffer.length()>0)
-        stringBuffer.deleteCharAt(stringBuffer.length()-1);
+        if (stringBuffer.length() > 0)
+            stringBuffer.deleteCharAt(stringBuffer.length() - 1);
         jLabel.setText(stringBuffer.toString());
     }
 
-    public void stopGoon(){
+    public void stopGoon() {
         htmlPanel.stopGoon();
     }
 }

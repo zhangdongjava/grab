@@ -23,6 +23,8 @@ public class HtmlContent {
     public static int TIME_WAIT = 900;
     public static long CLICK_TIME = System.currentTimeMillis();
 
+    private boolean validate = false;
+
     private static ThreadLocal<HtmlContent> threadLocal = new InheritableThreadLocal<HtmlContent>();
 
     private Map<String, LinkBean> urlMap = new HashMap<>();
@@ -180,7 +182,7 @@ public class HtmlContent {
      * @param name
      */
     public LinkBean linkName(String name, boolean like) {
-        vailte();
+       if(!validate) vailte();
         LinkBean linkBean = getUrl(name, like);
         String url = linkBean.getUrl();
         if (url == null) {
@@ -212,7 +214,7 @@ public class HtmlContent {
      * @param name
      */
     public LinkBean linkName(String name, String... notName) {
-        vailte();
+        if(!validate) vailte();
         LinkBean linkBean = getUrl(name, notName);
         String url = linkBean.getUrl();
         if (url == null) {
@@ -236,10 +238,12 @@ public class HtmlContent {
     }
 
     private void vailte() {
+        validate = true;
         if (exitsName("解除验证", false)) {
             mainWindow.stopGoon();
             JOptionPane.showConfirmDialog(mainWindow, "结束验证!");
         }
+        validate = false;
     }
 
 
@@ -281,7 +285,7 @@ public class HtmlContent {
         baseUrl = url.substring(0, url.indexOf("/", 9) + 1);
     }
 
-    private String cleckUrl(String url) {
+    public String cleckUrl(String url) {
         if (!url.startsWith("http")) {
             url = baseUrl + url;
         }

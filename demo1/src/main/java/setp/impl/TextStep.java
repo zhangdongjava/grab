@@ -29,7 +29,7 @@ public class TextStep extends BaseStep {
 
     public void run() {
         baseRun();
-        await();
+        textParse.ontStepRun(this);
         htmlContent.linkName(text, like);
     }
 

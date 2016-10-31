@@ -1,5 +1,6 @@
 package setp.impl;
 
+import org.jsoup.select.Elements;
 import setp.Step;
 import setp.TextParse;
 import util.HtmlContent;
@@ -7,9 +8,11 @@ import util.HtmlContent;
 /**
  * Created by dell_2 on 2016/10/29.
  */
-public abstract class BaseStep implements Step {
+public  class BaseStep implements Step {
 
     public static boolean IS_WAIT = false;
+
+    private int lineNum;
 
     protected HtmlContent htmlContent;
 
@@ -26,6 +29,8 @@ public abstract class BaseStep implements Step {
 
     protected boolean like = false;
 
+
+
     public void setLike(boolean like) {
         this.like = like;
     }
@@ -36,6 +41,11 @@ public abstract class BaseStep implements Step {
 
     public void setBase(boolean base) {
         this.base = base;
+    }
+
+    @Override
+    public void run() {
+
     }
 
     @Override
@@ -67,19 +77,29 @@ public abstract class BaseStep implements Step {
         this.mb = mb;
     }
 
-    protected void baseRun() {
+    public void baseRun() {
         TextParse textParse = getTextParse();
         if (textParse != null && (base))
             textParse.baseRun();
     }
 
-    protected void mbRun() {
+    public void mbRun() {
         TextParse textParse = getTextParse();
         if (textParse != null && (mb))
             textParse.baseRun();
     }
 
-    protected static void await() {
+    @Override
+    public void setLineNum(int num) {
+        lineNum = num;
+    }
+
+    @Override
+    public int getLineNum() {
+        return lineNum;
+    }
+
+    public static void await() {
         if (IS_WAIT) {
             synchronized (BaseStep.class) {
                 try {

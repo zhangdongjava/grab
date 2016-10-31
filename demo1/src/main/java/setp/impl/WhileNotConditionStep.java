@@ -36,8 +36,7 @@ public class WhileNotConditionStep extends BaseStep {
     public void run() {
         baseRun();
         while (htmlContent.exitsName(whileText, like)) {
-            mbRun();
-            await();
+            textParse.ontStepRun(this);
             htmlContent.linkName(whileText, like);
         }
 

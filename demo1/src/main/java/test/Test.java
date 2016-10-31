@@ -1,6 +1,8 @@
 package test;
 
 import setp.TextParse;
+import setp.sys.LcClear;
+import sun.font.ScriptRun;
 import ui.MainWindow;
 import util.HtmlContent;
 
@@ -25,7 +27,20 @@ public class Test {
     }
 
     public static void run(HtmlContent content, String[] files) {
+        //testRun(content);
+        scriptRun(content,files);
+    }
 
+    public static void  testRun(HtmlContent content){
+        new Thread(() -> {
+            LcClear lcClear = new LcClear();
+            lcClear.setHtmlContent(content);
+            lcClear.run();
+        }).start();
+
+    }
+
+    public static void scriptRun(HtmlContent content, String[] files){
         new Thread(() -> {
             TextParse textParse = null;
             try {

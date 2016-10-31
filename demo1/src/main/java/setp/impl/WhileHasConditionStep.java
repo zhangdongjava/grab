@@ -68,11 +68,10 @@ public class WhileHasConditionStep extends BaseStep {
         baseRun();
         while (!htmlContent.exitsName(triggerText, triggerLike)
                 &&htmlContent.exitsName(whileText, whileLike)) {
-            mbRun();
-            await();
+            textParse.ontStepRun(this);
             htmlContent.linkName(whileText, whileLike);
         }
-        baseRun();
+        textParse.ontStepRun(this);
         htmlContent.linkName(triggerText, triggerLike);
     }
 

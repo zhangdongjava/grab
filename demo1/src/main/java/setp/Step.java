@@ -21,4 +21,12 @@ public interface Step {
 
     void setMb(boolean mb);
 
+    void baseRun();
+
+    void mbRun();
+
+    void setLineNum(int num);
+
+    int  getLineNum();
+
 }

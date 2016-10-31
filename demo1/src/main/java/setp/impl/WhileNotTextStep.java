@@ -43,8 +43,7 @@ public class WhileNotTextStep extends BaseStep {
     public void run() {
         baseRun();
         while (htmlContent.exitsName(whileText, notText)) {
-            mbRun();
-            await();
+            textParse.ontStepRun(this);
             htmlContent.linkName(whileText, notText);
         }
 

@@ -12,15 +12,15 @@ public class MainWindow extends JFrame {
 
     private JLabel jLabel = new JLabel("暂无物品!");
 
-    public static String[] scripts={"田鼠"};
+    public static String[] scripts={"liuchong"};
 
     public MainWindow(){
-        this.setSize(520,700);
+        this.setSize(320,600);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         htmlPanel = new HtmlPanel(this);
-        htmlPanel.setBounds(0,100,360,560);
+        htmlPanel.setBounds(0,40,HtmlPanel.WIDTH,HtmlPanel.HEIGHT);
         jLabel.setBounds(5,5,650,40);
         this.add(htmlPanel);
         this.add(jLabel);

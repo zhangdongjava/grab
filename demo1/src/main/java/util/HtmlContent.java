@@ -1,5 +1,6 @@
 package util;
 
+import bean.LinkBean;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -7,6 +8,7 @@ import org.jsoup.select.Elements;
 import ui.MainWindow;
 
 import javax.swing.*;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,13 +25,18 @@ public class HtmlContent {
 
     private static ThreadLocal<HtmlContent> threadLocal = new InheritableThreadLocal<HtmlContent>();
 
-    private Map<String, String> urlMap = new HashMap<>();
+    private Map<String, LinkBean> urlMap = new HashMap<>();
     /**
      * 物品计数工具
      */
     private GoodsUtil goodsUtil;
 
     private MainWindow mainWindow;
+
+    /**
+     * 删除的form表单
+     */
+    public Elements delForms;
 
     private HtmlContent(String url, MainWindow mainWindow) {
         setBaseUrl(url);
@@ -67,15 +74,17 @@ public class HtmlContent {
      * @param name
      * @return
      */
-    private String getUrl(String name, boolean like) {
+    private LinkBean getUrl(String name, boolean like) {
         String url;
+        LinkBean linkBean = new LinkBean();
         Elements elements = document.getElementsByTag("a");
-        Element element = getAelement(elements, like , name);
+        Element element = getAelement(elements, like, name, linkBean);
         if (element != null) {
             url = element.attr("href");
-            return url;
+            linkBean.setUrl(url);
+            return linkBean;
         }
-        return null;
+        return linkBean;
     }
 
     /**
@@ -84,29 +93,32 @@ public class HtmlContent {
      * @param name
      * @return
      */
-    private String getUrl(String name, String notName) {
-        String url = urlMap.get(name + "_" + notName);
-        if (url != null) return url;
+    private LinkBean getUrl(String name, String... notName) {
+        LinkBean linkBean = urlMap.get(name + "_" + notName);
+        if (linkBean != null) return linkBean;
+        linkBean = new LinkBean();
         Elements elements = document.getElementsByTag("a");
-        Element element = getAelementNotName(elements, name, notName);
+        Element element = getAelementNotName(elements, name, linkBean,notName);
         if (element != null) {
-            url = element.attr("href");
-            urlMap.put(name + "_" + notName, url);
+            String url = element.attr("href");
+            linkBean.setUrl(url);
+            urlMap.put(name + "_" + notName, linkBean);
         }
-        return url;
+        return linkBean;
     }
 
 
-    private Element getAelement(Elements elements,boolean like, String name) {
-        for (int i = elements.size() - 1; i >= 0; i--) {
-            Element element = elements.get(i);
+    private Element getAelement(Elements elements, boolean like, String name, LinkBean linkBean) {
+        for (Element element : elements) {
             if (!like) {
                 if (element.text().equals(name)) {
                     System.out.println(element.text());
+                    linkBean.setClickName(element.text());
                     return element;
                 }
             } else {
                 if (element.text().contains(name)) {
+                    linkBean.setClickName(element.text());
                     System.out.println(element.text());
                     return element;
                 }
@@ -116,11 +128,11 @@ public class HtmlContent {
         return null;
     }
 
-    private Element getAelementNotName(Elements elements, String name, String notName) {
-        for (int i = elements.size() - 1; i >= 0; i--) {
-            Element element = elements.get(i);
+    private Element getAelementNotName(Elements elements, String name, LinkBean linkBean, String... notName) {
+        for (Element element : elements) {
             String text = element.text();
-            if (text.contains(name) && !text.contains(notName)) {
+            if (text.contains(name) && !textContainArray(text,notName)) {
+                linkBean.setClickName(text);
                 if (text.contains("x1")) {
                     goodsUtil.addGoods(text);
                 }
@@ -130,6 +142,17 @@ public class HtmlContent {
         return null;
     }
 
+    private boolean textContainArray(String text,String... notNames){
+        for (String notName : notNames) {
+            if(notName!= null){
+                if(text.contains(notName)){
+                    return  true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * 超链接name是否存在
      *
@@ -137,7 +160,7 @@ public class HtmlContent {
      * @return
      */
     public boolean exitsName(String name, boolean like) {
-        return getUrl(name, like) != null;
+        return getUrl(name, like).getUrl() != null;
     }
 
     /**
@@ -147,8 +170,8 @@ public class HtmlContent {
      * @param notName
      * @return
      */
-    public boolean exitsName(String name, String notName) {
-        return getUrl(name, notName) != null;
+    public boolean exitsName(String name, String... notName) {
+        return (getUrl(name, notName).getUrl()) != null;
     }
 
     /**
@@ -156,19 +179,22 @@ public class HtmlContent {
      *
      * @param name
      */
-    public boolean linkName(String name, boolean like) {
+    public LinkBean linkName(String name, boolean like) {
         vailte();
-        String url = getUrl(name, like);
+        LinkBean linkBean = getUrl(name, like);
+        String url = linkBean.getUrl();
         if (url == null) {
             cick_jx();
-            url = getUrl(name, like);
-            if (url != null) {
-                return linkUrl(url);
+            linkBean = getUrl(name, like);
+            if (linkBean.getUrl() != null) {
+                linkBean.setSuccess(linkUrl(linkBean.getUrl()));
+                return linkBean;
             }
         } else {
-            return linkUrl(url);
+            linkBean.setSuccess(linkUrl(linkBean.getUrl()));
+            return linkBean;
         }
-        return false;
+        return linkBean;
     }
 
     /**
@@ -176,24 +202,36 @@ public class HtmlContent {
      *
      * @param name
      */
-    public boolean linkName(String name, String notName) {
+    public LinkBean linkName(String name) {
+        return linkName(name, false);
+    }
+
+    /**
+     * 链接超链接name
+     *
+     * @param name
+     */
+    public LinkBean linkName(String name, String... notName) {
         vailte();
-        String url = getUrl(name, notName);
+        LinkBean linkBean = getUrl(name, notName);
+        String url = linkBean.getUrl();
         if (url == null) {
             cick_jx();
-            url = getUrl(name, notName);
-            if (url != null) {
-                return linkUrl(url);
+            linkBean = getUrl(name, notName);
+            if (linkBean.getUrl() != null) {
+                linkBean.setSuccess(linkUrl(linkBean.getUrl()));
+                return linkBean;
             }
         } else {
-            return linkUrl(url);
+            linkBean.setSuccess(linkUrl(linkBean.getUrl()));
+            return linkBean;
         }
-        return false;
+        return linkBean;
     }
 
     private void cick_jx() {
         while (exitsName("继续", false)) {
-            linkUrl(getUrl("继续", false));
+            linkUrl(getUrl("继续", false).getUrl());
         }
     }
 
@@ -213,8 +251,10 @@ public class HtmlContent {
         if (count > LINE_COUNT) return false;
         try {
             await();
+            url = cleckUrl(url);
             document = Jsoup.parse(new URL(url), 2000);
-            document.getElementsByTag("form").remove();
+            delForms = document.getElementsByTag("form").remove();
+            document.getElementsByTag("img").remove();
             urlMap.clear();
             buildAelements();
             mainWindow.setHtml(document.html());
@@ -242,11 +282,22 @@ public class HtmlContent {
         baseUrl = url.substring(0, url.indexOf("/", 9) + 1);
     }
 
-    private void buildAelements(){
-       Elements elements =  document.getElementsByTag("a");
-        for (Element element : elements) {
-            element.attr("href",baseUrl+element.attr("href"));
+    private String cleckUrl(String url) {
+        if (!url.startsWith("http")) {
+            url = baseUrl + url;
         }
+        return url;
+    }
+
+    private void buildAelements() {
+        Elements elements = document.getElementsByTag("a");
+        for (Element element : elements) {
+            element.attr("href", baseUrl + element.attr("href"));
+        }
+    }
+
+    public Document getDocument() {
+        return document;
     }
 }
 

@@ -138,3 +138,15 @@ fresh{
 上:万剑塔九(4,4)↑
 b刷新
 }
+fresh{
+神行
+黄泥冈
+下:小树林↓while2
+下:千年老树↓
+basewait1
+like大当家
+like攻击
+普通攻击while2
+like蒙汗药
+返回游戏
+}

@@ -245,8 +245,10 @@ public class HtmlContent {
         validate = true;
         if (exitsName("解除验证", false)) {
             ValidationKill.getValidationKill(this).kill();
+            throw new StepBackException();
         } else if (document.text().contains("战斗中，不能参战")) {
             zdz.run();
+            throw new StepBackException();
         }
         validate = false;
     }

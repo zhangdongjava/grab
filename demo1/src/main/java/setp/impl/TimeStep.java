@@ -33,7 +33,7 @@ public class TimeStep extends ManyStep {
         Calendar cd = Calendar.getInstance();
         cd.setTime(curr);
         cd.add(Calendar.MINUTE, 1);
-        cd.add(Calendar.SECOND, 20);
+        cd.add(Calendar.SECOND, 30);
         return cd.getTime();
     }
 

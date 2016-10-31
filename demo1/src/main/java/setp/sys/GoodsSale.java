@@ -69,19 +69,21 @@ public class GoodsSale extends BaseStep {
      * @param name 商品名称
      */
     public void saleOne(String name, String desc) {
-        System.out.println("卖掉一个商品:" + name + "-->" + desc);
+
         LinkBean res = htmlContent.linkName(name, getNotNames());
         Document doc = htmlContent.getDocument();
         String content = doc.text();
         if (desc != null && !"".equals(desc.trim())) {
             if (content.contains(desc)) {
                 sale();
+                System.out.println("卖掉一个商品:" + res.getClickName() + "-->" + desc);
             } else {
                 liuNames.add(res.getClickName());
                 htmlContent.linkName("返回列表");
             }
         } else {
             sale();
+            System.out.println("卖掉一个商品:" + res.getClickName() + "-->" + desc);
         }
     }
 

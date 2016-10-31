@@ -12,7 +12,7 @@ public class MainWindow extends JFrame {
 
     private JLabel jLabel = new JLabel("暂无物品!");
 
-    public static String[] scripts={"liuchong"};
+    public static String[] scripts={"clear"};
 
     public MainWindow(){
         this.setSize(320,600);

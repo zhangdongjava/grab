@@ -54,6 +54,7 @@ public class ForStep extends BaseStep {
             if (!htmlContent.exitsName(whileText, like))
                 return;
             mbRun();
+            textParse.ontStepRun(this);
             htmlContent.linkName(whileText, like);
         }
     }

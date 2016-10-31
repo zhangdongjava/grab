@@ -1,8 +1,5 @@
 package setp.impl;
 
-import setp.TextParse;
-import util.HtmlContent;
-
 /**
  * Created by dell_2 on 2016/10/29.
  */
@@ -69,8 +66,10 @@ public class WhileHasConditionStep extends BaseStep {
 
     public void run() {
         baseRun();
-        while (!htmlContent.exitsName(this.getTriggerText(), whileLike)) {
+        while (!htmlContent.exitsName(triggerText, triggerLike)
+                &&htmlContent.exitsName(whileText, whileLike)) {
             mbRun();
+            await();
             htmlContent.linkName(whileText, whileLike);
         }
         baseRun();

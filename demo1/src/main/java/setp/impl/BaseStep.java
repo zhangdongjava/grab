@@ -9,6 +9,8 @@ import util.HtmlContent;
  */
 public abstract class BaseStep implements Step {
 
+    public static boolean IS_WAIT = false;
+
     protected HtmlContent htmlContent;
 
     protected TextParse textParse;
@@ -75,5 +77,22 @@ public abstract class BaseStep implements Step {
         TextParse textParse = getTextParse();
         if (textParse != null && (mb))
             textParse.baseRun();
+    }
+
+    protected static void await() {
+        if (IS_WAIT) {
+            synchronized (BaseStep.class) {
+                try {
+                    BaseStep.class.wait();
+                } catch (InterruptedException e) {
+                }
+            }
+        }
+    }
+
+    public static void anotify() {
+        synchronized (BaseStep.class) {
+            BaseStep.class.notify();
+        }
     }
 }

@@ -70,9 +70,9 @@ public class HtmlContent {
     private String getUrl(String name, boolean like) {
         String url;
         Elements elements = document.getElementsByTag("a");
-        Element element = getAelement(elements, like ? null : name);
+        Element element = getAelement(elements, like , name);
         if (element != null) {
-            url = baseUrl + element.attr("href");
+            url = element.attr("href");
             return url;
         }
         return null;
@@ -90,17 +90,17 @@ public class HtmlContent {
         Elements elements = document.getElementsByTag("a");
         Element element = getAelementNotName(elements, name, notName);
         if (element != null) {
-            url = baseUrl + element.attr("href");
+            url = element.attr("href");
             urlMap.put(name + "_" + notName, url);
         }
         return url;
     }
 
 
-    private Element getAelement(Elements elements, String name) {
+    private Element getAelement(Elements elements,boolean like, String name) {
         for (int i = elements.size() - 1; i >= 0; i--) {
             Element element = elements.get(i);
-            if (name != null) {
+            if (!like) {
                 if (element.text().equals(name)) {
                     System.out.println(element.text());
                     return element;
@@ -216,6 +216,7 @@ public class HtmlContent {
             document = Jsoup.parse(new URL(url), 2000);
             document.getElementsByTag("form").remove();
             urlMap.clear();
+            buildAelements();
             mainWindow.setHtml(document.html());
         } catch (Exception e) {
             e.printStackTrace();
@@ -241,6 +242,12 @@ public class HtmlContent {
         baseUrl = url.substring(0, url.indexOf("/", 9) + 1);
     }
 
+    private void buildAelements(){
+       Elements elements =  document.getElementsByTag("a");
+        for (Element element : elements) {
+            element.attr("href",baseUrl+element.attr("href"));
+        }
+    }
 }
 
 

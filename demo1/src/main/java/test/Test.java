@@ -6,30 +6,38 @@ import util.HtmlContent;
 
 import javax.swing.*;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.LinkedList;
 
 /**
  * Created by dell_2 on 2016/10/29.
  */
 public class Test {
 
+    static LinkedList<TextParse> textParses = new LinkedList<>();
+
     public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InstantiationException, UnsupportedLookAndFeelException, ClassNotFoundException {
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");//Nimbus风格，jdk6
-        String str = TextParse.class.getResource("/").getPath() + "dbc";
-        File file = new File(str);
         MainWindow mainWindow = new MainWindow();
-        HtmlContent content = HtmlContent.initHtmlContent("http://xfhero45.yytou.com/gCmd.do?cmd=a&sid=epf90c3bjj03n2c5vrd85", mainWindow);
+
+
+    }
+
+    public static void run(HtmlContent content, String[] files) {
+
         new Thread(() -> {
             TextParse textParse = null;
             try {
-                textParse = TextParse.getInstance(file, content);
-               while (true){
-                   textParse.run();
-               }
+                for (String file : files) {
+                    textParse = TextParse.getInstance(file, content);
+                    textParses.add(textParse);
+                }
+                while (true) {
+                    textParses.forEach(TextParse::run);
+                }
             } catch (Exception e) {
+                e.printStackTrace();
                 System.out.println("解析脚本 文件失败!" + e.toString());
             }
         }).start();

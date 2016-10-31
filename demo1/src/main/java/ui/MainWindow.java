@@ -12,12 +12,14 @@ public class MainWindow extends JFrame {
 
     private JLabel jLabel = new JLabel("暂无物品!");
 
+    public static String[] scripts={"田鼠"};
+
     public MainWindow(){
         this.setSize(520,700);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        htmlPanel = new HtmlPanel();
+        htmlPanel = new HtmlPanel(this);
         htmlPanel.setBounds(0,100,360,560);
         jLabel.setBounds(5,5,650,40);
         this.add(htmlPanel);
@@ -25,8 +27,9 @@ public class MainWindow extends JFrame {
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+        UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");//Nimbus风格，jdk6
+        new MainWindow();
     }
 
     public void setHtml(String html){

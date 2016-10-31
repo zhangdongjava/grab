@@ -37,6 +37,7 @@ public class WhileNotConditionStep extends BaseStep {
         baseRun();
         while (htmlContent.exitsName(whileText, like)) {
             mbRun();
+            await();
             htmlContent.linkName(whileText, like);
         }
 

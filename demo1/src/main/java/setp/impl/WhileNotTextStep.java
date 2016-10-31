@@ -44,6 +44,7 @@ public class WhileNotTextStep extends BaseStep {
         baseRun();
         while (htmlContent.exitsName(whileText, notText)) {
             mbRun();
+            await();
             htmlContent.linkName(whileText, notText);
         }
 

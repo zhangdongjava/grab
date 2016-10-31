@@ -29,6 +29,7 @@ public class TextStep extends BaseStep {
 
     public void run() {
         baseRun();
+        await();
         htmlContent.linkName(text, like);
     }
 

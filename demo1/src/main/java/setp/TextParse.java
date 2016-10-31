@@ -17,7 +17,6 @@ public class TextParse {
 
     private File file;
 
-    private static TextParse textParse = new TextParse();
 
     private HtmlContent htmlContent;
 
@@ -26,8 +25,10 @@ public class TextParse {
         baseList = new LinkedList<>();
     }
 
-    public static TextParse getInstance(File file, HtmlContent htmlContent) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        textParse.file = file;
+    public static TextParse getInstance(String file, HtmlContent htmlContent) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        String str = TextParse.class.getResource("/").getPath() + file;
+        TextParse textParse = new TextParse();
+        textParse.file = new File(str);
         textParse.htmlContent = htmlContent;
         textParse.bulid();
         return textParse;
@@ -76,6 +77,10 @@ public class TextParse {
 
     public void baseRun() {
         baseList.forEach(Step::run);
+    }
+
+    public void ontStepRun(Step Step){
+
     }
 }
 

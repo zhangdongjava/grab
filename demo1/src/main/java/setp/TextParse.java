@@ -1,5 +1,6 @@
 package setp;
 
+import exception.StepBackException;
 import setp.impl.BaseStep;
 import setp.impl.FirstStep;
 import setp.impl.ManyStep;
@@ -34,6 +35,15 @@ public class TextParse {
 
     private boolean inMang = false;
 
+    /**
+     * 当前setp下标用于后退一步使用
+     */
+    private int currNormalIndex = 0;
+    /**
+     * 当前basesetp下标用于后退一步使用
+     */
+    private int currBaseIndex = 0;
+
     public TextParse() {
         linkedList = new LinkedList<>();
         baseList = new LinkedList<>();
@@ -54,9 +64,11 @@ public class TextParse {
         String line = reader.readLine();
         int index = 0;
         while (line != null) {
-            Step step = addStep(line.trim());
-            if (step != null) {
-                step.setLineNum(++index);
+            if (!line.trim().equals("")) {
+                Step step = addStep(line.trim());
+                if (step != null) {
+                    step.setLineNum(++index);
+                }
             }
             line = reader.readLine();
         }
@@ -111,7 +123,7 @@ public class TextParse {
             step.setHtmlContent(htmlContent);
             if (!inMang) {
                 linkedList.add(step);
-            }else{
+            } else {
                 manyStep.addStep(step);
             }
         }
@@ -121,16 +133,28 @@ public class TextParse {
 
 
     public void run() {
-        linkedList.forEach((step -> {
-            // System.out.println("num:"+step.getLineNum());
-            step.run();
-        }));
+        htmlContent.setCurrParse(this);
+        for (currNormalIndex = 0; currNormalIndex < linkedList.size(); currNormalIndex++) {
+            try {
+                System.out.println("普通脚本:" + linkedList.get(currNormalIndex));
+                linkedList.get(currNormalIndex).run();
+            } catch (StepBackException e) {
+                currNormalIndex -= 2;
+            }
+        }
     }
 
     public void baseRun() {
         if (statu == NORMAL) {
             statu = BASE;
-            baseList.forEach(Step::run);
+            for (currBaseIndex = 0; currBaseIndex < baseList.size(); currBaseIndex++) {
+                try {
+                    System.out.println("base脚本:" + baseList.get(currBaseIndex));
+                    baseList.get(currBaseIndex).run();
+                } catch (StepBackException e) {
+                    currNormalIndex -= 2;
+                }
+            }
             statu = NORMAL;
         }
     }

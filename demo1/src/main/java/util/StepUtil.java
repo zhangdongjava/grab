@@ -21,6 +21,7 @@ public class StepUtil {
         map.put("while2", WhileNotConditionStep.class);
         map.put("for", ForStep.class);
         map.put("whileNot", WhileNotTextStep.class);
+        map.put("wait", TimeWait.class);
         manymap.put("first{", FirstStep.class);
         manymap.put("many{", ManyStep.class);
         manymap.put("fresh{", TimeStep.class);

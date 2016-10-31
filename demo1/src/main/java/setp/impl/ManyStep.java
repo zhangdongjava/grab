@@ -18,7 +18,9 @@ public class ManyStep extends BaseStep {
 
     @Override
     public boolean run() {
-        steps.forEach(Step::run);
+        for (Step step : steps) {
+            step.run();
+        }
         return false;
     }
 

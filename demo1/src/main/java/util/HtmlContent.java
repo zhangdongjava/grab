@@ -1,6 +1,7 @@
 package util;
 
 import bean.LinkBean;
+import exception.StepBackException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -47,6 +48,8 @@ public class HtmlContent {
      * 解决战斗中
      */
     private static TextParse zdz;
+
+    private TextParse currParse;
 
     private HtmlContent(String url, MainWindow mainWindow) {
         setBaseUrl(url);
@@ -112,14 +115,12 @@ public class HtmlContent {
         for (Element element : elements) {
             if (!like) {
                 if (element.text().equals(name)) {
-                    System.out.println(element.text());
                     linkBean.setClickName(element.text());
                     return element;
                 }
             } else {
                 if (element.text().contains(name)) {
                     linkBean.setClickName(element.text());
-                    System.out.println(element.text());
                     return element;
                 }
 
@@ -230,8 +231,13 @@ public class HtmlContent {
     }
 
     private void cick_jx() {
+        boolean res = false;
         while (exitsName("继续", false)) {
             linkUrl(getUrl("继续", false).getUrl());
+            res = true;
+        }
+        if (res) {
+            throw new StepBackException();
         }
     }
 
@@ -300,6 +306,14 @@ public class HtmlContent {
 
     public Document getDocument() {
         return document;
+    }
+
+    public TextParse getCurrParse() {
+        return currParse;
+    }
+
+    public void setCurrParse(TextParse currParse) {
+        this.currParse = currParse;
     }
 }
 

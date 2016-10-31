@@ -16,9 +16,6 @@ public class TimeStep extends ManyStep {
     public boolean run() {
         boolean res = false;
         Date date1 = getNowBeforOneMinute();
-        System.out.println(date1.after(date));
-        System.out.println(date1);
-        System.out.println(date);
         if (date1.after(date)) {
             res = super.run();
             setDate();

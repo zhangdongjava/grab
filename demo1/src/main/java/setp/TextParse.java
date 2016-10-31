@@ -63,12 +63,19 @@ public class TextParse {
     }
 
     private Step addStep(String line) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, ClassNotFoundException {
-        Step step;
+        Step step = null;
         if (line.startsWith("base")) {
-            step = StepUtil.getStep(line.substring(4));
-            step.setHtmlContent(htmlContent);
-            step.setStep(this);
-            baseList.add(step);
+            if (line.endsWith("{")) {
+                manyStep = StepUtil.getManny(line.substring(4));
+                inMang = true;
+                baseList.add(manyStep);
+            } else {
+                step = StepUtil.getStep(line.substring(4));
+                step.setHtmlContent(htmlContent);
+                step.setStep(this);
+                baseList.add(step);
+            }
+
         } else {
             step = buildNotBaseStep(line);
         }
@@ -88,9 +95,9 @@ public class TextParse {
         } else if (line.endsWith("{")) {
             manyStep = StepUtil.getManny(line);
             inMang = true;
+            linkedList.add(manyStep);
         } else if (line.equals("}")) {
             inMang = false;
-            linkedList.add(manyStep);
             manyStep = null;
         } else {
             step = StepUtil.getStep(line);
@@ -100,7 +107,7 @@ public class TextParse {
             step.setHtmlContent(htmlContent);
             if (!inMang) {
                 linkedList.add(step);
-            } else {
+            }else{
                 manyStep.addStep(step);
             }
         }

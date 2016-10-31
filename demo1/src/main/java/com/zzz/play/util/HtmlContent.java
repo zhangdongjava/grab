@@ -159,6 +159,7 @@ public class HtmlContent {
      * @return
      */
     public boolean exitsName(String name, boolean like) {
+        if (!validate) vailte();
         return getUrl(name, like).getUrl() != null;
     }
 
@@ -170,6 +171,7 @@ public class HtmlContent {
      * @return
      */
     public boolean exitsName(String name, String... notName) {
+        if (!validate) vailte();
         return (getUrl(name, notName).getUrl()) != null;
     }
 
@@ -182,15 +184,8 @@ public class HtmlContent {
         if (!validate) vailte();
         LinkBean linkBean = getUrl(name, like);
         String url = linkBean.getUrl();
-        if (url == null) {
-            cick_jx();
-            linkBean = getUrl(name, like);
-            if (linkBean.getUrl() != null) {
-                linkBean.setSuccess(linkUrl(linkBean.getUrl()));
-                return linkBean;
-            }
-        } else {
-            linkBean.setSuccess(linkUrl(linkBean.getUrl()));
+        if (url != null) {
+            linkBean.setSuccess(linkUrl(url));
             return linkBean;
         }
         return linkBean;
@@ -214,39 +209,26 @@ public class HtmlContent {
         if (!validate) vailte();
         LinkBean linkBean = getUrl(name, notName);
         String url = linkBean.getUrl();
-        if (url == null) {
-            cick_jx();
-            linkBean = getUrl(name, notName);
-            if (linkBean.getUrl() != null) {
-                linkBean.setSuccess(linkUrl(linkBean.getUrl()));
-                return linkBean;
-            }
-        } else {
-            linkBean.setSuccess(linkUrl(linkBean.getUrl()));
+        if (url != null) {
+            linkBean.setSuccess(linkUrl(url));
             return linkBean;
         }
         return linkBean;
     }
 
     private void cick_jx() {
-        boolean res = false;
         while (exitsName("继续", false)) {
             linkUrl(getUrl("继续", false).getUrl());
-            res = true;
-        }
-        if (res) {
-            throw new StepBackException();
         }
     }
 
-    private void vailte() {
+    public void vailte() {
         validate = true;
+        cick_jx();
         if (exitsName("解除验证", false)) {
             ValidationKill.getValidationKill(this).kill();
-            throw new StepBackException();
         } else if (document.text().contains("战斗中，不能参战")) {
             zdz.run();
-            throw new StepBackException();
         }
         validate = false;
     }

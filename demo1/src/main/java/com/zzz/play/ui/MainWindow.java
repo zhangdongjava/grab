@@ -1,6 +1,8 @@
 package com.zzz.play.ui;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.Map;
 
 /**
@@ -8,7 +10,11 @@ import java.util.Map;
  */
 public class MainWindow extends JFrame {
 
-
+    private javax.swing.JLabel L_img;
+    private javax.swing.JLabel L_img2;
+    private PopupMenu pop;
+    private MenuItem open, close;
+    private TrayIcon trayicon;
     private TabPanel tabPanel;
     private MyDialog myDialog;
 
@@ -28,6 +34,7 @@ public class MainWindow extends JFrame {
         this.setContentPane(tabPanel);
         myDialog = new MyDialog(this);
         initMenu();
+        initToTray();
         this.setVisible(true);
     }
 
@@ -39,6 +46,55 @@ public class MainWindow extends JFrame {
         JMenuBar br = new JMenuBar();  //创建菜单工具栏
         br.add(jm);      //将菜单增加到菜单工具栏
         this.setJMenuBar(br);  //为 窗体设置  菜单工具栏
+    }
+
+    /**
+     * 初始化最小化托盘
+     */
+    private void initToTray() {
+        L_img = new javax.swing.JLabel();
+        L_img2 = new javax.swing.JLabel();
+
+        pop = new PopupMenu();
+        open = new MenuItem("open");
+        open.addActionListener((e) -> openFrame());
+
+        close = new MenuItem("close");
+        close.addActionListener((e) -> System.exit(-1));
+
+        pop.add(open);
+        pop.add(close);
+        if (SystemTray.isSupported()) {
+            SystemTray tray = SystemTray.getSystemTray();
+            Image icon = getToolkit().getImage(getClass().getResource("/image/icon.png"));
+            trayicon = new TrayIcon(icon, "java swing", pop);
+            trayicon.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getClickCount() == 2) {
+                        if (getExtendedState() == JFrame.ICONIFIED) {
+                            openFrame();// 还原窗口
+                        } else {
+                            // 设置窗口状态(最小化至托盘)
+                            setExtendedState(JFrame.ICONIFIED);
+                        }
+                    }
+                }
+            });
+
+            try {
+                tray.add(trayicon);
+            } catch (AWTException e) {
+                e.printStackTrace();
+            }
+        }
+        this.addWindowListener(new WindowAdapter() {
+            //窗口最小化
+            @Override
+            public void windowIconified(WindowEvent e) {
+                setVisible(false);// 设置为不可见
+            }
+        });
     }
 
     private void addTab() {
@@ -65,5 +121,15 @@ public class MainWindow extends JFrame {
     public void addTab(String name, String url) {
         tabPanel.addPanel(name, url);
         count++;
+    }
+
+    /**
+     * 从托盘显示出来
+     */
+    public void openFrame() {
+        setVisible(true);// 设置为可见
+        setAlwaysOnTop(true);// 设置置顶
+        // 设置窗口状态(在最小化状态弹出显示)
+        setExtendedState(JFrame.NORMAL);
     }
 }

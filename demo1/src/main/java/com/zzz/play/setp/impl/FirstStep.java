@@ -13,7 +13,6 @@ public class FirstStep extends ManyStep {
         for (int i = 0; i < steps.size(); i++) {
             Step step = steps.get(i);
             boolean res = step.run();
-            System.out.println("运行行脚本:"+step);
             if (!res && i == 0) {
                 return false;
             }

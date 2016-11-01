@@ -12,7 +12,7 @@ public class MainWindow extends JFrame {
 
     private JLabel jLabel = new JLabel("暂无物品!");
 
-    public static String[] scripts = {"first"};
+    public static String[] scripts = {"材料/血印分身蒙汗药", "材料/大白菜", "材料/柳虫"};
 
     public MainWindow() {
         this.setSize(320, 600);

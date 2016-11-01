@@ -132,9 +132,6 @@ public class HtmlContent {
             String text = element.text();
             if (text.contains(name) && !textContainArray(text, notName)) {
                 linkBean.setClickName(text);
-                if (text.contains("x1")) {
-                    goodsUtil.addGoods(text);
-                }
                 return element;
             }
         }

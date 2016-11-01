@@ -43,6 +43,8 @@ public class TextParse {
      */
     private int currBaseIndex = 0;
 
+    private String fileName;
+
     public TextParse() {
         linkedList = new LinkedList<>();
         baseList = new LinkedList<>();
@@ -163,6 +165,14 @@ public class TextParse {
     public void ontStepRun(Step step) {
         step.mbRun();
         BaseStep.await();
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }
 

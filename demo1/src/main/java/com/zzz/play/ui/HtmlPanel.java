@@ -19,7 +19,7 @@ import com.zzz.play.util.HtmlContent;
  */
 public class HtmlPanel extends JFXPanel {
 
-    private static final String urlStart = "http://";
+    private static final String url = "http://xfhero1.yytou.com/gCmd.do?cmd=7&sid=6r8sp03bnb2zcs8bodvqp";
 
     public static final int WIDTH = 300;
     public static final int HEIGHT = 500;
@@ -30,6 +30,7 @@ public class HtmlPanel extends JFXPanel {
 
     private WebView view;
     private Button stop;
+    private Button reload;
 
     public HtmlPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -55,11 +56,12 @@ public class HtmlPanel extends JFXPanel {
             VBox box = new VBox(10);
             HBox urlBox = new HBox(10);
             final TextField urlTextField = new TextField();
-            urlTextField.setText("http://xfhero1.yytou.com/gCmd.do?cmd=121a&sid=bc9m5a3bmih39n3gkutss");
+            urlTextField.setText(url);
             Button go = new Button("go");
             stop = new Button("stop");
-            urlTextField.setPrefWidth(WIDTH - 150);
-            urlBox.getChildren().addAll(urlTextField, go, stop);
+            reload = new Button("reload");
+            urlTextField.setPrefWidth(WIDTH - 180);
+            urlBox.getChildren().addAll(urlTextField, go, stop, reload);
             view.setMinSize(widthDouble, heightDouble - 100);
             view.setMaxSize(widthDouble, heightDouble - 50);
             view.setPrefSize(widthDouble, heightDouble - 50);
@@ -76,7 +78,15 @@ public class HtmlPanel extends JFXPanel {
                 Test.run(content, MainWindow.scripts);
             });
             stop.setOnAction(event -> stopGoon());
+            reload.setOnAction(event -> reload());
         });
+    }
+
+    /**
+     * 重新加载脚本
+     */
+    private void reload() {
+        Test.loadParse();
     }
 
     /**

@@ -16,6 +16,9 @@ import java.util.LinkedList;
 public class Test {
 
     static LinkedList<TextParse> textParses = new LinkedList<>();
+    static LinkedList<TextParse> runParses = new LinkedList<>();
+    static HtmlContent content;
+    static String[] files;
 
 
     public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InstantiationException, UnsupportedLookAndFeelException, ClassNotFoundException {
@@ -26,9 +29,12 @@ public class Test {
     }
 
     public static void run(HtmlContent content, String[] files) {
-        //testRun(content);
-        testScript(content);
-        //scriptRun(content, files);
+        Test.content = content;
+        Test.files = files;
+        loadParse();
+        //testRun(content)
+        // testScript(content);
+        scriptRun(content, files);
     }
 
     public static void testRun(HtmlContent content) {
@@ -43,7 +49,7 @@ public class Test {
     public static void testScript(HtmlContent content) {
         new Thread(() -> {
             try {
-                TextParse textParse = TextParse.getInstance("fresh", content);
+                TextParse textParse = TextParse.getInstance("材料/血印分身蒙汗药", content);
                 while (true) {
                     textParse.run();
                 }
@@ -53,26 +59,41 @@ public class Test {
         }).start();
     }
 
+    public static void loadParse() {
+        textParses.clear();
+        TextParse textParse = null;
+        for (String file : files) {
+            try {
+                textParse = TextParse.getInstance(file, content);
+                textParse.setFileName(file);
+                textParses.add(textParse);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println(file + "解析脚本 文件失败!" + e.toString());
+            }
+
+        }
+    }
+
     public static void scriptRun(HtmlContent content, String[] files) {
         new Thread(() -> {
             TextParse textParse = null;
-            try {
-                for (String file : files) {
-                    textParse = TextParse.getInstance(file, content);
-                    textParses.add(textParse);
-                }
-                while (true) {
-                    try {
-                        textParses.forEach(TextParse::run);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        System.out.println("运行脚本异常!" + e.toString());
+
+
+            while (true) {
+                runParses.clear();
+                runParses.addAll(textParses);
+                try {
+                    for (TextParse parse : runParses) {
+                        textParse = parse;
+                        textParse.run();
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println(textParse.getFileName() + "->运行脚本异常!" + e.toString());
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("解析脚本 文件失败!" + e.toString());
             }
+
         }).start();
     }
 }

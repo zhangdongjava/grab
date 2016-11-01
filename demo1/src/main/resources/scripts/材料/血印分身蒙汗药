@@ -14,7 +14,7 @@ like血印分身
 likexwhile2
 返回游戏
 }
-fresh{
+timeGlobal_90_{
 神行
 万剑宝塔
 右:万剑塔一(1,1)→
@@ -26,7 +26,7 @@ fresh{
 上:万剑塔一(4,4)↑
 b刷新
 }
-fresh{
+timeGlobal_90_{
 神行
 万剑宝塔
 守剑老人
@@ -40,7 +40,7 @@ fresh{
 上:万剑塔二(4,4)↑
 b刷新
 }
-fresh{
+timeGlobal_90_{
 神行
 万剑宝塔
 守剑老人
@@ -54,7 +54,7 @@ fresh{
 上:万剑塔三(4,4)↑
 b刷新
 }
-fresh{
+timeGlobal_90_{
 神行
 万剑宝塔
 守剑老人
@@ -68,7 +68,7 @@ fresh{
 上:万剑塔四(4,4)↑
 b刷新
 }
-fresh{
+timeGlobal_90_{
 神行
 万剑宝塔
 守剑老人
@@ -82,7 +82,7 @@ fresh{
 上:万剑塔五(4,4)↑
 b刷新
 }
-fresh{
+timeGlobal_90_{
 神行
 万剑宝塔
 守剑老人
@@ -96,7 +96,7 @@ fresh{
 上:万剑塔六(4,4)↑
 b刷新
 }
-fresh{
+timeGlobal_90_{
 神行
 万剑宝塔
 守剑老人
@@ -110,7 +110,7 @@ fresh{
 上:万剑塔七(4,4)↑
 b刷新
 }
-fresh{
+timeGlobal_90_{
 神行
 万剑宝塔
 守剑老人
@@ -124,7 +124,7 @@ fresh{
 上:万剑塔八(4,4)↑
 b刷新
 }
-fresh{
+timeGlobal_90_{
 神行
 万剑宝塔
 守剑老人
@@ -138,7 +138,7 @@ fresh{
 上:万剑塔九(4,4)↑
 b刷新
 }
-fresh{
+timeGlobal_90_{
 神行
 黄泥冈
 右:泥土路→

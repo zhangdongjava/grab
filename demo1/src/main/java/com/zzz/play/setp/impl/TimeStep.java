@@ -1,18 +1,20 @@
 package com.zzz.play.setp.impl;
 
-import com.zzz.play.mark.Global;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 到点执行的全局脚本
+ * 到点执行的非全局脚本
  * Created by dell_2 on 2016/10/31.
  */
-public class TimeStep extends ManyStep implements Global {
-
+public class TimeStep extends ManyStep {
     private Date date = new Date();
+
+    /**
+     * 提前的时间单位秒
+     */
+    private int inAdvance;
 
     @Override
     public boolean run() {
@@ -34,8 +36,7 @@ public class TimeStep extends ManyStep implements Global {
         Date curr = new Date();
         Calendar cd = Calendar.getInstance();
         cd.setTime(curr);
-        cd.add(Calendar.MINUTE, 1);
-        cd.add(Calendar.SECOND, 30);
+        cd.add(Calendar.SECOND, inAdvance);
         return cd.getTime();
     }
 
@@ -69,5 +70,9 @@ public class TimeStep extends ManyStep implements Global {
         cd.add(Calendar.MINUTE, -1);
         curr = cd.getTime();
         System.out.println(curr.before(date));
+    }
+
+    public void setInAdvance(int inAdvance) {
+        this.inAdvance = inAdvance;
     }
 }

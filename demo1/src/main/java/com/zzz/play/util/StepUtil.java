@@ -24,8 +24,8 @@ public class StepUtil {
         map.put("wait", TimeWait.class);
         manymap.put("first{", FirstStep.class);
         manymap.put("many{", ManyStep.class);
-        manymap.put("fresh{", TimeStep.class);
-        manymap.put("timeNormal{", TimeNormlStep.class);
+        manymap.put("timeNormal", TimeStep.class);
+        manymap.put("timeGlobal", TimeGlobalStep.class);
     }
 
     public static Step getStep(String line) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -41,9 +41,23 @@ public class StepUtil {
     }
 
     public static ManyStep getManny(String line) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
+        if (line.startsWith("time")) {
+            return buildTimeStep(line);
+        }
         Class cls = manymap.get(line);
         if (cls != null) {
             ManyStep step = (ManyStep) cls.newInstance();
+            return step;
+        }
+        return null;
+    }
+
+    public static TimeStep buildTimeStep(String line) throws IllegalAccessException, InstantiationException {
+        String[] lines = line.split("_");
+        Class cls = manymap.get(lines[0]);
+        if (cls != null) {
+            TimeStep step = (TimeStep) cls.newInstance();
+            step.setInAdvance(Integer.valueOf(lines[1]));
             return step;
         }
         return null;

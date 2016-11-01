@@ -25,6 +25,7 @@ public class StepUtil {
         manymap.put("first{", FirstStep.class);
         manymap.put("many{", ManyStep.class);
         manymap.put("fresh{", TimeStep.class);
+        manymap.put("timeNormal{", TimeNormlStep.class);
     }
 
     public static Step getStep(String line) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {

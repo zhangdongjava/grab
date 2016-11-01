@@ -3,6 +3,8 @@ package com.zzz.play.test;
 import com.zzz.play.setp.TextParse;
 import com.zzz.play.setp.sys.GoodsSale;
 import com.zzz.play.ui.MainWindow;
+import com.zzz.play.util.GlobalUtil;
+import com.zzz.play.util.GoodsUtil;
 import com.zzz.play.util.HtmlContent;
 
 import javax.swing.*;
@@ -19,6 +21,7 @@ public class Test {
     static LinkedList<TextParse> runParses = new LinkedList<>();
     static HtmlContent content;
     static String[] files;
+    static GlobalUtil globalUtil;
 
 
     public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InstantiationException, UnsupportedLookAndFeelException, ClassNotFoundException {
@@ -28,9 +31,10 @@ public class Test {
 
     }
 
-    public static void run(HtmlContent content, String[] files) {
+    public static void run(HtmlContent content, String[] files, GlobalUtil globalUtil) {
         Test.content = content;
         Test.files = files;
+        Test.globalUtil = globalUtil;
         loadParse();
         //testRun(content)
         // testScript(content);
@@ -66,6 +70,7 @@ public class Test {
             try {
                 textParse = TextParse.getInstance(file, content);
                 textParse.setFileName(file);
+                textParse.setGlobalUtil(globalUtil);
                 textParses.add(textParse);
             } catch (Exception e) {
                 e.printStackTrace();

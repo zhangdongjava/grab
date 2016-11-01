@@ -1,9 +1,12 @@
 package com.zzz.play.setp;
 
 import com.zzz.play.exception.StepBackException;
+import com.zzz.play.mark.Global;
 import com.zzz.play.setp.impl.BaseStep;
 import com.zzz.play.setp.impl.ManyStep;
 import com.zzz.play.setp.sys.GoodsSale;
+import com.zzz.play.util.GlobalUtil;
+import com.zzz.play.util.GoodsUtil;
 import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.StepUtil;
 
@@ -45,6 +48,11 @@ public class TextParse {
 
     private String fileName;
 
+    /**
+     * 全局脚本工具对象
+     */
+    private GlobalUtil globalUtil;
+
     public TextParse() {
         linkedList = new LinkedList<>();
         baseList = new LinkedList<>();
@@ -80,10 +88,9 @@ public class TextParse {
         if (line.startsWith("base")) {
             if (line.endsWith("{")) {
                 manyStep = StepUtil.getManny(line.substring(4));
-                inMang = true;
-                baseList.add(manyStep);
-                manyStep.setStep(this);
-                manyStep.setHtmlContent(htmlContent);
+                if (buildMany()) {
+                    baseList.add(manyStep);
+                }
             } else {
                 step = StepUtil.getStep(line.substring(4));
                 step.setHtmlContent(htmlContent);
@@ -109,10 +116,9 @@ public class TextParse {
             step = new GoodsSale(line.substring(4));
         } else if (line.endsWith("{")) {
             manyStep = StepUtil.getManny(line);
-            manyStep.setStep(this);
-            manyStep.setHtmlContent(htmlContent);
-            inMang = true;
-            linkedList.add(manyStep);
+            if (buildMany()) {
+                linkedList.add(manyStep);
+            }
         } else if (line.equals("}")) {
             inMang = false;
             manyStep = null;
@@ -132,13 +138,34 @@ public class TextParse {
         return step;
     }
 
+    /**
+     * @return 是否添加到集合
+     */
+    private boolean buildMany() {
+        manyStep.setStep(this);
+        manyStep.setHtmlContent(htmlContent);
+        inMang = true;
+        return manyTypeJudge();
+    }
+
+    private boolean manyTypeJudge() {
+        //全局
+        if (manyStep instanceof Global) {
+            //加入全局脚本中
+            globalUtil.addStep(manyStep);
+            //返回false  不加入本textParse中
+            return false;
+        }
+        return true;
+    }
+
 
     public void run() {
         htmlContent.setCurrParse(this);
         for (currNormalIndex = 0; currNormalIndex < linkedList.size(); currNormalIndex++) {
             try {
                 //System.out.println("普通脚本:" + linkedList.get(currNormalIndex));
-                if(currNormalIndex<0)currNormalIndex=0;
+                if (currNormalIndex < 0) currNormalIndex = 0;
                 linkedList.get(currNormalIndex).run();
             } catch (StepBackException e) {
                 currNormalIndex -= 2;
@@ -151,7 +178,7 @@ public class TextParse {
             statu = BASE;
             for (currBaseIndex = 0; currBaseIndex < baseList.size(); currBaseIndex++) {
                 try {
-                    if(currBaseIndex<0)currBaseIndex=0;
+                    if (currBaseIndex < 0) currBaseIndex = 0;
                     //System.out.println("base脚本:" + baseList.get(currBaseIndex));
                     baseList.get(currBaseIndex).run();
                 } catch (StepBackException e) {
@@ -173,6 +200,14 @@ public class TextParse {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public GlobalUtil getGlobalUtil() {
+        return globalUtil;
+    }
+
+    public void setGlobalUtil(GlobalUtil globalUtil) {
+        this.globalUtil = globalUtil;
     }
 }
 

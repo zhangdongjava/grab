@@ -2,6 +2,7 @@ package com.zzz.play.util;
 
 import com.zzz.play.bean.LinkBean;
 import com.zzz.play.exception.StepBackException;
+import com.zzz.play.inter.Observer;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -49,9 +51,12 @@ public class HtmlContent {
 
     private TextParse currParse;
 
+    private LinkedList<Observer> observers;
+
     private HtmlContent(String url, MainWindow mainWindow) {
         setBaseUrl(url);
         this.mainWindow = mainWindow;
+        observers = new LinkedList<>();
         linkUrl(url, 0);
     }
 
@@ -67,6 +72,10 @@ public class HtmlContent {
             throw new RuntimeException("com.zzz.play.util.HtmlContent not init !");
         }
         return htmlContent;
+    }
+
+    public void addObserver(Observer observer){
+        observers.add(observer);
     }
 
     /**
@@ -290,6 +299,12 @@ public class HtmlContent {
 
     public void setCurrParse(TextParse currParse) {
         this.currParse = currParse;
+    }
+
+    public void observersRun(TextParse textParse){
+        for (Observer observer : observers) {
+            observer.run(textParse);
+        }
     }
 }
 

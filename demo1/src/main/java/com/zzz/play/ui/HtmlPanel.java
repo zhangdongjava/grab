@@ -1,5 +1,10 @@
 package com.zzz.play.ui;
 
+import com.zzz.play.inter.impl.GlobalObserver;
+import com.zzz.play.setp.impl.BaseStep;
+import com.zzz.play.test.Test;
+import com.zzz.play.util.GlobalUtil;
+import com.zzz.play.util.HtmlContent;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
@@ -10,9 +15,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import com.zzz.play.setp.impl.BaseStep;
-import com.zzz.play.test.Test;
-import com.zzz.play.util.HtmlContent;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created by dell_2 on 2016/10/29.
@@ -25,12 +30,13 @@ public class HtmlPanel extends JFXPanel {
     public static final int HEIGHT = 500;
 
     private HtmlContent content;
+    private GlobalUtil globalUtil;
 
     private MainWindow mainWindow;
 
     private WebView view;
     private Button stop;
-    private Button reload;
+    private Button script;
 
     public HtmlPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -59,9 +65,9 @@ public class HtmlPanel extends JFXPanel {
             urlTextField.setText(url);
             Button go = new Button("go");
             stop = new Button("stop");
-            reload = new Button("reload");
+            script = new Button("脚本");
             urlTextField.setPrefWidth(WIDTH - 180);
-            urlBox.getChildren().addAll(urlTextField, go, stop, reload);
+            urlBox.getChildren().addAll(urlTextField, go, stop, script);
             view.setMinSize(widthDouble, heightDouble - 100);
             view.setMaxSize(widthDouble, heightDouble - 50);
             view.setPrefSize(widthDouble, heightDouble - 50);
@@ -71,21 +77,22 @@ public class HtmlPanel extends JFXPanel {
             root.getChildren().add(box);
             go.setOnAction(event -> {
                 try {
-                    content = HtmlContent.initHtmlContent(urlTextField.getText(), mainWindow);
+                    //组装各个对象
+                    assemble(urlTextField);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Test.run(content, MainWindow.scripts);
+                Test.run(content, MainWindow.scripts, globalUtil);
             });
             stop.setOnAction(event -> stopGoon());
-            reload.setOnAction(event -> reload());
+            script.setOnAction(event -> script());
         });
     }
 
     /**
-     * 重新加载脚本
+     * 弹出脚本功能窗口
      */
-    private void reload() {
+    private void script() {
         Test.loadParse();
     }
 
@@ -109,6 +116,13 @@ public class HtmlPanel extends JFXPanel {
                 stop.setText("go on");
             }
         });
+    }
+
+    public void assemble(TextField urlTextField) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
+        content = HtmlContent.initHtmlContent(urlTextField.getText(), mainWindow);
+        globalUtil = new GlobalUtil(content);
+        GlobalObserver globalObserver = new GlobalObserver(globalUtil);
+        content.addObserver(globalObserver);
     }
 
 }

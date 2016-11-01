@@ -35,6 +35,7 @@ public class MainWindow extends JFrame {
         myDialog = new MyDialog(this);
         initMenu();
         initToTray();
+        this.setAlwaysOnTop(false);
         this.setVisible(true);
     }
 
@@ -128,7 +129,7 @@ public class MainWindow extends JFrame {
      */
     public void openFrame() {
         setVisible(true);// 设置为可见
-        setAlwaysOnTop(true);// 设置置顶
+        //setAlwaysOnTop(true);// 设置置顶
         // 设置窗口状态(在最小化状态弹出显示)
         setExtendedState(JFrame.NORMAL);
     }

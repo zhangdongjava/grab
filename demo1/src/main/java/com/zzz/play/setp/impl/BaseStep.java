@@ -3,6 +3,8 @@ package com.zzz.play.setp.impl;
 import com.zzz.play.setp.Step;
 import com.zzz.play.setp.TextParse;
 import com.zzz.play.util.HtmlContent;
+import com.zzz.play.util.UtilDto;
+import com.zzz.play.util.WaitNotfiy;
 
 /**
  * Created by dell_2 on 2016/10/29.
@@ -27,6 +29,8 @@ public class BaseStep implements Step {
     protected boolean mb = false;
 
     protected boolean like = false;
+
+    private UtilDto utilDto;
 
 
     public void setLike(boolean like) {
@@ -97,20 +101,14 @@ public class BaseStep implements Step {
         return lineNum;
     }
 
-    public static void await() {
-        if (IS_WAIT) {
-            synchronized (BaseStep.class) {
-                try {
-                    BaseStep.class.wait();
-                } catch (InterruptedException e) {
-                }
-            }
-        }
+    public void await() {
+        utilDto.waitNotfiy.await();
     }
 
-    public static void anotify() {
-        synchronized (BaseStep.class) {
-            BaseStep.class.notify();
-        }
+    @Override
+    public void setUtilDto(UtilDto utilDto) {
+        this.utilDto = utilDto;
     }
+
+
 }

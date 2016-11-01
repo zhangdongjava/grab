@@ -1,14 +1,14 @@
 package com.zzz.play.util;
 
 import com.zzz.play.bean.LinkBean;
-import com.zzz.play.exception.StepBackException;
 import com.zzz.play.inter.Observer;
+import com.zzz.play.ui.HtmlPanel;
+import com.zzz.play.ui.ScriptDialog;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import com.zzz.play.setp.TextParse;
-import com.zzz.play.ui.MainWindow;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -23,21 +23,16 @@ import java.util.Map;
 public class HtmlContent {
     private static int LINE_COUNT = 120;
     private Document document;
-    public static String baseUrl;
+    public String baseUrl;
     public static int TIME_WAIT = 900;
     public static long CLICK_TIME = System.currentTimeMillis();
 
     private boolean validate = false;
 
-    private static ThreadLocal<HtmlContent> threadLocal = new InheritableThreadLocal<HtmlContent>();
 
     private Map<String, LinkBean> urlMap = new HashMap<>();
-    /**
-     * 物品计数工具
-     */
-    private GoodsUtil goodsUtil;
 
-    private MainWindow mainWindow;
+    private HtmlPanel htmlPanel;
 
     /**
      * 删除的form表单
@@ -47,32 +42,25 @@ public class HtmlContent {
     /**
      * 解决战斗中
      */
-    private static TextParse zdz;
+    private TextParse zdz;
 
     private TextParse currParse;
 
     private LinkedList<Observer> observers;
 
-    private HtmlContent(String url, MainWindow mainWindow) {
+    private HtmlContent(String url, HtmlPanel htmlPanel) {
         setBaseUrl(url);
-        this.mainWindow = mainWindow;
+        this.htmlPanel = htmlPanel;
         observers = new LinkedList<>();
         linkUrl(url, 0);
     }
 
-    public static HtmlContent initHtmlContent(String url, MainWindow window, GlobalUtil globalUtil) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
-        HtmlContent htmlContent = new HtmlContent(url, window);
-        zdz = TextParse.getInstance("zdz", htmlContent, globalUtil);
+    public static HtmlContent initHtmlContent(String url, HtmlPanel htmlPanel, GlobalUtil globalUtil) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
+        HtmlContent htmlContent = new HtmlContent(url, htmlPanel);
+        htmlContent.zdz = TextParse.getInstance(ScriptDialog.scriptRoot+"/zdz", htmlContent, globalUtil, htmlPanel.utilDto);
         return htmlContent;
     }
 
-    public static HtmlContent getHtmlContent() {
-        HtmlContent htmlContent = threadLocal.get();
-        if (htmlContent == null) {
-            throw new RuntimeException("com.zzz.play.util.HtmlContent not init !");
-        }
-        return htmlContent;
-    }
 
     public void addObserver(Observer observer) {
         observers.add(observer);
@@ -254,7 +242,7 @@ public class HtmlContent {
             document.getElementsByTag("img").remove();
             urlMap.clear();
             buildAelements();
-            mainWindow.setHtml(document.html());
+            htmlPanel.setHtml(document.html());
         } catch (Exception e) {
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);

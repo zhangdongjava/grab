@@ -1,6 +1,8 @@
 package com.zzz.play.setp;
 
 import com.zzz.play.util.HtmlContent;
+import com.zzz.play.util.UtilDto;
+import com.zzz.play.util.WaitNotfiy;
 
 /**
  * Created by dell_2 on 2016/10/29.
@@ -29,4 +31,7 @@ public interface Step {
 
     int  getLineNum();
 
+    void await();
+
+    void setUtilDto(UtilDto utilDto);
 }

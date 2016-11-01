@@ -44,10 +44,6 @@ public class GoodsSale extends BaseStep {
         } while (htmlContent.linkName("下.页").isSuccess());
         htmlContent.linkName("返回游戏");
         liuNames.clear();
-        System.out.println("结束!!");
-        System.out.println("结束!!");
-        System.out.println("结束!!");
-
         return false;
     }
 

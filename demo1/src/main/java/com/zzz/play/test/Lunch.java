@@ -2,46 +2,41 @@ package com.zzz.play.test;
 
 import com.zzz.play.setp.TextParse;
 import com.zzz.play.setp.sys.GoodsSale;
-import com.zzz.play.ui.MainWindow;
-import com.zzz.play.util.GlobalUtil;
-import com.zzz.play.util.GoodsUtil;
-import com.zzz.play.util.HtmlContent;
+import com.zzz.play.util.*;
 
-import javax.swing.*;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
+ * 实例化
  * Created by dell_2 on 2016/10/29.
  */
-public class Test {
+public class Lunch {
 
-    static LinkedList<TextParse> textParses = new LinkedList<>();
-    static LinkedList<TextParse> runParses = new LinkedList<>();
-    static HtmlContent content;
-    static String[] files;
-    static GlobalUtil globalUtil;
+    static ExecutorService service = Executors.newFixedThreadPool(20);
 
-
-    public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InstantiationException, UnsupportedLookAndFeelException, ClassNotFoundException {
-        UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");//Nimbus风格，jdk6
-        MainWindow mainWindow = new MainWindow();
+    public LinkedList<TextParse> textParses = new LinkedList<>();
+    public LinkedList<TextParse> runParses = new LinkedList<>();
+    public HtmlContent content;
+    public List<String> files;
+    public GlobalUtil globalUtil;
+    public UtilDto utilDto;
 
 
-    }
-
-    public static void run(HtmlContent content, String[] files, GlobalUtil globalUtil) {
-        Test.content = content;
-        Test.files = files;
-        Test.globalUtil = globalUtil;
+    public void run(HtmlContent content, List<String> files, GlobalUtil globalUtil, UtilDto utilDto) {
+        this.content = content;
+        this.files = files;
+        this.globalUtil = globalUtil;
+        this.utilDto = utilDto;
         loadParse();
+        scriptRun();
+        //testScript(content);
         //testRun(content)
-        // testScript(content);
-        scriptRun(content, files);
     }
 
-    public static void testRun(HtmlContent content) {
+    public void testRun(HtmlContent content) {
         new Thread(() -> {
             GoodsSale lcClear = new GoodsSale("柳虫_柳虫残骸");
             lcClear.setHtmlContent(content);
@@ -50,10 +45,10 @@ public class Test {
 
     }
 
-    public static void testScript(HtmlContent content) {
+    public void testScript(HtmlContent content) {
         new Thread(() -> {
             try {
-                TextParse textParse = TextParse.getInstance("材料/血印分身蒙汗药", content, globalUtil);
+                TextParse textParse = TextParse.getInstance("scripts/材料/血印分身蒙汗药", content, globalUtil, utilDto);
                 while (true) {
                     textParse.run();
                 }
@@ -63,12 +58,12 @@ public class Test {
         }).start();
     }
 
-    public static void loadParse() {
+    public void loadParse() {
         textParses.clear();
         TextParse textParse = null;
         for (String file : files) {
             try {
-                textParse = TextParse.getInstance(file, content, globalUtil);
+                textParse = TextParse.getInstance(file, content, globalUtil, utilDto);
                 textParse.setFileName(file);
                 textParses.add(textParse);
             } catch (Exception e) {
@@ -79,11 +74,9 @@ public class Test {
         }
     }
 
-    public static void scriptRun(HtmlContent content, String[] files) {
-        new Thread(() -> {
+    public void scriptRun() {
+        service.submit(() -> {
             TextParse textParse = null;
-
-
             while (true) {
                 runParses.clear();
                 runParses.addAll(textParses);
@@ -97,7 +90,6 @@ public class Test {
                     System.out.println(textParse.getFileName() + "->运行脚本异常!" + e.toString());
                 }
             }
-
-        }).start();
+        });
     }
 }

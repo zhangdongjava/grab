@@ -2,13 +2,9 @@ package com.zzz.play.setp;
 
 import com.zzz.play.exception.StepBackException;
 import com.zzz.play.mark.Global;
-import com.zzz.play.setp.impl.BaseStep;
 import com.zzz.play.setp.impl.ManyStep;
 import com.zzz.play.setp.sys.GoodsSale;
-import com.zzz.play.util.GlobalUtil;
-import com.zzz.play.util.GoodsUtil;
-import com.zzz.play.util.HtmlContent;
-import com.zzz.play.util.StepUtil;
+import com.zzz.play.util.*;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
@@ -53,17 +49,19 @@ public class TextParse {
      */
     private GlobalUtil globalUtil;
 
+    private UtilDto utilDto;
+
     public TextParse() {
         linkedList = new LinkedList<>();
         baseList = new LinkedList<>();
     }
 
-    public static TextParse getInstance(String file, HtmlContent htmlContent, GlobalUtil globalUtil) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException, ClassNotFoundException {
-        String str = TextParse.class.getResource("/").getPath() + file;
+    public static TextParse getInstance(String file, HtmlContent htmlContent, GlobalUtil globalUtil, UtilDto utilDto) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         TextParse textParse = new TextParse();
         textParse.globalUtil = globalUtil;
-        textParse.file = new File(str);
+        textParse.file = new File(file);
         textParse.htmlContent = htmlContent;
+        textParse.utilDto = utilDto;
         textParse.bulid();
         return textParse;
     }
@@ -78,6 +76,7 @@ public class TextParse {
                 Step step = addStep(line.trim());
                 if (step != null) {
                     step.setLineNum(++index);
+                    step.setUtilDto(utilDto);
                 }
             }
             line = reader.readLine();
@@ -144,6 +143,7 @@ public class TextParse {
      */
     private boolean buildMany() {
         manyStep.setStep(this);
+        manyStep.setUtilDto(utilDto);
         manyStep.setHtmlContent(htmlContent);
         inMang = true;
         return manyTypeJudge();
@@ -194,7 +194,7 @@ public class TextParse {
 
     public void ontStepRun(Step step) {
         step.mbRun();
-        BaseStep.await();
+        step.await();
     }
 
     public void beforStepRun(Step step) {

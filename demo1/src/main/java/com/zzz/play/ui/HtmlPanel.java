@@ -2,9 +2,11 @@ package com.zzz.play.ui;
 
 import com.zzz.play.inter.impl.GlobalObserver;
 import com.zzz.play.setp.impl.BaseStep;
-import com.zzz.play.test.Test;
+import com.zzz.play.test.Lunch;
 import com.zzz.play.util.GlobalUtil;
 import com.zzz.play.util.HtmlContent;
+import com.zzz.play.util.UtilDto;
+import com.zzz.play.util.WaitNotfiy;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
@@ -16,33 +18,45 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.LinkedList;
 
 /**
  * Created by dell_2 on 2016/10/29.
  */
 public class HtmlPanel extends JFXPanel {
 
-    private static final String url = "http://xfhero1.yytou.com/gCmd.do?cmd=7&sid=6r8sp03bnb2zcs8bodvqp";
+    private String url = "http://xfhero1.yytou.com/gCmd.do?cmd=7&sid=6r8sp03bnb2zcs8bodvqp";
 
     public static final int WIDTH = 300;
     public static final int HEIGHT = 500;
 
-    private HtmlContent content;
-    private GlobalUtil globalUtil;
-
-    private MainWindow mainWindow;
+    public HtmlContent content;
+    public GlobalUtil globalUtil;
 
     private WebView view;
     private Button stop;
     private Button script;
 
-    public HtmlPanel(MainWindow mainWindow) {
+    public Lunch lunch;
+
+    public UtilDto utilDto;
+
+    private ScriptDialog scriptDialog;
+    public MainWindow mainWindow;
+
+    private LinkedList<String> scripts;
+
+    public HtmlPanel(String url, MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         this.setLayout(null);
+        this.url = url;
+        scripts = new LinkedList<>();
+        scriptDialog = new ScriptDialog(this);
         run();
-
+        lunch = new Lunch();
     }
 
     public void setHtml(String html) {
@@ -76,13 +90,19 @@ public class HtmlPanel extends JFXPanel {
             box.getChildren().add(view);
             root.getChildren().add(box);
             go.setOnAction(event -> {
+                if (scripts.isEmpty()) {
+                    JOptionPane.showConfirmDialog(mainWindow, "没有选择脚本!");
+                    return;
+                }
                 try {
                     //组装各个对象
+                    //if(MainWindow.count<2)
                     assemble(urlTextField);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Test.run(content, MainWindow.scripts, globalUtil);
+                lunch.run(content, scripts, globalUtil, utilDto);
+                go.setVisible(false);
             });
             stop.setOnAction(event -> stopGoon());
             script.setOnAction(event -> script());
@@ -93,7 +113,7 @@ public class HtmlPanel extends JFXPanel {
      * 弹出脚本功能窗口
      */
     private void script() {
-        Test.loadParse();
+        scriptDialog.setVisible(true);
     }
 
     /**
@@ -101,18 +121,18 @@ public class HtmlPanel extends JFXPanel {
      */
     public void stopGoon() {
         Platform.runLater(() -> {
-            if (BaseStep.IS_WAIT) {
+            if (utilDto.waitNotfiy.wait) {
                 WebEngine engine = view.getEngine();
                 String location = engine.getLocation();
                 if (location != null && !"".equals(location)) {
                     System.out.println(location);
                     content.linkUrl(location);
                 }
-                BaseStep.IS_WAIT = false;
+                utilDto.waitNotfiy.wait = false;
                 stop.setText("stop");
-                BaseStep.anotify();
+                utilDto.waitNotfiy.anotfiy();
             } else {
-                BaseStep.IS_WAIT = true;
+                utilDto.waitNotfiy.wait = true;
                 stop.setText("go on");
             }
         });
@@ -120,9 +140,30 @@ public class HtmlPanel extends JFXPanel {
 
     public void assemble(TextField urlTextField) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
         globalUtil = new GlobalUtil();
-        content = HtmlContent.initHtmlContent(urlTextField.getText(), mainWindow, globalUtil);
+        utilDto = new UtilDto();
+        utilDto.waitNotfiy = new WaitNotfiy();
+        content = HtmlContent.initHtmlContent(urlTextField.getText(), this, globalUtil);
         GlobalObserver globalObserver = new GlobalObserver(globalUtil);
         content.addObserver(globalObserver);
     }
 
+    /**
+     * 添加脚本文件地址
+     * @param url
+     */
+    public void addScript(String url) {
+        scripts.add(url);
+    }
+
+    /**
+     * 清空脚本
+     */
+    public void cleatScript(){
+        scripts.clear();
+    }
+
+    public void reloadScript(){
+        lunch.files = this.scripts;
+        lunch.loadParse();
+    }
 }

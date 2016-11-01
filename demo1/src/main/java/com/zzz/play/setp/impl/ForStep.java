@@ -31,11 +31,11 @@ public class ForStep extends BaseStep {
         ForStep forStep = new ForStep();
         String[] datas = line.split("for");
         for (String data : datas) {
-            if (data != null && "".equals(data.trim())) {
+            if (data != null && !"".equals(data.trim())) {
                 if (forStep.getWhileText() == null) {
-                    if (line.startsWith("like")) {
+                    if (data.startsWith("like")) {
                         forStep.setLike(true);
-                        forStep.setWhileText(data);
+                        forStep.setWhileText(data.substring(4));
                     } else {
                         forStep.setWhileText(data);
                     }

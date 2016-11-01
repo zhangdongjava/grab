@@ -30,7 +30,7 @@ public class BaseStep implements Step {
 
     protected boolean like = false;
 
-    private UtilDto utilDto;
+    protected UtilDto utilDto;
 
 
     public void setLike(boolean like) {

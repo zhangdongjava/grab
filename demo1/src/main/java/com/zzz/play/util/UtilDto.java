@@ -6,4 +6,6 @@ package com.zzz.play.util;
 public class UtilDto {
 
     public WaitNotfiy waitNotfiy;
+
+    public VarUtil varUtil;
 }

@@ -1,0 +1,7 @@
+刷新
+puttest_a_刷新
+getVar_test_{
+功能菜单
+返回游戏
+状态
+}

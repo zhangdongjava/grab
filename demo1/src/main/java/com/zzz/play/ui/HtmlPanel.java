@@ -3,10 +3,7 @@ package com.zzz.play.ui;
 import com.zzz.play.inter.impl.GlobalObserver;
 import com.zzz.play.setp.impl.BaseStep;
 import com.zzz.play.test.Lunch;
-import com.zzz.play.util.GlobalUtil;
-import com.zzz.play.util.HtmlContent;
-import com.zzz.play.util.UtilDto;
-import com.zzz.play.util.WaitNotfiy;
+import com.zzz.play.util.*;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
@@ -142,6 +139,7 @@ public class HtmlPanel extends JFXPanel {
         globalUtil = new GlobalUtil();
         utilDto = new UtilDto();
         utilDto.waitNotfiy = new WaitNotfiy();
+        utilDto.varUtil = new VarUtil();
         content = HtmlContent.initHtmlContent(urlTextField.getText(), this, globalUtil);
         GlobalObserver globalObserver = new GlobalObserver(globalUtil);
         content.addObserver(globalObserver);
@@ -149,6 +147,7 @@ public class HtmlPanel extends JFXPanel {
 
     /**
      * 添加脚本文件地址
+     *
      * @param url
      */
     public void addScript(String url) {
@@ -158,11 +157,11 @@ public class HtmlPanel extends JFXPanel {
     /**
      * 清空脚本
      */
-    public void cleatScript(){
+    public void cleatScript() {
         scripts.clear();
     }
 
-    public void reloadScript(){
+    public void reloadScript() {
         lunch.files = this.scripts;
         lunch.loadParse();
     }

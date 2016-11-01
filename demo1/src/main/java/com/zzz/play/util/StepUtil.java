@@ -22,10 +22,12 @@ public class StepUtil {
         map.put("for", ForStep.class);
         map.put("whileNot", WhileNotTextStep.class);
         map.put("wait", TimeWait.class);
+        map.put("put", PutVarStep.class);
         manymap.put("first{", FirstStep.class);
         manymap.put("many{", ManyStep.class);
         manymap.put("timeNormal", TimeStep.class);
         manymap.put("timeGlobal", TimeGlobalStep.class);
+        manymap.put("getVar", GetVarStep.class);
     }
 
     public static Step getStep(String line) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -43,6 +45,8 @@ public class StepUtil {
     public static ManyStep getManny(String line) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
         if (line.startsWith("time")) {
             return buildTimeStep(line);
+        } else if (line.startsWith("getVar")) {
+            return buildVarStep(line);
         }
         Class cls = manymap.get(line);
         if (cls != null) {
@@ -61,5 +65,12 @@ public class StepUtil {
             return step;
         }
         return null;
+    }
+
+    public static ManyStep buildVarStep(String line) throws IllegalAccessException, InstantiationException {
+        String[] lines = line.split("_");
+        GetVarStep getVarStep = new GetVarStep();
+        getVarStep.setName(lines[1]);
+        return getVarStep;
     }
 }

@@ -82,6 +82,7 @@ likex1while2
 timeNormal_20_{
 进入树洞
 wait1
+putwanchong_a_巨大青蛇
 巨大青蛇
 攻击巨大青蛇
 金创药for5
@@ -90,6 +91,7 @@ wait1
 x1whileNot玉缕
 返回游戏
 }
+getVar_wanchong_{
 神行
 史家庄
 下:前院↓
@@ -98,4 +100,6 @@ x1whileNot玉缕
 烹制万虫羹
 返回赵老三
 返回游戏
+}
+
 sale柳虫_柳虫残骸,金创药,行军,玉缕

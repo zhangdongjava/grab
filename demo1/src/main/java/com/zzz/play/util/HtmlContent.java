@@ -60,9 +60,9 @@ public class HtmlContent {
         linkUrl(url, 0);
     }
 
-    public static HtmlContent initHtmlContent(String url, MainWindow window) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
+    public static HtmlContent initHtmlContent(String url, MainWindow window, GlobalUtil globalUtil) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
         HtmlContent htmlContent = new HtmlContent(url, window);
-        zdz = TextParse.getInstance("zdz", htmlContent);
+        zdz = TextParse.getInstance("zdz", htmlContent, globalUtil);
         return htmlContent;
     }
 
@@ -74,7 +74,7 @@ public class HtmlContent {
         return htmlContent;
     }
 
-    public void addObserver(Observer observer){
+    public void addObserver(Observer observer) {
         observers.add(observer);
     }
 
@@ -301,9 +301,19 @@ public class HtmlContent {
         this.currParse = currParse;
     }
 
-    public void observersRun(TextParse textParse){
+    public void observersRun(TextParse textParse) {
+        boolean change = false;
         for (Observer observer : observers) {
-            observer.run(textParse);
+            observer.run();
+            if (change) {
+                observer.change();
+            } else {
+                change = observer.change();
+            }
+        }
+        if (change) {
+            textParse.run();
+            throw new RuntimeException("该脚本重新执行本次停止!");
         }
     }
 }

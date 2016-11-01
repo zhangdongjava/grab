@@ -13,10 +13,11 @@ public class GlobalUtil {
 
     private HtmlContent htmlContent;
 
+    public boolean change;
+
     private LinkedList<Step> steps;
 
-    public GlobalUtil(HtmlContent htmlContent) {
-        this.htmlContent = htmlContent;
+    public GlobalUtil() {
         steps = new LinkedList<>();
     }
 
@@ -24,11 +25,15 @@ public class GlobalUtil {
         steps.add(step);
     }
 
-    public void run(TextParse textParse) {
+    public void run() {
+        System.out.println("执行全局脚本");
         for (Step step : steps) {
-            step.run();
+            if (!change) {
+                change = step.run();
+            } else {
+                step.run();
+            }
         }
-        textParse.run();
     }
 
 }

@@ -58,9 +58,10 @@ public class TextParse {
         baseList = new LinkedList<>();
     }
 
-    public static TextParse getInstance(String file, HtmlContent htmlContent) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public static TextParse getInstance(String file, HtmlContent htmlContent, GlobalUtil globalUtil) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         String str = TextParse.class.getResource("/").getPath() + file;
         TextParse textParse = new TextParse();
+        textParse.globalUtil = globalUtil;
         textParse.file = new File(str);
         textParse.htmlContent = htmlContent;
         textParse.bulid();
@@ -166,7 +167,9 @@ public class TextParse {
             try {
                 //System.out.println("普通脚本:" + linkedList.get(currNormalIndex));
                 if (currNormalIndex < 0) currNormalIndex = 0;
-                linkedList.get(currNormalIndex).run();
+                Step step = linkedList.get(currNormalIndex);
+                beforStepRun(step);
+                step.run();
             } catch (StepBackException e) {
                 currNormalIndex -= 2;
             }
@@ -192,6 +195,10 @@ public class TextParse {
     public void ontStepRun(Step step) {
         step.mbRun();
         BaseStep.await();
+    }
+
+    public void beforStepRun(Step step) {
+        htmlContent.observersRun(this);
     }
 
     public String getFileName() {

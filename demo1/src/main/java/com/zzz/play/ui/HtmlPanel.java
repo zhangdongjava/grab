@@ -119,8 +119,8 @@ public class HtmlPanel extends JFXPanel {
     }
 
     public void assemble(TextField urlTextField) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
-        content = HtmlContent.initHtmlContent(urlTextField.getText(), mainWindow);
-        globalUtil = new GlobalUtil(content);
+        globalUtil = new GlobalUtil();
+        content = HtmlContent.initHtmlContent(urlTextField.getText(), mainWindow, globalUtil);
         GlobalObserver globalObserver = new GlobalObserver(globalUtil);
         content.addObserver(globalObserver);
     }

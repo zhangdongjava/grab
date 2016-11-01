@@ -53,7 +53,7 @@ public class Test {
     public static void testScript(HtmlContent content) {
         new Thread(() -> {
             try {
-                TextParse textParse = TextParse.getInstance("材料/血印分身蒙汗药", content);
+                TextParse textParse = TextParse.getInstance("材料/血印分身蒙汗药", content, globalUtil);
                 while (true) {
                     textParse.run();
                 }
@@ -68,9 +68,8 @@ public class Test {
         TextParse textParse = null;
         for (String file : files) {
             try {
-                textParse = TextParse.getInstance(file, content);
+                textParse = TextParse.getInstance(file, content, globalUtil);
                 textParse.setFileName(file);
-                textParse.setGlobalUtil(globalUtil);
                 textParses.add(textParse);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -93,9 +93,6 @@ public class HomeStep extends BaseStep {
         upgrade = false;
         create();
         upgradeBuild();
-        if (create || upgrade) {
-            start();
-        }
     }
 
     /**

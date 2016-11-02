@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
  */
 public class Lunch {
 
-    static ExecutorService service = Executors.newFixedThreadPool(20);
+    ExecutorService service = Executors.newFixedThreadPool(20);
 
     public LinkedList<TextParse> textParses = new LinkedList<>();
     public LinkedList<TextParse> runParses = new LinkedList<>();
@@ -78,9 +78,10 @@ public class Lunch {
     }
 
     public void scriptRun() {
+        service.shutdownNow();
         service.submit(() -> {
             TextParse textParse = null;
-            while (true) {
+            while (!Thread.interrupted()) {
                 runParses.clear();
                 runParses.addAll(textParses);
                 try {

@@ -62,8 +62,8 @@ public class HtmlPanel extends JFXPanel {
     public void run() {
         Platform.runLater(() -> {
             view = new WebView();
-
             Group root = new Group();
+            view.setFontScale(0.8);
             Scene scene1 = new Scene(root, WIDTH, HEIGHT);
             HtmlPanel.this.setScene(scene1);
             Double widthDouble = new Integer(WIDTH).doubleValue();
@@ -80,6 +80,7 @@ public class HtmlPanel extends JFXPanel {
             view.setMinSize(widthDouble, heightDouble - 100);
             view.setMaxSize(widthDouble, heightDouble - 50);
             view.setPrefSize(widthDouble, heightDouble - 50);
+
             root.getChildren().add(view);
             box.getChildren().add(urlBox);
             box.getChildren().add(view);

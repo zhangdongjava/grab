@@ -50,10 +50,8 @@ public class HtmlPanel extends JFXPanel {
         this.mainWindow = mainWindow;
         this.setLayout(null);
         this.url = url;
-        scripts = new LinkedList<>();
-        scriptDialog = new ScriptDialog(this);
+        init();
         run();
-        lunch = new Lunch();
     }
 
     public void setHtml(String html) {
@@ -98,7 +96,7 @@ public class HtmlPanel extends JFXPanel {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                lunch.run(content, scripts, globalUtil, utilDto);
+                lunch.run(content, scripts);
                 go.setVisible(false);
             });
             stop.setOnAction(event -> stopGoon());
@@ -135,11 +133,19 @@ public class HtmlPanel extends JFXPanel {
         });
     }
 
-    public void assemble(TextField urlTextField) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
-        globalUtil = new GlobalUtil();
+    public void init() {
+        scripts = new LinkedList<>();
+        scriptDialog = new ScriptDialog(this);
         utilDto = new UtilDto();
         utilDto.waitNotfiy = new WaitNotfiy();
         utilDto.varUtil = new VarUtil();
+        globalUtil = new GlobalUtil();
+        lunch = new Lunch(globalUtil, utilDto);
+        lunch.globalUtil = globalUtil;
+
+    }
+
+    public void assemble(TextField urlTextField) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
         content = HtmlContent.initHtmlContent(urlTextField.getText(), this, globalUtil);
         GlobalObserver globalObserver = new GlobalObserver(globalUtil);
         content.addObserver(globalObserver);

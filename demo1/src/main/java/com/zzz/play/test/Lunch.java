@@ -24,12 +24,14 @@ public class Lunch {
     public GlobalUtil globalUtil;
     public UtilDto utilDto;
 
-
-    public void run(HtmlContent content, List<String> files, GlobalUtil globalUtil, UtilDto utilDto) {
-        this.content = content;
-        this.files = files;
+    public Lunch(GlobalUtil globalUtil, UtilDto utilDto){
         this.globalUtil = globalUtil;
         this.utilDto = utilDto;
+    }
+
+    public void run(HtmlContent content, List<String> files) {
+        this.content = content;
+        this.files = files;
         loadParse();
         scriptRun();
         //testScript(content);

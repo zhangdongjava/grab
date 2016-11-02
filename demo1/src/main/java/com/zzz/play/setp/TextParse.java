@@ -1,6 +1,7 @@
 package com.zzz.play.setp;
 
 import com.zzz.play.exception.StepBackException;
+import com.zzz.play.inter.Runable;
 import com.zzz.play.mark.Global;
 import com.zzz.play.setp.impl.ManyStep;
 import com.zzz.play.setp.sys.GoodsSale;
@@ -13,7 +14,7 @@ import java.util.LinkedList;
 /**
  * Created by dell_2 on 2016/10/29.
  */
-public class TextParse {
+public class TextParse implements Runable {
 
     public final int NORMAL = 0;
     public final int BASE = 1;
@@ -21,8 +22,8 @@ public class TextParse {
 
     public int statu = 0;
 
-    private LinkedList<Step> linkedList;
-    private LinkedList<Step> baseList;
+    private LinkedList<Runable> linkedList;
+    private LinkedList<Runable> baseList;
 
     private File file;
 
@@ -161,19 +162,20 @@ public class TextParse {
     }
 
 
-    public void run() {
+    public boolean run() {
         htmlContent.setCurrParse(this);
         for (currNormalIndex = 0; currNormalIndex < linkedList.size(); currNormalIndex++) {
             try {
                 //System.out.println("普通脚本:" + linkedList.get(currNormalIndex));
                 if (currNormalIndex < 0) currNormalIndex = 0;
-                Step step = linkedList.get(currNormalIndex);
-                beforStepRun(step);
+                Runable step = linkedList.get(currNormalIndex);
+                beforStepRun();
                 step.run();
             } catch (StepBackException e) {
                 currNormalIndex -= 2;
             }
         }
+        return false;
     }
 
     public void baseRun() {
@@ -197,7 +199,7 @@ public class TextParse {
         step.await();
     }
 
-    public void beforStepRun(Step step) {
+    public void beforStepRun() {
         htmlContent.observersRun(this);
     }
 

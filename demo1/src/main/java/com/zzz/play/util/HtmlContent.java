@@ -1,6 +1,7 @@
 package com.zzz.play.util;
 
 import com.zzz.play.bean.LinkBean;
+import com.zzz.play.exception.HomeEndException;
 import com.zzz.play.inter.Observer;
 import com.zzz.play.setp.Step;
 import com.zzz.play.setp.TextParse;
@@ -224,6 +225,8 @@ public class HtmlContent {
             ValidationKill.getValidationKill(this).kill();
         } else if (document.text().contains("战斗中，不能参战")) {
             zdz.run();
+        } else if (document.text().contains("事件容器已满")) {
+            throw new HomeEndException();
         }
         validate = false;
     }
@@ -250,6 +253,42 @@ public class HtmlContent {
         }
         return true;
     }
+
+    public LinkBean linkName(String name, int index) {
+        return linkName(name, index, false);
+    }
+
+    /**
+     * @param name  名称
+     * @param index 下标
+     * @param like  是否模糊
+     * @return
+     */
+    public LinkBean linkName(String name, int index, boolean like) {
+        LinkBean linkBean = new LinkBean();
+        Elements as = document.getElementsByTag("a");
+        for (Element a : as) {
+            if (!like && a.text().equals(name)) {
+                if (index == 0) {
+                    String url = a.attr("href");
+                    linkBean.setUrl(url);
+                    linkBean.setSuccess(linkUrl(url));
+                    break;
+                }
+                index--;
+            } else if (like && a.text().contains(name)) {
+                if (index == 0) {
+                    String url = a.attr("href");
+                    linkBean.setUrl(url);
+                    linkBean.setSuccess(linkUrl(url));
+                    break;
+                }
+                index--;
+            }
+        }
+        return linkBean;
+    }
+
 
     private void await() throws InterruptedException {
         Thread.sleep(TIME_WAIT);

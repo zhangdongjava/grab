@@ -5,6 +5,7 @@ import com.zzz.play.inter.Runable;
 import com.zzz.play.mark.Global;
 import com.zzz.play.setp.impl.ManyStep;
 import com.zzz.play.setp.sys.GoodsSale;
+import com.zzz.play.setp.sys.HomeStep;
 import com.zzz.play.util.*;
 
 import java.io.*;
@@ -115,6 +116,8 @@ public class TextParse implements Runable {
             step.setMb(true);
         } else if (line.startsWith("sale")) {
             step = new GoodsSale(line.substring(4));
+        } else if (line.startsWith("home")) {
+            step = new HomeStep();
         } else if (line.endsWith("{")) {
             manyStep = StepUtil.getManny(line);
             if (buildMany()) {

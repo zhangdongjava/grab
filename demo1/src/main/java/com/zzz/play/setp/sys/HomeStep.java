@@ -79,7 +79,7 @@ public class HomeStep extends BaseStep {
     }
 
     public void start() {
-        htmlContent.linkName("自己升级");
+        htmlContent.linkName("升级");
         htmlContent.linkName("确定升级");
         htmlContent.linkName("返回庄院管理");
         build();
@@ -117,7 +117,7 @@ public class HomeStep extends BaseStep {
      * 升级建筑
      */
     public void upgradeBuild() {
-        System.out.println("自己升级!");
+        System.out.println("升级!");
         for (int i = 0; i < upgradeCount; i++) {
             upgradeBuild(i);
         }
@@ -150,7 +150,7 @@ public class HomeStep extends BaseStep {
             int i2 = line.indexOf("级");
             int lv = Integer.valueOf(line.substring(i1 + 1, i2));
             if (lv < homeLv) {
-                htmlContent.linkName("自己升级", upgradeIndex);
+                htmlContent.linkName("升级", upgradeIndex);
                 htmlContent.linkName("确定升级");
                 upgradeIndex--;
                 upgrade = true;

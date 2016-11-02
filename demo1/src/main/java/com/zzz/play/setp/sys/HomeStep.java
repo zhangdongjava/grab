@@ -103,6 +103,7 @@ public class HomeStep extends BaseStep {
             htmlContent.linkName("建造", jzIndex);
             htmlContent.linkName("确定建造");
             create = true;
+            surplus--;
         }
         //建造房屋
         if (surplus > 0) {

@@ -1,5 +1,6 @@
 package com.zzz.play.test;
 
+import com.zzz.play.exception.HomeEndException;
 import com.zzz.play.setp.TextParse;
 import com.zzz.play.setp.sys.GoodsSale;
 import com.zzz.play.util.*;
@@ -78,20 +79,20 @@ public class Lunch {
     }
 
     public void scriptRun() {
-     //   service.shutdownNow();
+        //   service.shutdownNow();
         service.submit(() -> {
-            TextParse textParse = null;
             while (!Thread.interrupted()) {
                 runParses.clear();
                 runParses.addAll(textParses);
-                try {
-                    for (TextParse parse : runParses) {
-                        textParse = parse;
-                        textParse.run();
+                for (TextParse parse : runParses) {
+                    try {
+                        parse.run();
+                    } catch (HomeEndException e) {
+                        System.out.println(parse.getFileName() + "->" + e.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(parse.getFileName() + "->运行脚本异常!" + e.toString());
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.out.println(textParse.getFileName() + "->运行脚本异常!" + e.toString());
                 }
             }
         });

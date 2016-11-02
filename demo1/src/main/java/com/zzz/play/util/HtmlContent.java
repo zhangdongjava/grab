@@ -227,6 +227,7 @@ public class HtmlContent {
             } else if (document.text().contains("战斗中，不能参战")) {
                 zdz.run();
             } else if (document.text().contains("事件容器已满")) {
+                linkName("返回游戏");
                 throw new HomeEndException();
             }
 

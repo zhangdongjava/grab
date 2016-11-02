@@ -17,6 +17,7 @@ public class MainWindow extends JFrame {
     private TrayIcon trayicon;
     private TabPanel tabPanel;
     private MyDialog myDialog;
+    private SysSetDialog sysSetDialog;
 
     private JLabel jLabel = new JLabel("暂无物品!");
 
@@ -33,6 +34,7 @@ public class MainWindow extends JFrame {
         tabPanel = new TabPanel(this);
         this.setContentPane(tabPanel);
         myDialog = new MyDialog(this);
+        sysSetDialog = new SysSetDialog(this);
         initMenu();
         initToTray();
         this.setAlwaysOnTop(false);
@@ -41,12 +43,21 @@ public class MainWindow extends JFrame {
 
     private void initMenu() {
         JMenu jm = new JMenu("选项卡");     //创建JMenu菜单对象
+        JMenu set = new JMenu("设置");     //创建JMenu菜单对象
         JMenuItem addTab = new JMenuItem("添加");  //菜单项
+        JMenuItem scriptPath = new JMenuItem("脚本路径");  //菜单项
         addTab.addActionListener((e) -> addTab());
+        scriptPath.addActionListener((e) -> scriptPath());
         jm.add(addTab);   //将菜单项目添加到菜单
+        set.add(scriptPath);   //将菜单项目添加到菜单
         JMenuBar br = new JMenuBar();  //创建菜单工具栏
         br.add(jm);      //将菜单增加到菜单工具栏
+        br.add(set);      //将菜单增加到菜单工具栏
         this.setJMenuBar(br);  //为 窗体设置  菜单工具栏
+    }
+
+    private void scriptPath() {
+        sysSetDialog.setVisible(true);
     }
 
     /**
@@ -99,7 +110,6 @@ public class MainWindow extends JFrame {
     }
 
     private void addTab() {
-        System.out.println("myDialog");
         myDialog.setVisible(true);
     }
 

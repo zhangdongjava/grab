@@ -1,6 +1,6 @@
 package com.zzz.play.ui;
 
-import com.zzz.play.setp.TextParse;
+import com.zzz.play.util.Resource;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ScriptDialog extends JDialog {
 
-    public static String scriptRoot = TextParse.class.getResource("/").getPath() + "/scripts";
+    public static String scriptRoot = null;
     private static Map<String, String> allScripts;
     private HtmlPanel htmlPanel;
     private JList<String> list;
@@ -27,32 +27,34 @@ public class ScriptDialog extends JDialog {
 
     private Set<String> selectList;
 
+    private boolean is_init = false;
+
     static {
         allScripts = new ConcurrentHashMap<>();
-        build();
+        Resource.load();
     }
 
     public ScriptDialog(HtmlPanel htmlPanel) {
         super(htmlPanel.mainWindow);
+        this.setModal(true);
+        this.setLayout(null);
+        this.setSize(400, 600);
+        this.setLocationRelativeTo(null);
         this.htmlPanel = htmlPanel;
-        init();
     }
 
     private ScriptDialog(Frame frame) {
         super(frame);
-        init();
     }
 
     private void init() {
-        this.setLocationRelativeTo(null);
+
         defaultListModel = new DefaultListModel<>();
         list = new JList(allScripts.keySet().toArray());
         selectList = new HashSet<>();
         clickList = new JList(defaultListModel);
         ok = new JButton("确定");
-        this.setModal(true);
-        this.setLayout(null);
-        this.setSize(400, 600);
+
         list.setBackground(Color.gray);
         clickList.setBackground(Color.gray);
         list.setBounds(0, 0, 150, 500);
@@ -85,6 +87,16 @@ public class ScriptDialog extends JDialog {
         }
     }
 
+    public void showUi() {
+        scriptRoot = Resource.bootPath;
+        build();
+        if (!is_init) {
+            init();
+            is_init = true;
+        }
+        this.setVisible(true);
+    }
+
     private void ok() {
         htmlPanel.cleatScript();
         for (int i = 0; i < defaultListModel.size(); i++) {
@@ -106,7 +118,11 @@ public class ScriptDialog extends JDialog {
     }
 
 
-    public static void build() {
+    public void build() {
+        if (scriptRoot == null) {
+            JOptionPane.showConfirmDialog(this.htmlPanel.mainWindow, "请设置脚本根路径!");
+            return;
+        }
         File file = new File(scriptRoot);
         File[] files = file.listFiles();
         for (File file1 : files) {
@@ -118,7 +134,7 @@ public class ScriptDialog extends JDialog {
         }
     }
 
-    public static void openDir(File dir, String name) {
+    public void openDir(File dir, String name) {
         File[] files = dir.listFiles();
         for (File file1 : files) {
             if (file1.isFile()) {

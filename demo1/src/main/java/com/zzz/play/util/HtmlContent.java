@@ -2,13 +2,14 @@ package com.zzz.play.util;
 
 import com.zzz.play.bean.LinkBean;
 import com.zzz.play.inter.Observer;
+import com.zzz.play.setp.Step;
+import com.zzz.play.setp.TextParse;
+import com.zzz.play.setp.sys.FinishCombat;
 import com.zzz.play.ui.HtmlPanel;
-import com.zzz.play.ui.ScriptDialog;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import com.zzz.play.setp.TextParse;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -42,7 +43,7 @@ public class HtmlContent {
     /**
      * 解决战斗中
      */
-    private TextParse zdz;
+    private Step zdz;
 
     private TextParse currParse;
 
@@ -57,7 +58,7 @@ public class HtmlContent {
 
     public static HtmlContent initHtmlContent(String url, HtmlPanel htmlPanel, GlobalUtil globalUtil) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
         HtmlContent htmlContent = new HtmlContent(url, htmlPanel);
-        htmlContent.zdz = TextParse.getInstance(ScriptDialog.scriptRoot+"/zdz", htmlContent, globalUtil, htmlPanel.utilDto);
+        htmlContent.zdz = new FinishCombat(htmlContent);
         return htmlContent;
     }
 

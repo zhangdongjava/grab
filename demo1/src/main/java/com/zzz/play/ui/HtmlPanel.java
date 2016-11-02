@@ -108,7 +108,7 @@ public class HtmlPanel extends JFXPanel {
      * 弹出脚本功能窗口
      */
     private void script() {
-        scriptDialog.setVisible(true);
+        scriptDialog.showUi();
     }
 
     /**

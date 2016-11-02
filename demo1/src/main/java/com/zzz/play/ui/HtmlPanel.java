@@ -98,7 +98,7 @@ public class HtmlPanel extends JFXPanel {
                     e.printStackTrace();
                 }
                 lunch.run(content, scripts);
-                go.setVisible(false);
+                //go.setVisible(false);
             });
             stop.setOnAction(event -> stopGoon());
             script.setOnAction(event -> script());

@@ -219,7 +219,6 @@ public class HtmlContent {
     }
 
     public void vailte() {
-        System.out.println("vailte");
         validate = true;
         try {
             cick_jx();

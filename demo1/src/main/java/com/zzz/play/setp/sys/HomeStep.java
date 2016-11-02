@@ -99,7 +99,7 @@ public class HomeStep extends BaseStep {
     public void create() {
         System.out.println("建造!");
         int num = getMin();
-        if (num <= 4 && surplus > 0) {
+        if (num <4 && surplus > 0) {
             htmlContent.linkName("建造", jzIndex);
             htmlContent.linkName("确定建造");
             create = true;

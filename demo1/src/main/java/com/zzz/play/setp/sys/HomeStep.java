@@ -127,9 +127,10 @@ public class HomeStep extends BaseStep {
      * 升级建筑
      */
     public void upgradeBuild(int i) {
-        upgradeIndex = 0;
+
         htmlContent.linkName("间", i, true);
         do {
+            upgradeIndex = 0;
             String text = htmlContent.getDocument().text();
             String[] lines = text.split("\\s");
             for (String line : lines) {

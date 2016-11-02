@@ -21,8 +21,8 @@ public class MainWindow extends JFrame {
 
     private JLabel jLabel = new JLabel("暂无物品!");
 
-    // public static String[] scripts = {"scripts/材料/柳虫"};
-    public static String[] scripts = {"scripts/材料/血印分身蒙汗药", "scripts/材料/柳虫", "scripts/材料/大白菜"};
+    // public static String[] scripts = {"scripts/材料/大柳虫"};
+    public static String[] scripts = {"scripts/材料/血印分身蒙汗药", "scripts/材料/大柳虫", "scripts/材料/大白菜"};
 
     public static int count = 0;
 

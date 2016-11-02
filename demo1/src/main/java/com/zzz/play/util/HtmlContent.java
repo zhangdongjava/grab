@@ -219,17 +219,21 @@ public class HtmlContent {
     }
 
     public void vailte() {
-
+        System.out.println("vailte");
         validate = true;
-        cick_jx();
-        if (exitsName("解除验证", false)) {
-            ValidationKill.getValidationKill(this).kill();
-        } else if (document.text().contains("战斗中，不能参战")) {
-            zdz.run();
-        } else if (document.text().contains("事件容器已满")) {
-            throw new HomeEndException();
+        try {
+            cick_jx();
+            if (exitsName("解除验证", false)) {
+                ValidationKill.getValidationKill(this).kill();
+            } else if (document.text().contains("战斗中，不能参战")) {
+                zdz.run();
+            } else if (document.text().contains("事件容器已满")) {
+                throw new HomeEndException();
+            }
+
+        } finally {
+            validate = false;
         }
-        validate = false;
     }
 
 

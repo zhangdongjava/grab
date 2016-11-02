@@ -22,6 +22,7 @@ public class GlobalUtil {
     }
 
     public void run() {
+        System.out.println(Thread.currentThread().getName());
         for (Step step : steps) {
             if (!change) {
                 change = step.run();

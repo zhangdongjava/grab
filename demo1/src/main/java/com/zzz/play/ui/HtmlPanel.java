@@ -52,7 +52,6 @@ public class HtmlPanel extends JFXPanel {
         this.mainWindow = mainWindow;
         this.setLayout(null);
         this.url = url;
-        init();
         run();
     }
 
@@ -93,10 +92,11 @@ public class HtmlPanel extends JFXPanel {
                     return;
                 }
                 lunch.run(content, scripts);
-                //go.setVisible(false);
+                go.setDisable(true);
             });
             stop.setOnAction(event -> stopGoon());
             script.setOnAction(event -> script());
+            HtmlPanel.this.init();
         });
     }
 
@@ -129,7 +129,7 @@ public class HtmlPanel extends JFXPanel {
         });
     }
 
-    public void init() throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
+    public void init()  {
         scripts = new LinkedList<>();
         scriptDialog = new ScriptDialog(this);
         utilDto = new UtilDto();
@@ -138,7 +138,12 @@ public class HtmlPanel extends JFXPanel {
         globalUtil = new GlobalUtil();
         lunch = new Lunch(globalUtil, utilDto);
         lunch.globalUtil = globalUtil;
-        assemble();
+        try {
+            assemble();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 
     public void assemble() throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {

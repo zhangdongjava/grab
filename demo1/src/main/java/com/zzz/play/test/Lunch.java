@@ -84,12 +84,8 @@ public class Lunch {
     }
 
     public void scriptRun() {
-        if (runSetpTheard != null) {
-            runSetpTheard.interrupt();
-        }
         service.submit(() -> {
             while (!Thread.interrupted()) {
-                runSetpTheard = Thread.currentThread();
                 runParses.clear();
                 runParses.addAll(textParses);
                 for (TextParse parse : runParses) {
@@ -105,4 +101,26 @@ public class Lunch {
             }
         });
     }
+
+
+    public void waitRunEnd() {
+        System.out.println("开始等待!");
+        synchronized (runSetpTheard) {
+            try {
+                runSetpTheard.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("结束等待!");
+    }
+
+    public void notifyRunStart() {
+        System.out.println("开始唤醒!");
+        synchronized (runSetpTheard) {
+            runSetpTheard.notifyAll();
+        }
+    }
+
+
 }

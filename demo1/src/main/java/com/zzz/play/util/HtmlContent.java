@@ -1,7 +1,7 @@
 package com.zzz.play.util;
 
 import com.zzz.play.bean.LinkBean;
-import com.zzz.play.exception.HomeEndException;
+import com.zzz.play.exception.StopCurrStepException;
 import com.zzz.play.inter.Observer;
 import com.zzz.play.setp.Step;
 import com.zzz.play.setp.TextParse;
@@ -228,7 +228,10 @@ public class HtmlContent {
                 zdz.run();
             } else if (document.text().contains("事件容器已满")) {
                 linkName("返回游戏");
-                throw new HomeEndException();
+                throw new StopCurrStepException("事件容器已满！");
+            }else if (Thread.currentThread().isInterrupted()) {
+                linkName("返回游戏");
+                throw new StopCurrStepException("当前线程中断!");
             }
 
         } finally {

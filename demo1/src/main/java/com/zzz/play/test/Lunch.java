@@ -1,6 +1,6 @@
 package com.zzz.play.test;
 
-import com.zzz.play.exception.HomeEndException;
+import com.zzz.play.exception.StopCurrStepException;
 import com.zzz.play.setp.TextParse;
 import com.zzz.play.setp.sys.GoodsSale;
 import com.zzz.play.util.*;
@@ -24,6 +24,11 @@ public class Lunch {
     public List<String> files;
     public GlobalUtil globalUtil;
     public UtilDto utilDto;
+
+    /**
+     * 运行脚本的线程
+     */
+    private Thread runSetpTheard;
 
     public Lunch(GlobalUtil globalUtil, UtilDto utilDto) {
         this.globalUtil = globalUtil;
@@ -79,15 +84,18 @@ public class Lunch {
     }
 
     public void scriptRun() {
-        //   service.shutdownNow();
+        if (runSetpTheard != null) {
+            runSetpTheard.interrupt();
+        }
         service.submit(() -> {
             while (!Thread.interrupted()) {
+                runSetpTheard = Thread.currentThread();
                 runParses.clear();
                 runParses.addAll(textParses);
                 for (TextParse parse : runParses) {
                     try {
                         parse.run();
-                    } catch (HomeEndException e) {
+                    } catch (StopCurrStepException e) {
                         System.out.println(parse.getFileName() + "->" + e.toString());
                     } catch (Exception e) {
                         e.printStackTrace();

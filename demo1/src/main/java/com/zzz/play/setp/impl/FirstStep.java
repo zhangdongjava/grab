@@ -11,6 +11,7 @@ public class FirstStep extends ManyStep {
     @Override
     public boolean run() {
         for (int i = 0; i < steps.size(); i++) {
+
             Step step = steps.get(i);
             boolean res = step.run();
             if (!res && i == 0) {

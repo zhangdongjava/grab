@@ -1,6 +1,6 @@
 package com.zzz.play.setp.sys;
 
-import com.zzz.play.exception.HomeEndException;
+import com.zzz.play.exception.StopCurrStepException;
 import com.zzz.play.setp.impl.BaseStep;
 
 /**
@@ -72,7 +72,7 @@ public class HomeStep extends BaseStep {
         htmlContent.linkName("庄院");
         try {
             start();
-        } catch (HomeEndException ex) {
+        } catch (StopCurrStepException ex) {
             System.out.println("结束!!");
         }
         return true;

@@ -24,7 +24,7 @@ public class Lunch {
     public GlobalUtil globalUtil;
     public UtilDto utilDto;
 
-    public Lunch(GlobalUtil globalUtil, UtilDto utilDto){
+    public Lunch(GlobalUtil globalUtil, UtilDto utilDto) {
         this.globalUtil = globalUtil;
         this.utilDto = utilDto;
     }
@@ -61,6 +61,7 @@ public class Lunch {
     }
 
     public void loadParse() {
+        if (content == null) return;
         textParses.clear();
         TextParse textParse = null;
         for (String file : files) {

@@ -46,7 +46,9 @@ public class HtmlPanel extends JFXPanel {
 
     private LinkedList<String> scripts;
 
-    public HtmlPanel(String url, MainWindow mainWindow) {
+    private TextField urlTextField;
+
+    public HtmlPanel(String url, MainWindow mainWindow) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
         this.mainWindow = mainWindow;
         this.setLayout(null);
         this.url = url;
@@ -70,7 +72,7 @@ public class HtmlPanel extends JFXPanel {
             Double heightDouble = new Integer(HEIGHT).doubleValue();
             VBox box = new VBox(10);
             HBox urlBox = new HBox(10);
-            final TextField urlTextField = new TextField();
+            urlTextField = new TextField();
             urlTextField.setText(url);
             Button go = new Button("go");
             stop = new Button("stop");
@@ -89,13 +91,6 @@ public class HtmlPanel extends JFXPanel {
                 if (scripts.isEmpty()) {
                     JOptionPane.showConfirmDialog(mainWindow, "没有选择脚本!");
                     return;
-                }
-                try {
-                    //组装各个对象
-                    //if(MainWindow.count<2)
-                    assemble(urlTextField);
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
                 lunch.run(content, scripts);
                 //go.setVisible(false);
@@ -134,7 +129,7 @@ public class HtmlPanel extends JFXPanel {
         });
     }
 
-    public void init() {
+    public void init() throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
         scripts = new LinkedList<>();
         scriptDialog = new ScriptDialog(this);
         utilDto = new UtilDto();
@@ -143,10 +138,10 @@ public class HtmlPanel extends JFXPanel {
         globalUtil = new GlobalUtil();
         lunch = new Lunch(globalUtil, utilDto);
         lunch.globalUtil = globalUtil;
-
+        assemble();
     }
 
-    public void assemble(TextField urlTextField) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
+    public void assemble() throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
         content = HtmlContent.initHtmlContent(urlTextField.getText(), this, globalUtil);
         GlobalObserver globalObserver = new GlobalObserver(globalUtil);
         content.addObserver(globalObserver);

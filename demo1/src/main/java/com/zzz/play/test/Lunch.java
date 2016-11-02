@@ -78,7 +78,7 @@ public class Lunch {
     }
 
     public void scriptRun() {
-        service.shutdownNow();
+     //   service.shutdownNow();
         service.submit(() -> {
             TextParse textParse = null;
             while (!Thread.interrupted()) {

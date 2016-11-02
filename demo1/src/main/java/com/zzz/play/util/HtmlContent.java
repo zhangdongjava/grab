@@ -219,6 +219,7 @@ public class HtmlContent {
     }
 
     public void vailte() {
+
         validate = true;
         cick_jx();
         if (exitsName("解除验证", false)) {
@@ -265,6 +266,9 @@ public class HtmlContent {
      * @return
      */
     public LinkBean linkName(String name, int index, boolean like) {
+        if (!validate) {
+            vailte();
+        }
         LinkBean linkBean = new LinkBean();
         Elements as = document.getElementsByTag("a");
         for (Element a : as) {

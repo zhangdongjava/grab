@@ -1,7 +1,5 @@
 package com.zzz.play.setp.sys;
 
-import com.sun.deploy.security.ruleset.RunRule;
-import com.sun.javafx.collections.SourceAdapterChange;
 import com.zzz.play.exception.HomeEndException;
 import com.zzz.play.setp.impl.BaseStep;
 
@@ -169,7 +167,6 @@ public class HomeStep extends BaseStep {
             if (line != null && !"".equals(line.trim()))
                 build(line.trim());
         }
-        System.out.println(this);
     }
 
     public void build(String line) {

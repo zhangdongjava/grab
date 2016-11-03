@@ -77,7 +77,6 @@ likex1while2
 返回游戏
 timeNormal_20_{
 进入树洞
-返回大柳树
 wait1
 putwanchong_a_巨大青蛇
 巨大青蛇
@@ -109,4 +108,5 @@ like周武师
 返回游戏
 sale玉缕,青蛇皮,柳虫皮_这是一张柳虫的皮
 }
+返回大柳树
 sale柳虫_柳虫残骸,金创药,行军

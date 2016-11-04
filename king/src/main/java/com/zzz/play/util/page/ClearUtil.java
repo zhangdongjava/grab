@@ -58,36 +58,38 @@ public class ClearUtil {
         if (htmlContent != null && htmlContent.getDocument().text().contains(LOAD)) {
             System.out.println("满负重保存");
             clearPack(htmlContent);
-            bulidFz(htmlContent.getDocument().text(), htmlContent);
-            if (fz < 200) {
-                throw new StopCurrStepException("负重不狗!");
-            }
+            clickFz(htmlContent);
             htmlContent.linkName("返回游戏");
         }
     }
 
     public void fzClear(HtmlContent htmlContent) {
         if (htmlContent == null) return;
-        bulidFz(htmlContent.getDocument().text(), htmlContent);
+        bulidFz(htmlContent);
         getFz(htmlContent);
     }
 
-    public void bulidFz(String lineStr, HtmlContent htmlContent) {
-        htmlContent.linkName("返回游戏");
+    public void bulidFz(HtmlContent htmlContent) {
+        System.out.println("开始检测负重...");
+        htmlContent.linkName("返回", true);
         htmlContent.linkName("物品");
+        String lineStr = htmlContent.getDocument().text();
         String[] lines = lineStr.substring(0, 25).split("\\s");
         for (String line : lines) {
             if (line != null && !"".equals(line.trim())) {
                 if (line.startsWith("负重:")) {
+                    System.out.println("检测到负重........" + line);
                     line = line.substring(3);
                     int index = line.indexOf("/");
                     int cu = Integer.valueOf(line.substring(0, index));
                     int sum = Integer.valueOf(line.substring(index + 1));
                     fz = sum - cu;
+                    System.out.println("检测结果........" + fz);
                     break;
                 }
             }
         }
+        htmlContent.linkName("返回游戏");
     }
 
     /**
@@ -100,16 +102,22 @@ public class ClearUtil {
             System.out.println("负重检测保存" + fz);
             clearPack(htmlContent);
         }
-        htmlContent.linkName("返回游戏");
-        if (fz < 200) {
-            throw new StopCurrStepException("负重不狗!");
-        }
+        clickFz(htmlContent);
     }
 
     public void clearPack(HtmlContent htmlContent) {
         htmlContent.linkName("返回游戏");
         goodsSale.run();
         save.run();
+        htmlContent.linkName("返回游戏");
+    }
+
+
+    private void clickFz(HtmlContent htmlContent) {
+        bulidFz(htmlContent);
+        if (fz < 200) {
+            throw new StopCurrStepException("负重不狗!");
+        }
         htmlContent.linkName("返回游戏");
     }
 

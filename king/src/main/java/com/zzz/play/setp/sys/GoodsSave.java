@@ -60,7 +60,8 @@ public class GoodsSave extends BaseStep implements SaveMark {
      * @param name 商品名称
      */
     public void saveOne(String name) {
-        LinkBean res = htmlContent.linkName(name, true);
+        LinkBean res = htmlContent.linkName(name, getNotNames());
+        liuNames.add(res.getClickName());
         String text = htmlContent.getDocument().text();
         htmlContent.linkName("全部存入");
         htmlContent.linkName("返回物品列表");
@@ -76,7 +77,7 @@ public class GoodsSave extends BaseStep implements SaveMark {
     public ExistSale existSale() {
         ExistSale existSale = new ExistSale();
         for (String s : sets) {
-            if (htmlContent.exitsName(s, true)) {
+            if (htmlContent.exitsName(s, getNotNames())) {
                 existSale.exist = true;
                 existSale.name = s;
                 return existSale;

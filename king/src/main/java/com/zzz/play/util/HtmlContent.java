@@ -232,7 +232,9 @@ public class HtmlContent {
         if (count > LINE_COUNT) throw new RuntimeException("链接断开!");
         try {
             await();
+            System.out.println(url);
             url = cleckUrl(url);
+            System.out.println(url);
             document = Jsoup.parse(new URL(url), 2000);
             delForms = document.getElementsByTag("form").remove();
             document.getElementsByTag("img").remove();
@@ -241,10 +243,10 @@ public class HtmlContent {
             htmlPanel.setHtml(document.html());
             vailte();
             controller.pageChange();
-        }catch (SocketTimeoutException e){
+        } catch (SocketTimeoutException e) {
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);
@@ -300,11 +302,24 @@ public class HtmlContent {
         return document.html();
     }
 
-    private void setBaseUrl(String url) {
-        baseUrl = url.substring(0, url.indexOf("/", 9) + 1);
+    public void setBaseUrl(String url) {
+        String temp = url.substring(0, url.indexOf("/", 9) + 1);
+        if (temp.trim().equals("")) {
+            temp = url;
+        }
+        baseUrl = temp;
     }
 
     public String cleckUrl(String url) {
+        if (!(url.trim().startsWith("http"))) {
+            url = baseUrl + url;
+        } else {
+            setBaseUrl(url);
+        }
+        return url;
+    }
+
+    public String buildUrl(String url) {
         if (!(url.trim().startsWith("http"))) {
             url = baseUrl + url;
         }
@@ -314,7 +329,7 @@ public class HtmlContent {
     private void buildAelements() {
         Elements elements = document.getElementsByTag("a");
         for (Element element : elements) {
-            element.attr("href", cleckUrl(element.attr("href")));
+            element.attr("href", buildUrl(element.attr("href")));
         }
     }
 

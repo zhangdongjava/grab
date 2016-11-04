@@ -13,10 +13,16 @@ import java.util.Properties;
 public class Resource {
 
     private static String fileName = "systemKing.txt";
+    private static String SHU_QIAN_FILE_NAME = "shuQianKing.txt";
     public static String bootPathName = "bootPath";
 
     public static String bootPath;
     public static Properties properties = new Properties();
+    /**
+     * 书签
+     */
+    public static Properties shuqian = new Properties();
+
 
     public static void load() {
         File file = new File(fileName);
@@ -35,6 +41,19 @@ public class Resource {
                 throw new RuntimeException(file + "文件不存在！");
             }
         }
+        loadShuQian();
+    }
+
+    public static void loadShuQian() {
+        File file = new File(SHU_QIAN_FILE_NAME);
+        if (file.exists()) {
+            try {
+                shuqian.load(new FileInputStream(file));
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new RuntimeException(file + "文件不存在！");
+            }
+        }
     }
 
     public static void add(String name, String value) throws IOException {
@@ -42,6 +61,22 @@ public class Resource {
         File file = new File(fileName);
         FileOutputStream outputStream = new FileOutputStream(file);
         properties.store(outputStream, "系统设置");
+        bootPath = properties.get(bootPathName).toString();
+    }
+
+    /**
+     * 添加书签
+     *
+     * @param url
+     * @param qu
+     * @param role
+     * @throws IOException
+     */
+    public static void addSq(String url, String qu, String role) throws IOException {
+        File file = new File(SHU_QIAN_FILE_NAME);
+        shuqian.put(role, qu + "###" + url);
+        FileOutputStream outputStream = new FileOutputStream(file);
+        shuqian.store(outputStream, "书签列表");
     }
 
     public static void main(String[] args) throws IOException {

@@ -1,5 +1,11 @@
 package com.zzz.play.ui;
 
+
+import com.zzz.play.ui.dialog.MyDialog;
+import com.zzz.play.ui.dialog.ShuQianDialog;
+import com.zzz.play.ui.dialog.ShuQianOpenDialog;
+import com.zzz.play.ui.dialog.SysSetDialog;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -21,6 +27,8 @@ public class MainWindow extends JFrame {
     private TabPanel tabPanel;
     private MyDialog myDialog;
     private SysSetDialog sysSetDialog;
+    private ShuQianDialog shuQianDialog;
+    private ShuQianOpenDialog qianOpenDialog;
 
     private static MainWindow mainWindow;
 
@@ -40,6 +48,8 @@ public class MainWindow extends JFrame {
         this.setContentPane(tabPanel);
         myDialog = new MyDialog(this);
         sysSetDialog = new SysSetDialog(this);
+        shuQianDialog = new ShuQianDialog(this);
+        qianOpenDialog = new ShuQianOpenDialog(this);
         initMenu();
         initToTray();
         this.setAlwaysOnTop(false);
@@ -54,21 +64,26 @@ public class MainWindow extends JFrame {
     private void initMenu() {
         JMenu jm = new JMenu("选项卡");     //创建JMenu菜单对象
         JMenu set = new JMenu("设置");     //创建JMenu菜单对象
+        JMenu shuqian = new JMenu("书签");     //创建JMenu菜单对象
         JMenuItem addTab = new JMenuItem("添加");  //菜单项
         JMenuItem scriptPath = new JMenuItem("脚本路径");  //菜单项
+        JMenuItem shuqianAdd = new JMenuItem("添加");  //菜单项
+        JMenuItem shuqianOpen = new JMenuItem("打开");  //菜单项
         addTab.addActionListener((e) -> addTab());
         scriptPath.addActionListener((e) -> scriptPath());
+        shuqianAdd.addActionListener((e) -> shuqianAdd());
+        shuqianOpen.addActionListener((e) -> shuqianOpen());
         jm.add(addTab);   //将菜单项目添加到菜单
         set.add(scriptPath);   //将菜单项目添加到菜单
+        shuqian.add(shuqianAdd);   //将菜单项目添加到菜单
+        shuqian.add(shuqianOpen);   //将菜单项目添加到菜单
         JMenuBar br = new JMenuBar();  //创建菜单工具栏
         br.add(jm);      //将菜单增加到菜单工具栏
         br.add(set);      //将菜单增加到菜单工具栏
+        br.add(shuqian);      //将菜单增加到菜单工具栏
         this.setJMenuBar(br);  //为 窗体设置  菜单工具栏
     }
 
-    private void scriptPath() {
-        sysSetDialog.setVisible(true);
-    }
 
     /**
      * 初始化最小化托盘
@@ -140,7 +155,7 @@ public class MainWindow extends JFrame {
     }
 
     public void addTab(String name, String url) {
-        tabPanel.addPanel(name, url);
+        tabPanel.addPanel(name, url,null);
         count++;
     }
 
@@ -152,5 +167,32 @@ public class MainWindow extends JFrame {
         //setAlwaysOnTop(true);// 设置置顶
         // 设置窗口状态(在最小化状态弹出显示)
         setExtendedState(JFrame.NORMAL);
+    }
+
+    /**
+     * 添加书签
+     */
+    private void shuqianAdd() {
+        shuQianDialog.setVisible(true);
+    }
+    private void shuqianOpen() {
+        qianOpenDialog.setVisible(true);
+    }
+
+    private void scriptPath() {
+        sysSetDialog.setVisible(true);
+    }
+
+    /**
+     * 添加书签
+     * @param s
+     */
+    public void addShuQian(String s) {
+        qianOpenDialog.addShuQian(s);
+    }
+
+    public void openShuQian(String line) {
+        String[] lines = line.split("###");
+        tabPanel.addPanel(lines[0], lines[2],lines[1]);
     }
 }

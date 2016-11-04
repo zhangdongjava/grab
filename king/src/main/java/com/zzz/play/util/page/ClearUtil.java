@@ -1,6 +1,7 @@
 package com.zzz.play.util.page;
 
 import com.zzz.play.exception.RunStopException;
+import com.zzz.play.exception.StopCurrStepException;
 import com.zzz.play.mark.SaleMark;
 import com.zzz.play.mark.SaveMark;
 import com.zzz.play.setp.Step;
@@ -53,7 +54,7 @@ public class ClearUtil {
             System.out.println("满负重保存");
             clearPack(htmlContent);
             if (fz < 200) {
-                throw new RunStopException("负重不狗!");
+                throw new StopCurrStepException("负重不狗!");
             }
         }
     }
@@ -90,7 +91,7 @@ public class ClearUtil {
         }
         htmlContent.linkName("返回游戏");
         if (fz < 200) {
-            throw new RunStopException("负重不狗!");
+            throw new StopCurrStepException("负重不狗!");
         }
     }
 

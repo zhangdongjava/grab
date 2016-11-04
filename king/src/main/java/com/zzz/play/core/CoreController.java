@@ -6,10 +6,12 @@ import com.zzz.play.setp.Step;
 import com.zzz.play.setp.TextParse;
 import com.zzz.play.setp.impl.config.ManyStep;
 import com.zzz.play.setp.sys.GoodsSale;
+import com.zzz.play.ui.MainWindow;
 import com.zzz.play.util.GlobalUtil;
 import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.UtilDto;
 
+import javax.swing.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -126,6 +128,8 @@ public class CoreController {
                         utilDto.clearUtil.fzClear(content);
                         parse.run();
                     } catch (StopCurrStepException e) {
+                        utilDto.waitNotfiy.await();
+                        JOptionPane.showConfirmDialog(MainWindow.getWindow(), e.getMessage());
                         System.out.println(parse.getFileName() + "->" + e.toString());
                     } catch (Exception e) {
                         e.printStackTrace();

@@ -22,6 +22,8 @@ public class MainWindow extends JFrame {
     private MyDialog myDialog;
     private SysSetDialog sysSetDialog;
 
+    private static MainWindow mainWindow;
+
     private JLabel jLabel = new JLabel("暂无物品!");
 
     // public static String[] scripts = {"scripts/材料/大柳虫"};
@@ -42,6 +44,11 @@ public class MainWindow extends JFrame {
         initToTray();
         this.setAlwaysOnTop(false);
         this.setVisible(true);
+        mainWindow = this;
+    }
+
+    public static MainWindow getWindow() {
+        return mainWindow;
     }
 
     private void initMenu() {

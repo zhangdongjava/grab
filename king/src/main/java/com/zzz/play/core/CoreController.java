@@ -2,11 +2,9 @@ package com.zzz.play.core;
 
 import com.zzz.play.exception.StopCurrStepException;
 import com.zzz.play.inter.Observer;
-import com.zzz.play.mark.SaleMark;
-import com.zzz.play.mark.SaveMark;
 import com.zzz.play.setp.Step;
 import com.zzz.play.setp.TextParse;
-import com.zzz.play.setp.impl.ManyStep;
+import com.zzz.play.setp.impl.config.ManyStep;
 import com.zzz.play.setp.sys.GoodsSale;
 import com.zzz.play.util.GlobalUtil;
 import com.zzz.play.util.HtmlContent;

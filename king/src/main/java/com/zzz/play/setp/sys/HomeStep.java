@@ -1,7 +1,7 @@
 package com.zzz.play.setp.sys;
 
 import com.zzz.play.exception.StopCurrStepException;
-import com.zzz.play.setp.impl.BaseStep;
+import com.zzz.play.setp.impl.config.BaseStep;
 
 /**
  * 庄园升级home即可调用

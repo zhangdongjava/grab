@@ -29,9 +29,16 @@ public interface Step extends Runable {
 
     void setLineNum(int num);
 
-    int  getLineNum();
+    int getLineNum();
 
     void await();
 
     void setUtilDto(UtilDto utilDto);
+
+    /**
+     * 是否可以被中断
+     *
+     * @return
+     */
+    boolean breakOff();
 }

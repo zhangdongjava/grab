@@ -1,6 +1,6 @@
 package com.zzz.play.setp.sys;
 
-import com.zzz.play.setp.impl.BaseStep;
+import com.zzz.play.setp.impl.config.BaseStep;
 import com.zzz.play.util.HtmlContent;
 
 /**

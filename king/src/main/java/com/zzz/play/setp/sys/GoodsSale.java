@@ -2,7 +2,7 @@ package com.zzz.play.setp.sys;
 
 import com.zzz.play.bean.LinkBean;
 import com.zzz.play.mark.SaleMark;
-import com.zzz.play.setp.impl.BaseStep;
+import com.zzz.play.setp.impl.config.BaseStep;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 

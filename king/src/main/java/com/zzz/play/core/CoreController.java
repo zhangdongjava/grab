@@ -2,6 +2,9 @@ package com.zzz.play.core;
 
 import com.zzz.play.exception.StopCurrStepException;
 import com.zzz.play.inter.Observer;
+import com.zzz.play.mark.SaleMark;
+import com.zzz.play.mark.SaveMark;
+import com.zzz.play.setp.Step;
 import com.zzz.play.setp.TextParse;
 import com.zzz.play.setp.impl.ManyStep;
 import com.zzz.play.setp.sys.GoodsSale;
@@ -34,12 +37,10 @@ public class CoreController {
      * 全局观察者
      */
     public LinkedList<Observer> observers = new LinkedList<>();
-
     public HtmlContent content;
     public List<String> files;
     public GlobalUtil globalUtil;
     public UtilDto utilDto;
-
 
     public CoreController(GlobalUtil globalUtil, UtilDto utilDto) {
         this.globalUtil = globalUtil;
@@ -51,7 +52,8 @@ public class CoreController {
      * 页面改变 就是每次页面加载了调用
      */
     public void pageChange() {
-
+        utilDto.waitNotfiy.await();
+        utilDto.clearUtil.clear(content);
     }
 
     /**
@@ -76,12 +78,9 @@ public class CoreController {
      * 开始运行
      *
      * @param content
-     * @param files
      */
-    public void run(HtmlContent content, List<String> files) {
+    public void run(HtmlContent content) {
         this.content = content;
-        this.files = files;
-        loadParse();
         run();
         //testRun(content)
     }
@@ -102,10 +101,10 @@ public class CoreController {
     public void loadParse() {
         if (content == null) return;
         textParses.clear();
-        TextParse textParse = null;
+        TextParse textParse;
         for (String file : files) {
             try {
-                textParse = TextParse.getInstance(file, content, utilDto);
+                textParse = TextParse.getInstance(file, content, utilDto, this);
                 textParse.setFileName(file);
                 textParses.add(textParse);
             } catch (Exception e) {
@@ -154,5 +153,13 @@ public class CoreController {
      */
     public void addObserver(Observer observer) {
         observers.add(observer);
+    }
+
+    /**
+     * @param step
+     * @return
+     */
+    public boolean addMarkStep(Step step) {
+        return utilDto.clearUtil.addMarkStep(step);
     }
 }

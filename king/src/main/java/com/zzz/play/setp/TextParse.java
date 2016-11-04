@@ -140,6 +140,7 @@ public class TextParse implements Runable {
             step.setStep(this);
             step.setHtmlContent(htmlContent);
             if (!inMang) {
+                if(markSetp(step))
                 linkedList.add(step);
             } else {
                 manyStep.addStep(step);
@@ -169,6 +170,15 @@ public class TextParse implements Runable {
             return false;
         }
         return true;
+    }
+
+    /**
+     *
+     * @param step
+     * @return 不是标记
+     */
+    private boolean markSetp(Step step){
+        return  controller.addMarkStep(step);
     }
 
 

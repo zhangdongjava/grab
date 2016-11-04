@@ -24,25 +24,18 @@ import java.util.LinkedList;
  */
 public class HtmlPanel extends JFXPanel {
 
-    private String url = "http://xfhero1.yytou.com/gCmd.do?cmd=7&sid=6r8sp03bnb2zcs8bodvqp";
-
+    private String url;
     public static final int WIDTH = 300;
     public static final int HEIGHT = 500;
-
     public HtmlContent content;
     public GlobalUtil globalUtil;
-
     private WebView view;
     private Button stop;
     private Button script;
-
     public CoreController controller;
-
     public UtilDto utilDto;
-
     private ScriptDialog scriptDialog;
     public MainWindow mainWindow;
-
     private LinkedList<String> scripts;
 
     private TextField urlTextField;
@@ -90,7 +83,7 @@ public class HtmlPanel extends JFXPanel {
                     JOptionPane.showConfirmDialog(mainWindow, "没有选择脚本!");
                     return;
                 }
-                controller.run(content, scripts);
+                controller.run(content);
                 go.setDisable(true);
             });
             stop.setOnAction(event -> stopGoon());
@@ -148,6 +141,7 @@ public class HtmlPanel extends JFXPanel {
     public void assemble() throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
         content = new HtmlContent(urlTextField.getText(), this, controller);
         GlobalObserver globalObserver = new GlobalObserver(globalUtil);
+        controller.addObserver(globalObserver);
     }
 
     /**

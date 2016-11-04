@@ -83,18 +83,26 @@ public class HtmlPanel extends JFXPanel {
             box.getChildren().add(urlBox);
             box.getChildren().add(view);
             root.getChildren().add(box);
-            go.setOnAction(event -> {
-                if (scripts.isEmpty()) {
-                    JOptionPane.showConfirmDialog(mainWindow, "没有选择脚本!");
-                    return;
-                }
-                controller.run(content);
-                go.setDisable(true);
-            });
+            go.setOnAction(event -> go(go));
             stop.setOnAction(event -> stopGoon());
             script.setOnAction(event -> script());
             HtmlPanel.this.init();
         });
+    }
+
+    private void go(Button go) {
+        if (scripts.isEmpty()) {
+            JOptionPane.showConfirmDialog(mainWindow, "没有选择脚本!");
+            return;
+        }
+        WebEngine engine = view.getEngine();
+        String location = engine.getLocation();
+        if (location != null && !"".equals(location)) {
+            System.out.println(location);
+            content.linkUrl(location);
+        }
+        controller.run(content);
+        go.setDisable(true);
     }
 
     /**

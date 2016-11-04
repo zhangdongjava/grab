@@ -26,7 +26,7 @@ public class MainClass {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("JavaFX in Swing");
+		JFrame frame = new JFrame("JavaFXaaa 2232in Swing");
 		final JFXPanel webBrowser = new JFXPanel();
 		frame.setLayout(new BorderLayout());
 		frame.add(webBrowser, BorderLayout.CENTER);

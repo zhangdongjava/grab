@@ -24,6 +24,7 @@
         <processorPath useClasspath="true" />
         <module name="demo1" />
         <module name="king" />
+        <module name="swingdemo" />
       </profile>
     </annotationProcessing>
   </component>

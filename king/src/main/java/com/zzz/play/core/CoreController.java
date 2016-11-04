@@ -6,6 +6,7 @@ import com.zzz.play.setp.Step;
 import com.zzz.play.setp.TextParse;
 import com.zzz.play.setp.impl.config.ManyStep;
 import com.zzz.play.setp.sys.GoodsSale;
+import com.zzz.play.ui.HtmlPanel;
 import com.zzz.play.ui.MainWindow;
 import com.zzz.play.util.GlobalUtil;
 import com.zzz.play.util.HtmlContent;
@@ -41,6 +42,7 @@ public class CoreController {
     public List<String> files;
     public GlobalUtil globalUtil;
     public UtilDto utilDto;
+    public HtmlPanel htmlPanel;
 
     public CoreController(GlobalUtil globalUtil, UtilDto utilDto) {
         this.globalUtil = globalUtil;
@@ -128,7 +130,7 @@ public class CoreController {
                         utilDto.clearUtil.fzClear(content);
                         parse.run();
                     } catch (StopCurrStepException e) {
-                        JOptionPane.showConfirmDialog(MainWindow.getWindow(), e.getMessage());
+                        JOptionPane.showConfirmDialog(MainWindow.getWindow(), htmlPanel.name+"->"+e.getMessage());
                         System.out.println(parse.getFileName() + "->" + e.toString());
                     } catch (Exception e) {
                         e.printStackTrace();

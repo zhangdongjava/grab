@@ -40,6 +40,10 @@ public class HtmlPanel extends JFXPanel {
     private LinkedList<String> scripts;
 
     private TextField urlTextField;
+    /**
+     * 选项卡名称
+     */
+    public String name;
 
     public HtmlPanel(String url, MainWindow mainWindow) throws Exception {
         this.mainWindow = mainWindow;
@@ -100,26 +104,31 @@ public class HtmlPanel extends JFXPanel {
         scriptDialog.showUi();
     }
 
+    String text = null;
+
     /**
      * 暂停或继续
      */
     public void stopGoon() {
-        Platform.runLater(() -> {
-            if (utilDto.waitNotfiy.wait) {
-                WebEngine engine = view.getEngine();
-                String location = engine.getLocation();
-                if (location != null && !"".equals(location)) {
-                    System.out.println(location);
-                    content.linkUrl(location);
-                }
-                utilDto.waitNotfiy.wait = false;
-                stop.setText("stop");
-                utilDto.waitNotfiy.anotfiy();
-            } else {
-                utilDto.waitNotfiy.wait = true;
-                stop.setText("go on");
+
+        if (utilDto.waitNotfiy.wait) {
+            utilDto.waitNotfiy.wait = false;
+            WebEngine engine = view.getEngine();
+            String location = engine.getLocation();
+            if (location != null && !"".equals(location)) {
+                System.out.println("唤醒加载..." + location);
+                content.linkUrl(location);
+                System.out.println("加载完成..." + location);
             }
-        });
+            text = ("stop");
+            System.out.println("开始唤醒!");
+            utilDto.waitNotfiy.anotfiy();
+            System.out.println("唤醒成功!");
+        } else {
+            utilDto.waitNotfiy.wait = true;
+            text = ("go on");
+        }
+        Platform.runLater(() -> stop.setText(text));
     }
 
     public void init() {
@@ -132,6 +141,7 @@ public class HtmlPanel extends JFXPanel {
         globalUtil = new GlobalUtil();
         controller = new CoreController(globalUtil, utilDto);
         controller.globalUtil = globalUtil;
+        controller.htmlPanel = this;
         try {
             assemble();
         } catch (Exception e) {

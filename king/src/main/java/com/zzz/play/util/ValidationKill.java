@@ -14,7 +14,7 @@ public class ValidationKill {
     /**
      * 结果一次无法解析，就重来一次  这个就是重来计数器，大与MAX_COUNT次跑异常
      */
-    private int count  = 0;
+    private int count = 0;
 
     private static int MAX_COUNT = 10;
 
@@ -32,23 +32,28 @@ public class ValidationKill {
     }
 
     private void kill2() {
-        if(count > MAX_COUNT) throw new RuntimeException("结果无法解析");
+        if (count > MAX_COUNT) throw new RuntimeException("结果无法解析");
         htmlContent.linkName("解除验证");
         Document document = htmlContent.getDocument();
         String[] text = document.text().split("\\s+");
-        parse(text[1]);
+        parse(text, 0);
     }
 
-    private void parse(String line) {
+    private void parse(String[] lines, int index) {
+        if (index >= lines.length) {
+            count++;
+            htmlContent.linkName("返回游戏", false);
+            kill2();
+            return;
+        }
+        String line = lines[index];
         Object res = null;
         if (line.startsWith("请输入:")) {
             res = jiafa(line.substring(4, line.indexOf("的")));
         } else if (line.startsWith("请输入文字:")) {
             res = line.substring(6).trim();
         } else {
-            count ++;
-            htmlContent.linkName("返回游戏",false);
-            kill2();
+            parse(lines, index + 1);
         }
         sendRes(res);
     }
@@ -66,14 +71,24 @@ public class ValidationKill {
 
     private void sendRes(Object res) {
         Elements forms = htmlContent.delForms;
-        if(forms.size() != 1){
+        String action;
+        if (forms.size() != 1) {
+            System.out.println(htmlContent.getDocument().text());
+            System.out.println(htmlContent.getDocument().html());
+            forms = htmlContent.getDocument().getElementsByTag("go");
+            Element form = forms.get(0);
+            action = htmlContent.cleckUrl(form.attr("href"));
+        } else {
+            Element form = forms.get(0);
+            action = htmlContent.cleckUrl(form.attr("action"));
+        }
+        if (forms.size() != 1) {
             throw new RuntimeException("form 个数不对!");
         }
-        Element form = forms.get(0);
-        String action = htmlContent.cleckUrl(form.attr("action"));
-        htmlContent.linkUrl(action+"&guaji_name="+res);
-        htmlContent.linkName("返回游戏",false);
-        System.out.println(action+"?guaji_name="+res);
+
+        htmlContent.linkUrl(action + "&guaji_name=" + res);
+        htmlContent.linkName("返回游戏", false);
+        System.out.println(action + "?guaji_name=" + res);
     }
 
 }

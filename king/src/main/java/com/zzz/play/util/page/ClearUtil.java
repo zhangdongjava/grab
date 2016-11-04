@@ -52,6 +52,9 @@ public class ClearUtil {
         if (htmlContent != null && htmlContent.getDocument().text().contains(LOAD)) {
             System.out.println("满负重保存");
             clearPack(htmlContent);
+            if (fz < 200) {
+                throw new RunStopException("负重不狗!");
+            }
         }
     }
 

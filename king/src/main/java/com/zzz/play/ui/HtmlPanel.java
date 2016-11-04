@@ -1,7 +1,7 @@
 package com.zzz.play.ui;
 
 import com.zzz.play.inter.impl.GlobalObserver;
-import com.zzz.play.core.Lunch;
+import com.zzz.play.core.CoreController;
 import com.zzz.play.util.*;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -36,7 +36,7 @@ public class HtmlPanel extends JFXPanel {
     private Button stop;
     private Button script;
 
-    public Lunch lunch;
+    public CoreController controller;
 
     public UtilDto utilDto;
 
@@ -47,7 +47,7 @@ public class HtmlPanel extends JFXPanel {
 
     private TextField urlTextField;
 
-    public HtmlPanel(String url, MainWindow mainWindow) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
+    public HtmlPanel(String url, MainWindow mainWindow) throws Exception {
         this.mainWindow = mainWindow;
         this.setLayout(null);
         this.url = url;
@@ -90,7 +90,7 @@ public class HtmlPanel extends JFXPanel {
                     JOptionPane.showConfirmDialog(mainWindow, "没有选择脚本!");
                     return;
                 }
-                lunch.run(content, scripts);
+                controller.run(content, scripts);
                 go.setDisable(true);
             });
             stop.setOnAction(event -> stopGoon());
@@ -128,15 +128,15 @@ public class HtmlPanel extends JFXPanel {
         });
     }
 
-    public void init()  {
+    public void init() {
         scripts = new LinkedList<>();
         scriptDialog = new ScriptDialog(this);
         utilDto = new UtilDto();
         utilDto.waitNotfiy = new WaitNotfiy();
         utilDto.varUtil = new VarUtil();
         globalUtil = new GlobalUtil();
-        lunch = new Lunch(globalUtil, utilDto);
-        lunch.globalUtil = globalUtil;
+        controller = new CoreController(globalUtil, utilDto);
+        controller.globalUtil = globalUtil;
         try {
             assemble();
         } catch (Exception e) {
@@ -146,9 +146,8 @@ public class HtmlPanel extends JFXPanel {
     }
 
     public void assemble() throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
-        content = HtmlContent.initHtmlContent(urlTextField.getText(), this, globalUtil);
+        content = new HtmlContent(urlTextField.getText(), this, controller);
         GlobalObserver globalObserver = new GlobalObserver(globalUtil);
-        content.addObserver(globalObserver);
     }
 
     /**
@@ -168,7 +167,7 @@ public class HtmlPanel extends JFXPanel {
     }
 
     public void reloadScript() {
-        lunch.files = this.scripts;
-        lunch.loadParse();
+        controller.files = this.scripts;
+        controller.loadParse();
     }
 }

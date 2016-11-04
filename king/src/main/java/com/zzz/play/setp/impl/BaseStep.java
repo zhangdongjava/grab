@@ -31,7 +31,6 @@ public class BaseStep implements Step {
 
     protected UtilDto utilDto;
 
-
     public void setLike(boolean like) {
         this.like = like;
     }

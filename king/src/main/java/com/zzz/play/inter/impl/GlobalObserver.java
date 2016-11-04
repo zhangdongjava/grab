@@ -11,7 +11,7 @@ public class GlobalObserver implements Observer, OneStepRun {
 
     private GlobalUtil globalUtil;
 
-    private boolean change;
+    private boolean change = false;
 
     public GlobalObserver(GlobalUtil globalUtil) {
         this.globalUtil = globalUtil;
@@ -20,7 +20,6 @@ public class GlobalObserver implements Observer, OneStepRun {
     @Override
     public void run() {
         globalUtil.run();
-        change = globalUtil.change;
     }
 
     @Override

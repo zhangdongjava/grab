@@ -1,7 +1,4 @@
-package com.zzz.play.test;
-
-import java.awt.BorderLayout;
-import java.awt.Toolkit;
+package com.zzz.play.core;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -16,7 +13,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
 
 public class MainClass {
 	private static final int WIDTH = 800;

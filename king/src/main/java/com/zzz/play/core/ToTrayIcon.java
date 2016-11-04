@@ -1,23 +1,11 @@
-package com.zzz.play.test;
-  
-import java.awt.AWTException;  
-import java.awt.Image;  
-import java.awt.MenuItem;  
-import java.awt.PopupMenu;  
-import java.awt.SystemTray;  
-import java.awt.TrayIcon;  
-import java.awt.event.ActionEvent;  
-import java.awt.event.ActionListener;  
-import java.awt.event.MouseEvent;  
-import java.awt.event.MouseListener;  
-import java.awt.event.WindowEvent;  
-import java.awt.event.WindowListener;
+package com.zzz.play.core;
 
-import javax.swing.GroupLayout;
-import javax.swing.JFrame;
+import javax.swing.*;
 import javax.swing.GroupLayout.ParallelGroup;
-import javax.swing.GroupLayout.SequentialGroup;  
-  
+import javax.swing.GroupLayout.SequentialGroup;
+import java.awt.*;
+import java.awt.event.*;
+
 public class ToTrayIcon extends JFrame implements ActionListener,  
         WindowListener {  
   

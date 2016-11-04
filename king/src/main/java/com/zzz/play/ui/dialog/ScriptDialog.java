@@ -19,6 +19,7 @@ public class ScriptDialog extends JDialog {
 
     public static String scriptRoot = null;
     private static Map<String, String> allScripts;
+    private static Map<String, String> url_name;
     private HtmlPanel htmlPanel;
     private JList<String> list;
     private JList<String> clickList;
@@ -32,6 +33,7 @@ public class ScriptDialog extends JDialog {
 
     static {
         allScripts = new ConcurrentHashMap<>();
+        url_name = new ConcurrentHashMap<>();
         Resource.load();
     }
 
@@ -42,6 +44,7 @@ public class ScriptDialog extends JDialog {
         this.setSize(400, 600);
         this.setLocationRelativeTo(null);
         this.htmlPanel = htmlPanel;
+        build();
     }
 
     private ScriptDialog(Frame frame) {
@@ -89,8 +92,6 @@ public class ScriptDialog extends JDialog {
     }
 
     public void showUi() {
-        scriptRoot = Resource.bootPath;
-        build();
         this.setVisible(true);
     }
 
@@ -116,6 +117,7 @@ public class ScriptDialog extends JDialog {
 
 
     public void build() {
+        scriptRoot = Resource.bootPath;
         if (scriptRoot == null) {
             JOptionPane.showConfirmDialog(this.htmlPanel.mainWindow, "请设置脚本根路径!");
             return;
@@ -140,9 +142,16 @@ public class ScriptDialog extends JDialog {
         for (File file1 : files) {
             if (file1.isFile()) {
                 allScripts.put(name + "/" + file1.getName(), file1.getPath());
+                url_name.put(file1.getPath(), name + "/" + file1.getName());
             } else {
                 openDir(file1, name + "/" + file1.getName());
             }
         }
+    }
+
+    public void addScript(String url) {
+        String name = url_name.get(url);
+        defaultListModel.addElement(name);
+        selectList.add(name);
     }
 }

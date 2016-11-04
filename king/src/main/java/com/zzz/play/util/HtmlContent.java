@@ -64,7 +64,7 @@ public class HtmlContent {
      * @param name
      * @return
      */
-    private LinkBean getUrl(String name, boolean like) {
+    public LinkBean getUrl(String name, boolean like) {
         String url;
         LinkBean linkBean = new LinkBean();
         Elements elements = document.getElementsByTag("a");

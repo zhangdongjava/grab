@@ -1,5 +1,6 @@
 package com.zzz.play.ui;
 
+import com.zzz.play.bean.LinkBean;
 import com.zzz.play.inter.impl.GlobalObserver;
 import com.zzz.play.core.CoreController;
 import com.zzz.play.ui.dialog.ScriptDialog;
@@ -41,10 +42,12 @@ public class HtmlPanel extends JFXPanel {
     public UtilDto utilDto;
     private ScriptDialog scriptDialog;
     public MainWindow mainWindow;
-    private LinkedList<String> scripts;
+    public LinkedList<String> scripts;
     private Object startLock = new Object();
     private TextField urlTextField;
     private static ExecutorService exec = Executors.newFixedThreadPool(10);
+    public boolean isWait = false;
+    public String shuQianUrl;
     /**
      * 角色名称
      */
@@ -54,10 +57,12 @@ public class HtmlPanel extends JFXPanel {
      */
     public String daqu;
 
-    public HtmlPanel(String url, MainWindow mainWindow, String name, String daqu) throws Exception {
+    public HtmlPanel(String url, MainWindow mainWindow, String name, String daqu, LinkedList<String> script) throws Exception {
         this.mainWindow = mainWindow;
         this.name = name;
         this.daqu = daqu;
+        this.shuQianUrl = url;
+        this.scripts = script;
         this.setLayout(null);
         this.url = url;
         run();
@@ -114,7 +119,9 @@ public class HtmlPanel extends JFXPanel {
             content.linkUrl(location);
         }
         controller.run(content);
-        go.setDisable(true);
+        Platform.runLater(() -> {
+            go.setDisable(true);
+        });
     }
 
     /**
@@ -132,6 +139,7 @@ public class HtmlPanel extends JFXPanel {
     public void stopGoon() {
 
         if (utilDto.waitNotfiy.wait) {
+            isWait = false;
             utilDto.waitNotfiy.wait = false;
             WebEngine engine = view.getEngine();
             String location = engine.getLocation();
@@ -144,14 +152,20 @@ public class HtmlPanel extends JFXPanel {
             System.out.println("唤醒成功!");
         } else {
             utilDto.waitNotfiy.wait = true;
+            isWait = true;
             text = ("go on");
         }
         Platform.runLater(() -> stop.setText(text));
     }
 
     public void init() {
-        scripts = new LinkedList<>();
+        if (scripts == null) {
+            scripts = new LinkedList<>();
+        }
         scriptDialog = new ScriptDialog(this);
+        for (String s : scripts) {
+            scriptDialog.addScript(s);
+        }
         utilDto = new UtilDto();
         utilDto.waitNotfiy = new WaitNotfiy();
         utilDto.varUtil = new VarUtil();
@@ -185,11 +199,10 @@ public class HtmlPanel extends JFXPanel {
                 }
             }
             if (daqu != null) {
-                content.linkName(daqu, true);
-                if (content.baseUrl.contains("entry.yytou.com")){
-                    content.baseUrl = "http://hero2.yytou.com/";
-                }
-                content.linkName(name, true);
+                content.linkName(daqu.trim(), true);
+                LinkBean link = content.getUrl(name.trim(), true);
+                String urlTemp = link.getUrl().replace("entry.yytou.com", "hero2.yytou.com");
+                content.linkUrl(urlTemp);
                 content.linkName("点击进入", true);
                 while (!content.exitsName("进入游戏", true)) ;
                 content.linkName("进入游戏", true);

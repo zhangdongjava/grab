@@ -1,6 +1,7 @@
 package com.zzz.play.ui;
 
 
+import com.zzz.play.bean.ShuQian;
 import com.zzz.play.ui.dialog.MyDialog;
 import com.zzz.play.ui.dialog.ShuQianDialog;
 import com.zzz.play.ui.dialog.ShuQianOpenDialog;
@@ -12,6 +13,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.*;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -29,6 +32,8 @@ public class MainWindow extends JFrame {
     private SysSetDialog sysSetDialog;
     private ShuQianDialog shuQianDialog;
     private ShuQianOpenDialog qianOpenDialog;
+    private JFileChooser jChooser;
+    private LinkedList<HtmlPanel> htmlPanels;
 
     private static MainWindow mainWindow;
 
@@ -50,6 +55,7 @@ public class MainWindow extends JFrame {
         sysSetDialog = new SysSetDialog(this);
         shuQianDialog = new ShuQianDialog(this);
         qianOpenDialog = new ShuQianOpenDialog(this);
+        htmlPanels = new LinkedList<>();
         initMenu();
         initToTray();
         this.setAlwaysOnTop(false);
@@ -69,19 +75,79 @@ public class MainWindow extends JFrame {
         JMenuItem scriptPath = new JMenuItem("脚本路径");  //菜单项
         JMenuItem shuqianAdd = new JMenuItem("添加");  //菜单项
         JMenuItem shuqianOpen = new JMenuItem("打开");  //菜单项
+        JMenuItem all = new JMenuItem("保存所有");  //菜单项
+        JMenuItem open = new JMenuItem("打开所有");  //菜单项
         addTab.addActionListener((e) -> addTab());
         scriptPath.addActionListener((e) -> scriptPath());
         shuqianAdd.addActionListener((e) -> shuqianAdd());
         shuqianOpen.addActionListener((e) -> shuqianOpen());
+        all.addActionListener((e) -> all());
+        open.addActionListener((e) -> open());
         jm.add(addTab);   //将菜单项目添加到菜单
         set.add(scriptPath);   //将菜单项目添加到菜单
         shuqian.add(shuqianAdd);   //将菜单项目添加到菜单
         shuqian.add(shuqianOpen);   //将菜单项目添加到菜单
+        shuqian.add(all);   //将菜单项目添加到菜单
+        shuqian.add(open);   //将菜单项目添加到菜单
         JMenuBar br = new JMenuBar();  //创建菜单工具栏
         br.add(jm);      //将菜单增加到菜单工具栏
         br.add(set);      //将菜单增加到菜单工具栏
         br.add(shuqian);      //将菜单增加到菜单工具栏
         this.setJMenuBar(br);  //为 窗体设置  菜单工具栏
+    }
+
+    private void open() {
+        jChooser = new JFileChooser();
+        jChooser.setCurrentDirectory(new File(""));//设置默认打开路径
+        jChooser.setDialogType(JFileChooser.OPEN_DIALOG);//设置保存对话框
+        jChooser.showDialog(this, "保存书签");
+        File file = jChooser.getSelectedFile();
+        if (file != null) {
+            try {
+                ObjectInputStream stream = new ObjectInputStream(new FileInputStream(file));
+                LinkedList<ShuQian> list = (LinkedList<ShuQian>) stream.readObject();
+                for (ShuQian shuQian : list) {
+                    tabPanel.addPanel(shuQian.getName(), shuQian.getUrl(), shuQian.getDaqu(), shuQian.getScritps());
+                }
+            } catch (Exception e) {
+                JOptionPane.showConfirmDialog(this, "打开失败!" + e.toString());
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void all() {
+        jChooser = new JFileChooser();
+        jChooser.setCurrentDirectory(new File(""));//设置默认打开路径
+        jChooser.setDialogType(JFileChooser.SAVE_DIALOG);//设置保存对话框
+        jChooser.showDialog(this, "保存书签");
+        File file = jChooser.getSelectedFile();
+        if (file != null) {
+            try {
+                LinkedList<ShuQian> list = new LinkedList<>();
+                for (HtmlPanel htmlPanel : htmlPanels) {
+                    if (htmlPanel.name != null
+                            && htmlPanel.daqu != null
+                            && !htmlPanel.isWait
+                            && !htmlPanel.scripts.isEmpty()) {
+                        ShuQian shuQian = new ShuQian();
+                        shuQian.setUrl(htmlPanel.shuQianUrl);
+                        shuQian.setName(htmlPanel.name);
+                        shuQian.setDaqu(htmlPanel.daqu);
+                        shuQian.setScritps(htmlPanel.scripts);
+                        list.add(shuQian);
+                    }
+                }
+                if (list.size() > 0) {
+                    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
+                    out.writeObject(list);
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
 
@@ -155,7 +221,7 @@ public class MainWindow extends JFrame {
     }
 
     public void addTab(String name, String url) {
-        tabPanel.addPanel(name, url,null);
+        tabPanel.addPanel(name, url, null, null);
         count++;
     }
 
@@ -175,6 +241,7 @@ public class MainWindow extends JFrame {
     private void shuqianAdd() {
         shuQianDialog.setVisible(true);
     }
+
     private void shuqianOpen() {
         qianOpenDialog.setVisible(true);
     }
@@ -185,6 +252,7 @@ public class MainWindow extends JFrame {
 
     /**
      * 添加书签
+     *
      * @param s
      */
     public void addShuQian(String s) {
@@ -193,6 +261,10 @@ public class MainWindow extends JFrame {
 
     public void openShuQian(String line) {
         String[] lines = line.split("###");
-        tabPanel.addPanel(lines[0], lines[2],lines[1]);
+        tabPanel.addPanel(lines[0], lines[2], lines[1], null);
+    }
+
+    public void addHtmlPanel(HtmlPanel panel) {
+        htmlPanels.add(panel);
     }
 }

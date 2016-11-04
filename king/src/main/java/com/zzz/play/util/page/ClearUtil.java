@@ -5,6 +5,8 @@ import com.zzz.play.exception.StopCurrStepException;
 import com.zzz.play.mark.SaleMark;
 import com.zzz.play.mark.SaveMark;
 import com.zzz.play.setp.Step;
+import com.zzz.play.setp.sys.GoodsSale;
+import com.zzz.play.setp.sys.GoodsSave;
 import com.zzz.play.util.HtmlContent;
 
 import java.util.LinkedList;
@@ -25,12 +27,12 @@ public class ClearUtil {
     /**
      * 买脚本
      */
-    public LinkedList<Step> sales = new LinkedList<>();
+    GoodsSale goodsSale;
 
     /**
      * 存脚本
      */
-    public LinkedList<Step> saves = new LinkedList<>();
+    GoodsSave save;
 
     /**
      * @param step
@@ -38,11 +40,19 @@ public class ClearUtil {
      */
     public boolean addMarkStep(Step step) {
         //卖脚本
-        if (step instanceof SaleMark) {
-            sales.add(step);
+        if (step instanceof GoodsSale) {
+            if (goodsSale == null) {
+                goodsSale = (GoodsSale) step;
+            } else {
+                goodsSale.putStep((GoodsSale) step);
+            }
             return false;
-        } else if (step instanceof SaveMark) {
-            saves.add(step);
+        } else if (step instanceof GoodsSave) {
+            if (save == null) {
+                save = (GoodsSave) step;
+            } else {
+                save.putStep((GoodsSave) step);
+            }
             return false;
         }
         return true;
@@ -97,12 +107,8 @@ public class ClearUtil {
 
     public void clearPack(HtmlContent htmlContent) {
         htmlContent.linkName("返回游戏");
-        for (Step sale : sales) {
-            sale.run();
-        }
-        for (Step save : saves) {
-            save.run();
-        }
+        goodsSale.run();
+        save.run();
         htmlContent.linkName("返回游戏");
     }
 

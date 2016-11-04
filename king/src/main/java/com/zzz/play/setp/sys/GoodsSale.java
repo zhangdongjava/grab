@@ -2,6 +2,7 @@ package com.zzz.play.setp.sys;
 
 import com.zzz.play.bean.LinkBean;
 import com.zzz.play.mark.SaleMark;
+import com.zzz.play.setp.Step;
 import com.zzz.play.setp.impl.config.BaseStep;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -121,6 +122,12 @@ public class GoodsSale extends BaseStep implements SaleMark {
     private class ExistSale {
         public boolean exist = false;
         public String name = null;
+    }
+
+    public void putStep(GoodsSale step) {
+        for (Map.Entry<String, String> entry : step.maps.entrySet()) {
+            maps.put(entry.getKey(), entry.getValue());
+        }
     }
 }
 

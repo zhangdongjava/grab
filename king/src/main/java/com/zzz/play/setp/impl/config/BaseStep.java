@@ -108,5 +108,10 @@ public class BaseStep implements Step {
         this.utilDto = utilDto;
     }
 
+    @Override
+    public boolean breakOff() {
+        return true;
+    }
+
 
 }

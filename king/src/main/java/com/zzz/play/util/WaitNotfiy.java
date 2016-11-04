@@ -15,6 +15,7 @@ public class WaitNotfiy {
             try {
                 lock.wait();
             } catch (InterruptedException e) {
+                e.printStackTrace();
                 Thread.currentThread().interrupt();
             }
         }

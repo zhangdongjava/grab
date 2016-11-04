@@ -63,6 +63,7 @@ public class GoodsSave extends BaseStep implements SaveMark {
         LinkBean res = htmlContent.linkName(name, true);
         String text = htmlContent.getDocument().text();
         htmlContent.linkName("全部存入");
+        htmlContent.linkName("返回物品列表");
         System.out.println("保存了所有" + text);
     }
 
@@ -93,6 +94,10 @@ public class GoodsSave extends BaseStep implements SaveMark {
     private class ExistSale {
         public boolean exist = false;
         public String name = null;
+    }
+
+    public void putStep(GoodsSave step) {
+        sets.addAll(step.sets);
     }
 }
 

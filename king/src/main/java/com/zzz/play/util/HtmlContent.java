@@ -232,9 +232,7 @@ public class HtmlContent {
         if (count > LINE_COUNT) throw new RuntimeException("链接断开!");
         try {
             await();
-            System.out.println(url);
             url = cleckUrl(url);
-            System.out.println(url);
             document = Jsoup.parse(new URL(url), 2000);
             delForms = document.getElementsByTag("form").remove();
             document.getElementsByTag("img").remove();

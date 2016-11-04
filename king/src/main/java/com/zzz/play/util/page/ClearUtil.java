@@ -1,5 +1,6 @@
 package com.zzz.play.util.page;
 
+import com.zzz.play.exception.RunStopException;
 import com.zzz.play.mark.SaleMark;
 import com.zzz.play.mark.SaveMark;
 import com.zzz.play.setp.Step;
@@ -8,6 +9,7 @@ import com.zzz.play.util.HtmlContent;
 import java.util.LinkedList;
 
 /**
+ * 清理负重
  * Created by dell_2 on 2016/11/4.
  */
 public class ClearUtil {
@@ -84,6 +86,9 @@ public class ClearUtil {
             clearPack(htmlContent);
         }
         htmlContent.linkName("返回游戏");
+        if (fz < 200) {
+            throw new RunStopException("负重不狗!");
+        }
     }
 
     public void clearPack(HtmlContent htmlContent) {

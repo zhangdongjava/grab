@@ -58,25 +58,23 @@ public class ClearUtil {
         if (htmlContent != null && htmlContent.getDocument().text().contains(LOAD)) {
             System.out.println("满负重保存");
             clearPack(htmlContent);
+            bulidFz(htmlContent.getDocument().text(), htmlContent);
             if (fz < 200) {
                 throw new StopCurrStepException("负重不狗!");
             }
+            htmlContent.linkName("返回游戏");
         }
     }
 
     public void fzClear(HtmlContent htmlContent) {
         if (htmlContent == null) return;
-        htmlContent.linkName("返回游戏");
-        htmlContent.linkName("物品");
-        getFz(htmlContent.getDocument().text(), htmlContent);
+        bulidFz(htmlContent.getDocument().text(), htmlContent);
+        getFz(htmlContent);
     }
 
-    /**
-     * 获取负重
-     *
-     * @param lineStr
-     */
-    private void getFz(String lineStr, HtmlContent htmlContent) {
+    public void bulidFz(String lineStr, HtmlContent htmlContent) {
+        htmlContent.linkName("返回游戏");
+        htmlContent.linkName("物品");
         String[] lines = lineStr.substring(0, 25).split("\\s");
         for (String line : lines) {
             if (line != null && !"".equals(line.trim())) {
@@ -90,6 +88,14 @@ public class ClearUtil {
                 }
             }
         }
+    }
+
+    /**
+     * 获取负重
+     *
+     * @param htmlContent
+     */
+    private void getFz(HtmlContent htmlContent) {
         if (fz < 200) {
             System.out.println("负重检测保存" + fz);
             clearPack(htmlContent);

@@ -128,7 +128,6 @@ public class CoreController {
                         utilDto.clearUtil.fzClear(content);
                         parse.run();
                     } catch (StopCurrStepException e) {
-                        utilDto.waitNotfiy.await();
                         JOptionPane.showConfirmDialog(MainWindow.getWindow(), e.getMessage());
                         System.out.println(parse.getFileName() + "->" + e.toString());
                     } catch (Exception e) {

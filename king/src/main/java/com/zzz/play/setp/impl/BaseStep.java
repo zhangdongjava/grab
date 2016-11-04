@@ -100,7 +100,7 @@ public class BaseStep implements Step {
     }
 
     public void await() {
-        utilDto.waitNotfiy.await();
+
     }
 
     @Override

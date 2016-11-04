@@ -12,6 +12,13 @@ import java.util.LinkedList;
  */
 public class ClearUtil {
 
+    private static String LOAD = "你的负载过重";
+
+    /**
+     * 剩余负重
+     */
+    private int fz;
+
     /**
      * 买脚本
      */
@@ -30,15 +37,64 @@ public class ClearUtil {
         //卖脚本
         if (step instanceof SaleMark) {
             sales.add(step);
+            return false;
         } else if (step instanceof SaveMark) {
             saves.add(step);
+            return false;
         }
         return true;
     }
 
     public void clear(HtmlContent htmlContent) {
-
+        if (htmlContent == null) return;
+        if (htmlContent != null && htmlContent.getDocument().text().contains(LOAD)) {
+            System.out.println("满负重保存");
+            clearPack(htmlContent);
+        }
     }
 
+    public void fzClear(HtmlContent htmlContent) {
+        if (htmlContent == null) return;
+        htmlContent.linkName("返回游戏");
+        htmlContent.linkName("物品");
+        getFz(htmlContent.getDocument().text(), htmlContent);
+    }
+
+    /**
+     * 获取负重
+     *
+     * @param lineStr
+     */
+    private void getFz(String lineStr, HtmlContent htmlContent) {
+        String[] lines = lineStr.substring(0, 25).split("\\s");
+        for (String line : lines) {
+            if (line != null && !"".equals(line.trim())) {
+                if (line.startsWith("负重:")) {
+                    line = line.substring(3);
+                    int index = line.indexOf("/");
+                    int cu = Integer.valueOf(line.substring(0, index));
+                    int sum = Integer.valueOf(line.substring(index + 1));
+                    fz = sum - cu;
+                    break;
+                }
+            }
+        }
+        if (fz < 200) {
+            System.out.println("负重检测保存" + fz);
+            clearPack(htmlContent);
+        }
+        htmlContent.linkName("返回游戏");
+    }
+
+    public void clearPack(HtmlContent htmlContent) {
+        htmlContent.linkName("返回游戏");
+        for (Step sale : sales) {
+            sale.run();
+        }
+        for (Step save : saves) {
+            save.run();
+        }
+        htmlContent.linkName("返回游戏");
+    }
 
 }

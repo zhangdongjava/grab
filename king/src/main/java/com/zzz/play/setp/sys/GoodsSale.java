@@ -1,6 +1,7 @@
 package com.zzz.play.setp.sys;
 
 import com.zzz.play.bean.LinkBean;
+import com.zzz.play.mark.SaleMark;
 import com.zzz.play.setp.impl.BaseStep;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,7 +14,7 @@ import java.util.Map;
  * 柳虫残害清理
  * Created by dell_2 on 2016/10/31.
  */
-public class GoodsSale extends BaseStep {
+public class GoodsSale extends BaseStep implements SaleMark {
 
     private LinkedList<String> liuNames = new LinkedList<>();
 

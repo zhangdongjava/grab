@@ -6,6 +6,7 @@ import com.zzz.play.inter.Runable;
 import com.zzz.play.mark.Global;
 import com.zzz.play.setp.impl.ManyStep;
 import com.zzz.play.setp.sys.GoodsSale;
+import com.zzz.play.setp.sys.GoodsSave;
 import com.zzz.play.setp.sys.HomeStep;
 import com.zzz.play.util.GlobalUtil;
 import com.zzz.play.util.HtmlContent;
@@ -123,6 +124,8 @@ public class TextParse implements Runable {
             step.setMb(true);
         } else if (line.startsWith("sale")) {
             step = new GoodsSale(line.substring(4));
+        } else if (line.startsWith("save")) {
+            step = new GoodsSave(line.substring(4));
         } else if (line.startsWith("home")) {
             step = new HomeStep();
         } else if (line.endsWith("{")) {
@@ -140,8 +143,8 @@ public class TextParse implements Runable {
             step.setStep(this);
             step.setHtmlContent(htmlContent);
             if (!inMang) {
-                if(markSetp(step))
-                linkedList.add(step);
+                if (markSetp(step))
+                    linkedList.add(step);
             } else {
                 manyStep.addStep(step);
             }
@@ -173,12 +176,11 @@ public class TextParse implements Runable {
     }
 
     /**
-     *
      * @param step
      * @return 不是标记
      */
-    private boolean markSetp(Step step){
-        return  controller.addMarkStep(step);
+    private boolean markSetp(Step step) {
+        return controller.addMarkStep(step);
     }
 
 

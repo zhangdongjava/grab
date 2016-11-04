@@ -3,6 +3,7 @@ package com.zzz.play.ui;
 import com.zzz.play.inter.impl.GlobalObserver;
 import com.zzz.play.core.CoreController;
 import com.zzz.play.util.*;
+import com.zzz.play.util.page.ClearUtil;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
@@ -127,6 +128,7 @@ public class HtmlPanel extends JFXPanel {
         utilDto = new UtilDto();
         utilDto.waitNotfiy = new WaitNotfiy();
         utilDto.varUtil = new VarUtil();
+        utilDto.clearUtil = new ClearUtil();
         globalUtil = new GlobalUtil();
         controller = new CoreController(globalUtil, utilDto);
         controller.globalUtil = globalUtil;
@@ -140,6 +142,7 @@ public class HtmlPanel extends JFXPanel {
 
     public void assemble() throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
         content = new HtmlContent(urlTextField.getText(), this, controller);
+        controller.content = content;
         GlobalObserver globalObserver = new GlobalObserver(globalUtil);
         controller.addObserver(globalObserver);
     }

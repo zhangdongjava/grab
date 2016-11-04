@@ -241,6 +241,7 @@ public class HtmlContent {
             htmlPanel.setHtml(document.html());
             controller.pageChange();
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);
         }
@@ -300,7 +301,7 @@ public class HtmlContent {
     }
 
     public String cleckUrl(String url) {
-        if (!url.startsWith("http")) {
+        if (!(url.trim().startsWith("http"))) {
             url = baseUrl + url;
         }
         return url;
@@ -309,7 +310,7 @@ public class HtmlContent {
     private void buildAelements() {
         Elements elements = document.getElementsByTag("a");
         for (Element element : elements) {
-            element.attr("href", baseUrl + element.attr("href"));
+            element.attr("href", cleckUrl(element.attr("href")));
         }
     }
 

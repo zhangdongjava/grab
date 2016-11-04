@@ -125,6 +125,7 @@ public class CoreController {
                 runParses.addAll(textParses);
                 for (TextParse parse : runParses) {
                     try {
+                        utilDto.clearUtil.fzClear(content);
                         parse.run();
                     } catch (StopCurrStepException e) {
                         System.out.println(parse.getFileName() + "->" + e.toString());

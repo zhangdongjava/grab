@@ -90,10 +90,6 @@ public class ScriptDialog extends JDialog {
     public void showUi() {
         scriptRoot = Resource.bootPath;
         build();
-        if (!is_init) {
-            init();
-            is_init = true;
-        }
         this.setVisible(true);
     }
 
@@ -131,6 +127,10 @@ public class ScriptDialog extends JDialog {
             } else {
                 openDir(file1, file1.getName());
             }
+        }
+        if (!is_init) {
+            init();
+            is_init = true;
         }
     }
 

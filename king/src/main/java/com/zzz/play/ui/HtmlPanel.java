@@ -116,9 +116,7 @@ public class HtmlPanel extends JFXPanel {
             WebEngine engine = view.getEngine();
             String location = engine.getLocation();
             if (location != null && !"".equals(location)) {
-                System.out.println("唤醒加载..." + location);
                 content.linkUrl(location);
-                System.out.println("加载完成..." + location);
             }
             text = ("stop");
             System.out.println("开始唤醒!");

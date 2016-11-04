@@ -235,10 +235,10 @@ public class HtmlContent {
             document = Jsoup.parse(new URL(url), 2000);
             delForms = document.getElementsByTag("form").remove();
             document.getElementsByTag("img").remove();
-            vailte();
             urlMap.clear();
             buildAelements();
             htmlPanel.setHtml(document.html());
+            vailte();
             controller.pageChange();
         } catch (Exception e) {
             e.printStackTrace();

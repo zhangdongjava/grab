@@ -101,8 +101,8 @@ public class ClearUtil {
         if (fz < 200) {
             System.out.println("负重检测保存" + fz);
             clearPack(htmlContent);
+            clickFz(htmlContent);
         }
-        clickFz(htmlContent);
     }
 
     public void clearPack(HtmlContent htmlContent) {

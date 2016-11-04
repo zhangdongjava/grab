@@ -14,6 +14,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -240,7 +241,10 @@ public class HtmlContent {
             htmlPanel.setHtml(document.html());
             vailte();
             controller.pageChange();
-        } catch (Exception e) {
+        }catch (SocketTimeoutException e){
+            System.out.println(count + 1 + "次尝试链接..." + url);
+            linkUrl(url, count + 1);
+        }catch (Exception e) {
             e.printStackTrace();
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);

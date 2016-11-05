@@ -104,6 +104,7 @@ public class HomeStep extends BaseStep {
             htmlContent.linkName("确定建造");
             create = true;
             surplus--;
+            create();
         }
         //建造房屋
         if (surplus > 0) {
@@ -118,9 +119,10 @@ public class HomeStep extends BaseStep {
      */
     public void upgradeBuild() {
         System.out.println("升级!");
-        for (int i = 0; i < upgradeCount; i++) {
+        for (int i = 1; i < upgradeCount; i++) {
             upgradeBuild(i);
         }
+        upgradeBuild(0);
     }
 
     /**

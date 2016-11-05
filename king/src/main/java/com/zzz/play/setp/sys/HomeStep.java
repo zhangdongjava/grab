@@ -136,7 +136,7 @@ public class HomeStep extends BaseStep {
             String text = htmlContent.getDocument().text();
             String[] lines = text.split("\\s");
             for (String line : lines) {
-                if (line != null && !"".equals(line.trim())&&surplus>2)
+                if (line != null && !"".equals(line.trim()))
                     upgradeBuild(line.trim());
             }
         } while (htmlContent.linkName("下.页").isSuccess());
@@ -153,7 +153,6 @@ public class HomeStep extends BaseStep {
             int i2 = line.indexOf("级");
             int lv = Integer.valueOf(line.substring(i1 + 1, i2));
             if (lv < homeLv) {
-                surplus--;
                 htmlContent.linkName("升级", upgradeIndex);
                 htmlContent.linkName("确定升级");
                 upgradeIndex--;

@@ -1,11 +1,11 @@
 package com.zzz.play.ui;
 
-import com.zzz.play.bean.LinkBean;
-import com.zzz.play.inter.impl.GlobalObserver;
 import com.zzz.play.core.CoreController;
+import com.zzz.play.inter.impl.GlobalObserver;
 import com.zzz.play.ui.dialog.ScriptDialog;
 import com.zzz.play.util.*;
 import com.zzz.play.util.page.ClearUtil;
+import com.zzz.play.util.sys.LoginUtil;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
@@ -34,7 +34,7 @@ public class HtmlPanel extends JFXPanel {
     public static final int HEIGHT = 500;
     public HtmlContent content;
     public GlobalUtil globalUtil;
-    private WebView view;
+    public WebView view;
     private Button stop;
     private Button go;
     private Button script;
@@ -47,7 +47,9 @@ public class HtmlPanel extends JFXPanel {
     private TextField urlTextField;
     private static ExecutorService exec = Executors.newFixedThreadPool(10);
     public boolean isWait = false;
+    public boolean ruing = false;
     public String shuQianUrl;
+    public LoginUtil loginUtil;
     /**
      * 角色名称
      */
@@ -69,7 +71,9 @@ public class HtmlPanel extends JFXPanel {
     }
 
     public void setHtml(String html) {
-        Platform.runLater(() -> view.getEngine().loadContent(html));
+       // if (ruing) {
+            Platform.runLater(() -> view.getEngine().loadContent(html));
+       // }
     }
 
 
@@ -78,6 +82,7 @@ public class HtmlPanel extends JFXPanel {
             view = new WebView();
             Group root = new Group();
             view.setFontScale(0.8);
+            loginUtil = new LoginUtil(this);
             Scene scene1 = new Scene(root, WIDTH, HEIGHT);
             HtmlPanel.this.setScene(scene1);
             Double widthDouble = new Integer(WIDTH).doubleValue();
@@ -86,6 +91,7 @@ public class HtmlPanel extends JFXPanel {
             HBox urlBox = new HBox(10);
             urlTextField = new TextField();
             urlTextField.setText(url);
+            view.getEngine().load(url);
             go = new Button("go");
             stop = new Button("stop");
             script = new Button("脚本");
@@ -111,6 +117,7 @@ public class HtmlPanel extends JFXPanel {
             JOptionPane.showConfirmDialog(mainWindow, "没有选择脚本!");
             return;
         }
+        ruing = true;
         WebEngine engine = view.getEngine();
         String location = engine.getLocation();
         if (location != null && !"".equals(location)) {
@@ -199,18 +206,14 @@ public class HtmlPanel extends JFXPanel {
                 }
             }
             if (daqu != null) {
-                content.linkName(daqu.trim(), true);
-                LinkBean link = content.getUrl(name.trim(), true);
-                String urlTemp = link.getUrl().replace("entry.yytou.com", "hero2.yytou.com");
-                content.linkUrl(urlTemp);
-                content.linkName("点击进入", true);
-                while (!content.exitsName("进入游戏", true)) ;
-                content.linkName("进入游戏", true);
-                content.linkName("我知道了", true);
-                content.linkName("进入游戏", true);
-                if (!scripts.isEmpty()) {
-                    reloadScript();
-                    goScript();
+                try {
+                    loginUtil.login();
+                    if (!scripts.isEmpty()) {
+                        reloadScript();
+                        goScript();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         });

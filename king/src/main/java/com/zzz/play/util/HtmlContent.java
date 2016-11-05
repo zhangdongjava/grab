@@ -7,13 +7,13 @@ import com.zzz.play.setp.Step;
 import com.zzz.play.setp.TextParse;
 import com.zzz.play.setp.sys.FinishCombat;
 import com.zzz.play.ui.HtmlPanel;
+import com.zzz.play.util.http.HttpRequest;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.HashMap;
@@ -49,14 +49,21 @@ public class HtmlContent {
      */
     private CoreController controller;
 
+    private Map<String, String> urlReplace = new HashMap<>();
+
+    private HttpRequest httpRequest;
+
 
     public HtmlContent(String url, HtmlPanel htmlPanel, CoreController controller) {
+        initUrlReplace();
         this.controller = controller;
         setBaseUrl(url);
         this.htmlPanel = htmlPanel;
+        httpRequest = new HttpRequest();
         zdz = new FinishCombat(this);
-        linkUrl(url, 0);
+        selfLinkUrl(url, 0);
     }
+
 
     /**
      * 获取地址
@@ -228,19 +235,42 @@ public class HtmlContent {
         return linkUrl(url, 0);
     }
 
+    public boolean selfLinkUrl(String url) {
+        return selfLinkUrl(url, 0);
+    }
+
+    private boolean selfLinkUrl(String url, int count) {
+        if (count > LINE_COUNT) throw new RuntimeException("链接断开!");
+        try {
+            await();
+            url = cleckUrl(url);
+            String html = HttpRequest.sendGet(url);
+            System.out.println(html);
+            document = Jsoup.parse(html);
+            linkEnd();
+        } catch (IOException e) {
+            System.out.println(count + 1 + "次尝试链接..." + url);
+            selfLinkUrl(url, count + 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(count + 1 + "次尝试链接..." + url);
+            selfLinkUrl(url, count + 1);
+        }
+        return true;
+    }
+
+    private void setContext(String html) {
+        document = Jsoup.parse(html);
+        linkEnd();
+    }
+
     private boolean linkUrl(String url, int count) {
         if (count > LINE_COUNT) throw new RuntimeException("链接断开!");
         try {
             await();
             url = cleckUrl(url);
             document = Jsoup.parse(new URL(url), 2000);
-            delForms = document.getElementsByTag("form").remove();
-            document.getElementsByTag("img").remove();
-            urlMap.clear();
-            buildAelements();
-            htmlPanel.setHtml(document.html());
-            vailte();
-            controller.pageChange();
+            linkEnd();
         } catch (SocketTimeoutException e) {
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);
@@ -250,6 +280,17 @@ public class HtmlContent {
             linkUrl(url, count + 1);
         }
         return true;
+    }
+
+
+    private void linkEnd() {
+        delForms = document.getElementsByTag("form").remove();
+        document.getElementsByTag("img").remove();
+        urlMap.clear();
+        buildAelements();
+        htmlPanel.setHtml(document.html());
+        vailte();
+        controller.pageChange();
     }
 
     public LinkBean linkName(String name, int index) {
@@ -321,6 +362,9 @@ public class HtmlContent {
         if (!(url.trim().startsWith("http"))) {
             url = baseUrl + url;
         }
+//        for (Map.Entry<String, String> entry : urlReplace.entrySet()) {
+//            url = url.replace(entry.getKey(), entry.getValue());
+//        }
         return url;
     }
 
@@ -342,6 +386,11 @@ public class HtmlContent {
     public void setCurrParse(TextParse currParse) {
         this.currParse = currParse;
     }
+
+    private void initUrlReplace() {
+        urlReplace.put("&amp;", "&");
+    }
+
 
 }
 

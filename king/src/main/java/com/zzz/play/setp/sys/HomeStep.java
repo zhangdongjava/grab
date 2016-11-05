@@ -99,7 +99,7 @@ public class HomeStep extends BaseStep {
     public void create() {
         System.out.println("建造!");
         int num = getMin();
-        if (num < 4 && surplus > 0) {
+        if (num < 4 && surplus > 2) {
             htmlContent.linkName("建造", jzIndex);
             htmlContent.linkName("确定建造");
             create = true;
@@ -107,7 +107,7 @@ public class HomeStep extends BaseStep {
             create();
         }
         //建造房屋
-        if (surplus > 0) {
+        if (surplus > 2) {
             htmlContent.linkName("建造", 0);
             htmlContent.linkName("确定建造");
             surplus--;
@@ -136,7 +136,7 @@ public class HomeStep extends BaseStep {
             String text = htmlContent.getDocument().text();
             String[] lines = text.split("\\s");
             for (String line : lines) {
-                if (line != null && !"".equals(line.trim()))
+                if (line != null && !"".equals(line.trim())&&surplus>2)
                     upgradeBuild(line.trim());
             }
         } while (htmlContent.linkName("下.页").isSuccess());
@@ -153,6 +153,7 @@ public class HomeStep extends BaseStep {
             int i2 = line.indexOf("级");
             int lv = Integer.valueOf(line.substring(i1 + 1, i2));
             if (lv < homeLv) {
+                surplus--;
                 htmlContent.linkName("升级", upgradeIndex);
                 htmlContent.linkName("确定升级");
                 upgradeIndex--;

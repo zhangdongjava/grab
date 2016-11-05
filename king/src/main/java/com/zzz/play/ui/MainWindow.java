@@ -103,7 +103,7 @@ public class MainWindow extends JFrame {
         jChooser = new JFileChooser();
         jChooser.setCurrentDirectory(new File(""));//设置默认打开路径
         jChooser.setDialogType(JFileChooser.OPEN_DIALOG);//设置保存对话框
-        jChooser.showDialog(this, "保存书签");
+        jChooser.showDialog(this, "打开书签");
         File file = jChooser.getSelectedFile();
         if (file != null) {
             try {

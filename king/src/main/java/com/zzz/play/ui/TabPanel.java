@@ -17,11 +17,12 @@ public class TabPanel extends JTabbedPane {
         this.mainWindow = mainWindow;
     }
 
-    public void addPanel(String name, String url, String daqu,LinkedList<String> script) {
+    public void addPanel(String name, String url, String daqu, LinkedList<String> script) {
         try {
-            HtmlPanel panel = new HtmlPanel(url, mainWindow,name,daqu, script);
+            HtmlPanel panel = new HtmlPanel(url, mainWindow, name, daqu, script);
             this.add(name, panel);
             mainWindow.addHtmlPanel(panel);
+            Thread.sleep(5000);
         } catch (Exception e) {
             e.printStackTrace();
         }

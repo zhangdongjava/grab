@@ -82,7 +82,7 @@ public class MainWindow extends JFrame {
         shuqianAdd.addActionListener((e) -> shuqianAdd());
         shuqianOpen.addActionListener((e) -> shuqianOpen());
         all.addActionListener((e) -> all());
-        open.addActionListener((e) -> open());
+        open.addActionListener((e) -> new Thread(()->open()).start());
         jm.add(addTab);   //将菜单项目添加到菜单
         set.add(scriptPath);   //将菜单项目添加到菜单
         shuqian.add(shuqianAdd);   //将菜单项目添加到菜单

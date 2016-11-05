@@ -71,9 +71,9 @@ public class HtmlPanel extends JFXPanel {
     }
 
     public void setHtml(String html) {
-       // if (ruing) {
-            Platform.runLater(() -> view.getEngine().loadContent(html));
-       // }
+        // if (ruing) {
+        Platform.runLater(() -> view.getEngine().loadContent(html));
+        // }
     }
 
 

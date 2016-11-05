@@ -43,7 +43,7 @@ public class LoginUtil {
     public static void main(String[] args) throws IOException {
         String url = "http://xfhero1.yytou.com/gCmd.do?cmd=2&sid=evt4xw3bt59a08wkc1scn";
         HttpRequest httpRequest = new HttpRequest();
-        String res = HttpRequest.sendGet(url);
+        String res = httpRequest.sendGet(url);
         System.out.println(res);
     }
 

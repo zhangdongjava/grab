@@ -244,7 +244,7 @@ public class HtmlContent {
         try {
             await();
             url = cleckUrl(url);
-            String html = HttpRequest.sendGet(url);
+            String html = httpRequest.sendGet(url);
             document = Jsoup.parse(html);
             linkEnd();
         } catch (IOException e) {

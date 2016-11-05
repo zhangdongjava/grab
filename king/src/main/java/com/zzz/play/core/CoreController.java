@@ -130,7 +130,6 @@ public class CoreController {
                         utilDto.clearUtil.fzClear(content);
                         parse.run();
                     } catch (StopCurrStepException e) {
-                        JOptionPane.showConfirmDialog(MainWindow.getWindow(), htmlPanel.name+"->"+e.getMessage());
                         System.out.println(parse.getFileName() + "->" + e.toString());
                     } catch (Exception e) {
                         e.printStackTrace();

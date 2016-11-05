@@ -6,6 +6,7 @@ import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.http.HttpRequest;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -41,10 +42,11 @@ public class LoginUtil {
     }
 
     public static void main(String[] args) throws IOException {
-        String url = "http://xfhero1.yytou.com/gCmd.do?cmd=2&sid=evt4xw3bt59a08wkc1scn";
-        HttpRequest httpRequest = new HttpRequest();
-        String res = httpRequest.sendGet(url);
-        System.out.println(res);
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            System.out.println(random.nextInt(100));
+
+        }
     }
 
 

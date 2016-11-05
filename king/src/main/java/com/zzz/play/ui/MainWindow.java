@@ -16,6 +16,8 @@ import java.awt.event.WindowEvent;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by dell_2 on 2016/10/29.
@@ -36,6 +38,7 @@ public class MainWindow extends JFrame {
     private LinkedList<HtmlPanel> htmlPanels;
 
     private static MainWindow mainWindow;
+    private static ExecutorService exec = Executors.newFixedThreadPool(2);
 
     private JLabel jLabel = new JLabel("暂无物品!");
 
@@ -82,7 +85,7 @@ public class MainWindow extends JFrame {
         shuqianAdd.addActionListener((e) -> shuqianAdd());
         shuqianOpen.addActionListener((e) -> shuqianOpen());
         all.addActionListener((e) -> all());
-        open.addActionListener((e) -> new Thread(()->open()).start());
+        open.addActionListener((e) -> exec.submit(() -> open()));
         jm.add(addTab);   //将菜单项目添加到菜单
         set.add(scriptPath);   //将菜单项目添加到菜单
         shuqian.add(shuqianAdd);   //将菜单项目添加到菜单

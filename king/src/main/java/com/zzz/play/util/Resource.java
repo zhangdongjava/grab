@@ -13,7 +13,7 @@ import java.util.Properties;
 public class Resource {
 
     private static String fileName = "systemKing.txt";
-    private static String SHU_QIAN_FILE_NAME = "shuQianKing.txt";
+    private static String SHU_QIAN_FILE_NAME = "shuQianKing.properties";
     public static String bootPathName = "bootPath";
 
     public static String bootPath;

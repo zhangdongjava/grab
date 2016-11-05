@@ -13,6 +13,7 @@ import com.zzz.play.util.HtmlContent;
 public class ClearUtil {
 
     private static String LOAD = "你的负载过重";
+    private  int minFz = 50;
 
     /**
      * 剩余负重
@@ -98,7 +99,7 @@ public class ClearUtil {
      * @param htmlContent
      */
     private void getFz(HtmlContent htmlContent) {
-        if (fz < 200) {
+        if (fz < minFz) {
             System.out.println("负重检测保存" + fz);
             clearPack(htmlContent);
             clickFz(htmlContent);
@@ -107,15 +108,19 @@ public class ClearUtil {
 
     public void clearPack(HtmlContent htmlContent) {
         htmlContent.linkName("返回游戏");
-        goodsSale.run();
-        save.run();
+        if(goodsSale!=null){
+            goodsSale.run();
+        }
+        if(save!= null){
+            save.run();
+        }
         htmlContent.linkName("返回游戏");
     }
 
 
     private void clickFz(HtmlContent htmlContent) {
         bulidFz(htmlContent);
-        if (fz < 200) {
+        if (fz < minFz) {
             throw new StopCurrStepException("负重不狗!");
         }
         htmlContent.linkName("返回游戏");

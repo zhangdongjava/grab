@@ -22,6 +22,8 @@ public class ShuQianOpenDialog extends JDialog {
     private JList<String> jList;
     private DefaultListModel defaultListModel;
 
+    private static String line="----------------------------------------------------";
+
     public ShuQianOpenDialog(MainWindow parent) {
         super(parent);
         this.parent = parent;
@@ -53,8 +55,13 @@ public class ShuQianOpenDialog extends JDialog {
         Resource.load();
         Properties properties = Resource.shuqian;
         for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-            defaultListModel.addElement(entry.getKey() + "###" + entry.getValue());
-            System.out.println(entry.getKey() + "->" + entry.getValue());
+            if(entry.getKey().toString().startsWith("--")){
+                defaultListModel.addElement(line);
+            }else{
+                System.out.println(entry.getKey() + "->" + entry.getValue());
+                defaultListModel.addElement(entry.getKey() + "###" + entry.getValue());
+            }
+
         }
     }
 

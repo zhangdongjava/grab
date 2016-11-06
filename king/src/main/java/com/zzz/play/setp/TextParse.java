@@ -6,10 +6,7 @@ import com.zzz.play.inter.Runable;
 import com.zzz.play.mark.Global;
 import com.zzz.play.setp.impl.config.ClearStep;
 import com.zzz.play.setp.impl.config.ManyStep;
-import com.zzz.play.setp.sys.GoodsSale;
-import com.zzz.play.setp.sys.GoodsSave;
-import com.zzz.play.setp.sys.GoodsTakeout;
-import com.zzz.play.setp.sys.HomeStep;
+import com.zzz.play.setp.sys.*;
 import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.StepUtil;
 import com.zzz.play.util.UtilDto;
@@ -130,6 +127,8 @@ public class TextParse implements Runable {
             step = new GoodsSale(line.substring(5));
         } else if (line.startsWith("clear")) {
             step = new ClearStep();
+        } else if (line.startsWith("form")) {
+            step = new FormSubmit(line.substring(4));
         } else if (line.startsWith("save")) {
             step = new GoodsSave(line.substring(4));
         } else if (line.startsWith("take")) {

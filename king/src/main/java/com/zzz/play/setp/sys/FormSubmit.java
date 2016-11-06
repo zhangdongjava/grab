@@ -34,6 +34,30 @@ public class FormSubmit extends BaseStep {
      * @param form
      */
     public void submit(Element form) {
+        String action = form.attr("action");
+        StringBuilder url = new StringBuilder(action);
+        Elements inputs = form.getElementsByTag("input");
+        Element input = inputs.get(0);
+        for (int i = 1; i < inputs.size(); i++) {
+            Element input2 = inputs.get(i);
+            String name = input2.attr("name");
+            String val = input2.val();
+            url.append("&");
+            url.append(name);
+            url.append("=");
+            url.append(val);
 
+        }
+        String name = input.attr("name");
+        String val = value;
+        if (val == null) {
+            val = input.val();
+        }
+        url.append("&");
+        url.append(name);
+        url.append("=");
+        url.append(val);
+        System.out.println(url);
+        htmlContent.linkUrl(url.toString());
     }
 }

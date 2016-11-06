@@ -109,7 +109,7 @@ public class MainWindow extends JFrame {
      * 设置名称
      */
     private void setName() {
-        String name = (String) JOptionPane.showInputDialog(null,"请输入窗口名称：/n","title",JOptionPane.PLAIN_MESSAGE,null,null,"在这输入");
+        String name = (String) JOptionPane.showInputDialog(null, "请输入窗口名称：/n", "title", JOptionPane.PLAIN_MESSAGE, null, null, "在这输入");
         trayicon.setToolTip(name);
     }
 
@@ -238,7 +238,9 @@ public class MainWindow extends JFrame {
     }
 
     public void addTab(String name, String url) {
-        tabPanel.addPanel(name, url, null, null);
+        exec.submit(() -> {
+            tabPanel.addPanel(name, url, null, null);
+        });
         count++;
     }
 
@@ -278,7 +280,10 @@ public class MainWindow extends JFrame {
 
     public void openShuQian(String line) {
         String[] lines = line.split("###");
-        tabPanel.addPanel(lines[0], lines[2], lines[1], null);
+        exec.submit(() -> {
+            tabPanel.addPanel(lines[0], lines[2], lines[1], null);
+        });
+
     }
 
     public void addHtmlPanel(HtmlPanel panel) {

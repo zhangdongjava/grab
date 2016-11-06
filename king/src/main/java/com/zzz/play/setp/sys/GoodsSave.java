@@ -33,6 +33,8 @@ public class GoodsSave extends BaseStep implements SaveMark {
         htmlContent.linkName("帮派管理");
         htmlContent.linkName("帮派仓库");
         htmlContent.linkName("存入物品");
+        htmlContent.linkName("首页");
+        htmlContent.linkName("上页");
         do {
             savePage();
         } while (htmlContent.linkName("下.页").isSuccess());

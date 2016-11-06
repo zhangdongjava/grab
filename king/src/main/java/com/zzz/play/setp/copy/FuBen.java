@@ -6,6 +6,9 @@ import com.zzz.play.setp.sys.GoodsSale2;
 import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.UtilDto;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by Administrator on 2016/11/6 0006.
  */
@@ -20,6 +23,7 @@ public abstract class FuBen extends BaseStep {
      * 运行了多少次
      */
     protected int runNum;
+    protected Date lastDate;
 
 
     @Override
@@ -58,6 +62,7 @@ public abstract class FuBen extends BaseStep {
 
     @Override
     public boolean run() {
+        fresh();
         if (!ableIn) {
             return false;
         }
@@ -66,14 +71,31 @@ public abstract class FuBen extends BaseStep {
         goodsSale2.setUtilDto(utilDto);
         goodsSale2.run();
         ready();
-        fbRun();
+        if (fbRun()) {
+            lastDate = new Date();
+        }
         goodsSale2.clear();
         goodsSale2.setGoods(outClearLine());
         goodsSale2.run();
         return true;
     }
 
-    public abstract void fbRun();
+    public abstract boolean fbRun();
+
+    private void fresh() {
+        if (lastDate == null) {
+            return;
+        }
+        Date data = new Date();
+        Calendar c1 = Calendar.getInstance();
+        c1.setTime(lastDate);
+        Calendar c2 = Calendar.getInstance();
+        c2.setTime(new Date());
+        if (c1.get(Calendar.DAY_OF_MONTH) != c2.get(Calendar.DAY_OF_MONTH)) {
+            ableIn = true;
+        }
+    }
+
 }
 
 

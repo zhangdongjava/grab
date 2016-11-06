@@ -30,7 +30,7 @@ public class HtmlContent {
     public static long CLICK_TIME = System.currentTimeMillis();
     private boolean validate = false;
     private Map<String, LinkBean> urlMap = new HashMap<>();
-    private HtmlPanel htmlPanel;
+    public HtmlPanel htmlPanel;
 
     /**
      * 删除的form表单
@@ -248,11 +248,8 @@ public class HtmlContent {
             document = Jsoup.parse(html);
             linkEnd();
         } catch (IOException e) {
-            System.out.println(count + 1 + "次尝试链接..." + url);
             selfLinkUrl(url, count + 1);
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(count + 1 + "次尝试链接..." + url);
             selfLinkUrl(url, count + 1);
         }
         return true;

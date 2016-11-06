@@ -30,7 +30,7 @@ import java.util.concurrent.Executors;
 public class HtmlPanel extends JFXPanel {
 
     private String url;
-    public static final int WIDTH = MainWindow.width-100;
+    public static final int WIDTH = MainWindow.width - 100;
     public static final int HEIGHT = MainWindow.height - 100;
     public HtmlContent content;
     public GlobalUtil globalUtil;
@@ -173,7 +173,7 @@ public class HtmlPanel extends JFXPanel {
         for (String s : scripts) {
             scriptDialog.addScript(s);
         }
-        utilDto = new UtilDto();
+        utilDto = new UtilDto() ;
         utilDto.waitNotfiy = new WaitNotfiy();
         utilDto.varUtil = new VarUtil();
         utilDto.clearUtil = new ClearUtil();
@@ -222,6 +222,7 @@ public class HtmlPanel extends JFXPanel {
     public void assemble() throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
         content = new HtmlContent(urlTextField.getText(), this, controller);
         controller.content = content;
+
         GlobalObserver globalObserver = new GlobalObserver(globalUtil);
         controller.addObserver(globalObserver);
     }

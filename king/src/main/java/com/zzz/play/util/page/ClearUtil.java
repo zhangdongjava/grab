@@ -4,6 +4,7 @@ import com.zzz.play.exception.StopCurrStepException;
 import com.zzz.play.setp.Step;
 import com.zzz.play.setp.sys.GoodsSale;
 import com.zzz.play.setp.sys.GoodsSave;
+import com.zzz.play.ui.HtmlPanel;
 import com.zzz.play.util.HtmlContent;
 
 /**
@@ -13,7 +14,7 @@ import com.zzz.play.util.HtmlContent;
 public class ClearUtil {
 
     private static String LOAD = "你的负载过重";
-    private  int minFz = 50;
+    private int minFz = 50;
 
     /**
      * 剩余负重
@@ -29,6 +30,11 @@ public class ClearUtil {
      * 存脚本
      */
     GoodsSave save;
+
+    public ClearUtil() {
+        goodsSale = new GoodsSale("万年灵芝");
+
+    }
 
     /**
      * @param step
@@ -108,10 +114,11 @@ public class ClearUtil {
 
     public void clearPack(HtmlContent htmlContent) {
         htmlContent.linkName("返回游戏");
-        if(goodsSale!=null){
+        goodsSale.setHtmlContent(htmlContent);
+        if (goodsSale != null) {
             goodsSale.run();
         }
-        if(save!= null){
+        if (save != null) {
             save.run();
         }
         htmlContent.linkName("返回游戏");

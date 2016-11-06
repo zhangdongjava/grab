@@ -5,6 +5,7 @@ import com.zzz.play.exception.StepBackException;
 import com.zzz.play.inter.Runable;
 import com.zzz.play.mark.Global;
 import com.zzz.play.setp.copy.HeiFeng;
+import com.zzz.play.setp.copy.ShiRenGu;
 import com.zzz.play.setp.impl.config.ClearStep;
 import com.zzz.play.setp.impl.config.ManyStep;
 import com.zzz.play.setp.sys.*;
@@ -138,6 +139,8 @@ public class TextParse implements Runable {
             step = new GoodsSave(line.substring(4));
         } else if (line.startsWith("heif")) {
             step = new HeiFeng();
+        } else if (line.startsWith("shirengu")) {
+            step = new ShiRenGu();
         } else if (line.startsWith("take")) {
             step = new GoodsTakeout(line.substring(4));
         } else if (line.startsWith("home")) {

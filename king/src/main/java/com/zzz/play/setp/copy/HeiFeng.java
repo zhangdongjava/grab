@@ -12,7 +12,7 @@ public class HeiFeng extends FuBen {
 
     @Override
     public String outClearLine() {
-        return "【追风,黑松果,黑狼";
+        return "【玉清,黑松果,黑狼";
     }
 
 
@@ -90,7 +90,7 @@ public class HeiFeng extends FuBen {
         htmlContent.linkName("黑松果", true);
         htmlContent.linkName("黑毛狼");
         htmlContent.linkName("攻击黑毛狼");
-        if (htmlContent.exitsName("普通攻击")) {
+        while (htmlContent.exitsName("普通攻击")) {
             htmlContent.linkName("普通攻击");
         }
         htmlContent.linkName("x", true);

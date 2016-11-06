@@ -22,7 +22,7 @@ public class TabPanel extends JTabbedPane {
             HtmlPanel panel = new HtmlPanel(url, mainWindow, name, daqu, script);
             this.add(name, panel);
             mainWindow.addHtmlPanel(panel);
-            Thread.sleep(5000);
+            Thread.sleep(10000);
         } catch (Exception e) {
             e.printStackTrace();
         }

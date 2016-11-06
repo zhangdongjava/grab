@@ -18,6 +18,13 @@ public class FormSubmit extends BaseStep {
         }
     }
 
+    public FormSubmit() {
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     @Override
     public boolean run() {
         Elements forms = htmlContent.delForms;

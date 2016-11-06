@@ -128,6 +128,26 @@ public class GoodsSale2 extends BaseStep {
             maps.put(entry.getKey(), entry.getValue());
         }
     }
+
+    public void clear() {
+        maps.clear();
+    }
+
+    public void setGoods(String line) {
+        String[] vals = line.split(",");
+        for (String val : vals) {
+            if (val != null && !"".equals(val.trim())) {
+                String[] vvs = val.split("_");
+                if (vvs.length > 0) {
+                    String desc = null;
+                    if (vvs.length == 2)
+                        desc = vvs[1];
+                    maps.put(vvs[0], desc);
+                }
+            }
+        }
+
+    }
 }
 
 

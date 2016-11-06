@@ -22,6 +22,7 @@ public class ScriptDialog extends JDialog {
     private static Map<String, String> url_name;
     private HtmlPanel htmlPanel;
     private JList<String> list;
+    private ScrollPane jScrollPane;
     private JList<String> clickList;
     private DefaultListModel<String> defaultListModel;
 
@@ -39,6 +40,7 @@ public class ScriptDialog extends JDialog {
 
     public ScriptDialog(HtmlPanel htmlPanel) {
         super(htmlPanel.mainWindow);
+        jScrollPane = new ScrollPane();
         this.setModal(true);
         this.setLayout(null);
         this.setSize(400, 600);
@@ -61,15 +63,18 @@ public class ScriptDialog extends JDialog {
 
         list.setBackground(Color.gray);
         clickList.setBackground(Color.gray);
-        list.setBounds(0, 0, 150, 500);
+        jScrollPane.setBounds(0, 0, 150, 500);
+        list.setBounds(0, 0, 145, 480);
         list.addListSelectionListener((e) -> select(e));
         clickList.addListSelectionListener((e) -> remove(e));
         clickList.setBounds(160, 0, 150, 500);
         ok.setBounds(100, 520, 60, 30);
         ok.addActionListener((e) -> ok());
+        jScrollPane.add(list);
         this.add(ok);
-        this.add(list);
+        this.add(jScrollPane);
         this.add(clickList);
+        list.repaint();
     }
 
     private void remove(ListSelectionEvent e) {
@@ -92,6 +97,7 @@ public class ScriptDialog extends JDialog {
     }
 
     public void showUi() {
+        list.repaint();
         this.setVisible(true);
     }
 

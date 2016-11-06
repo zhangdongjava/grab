@@ -12,7 +12,7 @@ public class HeiFeng extends FuBen {
 
     @Override
     public String outClearLine() {
-        return "【玉清,黑松果,黑狼";
+        return "【追风,黑松果,黑狼";
     }
 
 

@@ -13,7 +13,7 @@ public class ShiRenGu extends FuBen {
 
     @Override
     public String outClearLine() {
-        return "【追风,黑松果,黑狼";
+        return "【玉清,黑松果,黑狼";
     }
 
 

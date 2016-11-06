@@ -125,6 +125,8 @@ public class TextParse implements Runable {
             step = new GoodsSale(line.substring(4));
         } else if (line.startsWith("sale2")) {
             step = new GoodsSale(line.substring(5));
+        }  else if (line.startsWith("save2")) {
+            step = new GoodsSave2(line.substring(5));
         } else if (line.startsWith("clear")) {
             step = new ClearStep();
         } else if (line.startsWith("form")) {

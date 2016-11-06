@@ -4,19 +4,21 @@ import com.zzz.play.bean.LinkBean;
 import com.zzz.play.mark.SaveMark;
 import com.zzz.play.setp.impl.config.BaseStep;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
 
 /**
  * 柳虫残害清理
  * Created by dell_2 on 2016/10/31.
  */
-public class GoodsSave extends BaseStep implements SaveMark {
+public class GoodsSave2 extends BaseStep {
 
     private LinkedList<String> liuNames = new LinkedList<>();
 
     private Set<String> sets = new HashSet<>();
 
-    public GoodsSave(String line) {
+    public GoodsSave2(String line) {
         String[] vals = line.split(",");
         for (String val : vals) {
             if (val != null && !"".equals(val.trim())) {
@@ -98,7 +100,7 @@ public class GoodsSave extends BaseStep implements SaveMark {
         public String name = null;
     }
 
-    public void putStep(GoodsSave step) {
+    public void putStep(GoodsSave2 step) {
         sets.addAll(step.sets);
     }
 }

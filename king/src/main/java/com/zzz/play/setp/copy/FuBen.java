@@ -86,7 +86,6 @@ public abstract class FuBen extends BaseStep {
         if (lastDate == null) {
             return;
         }
-        Date data = new Date();
         Calendar c1 = Calendar.getInstance();
         c1.setTime(lastDate);
         Calendar c2 = Calendar.getInstance();

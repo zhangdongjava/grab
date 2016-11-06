@@ -25,7 +25,7 @@ public class HeiFeng extends FuBen {
 
 
     @Override
-    public void fbRun() {
+    public boolean fbRun() {
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("功能菜单");
         htmlContent.linkName("神行千里");
@@ -34,9 +34,9 @@ public class HeiFeng extends FuBen {
         htmlContent.linkName("进入黑风岭副本");
         if (htmlContent.getDocument().text().contains("今天你已进入黑风岭副本")) {
             ableIn = false;
-            System.out.println( htmlContent.htmlPanel.name+"黑风副本结束!");
+            System.out.println(htmlContent.htmlPanel.name + "黑风副本结束!");
             htmlContent.linkName("返回游戏");
-            return;
+            return false;
         }
         gjHml();
         htmlContent.linkName("右:黑松林→");
@@ -83,6 +83,7 @@ public class HeiFeng extends FuBen {
         zhanDou();
         runNum++;
         wjHz();
+        return true;
     }
 
     public void gjHml() {

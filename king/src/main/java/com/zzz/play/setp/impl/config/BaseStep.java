@@ -1,5 +1,6 @@
 package com.zzz.play.setp.impl.config;
 
+import com.zzz.play.core.CoreController;
 import com.zzz.play.setp.Step;
 import com.zzz.play.setp.TextParse;
 import com.zzz.play.util.HtmlContent;
@@ -30,6 +31,8 @@ public class BaseStep implements Step {
     protected boolean like = false;
 
     protected UtilDto utilDto;
+
+    protected CoreController controller;
 
     public void setLike(boolean like) {
         this.like = like;
@@ -111,6 +114,11 @@ public class BaseStep implements Step {
     @Override
     public boolean breakOff() {
         return true;
+    }
+
+    @Override
+    public void setCoreController(CoreController controller) {
+        this.controller = controller;
     }
 
 

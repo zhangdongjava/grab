@@ -4,9 +4,11 @@ import com.zzz.play.core.CoreController;
 import com.zzz.play.exception.StepBackException;
 import com.zzz.play.inter.Runable;
 import com.zzz.play.mark.Global;
+import com.zzz.play.setp.impl.config.ClearStep;
 import com.zzz.play.setp.impl.config.ManyStep;
 import com.zzz.play.setp.sys.GoodsSale;
 import com.zzz.play.setp.sys.GoodsSave;
+import com.zzz.play.setp.sys.GoodsTakeout;
 import com.zzz.play.setp.sys.HomeStep;
 import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.StepUtil;
@@ -86,6 +88,7 @@ public class TextParse implements Runable {
                 if (step != null) {
                     step.setLineNum(++index);
                     step.setUtilDto(utilDto);
+                    step.setCoreController(controller);
                 }
             }
             line = reader.readLine();
@@ -123,8 +126,14 @@ public class TextParse implements Runable {
             step.setMb(true);
         } else if (line.startsWith("sale")) {
             step = new GoodsSale(line.substring(4));
+        } else if (line.startsWith("sale2")) {
+            step = new GoodsSale(line.substring(5));
+        } else if (line.startsWith("clear")) {
+            step = new ClearStep();
         } else if (line.startsWith("save")) {
             step = new GoodsSave(line.substring(4));
+        } else if (line.startsWith("take")) {
+            step = new GoodsTakeout(line.substring(4));
         } else if (line.startsWith("home")) {
             step = new HomeStep();
         } else if (line.endsWith("{")) {
@@ -159,6 +168,7 @@ public class TextParse implements Runable {
         manyStep.setStep(this);
         manyStep.setUtilDto(utilDto);
         manyStep.setHtmlContent(htmlContent);
+        manyStep.setCoreController(controller);
         inMang = true;
         return manyTypeJudge();
     }

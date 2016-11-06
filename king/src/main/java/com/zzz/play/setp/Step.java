@@ -1,5 +1,6 @@
 package com.zzz.play.setp;
 
+import com.zzz.play.core.CoreController;
 import com.zzz.play.inter.Runable;
 import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.UtilDto;
@@ -41,4 +42,6 @@ public interface Step extends Runable {
      * @return
      */
     boolean breakOff();
+
+    void setCoreController(CoreController controller);
 }

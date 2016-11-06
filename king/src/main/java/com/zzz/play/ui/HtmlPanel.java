@@ -30,8 +30,8 @@ import java.util.concurrent.Executors;
 public class HtmlPanel extends JFXPanel {
 
     private String url;
-    public static final int WIDTH = 300;
-    public static final int HEIGHT = 500;
+    public static final int WIDTH = MainWindow.width-100;
+    public static final int HEIGHT = MainWindow.height - 100;
     public HtmlContent content;
     public GlobalUtil globalUtil;
     public WebView view;
@@ -81,7 +81,7 @@ public class HtmlPanel extends JFXPanel {
         Platform.runLater(() -> {
             view = new WebView();
             Group root = new Group();
-            view.setFontScale(0.8);
+            view.setFontScale(1.2);
             loginUtil = new LoginUtil(this);
             Scene scene1 = new Scene(root, WIDTH, HEIGHT);
             HtmlPanel.this.setScene(scene1);
@@ -95,12 +95,12 @@ public class HtmlPanel extends JFXPanel {
             go = new Button("go");
             stop = new Button("stop");
             script = new Button("脚本");
-            urlTextField.setPrefWidth(WIDTH - 180);
-            urlBox.getChildren().addAll(urlTextField, go, stop, script);
+            urlTextField.setPrefWidth(WIDTH - 20);
+            urlBox.getChildren().addAll(go, stop, script);
             view.setMinSize(widthDouble, heightDouble - 100);
             view.setMaxSize(widthDouble, heightDouble - 50);
             view.setPrefSize(widthDouble, heightDouble - 50);
-            root.getChildren().add(view);
+            box.getChildren().add(urlTextField);
             box.getChildren().add(urlBox);
             box.getChildren().add(view);
             root.getChildren().add(box);

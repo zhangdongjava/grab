@@ -24,6 +24,9 @@ import java.util.concurrent.Executors;
  */
 public class MainWindow extends JFrame {
 
+    public static int width = 600;
+    public static int height = 800;
+
     private JLabel L_img;
     private JLabel L_img2;
     private PopupMenu pop;
@@ -48,7 +51,7 @@ public class MainWindow extends JFrame {
     public static int count = 0;
 
     public MainWindow() {
-        this.setSize(400, 600);
+        this.setSize(width, height);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -76,6 +79,7 @@ public class MainWindow extends JFrame {
         JMenu shuqian = new JMenu("书签");     //创建JMenu菜单对象
         JMenuItem addTab = new JMenuItem("添加");  //菜单项
         JMenuItem scriptPath = new JMenuItem("脚本路径");  //菜单项
+        JMenuItem name = new JMenuItem("名称");  //菜单项
         JMenuItem shuqianAdd = new JMenuItem("添加");  //菜单项
         JMenuItem shuqianOpen = new JMenuItem("打开");  //菜单项
         JMenuItem all = new JMenuItem("保存所有");  //菜单项
@@ -85,9 +89,11 @@ public class MainWindow extends JFrame {
         shuqianAdd.addActionListener((e) -> shuqianAdd());
         shuqianOpen.addActionListener((e) -> shuqianOpen());
         all.addActionListener((e) -> all());
+        name.addActionListener((e) -> setName());
         open.addActionListener((e) -> exec.submit(() -> open()));
         jm.add(addTab);   //将菜单项目添加到菜单
         set.add(scriptPath);   //将菜单项目添加到菜单
+        set.add(name);   //将菜单项目添加到菜单
         shuqian.add(shuqianAdd);   //将菜单项目添加到菜单
         shuqian.add(shuqianOpen);   //将菜单项目添加到菜单
         shuqian.add(all);   //将菜单项目添加到菜单
@@ -97,6 +103,14 @@ public class MainWindow extends JFrame {
         br.add(set);      //将菜单增加到菜单工具栏
         br.add(shuqian);      //将菜单增加到菜单工具栏
         this.setJMenuBar(br);  //为 窗体设置  菜单工具栏
+    }
+
+    /**
+     * 设置名称
+     */
+    private void setName() {
+        String name = (String) JOptionPane.showInputDialog(null,"请输入窗口名称：/n","title",JOptionPane.PLAIN_MESSAGE,null,null,"在这输入");
+        trayicon.setToolTip(name);
     }
 
     private void open() {

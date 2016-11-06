@@ -31,9 +31,14 @@ public class ShiRenGu extends FuBen {
         htmlContent.linkName("功能菜单");
         htmlContent.linkName("神行千里");
         htmlContent.linkName("食人谷");
+        htmlContent.linkName("进入食人谷副本");
+        if (htmlContent.getDocument().text().contains("今天你已进入食人谷副本")) {
+            ableIn = false;
+            return false;
+        }
         gjSj();
         while (htmlContent.getDocument().text().contains("进入食人谷副本，必须攀下一个悬崖")) {
-           htmlContent.linkName("返回食人谷悬崖");
+            htmlContent.linkName("返回食人谷悬崖");
             gjSj();
         }
         htmlContent.linkName("守谷小喽罗");
@@ -71,7 +76,7 @@ public class ShiRenGu extends FuBen {
         htmlContent.linkName("上:奇异果园↑");
         htmlContent.linkName("食人谷果农");
         htmlContent.linkName("配置狂暴一");
-        htmlContent.linkName("返回",true);
+        htmlContent.linkName("返回", true);
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("下:巨型峡谷↓");
         htmlContent.linkName("进入谷内小屋");

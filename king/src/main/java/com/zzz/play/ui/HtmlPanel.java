@@ -44,12 +44,19 @@ public class HtmlPanel extends JFXPanel {
     private TextField fontVal;
     //刷新间隔
     private TextField interval;
+    //设置刷新间隔字体大小按钮
     private Button setBtn;
+    //是否显示日志按钮
     private Button logBtn;
+    //核心控制器
     public CoreController controller;
+    //工具载体
     public UtilDto utilDto;
+    //脚本选择弹窗
     private ScriptDialog scriptDialog;
+    //主窗口
     public MainWindow mainWindow;
+    //脚本集合
     public LinkedList<String> scripts;
     private Object startLock = new Object();
     private TextField urlTextField;

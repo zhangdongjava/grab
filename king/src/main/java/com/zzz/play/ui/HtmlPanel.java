@@ -108,8 +108,8 @@ public class HtmlPanel extends JFXPanel {
             Double widthDouble = new Integer(WIDTH).doubleValue();
             Double heightDouble = new Integer(HEIGHT).doubleValue();
             VBox box = new VBox(10);
-            VBox box2 = new VBox(10);
             HBox urlBox = new HBox(10);
+            HBox box2 = new HBox(10);
             urlTextField = new TextField();
             urlTextField.setText(url);
             view.getEngine().load(url);
@@ -119,15 +119,16 @@ public class HtmlPanel extends JFXPanel {
             script = new Button("脚本");
             logBtn = new Button("开启日志");
             urlTextField.setPrefWidth(WIDTH - 20);
-            urlBox.getChildren().addAll(go, stop, script, fontVal, interval, setBtn, showTime);
+            urlBox.getChildren().addAll(go, stop, script, fontVal, logBtn);
+            box2.getChildren().addAll(interval, setBtn, showTime);
             view.setMinSize(widthDouble, heightDouble - 100);
             view.setMaxSize(widthDouble, heightDouble - 50);
             view.setPrefSize(widthDouble, heightDouble - 50);
             box.getChildren().add(urlTextField);
             box.getChildren().add(urlBox);
+            box.getChildren().add(box2);
             box.getChildren().add(view);
             root.getChildren().add(box);
-            root.getChildren().add(box2);
             go.setOnAction(event -> goScript());
             stop.setOnAction(event -> stopGoon());
             script.setOnAction(event -> script());

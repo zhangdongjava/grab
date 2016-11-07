@@ -7,7 +7,7 @@ public class HeiFeng extends FuBen {
 
     @Override
     public String inClearLine() {
-        return "柳虫,青蛇皮,万年灵芝,金创药";
+        return "柳虫,青蛇皮,金创药";
     }
 
     @Override

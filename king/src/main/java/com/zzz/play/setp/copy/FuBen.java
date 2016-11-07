@@ -3,6 +3,7 @@ package com.zzz.play.setp.copy;
 import com.zzz.play.setp.impl.config.BaseStep;
 import com.zzz.play.setp.sys.BuyDrug;
 import com.zzz.play.setp.sys.GoodsSale2;
+import com.zzz.play.setp.sys.GoodsSave2;
 import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.UtilDto;
 
@@ -15,6 +16,9 @@ import java.util.Date;
 public abstract class FuBen extends BaseStep {
 
     protected BuyDrug buyDrug = new BuyDrug();
+
+    protected GoodsSale2 goodsSale2 = new GoodsSale2(inClearLine());
+    protected GoodsSave2 goodsSave = new GoodsSave2(saveLine());
     /**
      * 是否可以进入副本
      */
@@ -30,12 +34,16 @@ public abstract class FuBen extends BaseStep {
     public void setHtmlContent(HtmlContent htmlContent) {
         super.setHtmlContent(htmlContent);
         buyDrug.setHtmlContent(htmlContent);
+        goodsSale2.setHtmlContent(htmlContent);
+        goodsSave.setHtmlContent(htmlContent);
     }
 
     @Override
     public void setUtilDto(UtilDto utilDto) {
         super.setUtilDto(utilDto);
         buyDrug.setUtilDto(utilDto);
+        goodsSale2.setUtilDto(utilDto);
+        goodsSave.setUtilDto(utilDto);
     }
 
     /**
@@ -52,6 +60,13 @@ public abstract class FuBen extends BaseStep {
      */
     public abstract String outClearLine();
 
+    /**
+     * 保存物品集合
+     *
+     * @return
+     */
+    public abstract String saveLine();
+
 
     /**
      * 准备东西
@@ -66,14 +81,12 @@ public abstract class FuBen extends BaseStep {
         if (!ableIn) {
             return false;
         }
-        GoodsSale2 goodsSale2 = new GoodsSale2(inClearLine());
-        goodsSale2.setHtmlContent(htmlContent);
-        goodsSale2.setUtilDto(utilDto);
         goodsSale2.run();
         ready();
         if (fbRun()) {
             lastDate = new Date();
         }
+        goodsSave.run();
         goodsSale2.clear();
         goodsSale2.setGoods(outClearLine());
         goodsSale2.run();

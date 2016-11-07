@@ -16,6 +16,11 @@ public class ShiRenGu extends FuBen {
         return "【玉清,黑松果,黑狼";
     }
 
+    @Override
+    public String saveLine() {
+        return "狂暴一";
+    }
+
 
     @Override
     public void ready() {

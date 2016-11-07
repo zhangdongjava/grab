@@ -15,6 +15,11 @@ public class HeiFeng extends FuBen {
         return "【追风,黑松果,黑狼";
     }
 
+    @Override
+    public String saveLine() {
+        return "虎骨";
+    }
+
 
     @Override
     public void ready() {

@@ -74,20 +74,16 @@ public class ValidationKill {
 
     private void sendRes(Object res) {
         Elements forms = htmlContent.delForms;
-        String action = null;
-        if (forms.size() != 1) {
-            logger.error("没找到提交form表单");
+        String action;
+        if (forms.size() == 0) {
+            logger.error(htmlContent.htmlPanel.name + "没找到提交form表单");
         } else {
             Element form = forms.get(0);
             action = htmlContent.cleckUrl(form.attr("action"));
+            htmlContent.linkUrl(action + "&guaji_name=" + res);
+            htmlContent.linkName("返回游戏", false);
+            System.out.println(action + "?guaji_name=" + res);
         }
-        if (forms.size() != 1) {
-            throw new RuntimeException("form 个数不对!");
-        }
-
-        htmlContent.linkUrl(action + "&guaji_name=" + res);
-        htmlContent.linkName("返回游戏", false);
-        System.out.println(action + "?guaji_name=" + res);
     }
 
 }

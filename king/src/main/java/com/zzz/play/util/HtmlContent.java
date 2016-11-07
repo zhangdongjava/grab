@@ -288,13 +288,11 @@ public class HtmlContent {
                 logger.error(document.text().substring(22));
             }
             printfUrl(url);
-        } catch (SocketTimeoutException e) {
+        } catch (IOException e) {
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(count + 1 + "次尝试链接..." + url);
-            linkUrl(url, count + 1);
         }
         return true;
     }

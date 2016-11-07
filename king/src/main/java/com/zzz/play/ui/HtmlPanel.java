@@ -45,6 +45,7 @@ public class HtmlPanel extends JFXPanel {
     //刷新间隔
     private TextField interval;
     private Button setBtn;
+    private Button logBtn;
     public CoreController controller;
     public UtilDto utilDto;
     private ScriptDialog scriptDialog;
@@ -107,15 +108,18 @@ public class HtmlPanel extends JFXPanel {
             Double widthDouble = new Integer(WIDTH).doubleValue();
             Double heightDouble = new Integer(HEIGHT).doubleValue();
             VBox box = new VBox(10);
+            VBox box2 = new VBox(10);
             HBox urlBox = new HBox(10);
             urlTextField = new TextField();
             urlTextField.setText(url);
             view.getEngine().load(url);
             go = new Button("go");
             stop = new Button("stop");
+            stop.setDisable(true);
             script = new Button("脚本");
+            logBtn = new Button("开启日志");
             urlTextField.setPrefWidth(WIDTH - 20);
-            urlBox.getChildren().addAll(go, stop, script,fontVal,interval,setBtn,showTime);
+            urlBox.getChildren().addAll(go, stop, script, fontVal, interval, setBtn, showTime);
             view.setMinSize(widthDouble, heightDouble - 100);
             view.setMaxSize(widthDouble, heightDouble - 50);
             view.setPrefSize(widthDouble, heightDouble - 50);
@@ -123,13 +127,27 @@ public class HtmlPanel extends JFXPanel {
             box.getChildren().add(urlBox);
             box.getChildren().add(view);
             root.getChildren().add(box);
+            root.getChildren().add(box2);
             go.setOnAction(event -> goScript());
             stop.setOnAction(event -> stopGoon());
             script.setOnAction(event -> script());
             setBtn.setOnAction(event -> setProperty());
+            logBtn.setOnAction(event -> logSet());
             HtmlPanel.this.init();
         });
         joinGame();
+    }
+
+    private void logSet() {
+        Platform.runLater(() -> {
+            if (content.printLog) {
+                content.printLog = !content.printLog;
+                logBtn.setText("开启日志");
+            } else {
+                content.printLog = !content.printLog;
+                logBtn.setText("关闭日志");
+            }
+        });
     }
 
     private void setProperty() {
@@ -157,6 +175,7 @@ public class HtmlPanel extends JFXPanel {
         controller.run(content);
         Platform.runLater(() -> {
             go.setDisable(true);
+            stop.setDisable(false);
         });
     }
 

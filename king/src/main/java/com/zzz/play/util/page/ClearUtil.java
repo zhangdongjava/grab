@@ -32,7 +32,7 @@ public class ClearUtil {
     GoodsSave save;
 
     public ClearUtil() {
-        goodsSale = new GoodsSale("万年灵芝");
+        goodsSale = new GoodsSale("柳虫");
 
     }
 
@@ -63,7 +63,6 @@ public class ClearUtil {
     public void clear(HtmlContent htmlContent) {
         if (htmlContent == null) return;
         if (htmlContent != null && htmlContent.getDocument().text().contains(LOAD)) {
-            System.out.println("满负重保存");
             clearPack(htmlContent);
             clickFz(htmlContent);
             htmlContent.linkName("返回游戏");
@@ -77,7 +76,6 @@ public class ClearUtil {
     }
 
     public void bulidFz(HtmlContent htmlContent) {
-        System.out.println("开始检测负重...");
         htmlContent.linkName("返回", true);
         htmlContent.linkName("物品");
         String lineStr = htmlContent.getDocument().text();
@@ -85,13 +83,11 @@ public class ClearUtil {
         for (String line : lines) {
             if (line != null && !"".equals(line.trim())) {
                 if (line.startsWith("负重:")) {
-                    System.out.println("检测到负重........" + line);
                     line = line.substring(3);
                     int index = line.indexOf("/");
                     int cu = Integer.valueOf(line.substring(0, index));
                     int sum = Integer.valueOf(line.substring(index + 1));
                     fz = sum - cu;
-                    System.out.println("检测结果........" + fz);
                     break;
                 }
             }
@@ -106,7 +102,6 @@ public class ClearUtil {
      */
     private void getFz(HtmlContent htmlContent) {
         if (fz < minFz) {
-            System.out.println("负重检测保存" + fz);
             clearPack(htmlContent);
             clickFz(htmlContent);
         }

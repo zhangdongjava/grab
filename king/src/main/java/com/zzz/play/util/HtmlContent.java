@@ -30,6 +30,7 @@ import java.util.UUID;
 public class HtmlContent {
 
     private Logger logger = Logger.getLogger(HtmlContent.class);
+    public boolean printLog = false;
     private static int LINE_COUNT = 120;
     private Document document;
     public String baseUrl;
@@ -282,7 +283,9 @@ public class HtmlContent {
             url = cleckUrl(url);
             document = Jsoup.parse(new URL(url), 2000);
             linkEnd();
-            logger.error(document.text().substring(22));
+            if(printLog){
+                logger.error(document.text().substring(22));
+            }
         } catch (SocketTimeoutException e) {
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);

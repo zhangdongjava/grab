@@ -1,5 +1,6 @@
 package com.zzz.play.util;
 
+import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -11,6 +12,8 @@ import org.jsoup.select.Elements;
 public class ValidationKill {
 
     private HtmlContent htmlContent;
+
+    private Logger logger = Logger.getLogger(ValidationKill.class);
     /**
      * 结果一次无法解析，就重来一次  这个就是重来计数器，大与MAX_COUNT次跑异常
      */
@@ -71,13 +74,9 @@ public class ValidationKill {
 
     private void sendRes(Object res) {
         Elements forms = htmlContent.delForms;
-        String action;
+        String action = null;
         if (forms.size() != 1) {
-            System.out.println(htmlContent.getDocument().text());
-            System.out.println(htmlContent.getDocument().html());
-            forms = htmlContent.getDocument().getElementsByTag("go");
-            Element form = forms.get(0);
-            action = htmlContent.cleckUrl(form.attr("href"));
+            logger.error("没找到提交form表单");
         } else {
             Element form = forms.get(0);
             action = htmlContent.cleckUrl(form.attr("action"));

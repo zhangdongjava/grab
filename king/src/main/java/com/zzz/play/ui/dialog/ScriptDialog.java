@@ -7,9 +7,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
 import java.io.File;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -33,8 +31,8 @@ public class ScriptDialog extends JDialog {
     private boolean is_init = false;
 
     static {
-        allScripts = new ConcurrentHashMap<>();
-        url_name = new ConcurrentHashMap<>();
+        allScripts = new LinkedHashMap<>();
+        url_name = new HashMap<>();
         Resource.load();
     }
 

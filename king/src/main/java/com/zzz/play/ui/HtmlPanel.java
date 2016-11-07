@@ -126,8 +126,8 @@ public class HtmlPanel extends JFXPanel {
             script = new Button("脚本");
             logBtn = new Button("开启日志");
             urlTextField.setPrefWidth(WIDTH - 20);
-            urlBox.getChildren().addAll(go, stop, script, fontVal, logBtn);
-            box2.getChildren().addAll(interval, setBtn, showTime);
+            urlBox.getChildren().addAll(go, stop, script, logBtn);
+            box2.getChildren().addAll(fontVal,interval, setBtn, showTime);
             view.setMinSize(widthDouble, heightDouble - 100);
             view.setMaxSize(widthDouble, heightDouble - 50);
             view.setPrefSize(widthDouble, heightDouble - 50);

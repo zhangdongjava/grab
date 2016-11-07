@@ -35,13 +35,13 @@ b右:大柳树→
 攻击青蛇
 金创药
 普通攻击while2
-likex1while2
+like蛇皮
 返回游戏
 青蛇
 攻击青蛇
 金创药
 普通攻击while2
-likex1while2
+like蛇皮
 返回游戏
 timeNormal_20_{
 进入树洞
@@ -53,7 +53,7 @@ putwanchong_a_巨大青蛇
 金创药for5
 大刀砍术while2
 普通攻击while2
-x1whileNot玉缕
+like蛇胆
 返回游戏
 }
 getVar_wanchong_{

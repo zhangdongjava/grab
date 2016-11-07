@@ -63,6 +63,7 @@ public class HtmlContent {
     private HttpRequest httpRequest;
 
     private long lastTime;
+    private long lastLogTime;
 
 
     public HtmlContent(String url, HtmlPanel htmlPanel, CoreController controller) {
@@ -283,9 +284,10 @@ public class HtmlContent {
             url = cleckUrl(url);
             document = Jsoup.parse(new URL(url), 2000);
             linkEnd();
-            if(printLog){
+            if (printLog) {
                 logger.error(document.text().substring(22));
             }
+            printfUrl(url);
         } catch (SocketTimeoutException e) {
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);
@@ -295,6 +297,19 @@ public class HtmlContent {
             linkUrl(url, count + 1);
         }
         return true;
+    }
+
+    /**
+     * 打印地址到文件中分钟一次
+     *
+     * @param url
+     */
+    private void printfUrl(String url) {
+        long currTime = System.currentTimeMillis();
+        if (currTime - lastLogTime > 600000) {
+            logger.error(url);
+            lastLogTime = currTime;
+        }
     }
 
 

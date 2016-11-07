@@ -124,7 +124,7 @@ public class ShiRenGu extends FuBen {
             while (htmlContent.exitsName("普通攻击")) {
                 htmlContent.linkName("普通攻击");
             }
-            htmlContent.linkName("x", true);
+            htmlContent.linkName("蛇筋", true);
             htmlContent.linkName("返回游戏");
         }
         htmlContent.linkName("进入食人谷副本");
@@ -140,7 +140,7 @@ public class ShiRenGu extends FuBen {
         while (htmlContent.exitsName("普通攻击")) {
             htmlContent.linkName("普通攻击");
         }
-        htmlContent.linkName("x", true);
+        htmlContent.linkName("x1", true);
         htmlContent.linkName("返回游戏");
     }
 

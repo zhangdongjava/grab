@@ -98,7 +98,7 @@ public class HeiFeng extends FuBen {
         while (htmlContent.exitsName("普通攻击")) {
             htmlContent.linkName("普通攻击");
         }
-        htmlContent.linkName("x", true);
+        htmlContent.linkName("虎骨", true);
         htmlContent.linkName("返回游戏");
     }
 

@@ -40,6 +40,8 @@ public class GoodsSale2 extends BaseStep {
     public boolean run() {
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("物品");
+        htmlContent.linkName("首页");
+        htmlContent.linkName("上页");
         do {
             await();
             salePage();

@@ -11,6 +11,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -38,6 +39,12 @@ public class HtmlPanel extends JFXPanel {
     private Button stop;
     private Button go;
     private Button script;
+    private Label showTime;
+    //字体大小
+    private TextField fontVal;
+    //刷新间隔
+    private TextField interval;
+    private Button setBtn;
     public CoreController controller;
     public UtilDto utilDto;
     private ScriptDialog scriptDialog;
@@ -71,17 +78,29 @@ public class HtmlPanel extends JFXPanel {
     }
 
     public void setHtml(String html) {
-        // if (ruing) {
         Platform.runLater(() -> view.getEngine().loadContent(html));
-        // }
+    }
+
+    public void setShowTime(long time) {
+        Platform.runLater(() -> showTime.setText(Long.toString(time)));
     }
 
 
     public void run() throws InterruptedException {
         Platform.runLater(() -> {
             view = new WebView();
+            showTime = new Label();
+            fontVal = new TextField();
+            fontVal.setPrefWidth(40);
+            fontVal.setPromptText("字体");
+            fontVal.setText("0.9");
+            interval = new TextField();
+            interval.setPrefWidth(50);
+            interval.setPromptText("间隔");
+            interval.setText("600");
+            setBtn = new Button("设置");
             Group root = new Group();
-            view.setFontScale(1.2);
+            view.setFontScale(0.9);
             loginUtil = new LoginUtil(this);
             Scene scene1 = new Scene(root, WIDTH, HEIGHT);
             HtmlPanel.this.setScene(scene1);
@@ -96,7 +115,7 @@ public class HtmlPanel extends JFXPanel {
             stop = new Button("stop");
             script = new Button("脚本");
             urlTextField.setPrefWidth(WIDTH - 20);
-            urlBox.getChildren().addAll(go, stop, script);
+            urlBox.getChildren().addAll(go, stop, script,fontVal,interval,setBtn,showTime);
             view.setMinSize(widthDouble, heightDouble - 100);
             view.setMaxSize(widthDouble, heightDouble - 50);
             view.setPrefSize(widthDouble, heightDouble - 50);
@@ -107,9 +126,19 @@ public class HtmlPanel extends JFXPanel {
             go.setOnAction(event -> goScript());
             stop.setOnAction(event -> stopGoon());
             script.setOnAction(event -> script());
+            setBtn.setOnAction(event -> setProperty());
             HtmlPanel.this.init();
         });
         joinGame();
+    }
+
+    private void setProperty() {
+        Platform.runLater(() -> {
+            double font = Double.valueOf(fontVal.getText());
+            view.setFontScale(font);
+            int in = Integer.valueOf(interval.getText());
+            content.TIME_WAIT = in;
+        });
     }
 
     private void goScript() {
@@ -173,7 +202,7 @@ public class HtmlPanel extends JFXPanel {
         for (String s : scripts) {
             scriptDialog.addScript(s);
         }
-        utilDto = new UtilDto() ;
+        utilDto = new UtilDto();
         utilDto.waitNotfiy = new WaitNotfiy();
         utilDto.varUtil = new VarUtil();
         utilDto.clearUtil = new ClearUtil();

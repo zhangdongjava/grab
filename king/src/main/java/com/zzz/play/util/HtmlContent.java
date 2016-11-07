@@ -8,30 +8,38 @@ import com.zzz.play.setp.TextParse;
 import com.zzz.play.setp.sys.FinishCombat;
 import com.zzz.play.ui.HtmlPanel;
 import com.zzz.play.util.http.HttpRequest;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by dell_2 on 2016/10/29.
  */
 public class HtmlContent {
+
+    private Logger logger = Logger.getLogger(HtmlContent.class);
     private static int LINE_COUNT = 120;
     private Document document;
     public String baseUrl;
-    public static int TIME_WAIT = 900;
+    public int TIME_WAIT = 600;
     public static long CLICK_TIME = System.currentTimeMillis();
     private boolean validate = false;
     private Map<String, LinkBean> urlMap = new HashMap<>();
     public HtmlPanel htmlPanel;
 
+    private PrintStream filePrint;
     /**
      * 删除的form表单
      */
@@ -53,8 +61,15 @@ public class HtmlContent {
 
     private HttpRequest httpRequest;
 
+    private long lastTime;
+
 
     public HtmlContent(String url, HtmlPanel htmlPanel, CoreController controller) {
+        try {
+            filePrint = new PrintStream(new FileOutputStream("d:/xx" + UUID.randomUUID() + ".lines"));
+        } catch (FileNotFoundException e) {
+        }
+        lastTime = System.currentTimeMillis();
         initUrlReplace();
         this.controller = controller;
         setBaseUrl(url);
@@ -267,6 +282,7 @@ public class HtmlContent {
             url = cleckUrl(url);
             document = Jsoup.parse(new URL(url), 2000);
             linkEnd();
+            logger.error(document.text().substring(22));
         } catch (SocketTimeoutException e) {
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);
@@ -283,6 +299,9 @@ public class HtmlContent {
         delForms = document.getElementsByTag("form").remove();
         document.getElementsByTag("img").remove();
         urlMap.clear();
+        long currTime = System.currentTimeMillis();
+        htmlPanel.setShowTime(currTime - lastTime);
+        lastTime = currTime;
         buildAelements();
         htmlPanel.setHtml(document.html());
         vailte();

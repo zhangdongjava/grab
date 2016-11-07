@@ -41,6 +41,8 @@ public class GoodsSale extends BaseStep implements SaleMark {
     public boolean run() {
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("物品");
+        htmlContent.linkName("首页");
+        htmlContent.linkName("上页");
         do {
             await();
             salePage();

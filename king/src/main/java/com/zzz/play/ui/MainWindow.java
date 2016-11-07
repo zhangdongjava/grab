@@ -24,8 +24,8 @@ import java.util.concurrent.Executors;
  */
 public class MainWindow extends JFrame {
 
-    public static int width = 600;
-    public static int height = 800;
+    public static int width = 400;
+    public static int height = 550;
 
     private JLabel L_img;
     private JLabel L_img2;

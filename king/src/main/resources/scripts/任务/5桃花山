@@ -8,11 +8,15 @@ basemany{
 普通攻击while2
 likexwhile2
 返回游戏
+}
+basemany{
 杀人蜂
 万年灵芝
 普通攻击while2
 likexwhile2
 返回游戏
+}
+basemany{
 杀人蜂
 万年灵芝
 普通攻击while2
@@ -315,7 +319,7 @@ like桃花寨小头目部
 万年灵芝
 万年灵芝
 普通攻击while2
-likexwhile2
+like蜂王浆
 返回游戏
 返回桃花涧
 钓叟
@@ -327,7 +331,7 @@ likexwhile2
 巨大老龟
 攻击巨大老龟
 普通攻击while2
-likexwhile2
+like老龟壳
 返回游戏
 右:水云洞→
 下:洞中小路↓
@@ -338,7 +342,7 @@ likexwhile2
 万年灵芝
 万年灵芝
 普通攻击while2
-likexwhile2
+like龙皮
 返回游戏
 返回游戏
 返回游戏
@@ -364,7 +368,6 @@ likexwhile2
 万年灵芝
 万年灵芝
 普通攻击while2
-likexwhile2
 返回游戏
 桃花寨巡山使
 返回游戏
@@ -377,7 +380,6 @@ likexwhile2
 万年灵芝
 万年灵芝
 普通攻击while2
-likexwhile2
 返回游戏
 小霸王.周通
 返回游戏
@@ -393,7 +395,6 @@ likexwhile2
 万年灵芝
 万年灵芝
 普通攻击while2
-likexwhile2
 返回游戏
 打虎将.李忠
 返回游戏

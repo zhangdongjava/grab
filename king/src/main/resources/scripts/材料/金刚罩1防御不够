@@ -5,6 +5,8 @@ basefirst{
 普通攻击while2
 likex1while2
 返回游戏
+}
+basefirst{
 杀人蜂
 万年灵芝
 普通攻击while2
@@ -36,7 +38,7 @@ b诱出蜂王
 巨大老龟
 攻击巨大老龟
 普通攻击while2
-likexwhile2
+like老龟壳
 返回游戏
 timeNormal_60_{
 右:水云洞→
@@ -47,7 +49,7 @@ like攻击
 万年灵芝
 万年灵芝
 普通攻击while2
-likexwhile2
+like龙皮
 返回游戏
 }
 sale蜂刺

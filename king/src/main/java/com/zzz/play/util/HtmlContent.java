@@ -285,7 +285,7 @@ public class HtmlContent {
             document = Jsoup.parse(new URL(url), 2000);
             linkEnd();
             if (printLog) {
-                logger.error(document.text().substring(22));
+                logger.error(document.text());
             }
             printfUrl(url);
         } catch (IOException e) {

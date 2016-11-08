@@ -1,10 +1,14 @@
 package com.zzz.play.setp.copy;
 
+import org.apache.log4j.Logger;
+
 /**
  * 太尉副本
  * Created by Administrator on 2016/11/6 0006.
  */
 public class TaiWei extends FuBen {
+
+    private Logger logger = Logger.getLogger(TaiWei.class);
 
     @Override
     public String inClearLine() {
@@ -37,9 +41,9 @@ public class TaiWei extends FuBen {
         htmlContent.linkName("神行千里");
         htmlContent.linkName("太尉宝库");
         htmlContent.linkName("进入太尉宝库副本");
-        if (htmlContent.getDocument().text().contains("今天你已进入黑风岭副本")) {
+        if (htmlContent.getDocument().text().contains("今天你已进入太尉宝库副")) {
             ableIn = false;
-            System.out.println(htmlContent.htmlPanel.name + "黑风副本结束!");
+            logger.error(htmlContent.htmlPanel.name + "太尉宝库结束!");
             htmlContent.linkName("返回游戏");
             return false;
         }
@@ -128,16 +132,6 @@ public class TaiWei extends FuBen {
         return true;
     }
 
-    public void gjHml() {
-        htmlContent.linkName("黑松果", true);
-        htmlContent.linkName("黑毛狼");
-        htmlContent.linkName("攻击黑毛狼");
-        while (htmlContent.exitsName("普通攻击")) {
-            htmlContent.linkName("普通攻击");
-        }
-        htmlContent.linkName("黑狼毛", true);
-        htmlContent.linkName("返回游戏");
-    }
 
     /**
      * 战斗
@@ -156,33 +150,6 @@ public class TaiWei extends FuBen {
         htmlContent.linkName("返回游戏");
     }
 
-    /**
-     * 获取进去材料
-     */
-    public void getCl() {
-        htmlContent.linkName("返回乱石河边");
-        htmlContent.linkName("左:黑松林←");
-        gjHml();
-        htmlContent.linkName("下:黑松林↓");
-        gjHml();
-        htmlContent.linkName("上:黑松林↑");
-        gjHml();
-        htmlContent.linkName("左:黑松林←");
-        gjHml();
-        htmlContent.linkName("上:黑松林↑");
-        gjHml();
-        htmlContent.linkName("下:黑松林↓");
-        gjHml();
-        htmlContent.linkName("左:黑松林←");
-        gjHml();
-        htmlContent.linkName("左:黑松林←");
-        gjHml();
-        for (int i = 0; i < 5; i++) {
-            htmlContent.linkName("右:黑松林→");
-        }
-        htmlContent.linkName("右:乱石河边→");
-        htmlContent.linkName("进入乱石河");
-    }
 
     /**
      * 武将换装

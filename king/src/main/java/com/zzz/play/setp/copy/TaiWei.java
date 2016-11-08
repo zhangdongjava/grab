@@ -205,6 +205,9 @@ public class TaiWei extends FuBen {
         htmlContent.linkName("攻击宝库守卫");
         htmlContent.linkName("万年灵芝");
         htmlContent.linkName("万年灵芝");
+        while (htmlContent.exitsName("普通攻击")) {
+            htmlContent.linkName("普通攻击");
+        }
         htmlContent.linkName("钥匙", true);
         htmlContent.linkName("钥匙", true);
         htmlContent.linkName("钥匙", true);

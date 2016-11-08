@@ -18,7 +18,7 @@ public class ShiRenGu extends FuBen {
 
     @Override
     public String saveLine() {
-        return "狂暴一";
+        return "狂暴一,【玉清";
     }
 
 

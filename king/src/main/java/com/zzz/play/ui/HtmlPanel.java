@@ -48,6 +48,8 @@ public class HtmlPanel extends JFXPanel {
     private Button setBtn;
     //是否显示日志按钮
     private Button logBtn;
+    //加载地址
+    private Button loadBtn;
     //核心控制器
     public CoreController controller;
     //工具载体
@@ -107,6 +109,7 @@ public class HtmlPanel extends JFXPanel {
             interval.setPromptText("间隔");
             interval.setText("600");
             setBtn = new Button("设置");
+            loadBtn = new Button("→");
             Group root = new Group();
             view.setFontScale(0.9);
             loginUtil = new LoginUtil(this);
@@ -124,7 +127,7 @@ public class HtmlPanel extends JFXPanel {
             stop = new Button("stop");
             stop.setDisable(true);
             script = new Button("脚本");
-            logBtn = new Button("开启日志");
+            logBtn = new Button("log on");
             urlTextField.setPrefWidth(WIDTH - 20);
             urlBox.getChildren().addAll(go, stop, script, logBtn);
             box2.getChildren().addAll(fontVal,interval, setBtn, showTime);
@@ -141,19 +144,27 @@ public class HtmlPanel extends JFXPanel {
             script.setOnAction(event -> script());
             setBtn.setOnAction(event -> setProperty());
             logBtn.setOnAction(event -> logSet());
+            loadBtn.setOnAction(event -> loadBtn());
             HtmlPanel.this.init();
         });
         joinGame();
+    }
+
+    /**
+     * 加载地址
+     */
+    private void loadBtn() {
+        content.linkUrl(urlTextField.getText());
     }
 
     private void logSet() {
         Platform.runLater(() -> {
             if (content.printLog) {
                 content.printLog = !content.printLog;
-                logBtn.setText("开启日志");
+                logBtn.setText("log on");
             } else {
                 content.printLog = !content.printLog;
-                logBtn.setText("关闭日志");
+                logBtn.setText("log off");
             }
         });
     }

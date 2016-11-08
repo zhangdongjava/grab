@@ -113,6 +113,9 @@ public class HeiFeng extends FuBen {
             htmlContent.linkName("普通攻击");
         }
         htmlContent.linkName("虎骨", true);
+        htmlContent.linkName("虎骨", true);
+        htmlContent.linkName("虎骨", true);
+        htmlContent.linkName("魄力", true);
         htmlContent.linkName("返回游戏");
     }
 

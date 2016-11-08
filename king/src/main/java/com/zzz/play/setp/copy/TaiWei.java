@@ -152,7 +152,7 @@ public class TaiWei extends FuBen {
         htmlContent.linkName("太尉", true);
         htmlContent.linkName("太尉", true);
         htmlContent.linkName("太尉", true);
-        htmlContent.linkName("太尉", true);
+        htmlContent.linkName("魄力", true);
         htmlContent.linkName("返回游戏");
     }
 

@@ -40,7 +40,6 @@ public class HtmlContent {
     private Map<String, LinkBean> urlMap = new HashMap<>();
     public HtmlPanel htmlPanel;
 
-    private PrintStream filePrint;
     /**
      * 删除的form表单
      */
@@ -67,10 +66,6 @@ public class HtmlContent {
 
 
     public HtmlContent(String url, HtmlPanel htmlPanel, CoreController controller) {
-        try {
-            filePrint = new PrintStream(new FileOutputStream("d:/xx" + UUID.randomUUID() + ".lines"));
-        } catch (FileNotFoundException e) {
-        }
         lastTime = System.currentTimeMillis();
         initUrlReplace();
         this.controller = controller;

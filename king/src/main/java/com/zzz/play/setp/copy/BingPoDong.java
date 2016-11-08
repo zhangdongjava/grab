@@ -50,17 +50,17 @@ public class BingPoDong extends FuBen {
         htmlContent.linkName("冰封老人");
         htmlContent.linkName("进入冰魄洞副本");
         htmlContent.linkName("传送进冰魄洞");
-        if (htmlContent.getDocument().text().contains("今天你已进入太尉宝库副")) {
+        if (htmlContent.getDocument().text().contains("今天你已进入")) {
             ableIn = false;
+            lastDate = new Date();
             logger.error(htmlContent.htmlPanel.name + "冰魄洞结束!");
+            htmlContent.linkName("返回",true);
+            htmlContent.linkName("返回",true);
             htmlContent.linkName("返回游戏");
             return false;
         }
         if (htmlContent.getDocument().text().contains("对不起，需要提供红角兽王鬃毛x1")) {
             return false;
-        }
-        if (htmlContent.getDocument().text().contains("红角兽王鬃毛-1")) {
-            lastDate = new Date();
         }
         htmlContent.linkName("返回游戏");
         sd();

@@ -41,15 +41,13 @@ public class ShiRenGu extends FuBen {
         htmlContent.linkName("进入食人谷副本");
         if (htmlContent.getDocument().text().contains("今天你已进入食人谷副本")) {
             ableIn = false;
+            lastDate = new Date();
             return false;
         }
         gjSj();
         while (htmlContent.getDocument().text().contains("进入食人谷副本，必须攀下一个悬崖")) {
             htmlContent.linkName("返回食人谷悬崖");
             gjSj();
-        }
-        if(htmlContent.exitsName("守谷小喽罗")){
-            lastDate = new Date();
         }
         htmlContent.linkName("守谷小喽罗");
         htmlContent.linkName("攻击守谷小喽罗");

@@ -45,6 +45,7 @@ public class TaiWei extends FuBen {
         htmlContent.linkName("进入太尉宝库副本");
         if (htmlContent.getDocument().text().contains("今天你已进入太尉宝库副")) {
             ableIn = false;
+            lastDate = new Date();
             logger.error(htmlContent.htmlPanel.name + "太尉宝库结束!");
             htmlContent.linkName("返回游戏");
             return false;
@@ -53,7 +54,6 @@ public class TaiWei extends FuBen {
             htmlContent.linkName("返回太尉宝库玄铁大门");
             getMenPiao();
         }
-        lastDate = new Date();
         htmlContent.linkName("宝库铁甲兵");
         htmlContent.linkName("攻击宝库铁甲兵");
         zhanDou();

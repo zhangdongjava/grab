@@ -1,5 +1,7 @@
 package com.zzz.play.setp.copy;
 
+import java.util.Date;
+
 /**
  * Created by Administrator on 2016/11/6 0006.
  */
@@ -42,6 +44,9 @@ public class HeiFeng extends FuBen {
             System.out.println(htmlContent.htmlPanel.name + "黑风副本结束!");
             htmlContent.linkName("返回游戏");
             return false;
+        }
+        if(htmlContent.exitsName("黑松果",true)){
+            lastDate = new Date();
         }
         gjHml();
         htmlContent.linkName("右:黑松林→");

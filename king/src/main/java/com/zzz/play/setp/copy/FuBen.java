@@ -83,8 +83,8 @@ public abstract class FuBen extends BaseStep {
         }
         goodsSale2.run();
         ready();
-        if (fbRun()) {
-            lastDate = new Date();
+        if (!fbRun()) {
+            return false;
         }
         goodsSave.run();
         goodsSale2.clear();

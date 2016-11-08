@@ -1,5 +1,7 @@
 package com.zzz.play.setp.copy;
 
+import java.util.Date;
+
 /**
  * 食人谷
  * Created by Administrator on 2016/11/6 0006.
@@ -45,6 +47,9 @@ public class ShiRenGu extends FuBen {
         while (htmlContent.getDocument().text().contains("进入食人谷副本，必须攀下一个悬崖")) {
             htmlContent.linkName("返回食人谷悬崖");
             gjSj();
+        }
+        if(htmlContent.exitsName("守谷小喽罗")){
+            lastDate = new Date();
         }
         htmlContent.linkName("守谷小喽罗");
         htmlContent.linkName("攻击守谷小喽罗");

@@ -4,6 +4,7 @@ import com.zzz.play.core.CoreController;
 import com.zzz.play.exception.StepBackException;
 import com.zzz.play.inter.Runable;
 import com.zzz.play.mark.Global;
+import com.zzz.play.setp.copy.BingPoDong;
 import com.zzz.play.setp.copy.HeiFeng;
 import com.zzz.play.setp.copy.ShiRenGu;
 import com.zzz.play.setp.copy.TaiWei;
@@ -144,6 +145,8 @@ public class TextParse implements Runable {
             step = new ShiRenGu();
         } else if (line.startsWith("taiwei")) {
             step = new TaiWei();
+        } else if (line.startsWith("podong")) {
+            step = new BingPoDong();
         } else if (line.startsWith("take")) {
             step = new GoodsTakeout(line.substring(4));
         } else if (line.startsWith("home")) {

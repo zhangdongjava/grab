@@ -2,6 +2,8 @@ package com.zzz.play.setp.copy;
 
 import org.apache.log4j.Logger;
 
+import java.util.Date;
+
 /**
  * 太尉副本
  * Created by Administrator on 2016/11/6 0006.
@@ -51,6 +53,7 @@ public class TaiWei extends FuBen {
             htmlContent.linkName("返回太尉宝库玄铁大门");
             getMenPiao();
         }
+        lastDate = new Date();
         htmlContent.linkName("宝库铁甲兵");
         htmlContent.linkName("攻击宝库铁甲兵");
         zhanDou();

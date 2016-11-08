@@ -23,6 +23,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by dell_2 on 2016/10/29.
@@ -222,6 +223,9 @@ public class HtmlContent {
         try {
             if (exitsName("继续", false)) {
                 linkUrl(getUrl("继续", false).getUrl());
+                try {
+                    TimeUnit.MILLISECONDS.sleep(2000);
+                } catch (InterruptedException e) {Thread.currentThread().interrupt();}
             }
             if (exitsName("解除验证", false)) {
                 ValidationKill.getValidationKill(this).kill();

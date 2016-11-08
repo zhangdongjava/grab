@@ -22,7 +22,7 @@ public class TaiWei extends FuBen {
 
     @Override
     public String saveLine() {
-        return "太尉";
+        return "太尉秘图";
     }
 
 
@@ -137,7 +137,7 @@ public class TaiWei extends FuBen {
      * 战斗
      */
     public void zhanDou() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 8; i++) {
             htmlContent.linkName("万年灵芝");
         }
         while (htmlContent.exitsName("普通攻击")) {

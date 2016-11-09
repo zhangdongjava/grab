@@ -56,8 +56,8 @@ public class CoreController {
      * 页面改变 就是每次页面加载了调用
      */
     public void pageChange() {
-        if (execChange) return;
         utilDto.waitNotfiy.await();
+        if (execChange) return;
         execChange = true;
         try {
             if (content.getDocument().text().contains("战斗结束")) {

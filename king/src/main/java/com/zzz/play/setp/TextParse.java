@@ -125,6 +125,8 @@ public class TextParse implements Runable {
         } else if (line.startsWith("mb")) {
             step = StepUtil.getStep(line.substring(2));
             step.setMb(true);
+        } else if (line.startsWith("shenFenWenShu")) {
+            step = new ShenFenWenShu();
         } else if (line.startsWith("sale")) {
             step = new GoodsSale(line.substring(4));
         } else if (line.startsWith("sale2")) {

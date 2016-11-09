@@ -44,7 +44,7 @@ public class CoreController {
     public UtilDto utilDto;
     public HtmlPanel htmlPanel;
     private static String[] goods = {"禁军", "御林", "好汉印", "神奇丹药", "高级锻造石", "天书油墨"};
-    private boolean execChange = true;
+    private boolean execChange = false;
 
     public CoreController(GlobalUtil globalUtil, UtilDto utilDto) {
         this.globalUtil = globalUtil;
@@ -56,9 +56,9 @@ public class CoreController {
      * 页面改变 就是每次页面加载了调用
      */
     public void pageChange() {
-        if (!execChange) return;
+        if (execChange) return;
         utilDto.waitNotfiy.await();
-        execChange = false;
+        execChange = true;
         try {
             if (content.getDocument().text().contains("战斗结束")) {
                 for (String good : goods) {
@@ -67,7 +67,7 @@ public class CoreController {
             }
             utilDto.clearUtil.clear(content);
         }finally {
-            execChange = true;
+            execChange = false;
         }
     }
 

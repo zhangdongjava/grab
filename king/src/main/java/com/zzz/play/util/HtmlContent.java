@@ -270,6 +270,7 @@ public class HtmlContent {
         } catch (IOException e) {
             selfLinkUrl(url, count + 1);
         } catch (Exception e) {
+            e.printStackTrace();
             selfLinkUrl(url, count + 1);
         }
         return true;

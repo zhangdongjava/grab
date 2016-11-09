@@ -60,7 +60,7 @@ public class CoreController {
         if (execChange) return;
         execChange = true;
         try {
-            if (content.getDocument().text().contains("战斗结束")) {
+            if (content!= null && content.getDocument().text().contains("战斗已经结束!")) {
                 for (String good : goods) {
                     content.linkName(good, true);
                 }

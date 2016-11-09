@@ -43,6 +43,8 @@ public class CoreController {
     public GlobalUtil globalUtil;
     public UtilDto utilDto;
     public HtmlPanel htmlPanel;
+    private static String[] goods = {"禁军", "御林", "好汉印", "神奇丹药", "高级锻造石", "天书油墨"};
+    private boolean execChange = true;
 
     public CoreController(GlobalUtil globalUtil, UtilDto utilDto) {
         this.globalUtil = globalUtil;
@@ -54,6 +56,12 @@ public class CoreController {
      * 页面改变 就是每次页面加载了调用
      */
     public void pageChange() {
+        if (!execChange) return;
+        execChange = false;
+        for (String good : goods) {
+            content.linkName(good, true);
+        }
+        execChange = true;
         utilDto.waitNotfiy.await();
         utilDto.clearUtil.clear(content);
     }

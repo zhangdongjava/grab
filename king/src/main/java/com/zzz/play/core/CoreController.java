@@ -57,12 +57,14 @@ public class CoreController {
      */
     public void pageChange() {
         if (!execChange) return;
+        utilDto.waitNotfiy.await();
         execChange = false;
-        for (String good : goods) {
-            content.linkName(good, true);
+        if (content.getDocument().text().contains("战斗结束")) {
+            for (String good : goods) {
+                content.linkName(good, true);
+            }
         }
         execChange = true;
-        utilDto.waitNotfiy.await();
         utilDto.clearUtil.clear(content);
     }
 

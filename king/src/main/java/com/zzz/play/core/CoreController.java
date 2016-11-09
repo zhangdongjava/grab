@@ -59,13 +59,16 @@ public class CoreController {
         if (!execChange) return;
         utilDto.waitNotfiy.await();
         execChange = false;
-        if (content.getDocument().text().contains("战斗结束")) {
-            for (String good : goods) {
-                content.linkName(good, true);
+        try {
+            if (content.getDocument().text().contains("战斗结束")) {
+                for (String good : goods) {
+                    content.linkName(good, true);
+                }
             }
+            utilDto.clearUtil.clear(content);
+        }finally {
+            execChange = true;
         }
-        execChange = true;
-        utilDto.clearUtil.clear(content);
     }
 
     /**

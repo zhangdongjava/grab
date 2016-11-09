@@ -222,10 +222,10 @@ public class HtmlContent {
     public void vailte() {
         try {
             if (exitsName("继续", false)) {
-                linkUrl(getUrl("继续", false).getUrl());
                 try {
-                    TimeUnit.MILLISECONDS.sleep(2000);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                 } catch (InterruptedException e) {Thread.currentThread().interrupt();}
+                linkUrl(getUrl("继续", false).getUrl());
             }
             if (exitsName("解除验证", false)) {
                 ValidationKill.getValidationKill(this).kill();

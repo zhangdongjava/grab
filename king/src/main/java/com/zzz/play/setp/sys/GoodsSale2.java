@@ -36,6 +36,10 @@ public class GoodsSale2 extends BaseStep {
 
     }
 
+    public GoodsSale2() {
+    }
+
+
     @Override
     public boolean run() {
         htmlContent.linkName("返回游戏");

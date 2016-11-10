@@ -1,23 +1,33 @@
 package com.zzz.play.setp.material;
 
-import com.zzz.play.setp.impl.config.BaseStep;
+import com.zzz.play.setp.sup.SecondRefresh;
 import com.zzz.play.util.sys.GoodsNumUtil;
+
+import java.util.Date;
 
 /**
  * 刷强体奇书
  * Created by dell_2 on 2016/11/10.
  */
-public class QiangTi extends BaseStep {
+public class QiangTi extends SecondRefresh {
 
     private int hu;
     private int huang;
     private int qian;
-    private boolean run = true;
+    private QianChongSi qianChongSi = new QianChongSi();
+    /**
+     * 是否运行中
+     */
+    private boolean runIng = false;
 
     @Override
     public boolean run() {
-        init();
+        fresh();
+        if (!ableIn) {
+            return false;
+        }
         contrl();
+        init();
         return super.run();
     }
 
@@ -25,7 +35,13 @@ public class QiangTi extends BaseStep {
      * 控制
      */
     private void contrl() {
-        if(qian>0){
+        if (runIng) {
+            if (qian <= 0) {
+                hecheng();
+            } else {
+                shuaQianChong();
+            }
+        } else {
 
         }
     }
@@ -43,18 +59,47 @@ public class QiangTi extends BaseStep {
         if (hu > huang) {
             hu = huang;
         }
-        if(hu == 0){
-            run = false;
+        if (hu == 0) {
+            lastDate = new Date();
+            ableIn = false;
         }
+        runIng = true;
         qian = (hu * 3) - qian;
+        System.out.println(numUtil.map);
+        System.out.println("虎骨->" + hu);
+        System.out.println("需要千虫丝->" + qian);
         numUtil.clear();
     }
 
     /**
      * 刷千虫丝
      */
-    private void shuaQianChong(){
+    private void shuaQianChong() {
+        qianChongSi.run();
+        qian -= qianChongSi.getNum();
+        if (qian <= 0) {
+            hecheng();
+        }
+    }
 
+    /**
+     * 合成强体
+     */
+    private void hecheng() {
+        runIng = false;
+        htmlContent.linkName("功能菜单");
+        htmlContent.linkName("神行千里");
+        htmlContent.linkName("黑风岭");
+        htmlContent.linkName("黑风岭砍柴老者");
+        htmlContent.linkName("研制强体奇书");
+        while (htmlContent.getDocument().text().contains("完成研制")) {
+            htmlContent.linkName("返回黑风岭砍柴老者");
+            htmlContent.linkName("研制强体奇书");
+        }
+        goodsSale2.setGoods(".虎骨");
+        goodsSale2.run();
+        goodsSave.setGoods("强体奇书");
+        goodsSave.run();
     }
 
 

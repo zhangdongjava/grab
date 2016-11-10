@@ -28,6 +28,10 @@ public class GoodsSave2 extends BaseStep {
 
     }
 
+    public GoodsSave2() {
+    }
+
+
     @Override
     public boolean run() {
         htmlContent.linkName("返回游戏");
@@ -102,6 +106,16 @@ public class GoodsSave2 extends BaseStep {
 
     public void putStep(GoodsSave2 step) {
         sets.addAll(step.sets);
+    }
+
+    public void setGoods(String line) {
+        String[] vals = line.split(",");
+        for (String val : vals) {
+            if (val != null && !"".equals(val.trim())) {
+                sets.add(val);
+            }
+        }
+
     }
 }
 

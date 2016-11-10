@@ -10,6 +10,7 @@ import com.zzz.play.setp.copy.ShiRenGu;
 import com.zzz.play.setp.copy.TaiWei;
 import com.zzz.play.setp.impl.config.ClearStep;
 import com.zzz.play.setp.impl.config.ManyStep;
+import com.zzz.play.setp.material.QiangTi;
 import com.zzz.play.setp.sys.*;
 import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.StepUtil;
@@ -145,6 +146,8 @@ public class TextParse implements Runable {
             step = new HeiFeng();
         } else if (line.startsWith("shirengu")) {
             step = new ShiRenGu();
+        }else if (line.startsWith("qiangTi")) {
+            step = new QiangTi();
         } else if (line.startsWith("taiwei")) {
             step = new TaiWei();
         } else if (line.startsWith("podong")) {

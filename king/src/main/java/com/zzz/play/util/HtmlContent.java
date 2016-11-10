@@ -8,6 +8,7 @@ import com.zzz.play.setp.TextParse;
 import com.zzz.play.setp.sys.FinishCombat;
 import com.zzz.play.ui.HtmlPanel;
 import com.zzz.play.util.http.HttpRequest;
+import com.zzz.play.util.sys.GoodsNumUtil;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -70,11 +71,17 @@ public class HtmlContent {
         lastTime = System.currentTimeMillis();
         initUrlReplace();
         this.controller = controller;
+        initUtil();
         setBaseUrl(url);
         this.htmlPanel = htmlPanel;
         httpRequest = new HttpRequest();
         zdz = new FinishCombat(this);
         selfLinkUrl(url, 0);
+    }
+
+    private void  initUtil(){
+        controller.utilDto.goodsNumUtil = new GoodsNumUtil();
+        controller.utilDto.goodsNumUtil.setHtmlContent(this);
     }
 
 

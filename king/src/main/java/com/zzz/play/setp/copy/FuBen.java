@@ -1,6 +1,6 @@
 package com.zzz.play.setp.copy;
 
-import com.zzz.play.setp.impl.config.BaseStep;
+import com.zzz.play.setp.sup.SecondRefresh;
 import com.zzz.play.setp.sys.BuyDrug;
 import com.zzz.play.setp.sys.GoodsSale2;
 import com.zzz.play.setp.sys.GoodsSave2;
@@ -13,21 +13,17 @@ import java.util.Date;
 /**
  * Created by Administrator on 2016/11/6 0006.
  */
-public abstract class FuBen extends BaseStep {
+public abstract class FuBen extends SecondRefresh {
 
     protected BuyDrug buyDrug = new BuyDrug();
 
     protected GoodsSale2 goodsSale2 = new GoodsSale2(inClearLine());
     protected GoodsSave2 goodsSave = new GoodsSave2(saveLine());
-    /**
-     * 是否可以进入副本
-     */
-    protected boolean ableIn = true;
+
     /**
      * 运行了多少次
      */
     protected int runNum;
-    protected Date lastDate;
 
 
     @Override
@@ -95,18 +91,6 @@ public abstract class FuBen extends BaseStep {
 
     public abstract boolean fbRun();
 
-    private void fresh() {
-        if (lastDate == null) {
-            return;
-        }
-        Calendar c1 = Calendar.getInstance();
-        c1.setTime(lastDate);
-        Calendar c2 = Calendar.getInstance();
-        c2.setTime(new Date());
-        if (c1.get(Calendar.DAY_OF_MONTH) != c2.get(Calendar.DAY_OF_MONTH)) {
-            ableIn = true;
-        }
-    }
 
 }
 

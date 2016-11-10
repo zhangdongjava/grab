@@ -121,7 +121,7 @@ public class CoreController {
     public void loadParse() {
         if (content == null) return;
         textParses.clear();
-        if(sysTextParse==null){
+        if (sysTextParse == null) {
             sysTextParse = new SysTextParse(content);
         }
         textParses.add(sysTextParse);
@@ -149,7 +149,9 @@ public class CoreController {
                 runParses.addAll(textParses);
                 for (Runable parse : runParses) {
                     try {
-                        utilDto.clearUtil.fzClear(content);
+                        if (parse.isClear()) {
+                            utilDto.clearUtil.fzClear(content);
+                        }
                         parse.run();
                     } catch (StopCurrStepException e) {
                         System.out.println(parse.getFileName() + "->" + e.toString());

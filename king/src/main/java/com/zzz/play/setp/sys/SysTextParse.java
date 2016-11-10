@@ -37,4 +37,9 @@ public class SysTextParse implements Runable {
     public String getFileName() {
         return "系统运行器";
     }
+
+    @Override
+    public boolean isClear() {
+        return false;
+    }
 }

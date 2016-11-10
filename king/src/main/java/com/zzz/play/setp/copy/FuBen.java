@@ -14,8 +14,6 @@ public abstract class FuBen extends SecondRefresh {
     protected int runNum;
 
 
-
-
     /**
      * 进入副本清理物品字符串
      *
@@ -30,7 +28,12 @@ public abstract class FuBen extends SecondRefresh {
      */
     public abstract String outClearLine();
 
-
+    /**
+     * 要保存的物品
+     *
+     * @return
+     */
+    public abstract String saveLine();
 
 
     /**
@@ -52,6 +55,7 @@ public abstract class FuBen extends SecondRefresh {
         if (!fbRun()) {
             return false;
         }
+        goodsSave.setGoods(saveLine());
         goodsSave.run();
         goodsSale2.clear();
         goodsSale2.setGoods(outClearLine());

@@ -28,14 +28,15 @@ public class Resource {
         File file = new File(fileName);
         if (file.exists()) {
             try {
-                properties.load(new FileInputStream(file));
+                FileInputStream in = new FileInputStream(file);
+                properties.load(in);
                 Object val = properties.get(bootPathName);
                 if (val != null) {
                     bootPath = val.toString();
                 } else {
                     JOptionPane.showConfirmDialog(null, "请设置脚本路径!");
                 }
-
+                in.close();
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new RuntimeException(file + "文件不存在！");
@@ -48,7 +49,9 @@ public class Resource {
         File file = new File(SHU_QIAN_FILE_NAME);
         if (file.exists()) {
             try {
-                shuqian.load(new FileInputStream(file));
+                FileInputStream in = new FileInputStream(file);
+                shuqian.load(in);
+                in.close();
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new RuntimeException(file + "文件不存在！");
@@ -61,6 +64,7 @@ public class Resource {
         File file = new File(fileName);
         FileOutputStream outputStream = new FileOutputStream(file);
         properties.store(outputStream, "系统设置");
+        outputStream.close();
         bootPath = properties.get(bootPathName).toString();
     }
 
@@ -77,6 +81,7 @@ public class Resource {
         shuqian.put(role, qu + "###" + url);
         FileOutputStream outputStream = new FileOutputStream(file);
         shuqian.store(outputStream, "书签列表");
+        outputStream.close();
     }
 
     public static void main(String[] args) throws IOException {

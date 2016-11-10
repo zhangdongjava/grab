@@ -63,6 +63,10 @@ public class TextParse implements Runable {
      * 核心控制器
      */
     private CoreController controller;
+    /**
+     * 是否清理
+     */
+    private boolean clear;
 
     public TextParse() {
         linkedList = new LinkedList<>();
@@ -256,9 +260,19 @@ public class TextParse implements Runable {
         return fileName;
     }
 
+    @Override
+    public boolean isClear() {
+        return clear;
+    }
+
+    public void setClear(boolean clear) {
+        this.clear = clear;
+    }
+
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
+
 
 }
 

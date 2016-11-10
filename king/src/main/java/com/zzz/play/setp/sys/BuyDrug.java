@@ -70,7 +70,6 @@ public class BuyDrug extends BaseStep {
         htmlContent.linkName("购买物品");
         htmlContent.linkName(name, true);
         formSubmit.run();
-        System.out.println(htmlContent.htmlPanel.name+":"+htmlContent.getDocument().text());
         htmlContent.linkName("返回游戏");
         return true;
     }
@@ -93,7 +92,6 @@ public class BuyDrug extends BaseStep {
         htmlContent.linkName("返回游戏");
         int buy = Integer.valueOf(num) - currNum;
         buyNum = String.valueOf(buy);
-        System.out.println("现有:" + currNum + ",共需要:" + num + ",需要购买:" + buy);
         return buy > 0;
     }
 

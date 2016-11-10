@@ -46,6 +46,11 @@ public class QianChongSi extends BaseStep {
         go("左:柳树林←");
         go("上:柳树林↑");
         go("右:柳树林→");
+        htmlContent.linkName("右:大柳树→");
+        for (int i = 0; i < 2; i++) {
+            shePi();
+        }
+        htmlContent.linkName("功能菜单");
         htmlContent.linkName("功能菜单");
         htmlContent.linkName("神行千里");
         htmlContent.linkName("史家庄");
@@ -89,12 +94,22 @@ public class QianChongSi extends BaseStep {
         }
     }
 
+    public void shePi() {
+        htmlContent.linkName("青蛇");
+        htmlContent.linkName("攻击青蛇");
+        while (htmlContent.exitsName("普通攻击")) {
+            htmlContent.linkName("普通攻击");
+        }
+        htmlContent.linkName("青蛇皮", true);
+        htmlContent.linkName("返回游戏");
+    }
+
     public void zhandou() {
         while (htmlContent.exitsName("普通攻击")) {
             htmlContent.linkName("普通攻击");
         }
-        while (htmlContent.exitsName("柳皮", true)) {
-            htmlContent.linkName("柳皮", true);
+        while (htmlContent.exitsName("柳虫皮", true)) {
+            htmlContent.linkName("柳虫皮", true);
         }
         htmlContent.linkName("返回游戏");
     }

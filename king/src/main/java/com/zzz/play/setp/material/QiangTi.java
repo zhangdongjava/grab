@@ -1,6 +1,7 @@
 package com.zzz.play.setp.material;
 
 import com.zzz.play.setp.sup.SecondRefresh;
+import com.zzz.play.util.UtilDto;
 import com.zzz.play.util.sys.GoodsNumUtil;
 
 import java.util.Date;
@@ -27,7 +28,6 @@ public class QiangTi extends SecondRefresh {
             return false;
         }
         contrl();
-        init();
         return super.run();
     }
 
@@ -42,7 +42,7 @@ public class QiangTi extends SecondRefresh {
                 shuaQianChong();
             }
         } else {
-
+            init();
         }
     }
 
@@ -75,8 +75,12 @@ public class QiangTi extends SecondRefresh {
      * 刷千虫丝
      */
     private void shuaQianChong() {
+        qianChongSi.setHtmlContent(htmlContent);
+        qianChongSi.setUtilDto(utilDto);
         qianChongSi.run();
+        System.out.println("需要千虫丝:"+qian);
         qian -= qianChongSi.getNum();
+        System.out.println("还需要千虫丝:"+qian);
         if (qian <= 0) {
             hecheng();
         }
@@ -100,6 +104,9 @@ public class QiangTi extends SecondRefresh {
         goodsSale2.run();
         goodsSave.setGoods("强体奇书");
         goodsSave.run();
+        qian = 0;
+        hu = 0;
+        huang = 0;
     }
 
 

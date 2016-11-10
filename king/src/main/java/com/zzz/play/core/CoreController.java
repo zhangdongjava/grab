@@ -101,7 +101,6 @@ public class CoreController {
      */
     public void run(HtmlContent content) {
         this.content = content;
-        sysTextParse = new SysTextParse(this.content);
         run();
         //testRun(content)
     }
@@ -122,6 +121,9 @@ public class CoreController {
     public void loadParse() {
         if (content == null) return;
         textParses.clear();
+        if(sysTextParse==null){
+            sysTextParse = new SysTextParse(content);
+        }
         textParses.add(sysTextParse);
         TextParse textParse;
         for (String file : files) {

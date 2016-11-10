@@ -34,8 +34,8 @@ public class TextParse implements Runable {
 
     public int statu = 0;
 
-    private LinkedList<Runable> linkedList;
-    private LinkedList<Runable> baseList;
+    private LinkedList<Step> linkedList;
+    private LinkedList<Step> baseList;
 
     private File file;
 
@@ -219,7 +219,7 @@ public class TextParse implements Runable {
             try {
                 //System.out.println("普通脚本:" + linkedList.get(currNormalIndex));
                 if (currNormalIndex < 0) currNormalIndex = 0;
-                Runable step = linkedList.get(currNormalIndex);
+                Step step = linkedList.get(currNormalIndex);
                 controller.stepRunBefore();
                 step.run();
                 controller.stepRunAfter();

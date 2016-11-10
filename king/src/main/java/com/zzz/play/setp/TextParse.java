@@ -228,11 +228,10 @@ public class TextParse implements Runable {
 
 
     public boolean run() {
-        int syNum = config.getCount() - 1;
-        if (syNum == 0) {
+        if (config.getCount() == 0) {
             return false;
         }
-        config.setCount(syNum);
+        config.countJian();
         htmlContent.setCurrParse(this);
         for (currNormalIndex = 0; currNormalIndex < linkedList.size(); currNormalIndex++) {
             try {

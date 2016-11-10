@@ -41,6 +41,10 @@ public interface Runable {
             this.count = count;
         }
 
+        public void countJian(){
+            count --;
+        }
+
         @Override
         public String toString() {
             final StringBuffer sb = new StringBuffer("RunConfig{");

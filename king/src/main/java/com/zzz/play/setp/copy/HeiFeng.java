@@ -42,7 +42,7 @@ public class HeiFeng extends FuBen {
         if (htmlContent.getDocument().text().contains("今天你已进入黑风岭副本")) {
             ableIn = false;
             lastDate = new Date();
-            System.out.println(htmlContent.htmlPanel.name + "黑风副本结束!");
+            logger.error(htmlContent.htmlPanel.name + "黑风副本结束!");
             htmlContent.linkName("返回游戏");
             return false;
         }

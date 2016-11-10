@@ -42,6 +42,7 @@ public class ShiRenGu extends FuBen {
         if (htmlContent.getDocument().text().contains("今天你已进入食人谷副本")) {
             ableIn = false;
             lastDate = new Date();
+            logger.error(htmlContent.htmlPanel.name + "食人谷副本结束!");
             return false;
         }
         gjSj();

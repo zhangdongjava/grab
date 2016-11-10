@@ -1,7 +1,5 @@
 package com.zzz.play.setp.copy;
 
-import org.apache.log4j.Logger;
-
 import java.util.Date;
 
 /**
@@ -9,8 +7,6 @@ import java.util.Date;
  * Created by Administrator on 2016/11/6 0006.
  */
 public class TaiWei extends FuBen {
-
-    private Logger logger = Logger.getLogger(TaiWei.class);
 
     @Override
     public String inClearLine() {

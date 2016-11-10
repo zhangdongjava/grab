@@ -149,6 +149,7 @@ public class CoreController {
                         System.out.println(parse.getFileName() + "->运行脚本异常!" + e.toString());
                     }
                 }
+                System.gc();
             }
         });
     }

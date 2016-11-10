@@ -3,7 +3,12 @@
     <output-path>$PROJECT_DIR$/out/artifacts/king_jar</output-path>
     <root id="archive" name="king.jar">
       <element id="module-output" name="king" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jsoup/jsoup/1.9.2/jsoup-1.9.2.jar" path-in-jar="/" />
+      <element id="directory" name="lib">
+        <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
+        <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.9.2" />
+        <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.13" />
+        <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.13" />
+      </element>
     </root>
   </artifact>
 </component>

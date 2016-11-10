@@ -1,5 +1,8 @@
 package com.zzz.play.setp.copy;
 
+import com.zzz.play.exception.StopCurrStepException;
+import org.apache.log4j.Logger;
+
 import java.util.Date;
 
 /**
@@ -123,6 +126,10 @@ public class ShiRenGu extends FuBen {
      */
     public void gjSj() {
         for (int i = 0; i < 5; i++) {
+            if(!htmlContent.exitsName("巨蛇")){
+                logger.error(htmlContent.htmlPanel.name +"巨蛇不见了");
+                throw new StopCurrStepException("巨蛇不见了");
+            }
             htmlContent.linkName("巨蛇");
             htmlContent.linkName("攻击巨蛇");
             htmlContent.linkName("万年灵芝");

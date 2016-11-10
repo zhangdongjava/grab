@@ -19,7 +19,7 @@ public class HeiFeng extends FuBen {
 
     @Override
     public String saveLine() {
-        return "虎骨";
+        return "强体奇书";
     }
 
 

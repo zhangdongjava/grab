@@ -23,7 +23,32 @@ public interface Runable {
         /**
          * 运行次数
          */
-        private int count;
+        private int count = -1;
+
+        public boolean isClear() {
+            return clear;
+        }
+
+        public void setClear(boolean clear) {
+            this.clear = clear;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+
+        @Override
+        public String toString() {
+            final StringBuffer sb = new StringBuffer("RunConfig{");
+            sb.append("clear=").append(clear);
+            sb.append(", count=").append(count);
+            sb.append('}');
+            return sb.toString();
+        }
     }
 
 }

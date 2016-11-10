@@ -1,5 +1,6 @@
 package com.zzz.play.setp;
 
+import com.alibaba.fastjson.JSON;
 import com.zzz.play.core.CoreController;
 import com.zzz.play.exception.StepBackException;
 import com.zzz.play.inter.Runable;
@@ -68,6 +69,13 @@ public class TextParse implements Runable {
      */
     private boolean clear;
 
+    private int runNum;
+
+    /**
+     * 运行参数
+     */
+    private Runable.RunConfig config;
+
     public TextParse() {
         linkedList = new LinkedList<>();
         baseList = new LinkedList<>();
@@ -87,7 +95,9 @@ public class TextParse implements Runable {
         linkedList.clear();
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line = reader.readLine();
-        int index = 0;
+        config = JSON.parseObject(line, RunConfig.class);
+        int index = 1;
+        line = reader.readLine();
         while (line != null) {
             if (!line.trim().equals("")) {
                 Step step = addStep(line.trim());
@@ -150,7 +160,7 @@ public class TextParse implements Runable {
             step = new HeiFeng();
         } else if (line.startsWith("shirengu")) {
             step = new ShiRenGu();
-        }else if (line.startsWith("qiangTi")) {
+        } else if (line.startsWith("qiangTi")) {
             step = new QiangTi();
         } else if (line.startsWith("taiwei")) {
             step = new TaiWei();
@@ -218,6 +228,11 @@ public class TextParse implements Runable {
 
 
     public boolean run() {
+        int syNum = config.getCount() - 1;
+        if (syNum == 0) {
+            return false;
+        }
+        config.setCount(syNum);
         htmlContent.setCurrParse(this);
         for (currNormalIndex = 0; currNormalIndex < linkedList.size(); currNormalIndex++) {
             try {
@@ -262,7 +277,7 @@ public class TextParse implements Runable {
 
     @Override
     public boolean isClear() {
-        return clear;
+        return config.isClear();
     }
 
     public void setClear(boolean clear) {
@@ -271,6 +286,11 @@ public class TextParse implements Runable {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public static void main(String[] args) {
+        RunConfig config = JSON.parseObject("{clear:true}", RunConfig.class);
+        System.out.println(config);
     }
 
 

@@ -31,7 +31,7 @@ public class TaiWei extends FuBen {
     @Override
     public void ready() {
         buyDrug.setName("万年灵芝");
-        buyDrug.setNum("300");
+        buyDrug.setNum("200");
         buyDrug.run();
     }
 

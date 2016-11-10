@@ -125,6 +125,7 @@ public class ShiRenGu extends FuBen {
         for (int i = 0; i < 5; i++) {
             htmlContent.linkName("巨蛇");
             htmlContent.linkName("攻击巨蛇");
+            htmlContent.linkName("万年灵芝");
             while (htmlContent.exitsName("普通攻击")) {
                 htmlContent.linkName("普通攻击");
             }

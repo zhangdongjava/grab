@@ -3,6 +3,8 @@ package com.zzz.play.setp.activity;
 import com.zzz.play.setp.sup.SecondRefresh;
 import com.zzz.play.util.HtmlContent;
 
+import java.util.Date;
+
 /**
  * 活动史老太公领取星光
  * Created by dell_2 on 2016/11/10.
@@ -33,6 +35,7 @@ public class GeiXingGuang extends SecondRefresh {
         htmlContent.linkName("史老太公");
         htmlContent.linkName("领取新区每日奖励");
         htmlContent.linkName("返回游戏");
+        lastDate = new Date();
         ableIn = false;
         return true;
     }

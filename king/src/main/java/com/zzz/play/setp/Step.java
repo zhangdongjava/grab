@@ -8,7 +8,7 @@ import com.zzz.play.util.UtilDto;
 /**
  * Created by dell_2 on 2016/10/29.
  */
-public interface Step extends Runable {
+public interface Step {
 
     boolean run();
 

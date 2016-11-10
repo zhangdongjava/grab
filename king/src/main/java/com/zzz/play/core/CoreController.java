@@ -2,10 +2,12 @@ package com.zzz.play.core;
 
 import com.zzz.play.exception.StopCurrStepException;
 import com.zzz.play.inter.Observer;
+import com.zzz.play.inter.Runable;
 import com.zzz.play.setp.Step;
 import com.zzz.play.setp.TextParse;
 import com.zzz.play.setp.impl.config.ManyStep;
 import com.zzz.play.setp.sys.GoodsSale;
+import com.zzz.play.setp.sys.SysTextParse;
 import com.zzz.play.ui.HtmlPanel;
 import com.zzz.play.ui.MainWindow;
 import com.zzz.play.util.GlobalUtil;
@@ -13,6 +15,7 @@ import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.UtilDto;
 
 import javax.swing.*;
+import java.io.PipedReader;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -28,11 +31,11 @@ public class CoreController {
     /**
      * 缓存集合
      */
-    public LinkedList<TextParse> textParses = new LinkedList<>();
+    public LinkedList<Runable> textParses = new LinkedList<>();
     /**
      * 运行中的集合
      */
-    public LinkedList<TextParse> runParses = new LinkedList<>();
+    public LinkedList<Runable> runParses = new LinkedList<>();
 
     /**
      * 全局观察者
@@ -45,6 +48,8 @@ public class CoreController {
     public HtmlPanel htmlPanel;
     private static String[] goods = {"禁军", "御林", "好汉印", "神奇丹药", "高级锻造石", "天书油墨"};
     private boolean execChange = false;
+
+    private SysTextParse sysTextParse;
 
     public CoreController(GlobalUtil globalUtil, UtilDto utilDto) {
         this.globalUtil = globalUtil;
@@ -60,13 +65,13 @@ public class CoreController {
         if (execChange) return;
         execChange = true;
         try {
-            if (content!= null && content.getDocument().text().contains("战斗已经结束!")) {
+            if (content != null && content.getDocument().text().contains("战斗已经结束!")) {
                 for (String good : goods) {
                     content.linkName(good, true);
                 }
             }
             utilDto.clearUtil.clear(content);
-        }finally {
+        } finally {
             execChange = false;
         }
     }
@@ -96,6 +101,7 @@ public class CoreController {
      */
     public void run(HtmlContent content) {
         this.content = content;
+        sysTextParse = new SysTextParse(this.content);
         run();
         //testRun(content)
     }
@@ -116,6 +122,7 @@ public class CoreController {
     public void loadParse() {
         if (content == null) return;
         textParses.clear();
+        textParses.add(sysTextParse);
         TextParse textParse;
         for (String file : files) {
             try {
@@ -138,7 +145,7 @@ public class CoreController {
             while (!Thread.interrupted()) {
                 runParses.clear();
                 runParses.addAll(textParses);
-                for (TextParse parse : runParses) {
+                for (Runable parse : runParses) {
                     try {
                         utilDto.clearUtil.fzClear(content);
                         parse.run();

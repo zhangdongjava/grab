@@ -6,4 +6,6 @@ package com.zzz.play.inter;
 public interface Runable {
 
     boolean run();
+
+    String getFileName();
 }

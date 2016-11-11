@@ -115,7 +115,7 @@ public class KuangBaoEr extends SecondRefresh {
         htmlContent.linkName("上:景阳岗上↑");
         htmlContent.linkName("行者.武松");
         htmlContent.linkName("合成狂暴二");
-        while (htmlContent.getDocument().text().contains("完成研制")) {
+        while (htmlContent.getDocument().text().contains("完成合成")) {
             getHuPi -= HU_NUM;
             bingPo -= 1;
             htmlContent.linkName("返回武松");

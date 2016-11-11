@@ -55,7 +55,7 @@ public class JingGang extends SecondRefresh {
         numUtil.setNames("太尉秘图", "牛皮");
         numUtil.run();
         mitu = numUtil.map.get("太尉秘图") / 2;
-        if (mitu == 1) {
+        if (mitu == 0) {
             lastDate = new Date();
             ableIn = false;
         }

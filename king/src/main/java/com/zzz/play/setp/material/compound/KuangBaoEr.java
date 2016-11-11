@@ -68,7 +68,7 @@ public class KuangBaoEr extends SecondRefresh {
             return;
         }
         runIng = true;
-        numUtil.setNames("蒙汗药", "景阳岗虎皮");
+        numUtil.setNames("景阳岗虎皮");
         numUtil.run();
         getHuPi = numUtil.map.get("景阳岗虎皮");
         System.out.println(numUtil.map);

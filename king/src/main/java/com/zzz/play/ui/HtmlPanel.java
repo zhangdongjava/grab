@@ -33,6 +33,7 @@ public class HtmlPanel extends JFXPanel {
     private String url;
     public static final int WIDTH = MainWindow.width - 100;
     public static final int HEIGHT = MainWindow.height - 100;
+    public static Integer DEFAULT_WAIT = 538;
     public HtmlContent content;
     public GlobalUtil globalUtil;
     public WebView view;
@@ -107,7 +108,7 @@ public class HtmlPanel extends JFXPanel {
             interval = new TextField();
             interval.setPrefWidth(50);
             interval.setPromptText("间隔");
-            interval.setText("600");
+            interval.setText(DEFAULT_WAIT.toString());
             setBtn = new Button("设置");
             loadBtn = new Button("→");
             Group root = new Group();

@@ -36,7 +36,7 @@ public class HtmlContent {
     private static int LINE_COUNT = 120;
     private Document document;
     public String baseUrl;
-    public int TIME_WAIT = 600;
+    public int TIME_WAIT = HtmlPanel.DEFAULT_WAIT;
     public static long CLICK_TIME = System.currentTimeMillis();
     private boolean validate = false;
     private Map<String, LinkBean> urlMap = new HashMap<>();

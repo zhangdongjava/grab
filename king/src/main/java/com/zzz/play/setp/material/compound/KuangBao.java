@@ -77,7 +77,9 @@ public class KuangBao extends SecondRefresh {
         if (bingPo == 0) {
             lastDate = new Date();
             ableIn = false;
+            return;
         }
+        runIng = true;
         mengHanTotal = bingPo * 30;
         goodsTakeout.setGoods("蒙汗药_" + mengHanTotal);
         goodsTakeout.run();

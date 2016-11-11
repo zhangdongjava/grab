@@ -58,7 +58,9 @@ public class JingGang extends SecondRefresh {
         if (mitu == 0) {
             lastDate = new Date();
             ableIn = false;
+            return;
         }
+        runIng = true;
         niupi = numUtil.map.get("牛皮");
         int du = mitu * 4;
         goodsTakeout.setGoods("变异菜青虫毒液_" + du);

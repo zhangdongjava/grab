@@ -51,7 +51,7 @@ public class JingGang extends SecondRefresh {
      */
     public void init() {
         GoodsNumUtil numUtil = utilDto.goodsNumUtil;
-        goodsTakeout.setGoods("太尉秘图_100000");
+        goodsTakeout.setGoods("太尉秘图_20");
         goodsTakeout.run();
         numUtil.setNames("太尉秘图", "牛皮");
         numUtil.run();

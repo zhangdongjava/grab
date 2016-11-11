@@ -1,4 +1,4 @@
-{clear:true}
+﻿{clear:true}
 basefirst{
 杀人蜂
 普通攻击while2
@@ -39,5 +39,5 @@ like攻击
 like龙皮
 返回游戏
 }
-sale蜂刺
+sale蜂刺,蜂王浆,龙皮
 save金刚,锻造,油墨,丹药

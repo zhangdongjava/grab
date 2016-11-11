@@ -28,11 +28,6 @@
         <module name="swingdemo" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="demo1" target="1.5" />
-      <module name="king" target="1.5" />
-      <module name="logger" target="1.5" />
-      <module name="swingdemo" target="1.5" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8" />
   </component>
 </project>

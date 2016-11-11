@@ -1,10 +1,7 @@
 package com.zzz.play.util;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -14,15 +11,25 @@ public class Resource {
 
     private static String fileName = "systemKing.txt";
     private static String SHU_QIAN_FILE_NAME = "shuQianKing.properties";
+    private static String UI = "ui.properties";
     public static String bootPathName = "bootPath";
 
     public static String bootPath;
+    public static Integer UI_WIDTH = 500;
+    public static Integer UI_HEIGHT = 600;
     public static Properties properties = new Properties();
     /**
      * 书签
      */
     public static Properties shuqian = new Properties();
+    /**
+     * 界面配置
+     */
+    public static Properties ui = new Properties();
 
+    static {
+        load();
+    }
 
     public static void load() {
         File file = new File(fileName);
@@ -43,6 +50,7 @@ public class Resource {
             }
         }
         loadShuQian();
+        loadUi();
     }
 
     public static void loadShuQian() {
@@ -56,6 +64,32 @@ public class Resource {
                 e.printStackTrace();
                 throw new RuntimeException(file + "文件不存在！");
             }
+        }
+    }
+
+    public static void loadUi() {
+        File file = new File(UI);
+        if (file.exists()) {
+            try {
+                FileInputStream in = new FileInputStream(file);
+                ui.load(in);
+                UI_WIDTH = Integer.valueOf(ui.getProperty("width"));
+                UI_HEIGHT = Integer.valueOf(ui.getProperty("height"));
+                in.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new RuntimeException(file + "文件不存在！");
+            }
+        } else {
+            FileOutputStream outputStream = null;
+            try {
+                outputStream = new FileOutputStream(file);
+                shuqian.store(outputStream, "书签列表");
+                outputStream.close();
+            } catch (Exception e) {
+
+            }
+
         }
     }
 

@@ -128,17 +128,21 @@ public class KuangBao extends SecondRefresh {
         runIng = false;
         htmlContent.linkName("功能菜单");
         htmlContent.linkName("神行千里");
-        htmlContent.linkName("上东京");
-        htmlContent.linkName("上:北大街↑");
-        htmlContent.linkName("游方和尚");
-        htmlContent.linkName("研制金刚奇书");
+        htmlContent.linkName("景阳岗");
+        htmlContent.linkName("上:山路↑");
+        htmlContent.linkName("上:山下↑");
+        htmlContent.linkName("上:山路↑");
+        htmlContent.linkName("上:树林↑");
+        htmlContent.linkName("上:景阳岗上↑");
+        htmlContent.linkName("行者.武松");
+        htmlContent.linkName("研制狂暴奇书");
         while (htmlContent.getDocument().text().contains("完成研制")) {
-            htmlContent.linkName("返回游方和尚");
-            htmlContent.linkName("研制金刚奇书");
+            htmlContent.linkName("返回武松");
+            htmlContent.linkName("研制狂暴奇书");
         }
-        htmlContent.linkName("返回游方和尚");
+        htmlContent.linkName("返回武松");
         htmlContent.linkName("返回游戏");
-        goodsSave.setGoods("金刚奇书");
+        goodsSave.setGoods("狂暴奇书");
         goodsSave.run();
         mengHan = 0;
         huPi = 0;

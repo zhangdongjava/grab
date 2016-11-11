@@ -112,7 +112,9 @@ public class KuangBao extends SecondRefresh {
             goodsTakeout.run();
             numUtil.setNames("蒙汗药");
             numUtil.run();
+            System.out.println("需要虎皮:" + huPi);
             this.mengHan = mengHanTotal - (numUtil.map.get("蒙汗药"));
+            System.out.println("还需要虎皮:" + huPi);
         }
 
 

@@ -63,6 +63,7 @@ public class QiangTi extends SecondRefresh {
         if (hu == 0) {
             lastDate = new Date();
             ableIn = false;
+            return;
         }
         runIng = true;
         qian = (hu * 3) - qian;

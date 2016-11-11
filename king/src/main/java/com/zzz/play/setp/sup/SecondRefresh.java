@@ -4,6 +4,7 @@ import com.zzz.play.setp.impl.config.BaseStep;
 import com.zzz.play.setp.sys.BuyDrug;
 import com.zzz.play.setp.sys.GoodsSale2;
 import com.zzz.play.setp.sys.GoodsSave2;
+import com.zzz.play.setp.sys.GoodsTakeout;
 import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.UtilDto;
 
@@ -20,6 +21,7 @@ public abstract class SecondRefresh extends BaseStep {
 
     protected GoodsSale2 goodsSale2 = new GoodsSale2();
     protected GoodsSave2 goodsSave = new GoodsSave2();
+    protected GoodsTakeout goodsTakeout =new GoodsTakeout();
 
     @Override
     public void setHtmlContent(HtmlContent htmlContent) {

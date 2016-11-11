@@ -1,21 +1,20 @@
-package com.zzz.play.setp.material;
+package com.zzz.play.setp.material.compound;
 
+import com.zzz.play.setp.material.NiuPi;
 import com.zzz.play.setp.sup.SecondRefresh;
-import com.zzz.play.util.UtilDto;
 import com.zzz.play.util.sys.GoodsNumUtil;
 
 import java.util.Date;
 
 /**
- * 刷强体奇书
- * Created by dell_2 on 2016/11/10.
+ * 金刚奇书合成
+ * Created by dell_2 on 2016/11/11.
  */
-public class QiangTi extends SecondRefresh {
+public class JingGang extends SecondRefresh {
 
-    private int hu;
-    private int huang;
-    private int qian;
-    private QianChongSi qianChongSi = new QianChongSi();
+    private int mitu;
+    private int niupi;
+    private NiuPi niuPi = new NiuPi();
     /**
      * 是否运行中
      */
@@ -36,10 +35,10 @@ public class QiangTi extends SecondRefresh {
      */
     private void contrl() {
         if (runIng) {
-            if (qian <= 0) {
+            if (niupi <= 0) {
                 hecheng();
             } else {
-                shuaQianChong();
+                shua();
             }
         } else {
             init();
@@ -50,38 +49,38 @@ public class QiangTi extends SecondRefresh {
      * 初始化材料数量，从物品中获取到
      */
     public void init() {
+        goodsTakeout.setGoods("太尉秘图_100000");
+        goodsTakeout.run();
         GoodsNumUtil numUtil = utilDto.goodsNumUtil;
-        numUtil.setNames("虎骨", "黄金虎骨", "千虫丝");
+        numUtil.setNames("太尉秘图", "牛皮");
         numUtil.run();
-        hu = numUtil.map.get("虎骨");
-        huang = numUtil.map.get("黄金虎骨");
-        qian = numUtil.map.get("千虫丝");
-        if (hu > huang) {
-            hu = huang;
-        }
-        if (hu == 0) {
+        mitu = numUtil.map.get("太尉秘图");
+        if (mitu <=1) {
             lastDate = new Date();
             ableIn = false;
         }
-        runIng = true;
-        qian = (hu * 3) - qian;
+        niupi = numUtil.map.get("牛皮");
+        int du = mitu / 2 * 2;
+        goodsTakeout.setGoods("变异菜青虫毒液_" + du);
+        goodsTakeout.run();
+        niupi = mitu / 2 * 20 - niupi;
         System.out.println(numUtil.map);
-        System.out.println("虎骨->" + hu);
-        System.out.println("需要千虫丝->" + qian);
+        System.out.println("太尉->" + mitu);
+        System.out.println("需要牛皮->" + niupi);
         numUtil.clear();
     }
 
     /**
      * 刷千虫丝
      */
-    private void shuaQianChong() {
-        qianChongSi.setHtmlContent(htmlContent);
-        qianChongSi.setUtilDto(utilDto);
-        qianChongSi.run();
-        System.out.println("需要千虫丝:"+qian);
-        qian -= qianChongSi.getNum();
-        System.out.println("还需要千虫丝:"+qian);
-        if (qian <= 0) {
+    private void shua() {
+        niuPi.setHtmlContent(htmlContent);
+        niuPi.setUtilDto(utilDto);
+        niuPi.run();
+        System.out.println("需要牛皮:" + niupi);
+        niupi -= niuPi.getNum();
+        System.out.println("还需要牛皮:" + niupi);
+        if (niupi <= 0) {
             hecheng();
         }
     }
@@ -93,9 +92,10 @@ public class QiangTi extends SecondRefresh {
         runIng = false;
         htmlContent.linkName("功能菜单");
         htmlContent.linkName("神行千里");
-        htmlContent.linkName("黑风岭");
-        htmlContent.linkName("黑风岭砍柴老者");
-        htmlContent.linkName("研制强体奇书");
+        htmlContent.linkName("上东京");
+        htmlContent.linkName("上:北大街↑");
+        htmlContent.linkName("游方和尚");
+        htmlContent.linkName("研制金刚奇书");
         while (htmlContent.getDocument().text().contains("完成研制")) {
             htmlContent.linkName("返回黑风岭砍柴老者");
             htmlContent.linkName("研制强体奇书");
@@ -106,10 +106,8 @@ public class QiangTi extends SecondRefresh {
         goodsSale2.run();
         goodsSave.setGoods("强体奇书");
         goodsSave.run();
-        qian = 0;
-        hu = 0;
-        huang = 0;
+        niupi = 0;
+        mitu = 0;
     }
-
 
 }

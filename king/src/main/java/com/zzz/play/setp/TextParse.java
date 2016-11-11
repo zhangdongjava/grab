@@ -162,6 +162,8 @@ public class TextParse implements Runable {
             step = new HeiFeng();
         } else if (line.startsWith("shirengu")) {
             step = new ShiRenGu();
+        } else if (line.startsWith("qiangXian")) {
+            step = new QiangXian();
         } else if (line.startsWith("qiangTi")) {
             step = new QiangTi();
         } else if (line.startsWith("jingGang")) {

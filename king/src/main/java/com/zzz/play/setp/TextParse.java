@@ -13,6 +13,7 @@ import com.zzz.play.setp.impl.config.ClearStep;
 import com.zzz.play.setp.impl.config.ManyStep;
 import com.zzz.play.setp.material.compound.JingGang;
 import com.zzz.play.setp.material.compound.KuangBao;
+import com.zzz.play.setp.material.compound.KuangBaoEr;
 import com.zzz.play.setp.material.compound.QiangTi;
 import com.zzz.play.setp.sys.*;
 import com.zzz.play.util.HtmlContent;
@@ -170,6 +171,8 @@ public class TextParse implements Runable {
             step = new JingGang();
         } else if (line.startsWith("kuangBao")) {
             step = new KuangBao();
+        } else if (line.startsWith("kuangBaoEr")) {
+            step = new KuangBaoEr();
         } else if (line.startsWith("taiwei")) {
             step = new TaiWei();
         } else if (line.startsWith("podong")) {

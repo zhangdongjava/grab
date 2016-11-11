@@ -70,11 +70,9 @@ public class CoreController {
         execChange = true;
         try {
             if (content != null && content.getDocument().text().contains("战斗已经结束!")) {
-                logger.error(content.getDocument().text());
                 for (String good : goods) {
                     LinkBean res = content.linkName(good, true);
-                    System.out.println(res.isSuccess());
-                    if(res.isSuccess()){
+                    if (res.isSuccess()) {
                         logger.error(content.getDocument().text());
                     }
                 }

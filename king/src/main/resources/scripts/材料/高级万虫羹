@@ -37,10 +37,9 @@ b右:大柳树→
 普通攻击while2
 like蛇皮
 返回游戏
-timeNormal_20_{
+timeNormal_2_{
 进入树洞
 返回大柳树
-wait1
 putwanchong_a_巨大青蛇
 巨大青蛇
 攻击巨大青蛇

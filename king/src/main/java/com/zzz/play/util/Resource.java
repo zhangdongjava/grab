@@ -84,7 +84,7 @@ public class Resource {
             FileOutputStream outputStream = null;
             try {
                 outputStream = new FileOutputStream(file);
-                shuqian.store(outputStream, "书签列表");
+                ui.store(outputStream, "书签列表");
                 outputStream.close();
             } catch (Exception e) {
 

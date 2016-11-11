@@ -54,16 +54,16 @@ public class JingGang extends SecondRefresh {
         GoodsNumUtil numUtil = utilDto.goodsNumUtil;
         numUtil.setNames("太尉秘图", "牛皮");
         numUtil.run();
-        mitu = numUtil.map.get("太尉秘图");
-        if (mitu <=1) {
+        mitu = numUtil.map.get("太尉秘图") / 2;
+        if (mitu == 1) {
             lastDate = new Date();
             ableIn = false;
         }
         niupi = numUtil.map.get("牛皮");
-        int du = mitu / 2 * 2;
+        int du = mitu * 4;
         goodsTakeout.setGoods("变异菜青虫毒液_" + du);
         goodsTakeout.run();
-        niupi = mitu / 2 * 20 - niupi;
+        niupi = mitu * 20 - niupi;
         System.out.println(numUtil.map);
         System.out.println("太尉->" + mitu);
         System.out.println("需要牛皮->" + niupi);
@@ -97,14 +97,12 @@ public class JingGang extends SecondRefresh {
         htmlContent.linkName("游方和尚");
         htmlContent.linkName("研制金刚奇书");
         while (htmlContent.getDocument().text().contains("完成研制")) {
-            htmlContent.linkName("返回黑风岭砍柴老者");
-            htmlContent.linkName("研制强体奇书");
+            htmlContent.linkName("返回游方和尚");
+            htmlContent.linkName("研制金刚奇书");
         }
-        htmlContent.linkName("返回黑风岭砍柴老者");
+        htmlContent.linkName("返回游方和尚");
         htmlContent.linkName("返回游戏");
-        goodsSale2.setGoods(".虎骨");
-        goodsSale2.run();
-        goodsSave.setGoods("强体奇书");
+        goodsSave.setGoods("金刚奇书");
         goodsSave.run();
         niupi = 0;
         mitu = 0;

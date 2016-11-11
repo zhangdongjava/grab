@@ -1,17 +1,16 @@
 package com.zzz.play.setp.material.compound;
 
 import com.zzz.play.setp.material.HuPi;
-import com.zzz.play.setp.material.NiuPi;
 import com.zzz.play.setp.sup.SecondRefresh;
 import com.zzz.play.util.sys.GoodsNumUtil;
 
 import java.util.Date;
 
 /**
- * 狂暴奇书合成
+ * 狂暴二合成
  * Created by dell_2 on 2016/11/11.
  */
-public class KuangBao extends SecondRefresh {
+public class KuangBaoEr extends SecondRefresh {
 
     private int bingPo;
 
@@ -26,9 +25,9 @@ public class KuangBao extends SecondRefresh {
      */
     private boolean runIng = false;
 
-    private static int HU_NUM = 16;
-    private static int BING_NUM = 2;
-    private static int MENG_NUM = 30;
+    private static int HU_NUM = 30;
+    private static int BING_NUM = 5;
+    private static int MENG_NUM = 50;
 
     @Override
     public boolean run() {
@@ -114,16 +113,16 @@ public class KuangBao extends SecondRefresh {
         htmlContent.linkName("上:树林↑");
         htmlContent.linkName("上:景阳岗上↑");
         htmlContent.linkName("行者.武松");
-        htmlContent.linkName("研制狂暴奇书");
+        htmlContent.linkName("合成狂暴二");
         while (htmlContent.getDocument().text().contains("完成研制")) {
             getHuPi -= HU_NUM;
             bingPo -= 1;
             htmlContent.linkName("返回武松");
-            htmlContent.linkName("研制狂暴奇书");
+            htmlContent.linkName("合成狂暴二");
         }
         htmlContent.linkName("返回武松");
         htmlContent.linkName("返回游戏");
-        goodsSave.setGoods("狂暴奇书,蒙汗药");
+        goodsSave.setGoods("狂暴奇书");
         goodsSave.run();
         if (bingPo <= 0) {
             runIng = false;

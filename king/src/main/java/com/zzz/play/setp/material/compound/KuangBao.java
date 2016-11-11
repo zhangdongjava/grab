@@ -14,24 +14,21 @@ import java.util.Date;
 public class KuangBao extends SecondRefresh {
 
     private int bingPo;
-    /**
-     * 还差的虎皮
-     */
-    private int huPi;
-    /**
-     * 还差的蒙汗
-     */
-    private int mengHan;
 
-    /**
-     * 一共需要蒙汗药
-     */
-    private int mengHanTotal;
     private HuPi huPiScript = new HuPi();
+    /**
+     * 刷到的虎皮数量
+     */
+    private int getHuPi;
+
     /**
      * 是否运行中
      */
     private boolean runIng = false;
+
+    private static int HU_NUM = 16;
+    private static int BING_NUM = 2;
+    private static int MENG_NUM = 30;
 
     @Override
     public boolean run() {
@@ -48,18 +45,10 @@ public class KuangBao extends SecondRefresh {
      */
     private void contrl() {
         if (runIng) {
-            if (huPi <= 0 && mengHan <= 0) {
-                hecheng();
-            } else {
-                shua();
-            }
+            shua();
         } else {
             init();
-            if (huPi <= 0 && mengHan <= 0) {
-                hecheng();
-            } else {
-                shua();
-            }
+            shua();
         }
     }
 
@@ -72,7 +61,7 @@ public class KuangBao extends SecondRefresh {
         GoodsNumUtil numUtil = utilDto.goodsNumUtil;
         numUtil.setNames("冰魄珠");
         numUtil.run();
-        bingPo = numUtil.map.get("冰魄珠") / 2;
+        bingPo = numUtil.map.get("冰魄珠") / BING_NUM;
         numUtil.clear();
         if (bingPo == 0) {
             lastDate = new Date();
@@ -80,17 +69,14 @@ public class KuangBao extends SecondRefresh {
             return;
         }
         runIng = true;
-        mengHanTotal = bingPo * 30;
+        int mengHanTotal = bingPo * MENG_NUM;
         goodsTakeout.setGoods("蒙汗药_" + mengHanTotal);
         goodsTakeout.run();
         numUtil.setNames("蒙汗药", "景阳岗虎皮");
         numUtil.run();
-        this.mengHan = mengHanTotal - numUtil.map.get("蒙汗药");
-        huPi = bingPo * 16 - numUtil.map.get("景阳岗虎皮");
+        getHuPi = numUtil.map.get("景阳岗虎皮");
         System.out.println(numUtil.map);
-        System.out.println("冰魄->" + bingPo*2);
-        System.out.println("需要蒙汗->" + this.mengHan);
-        System.out.println("需要虎皮->" + huPi);
+        System.out.println("冰魄->" + bingPo * BING_NUM);
         numUtil.clear();
     }
 
@@ -98,27 +84,19 @@ public class KuangBao extends SecondRefresh {
      * 刷千虫丝
      */
     private void shua() {
-        if (huPi > 0) {
-            huPiScript.setHtmlContent(htmlContent);
-            huPiScript.setUtilDto(utilDto);
-            huPiScript.run();
-            System.out.println("需要虎皮:" + huPi);
-            huPi -= huPiScript.getNum();
-            System.out.println("还需要虎皮:" + huPi);
-        }
-        if (mengHan > 0) {
-            GoodsNumUtil numUtil = utilDto.goodsNumUtil;
-            goodsTakeout.setGoods("蒙汗药_" + mengHan);
-            goodsTakeout.run();
-            numUtil.setNames("蒙汗药");
-            numUtil.run();
-            System.out.println("需要虎皮:" + huPi);
-            this.mengHan = mengHanTotal - (numUtil.map.get("蒙汗药"));
-            System.out.println("还需要虎皮:" + huPi);
-        }
-
-
-        if (huPi <= 0 && mengHan < 0) {
+        huPiScript.setHtmlContent(htmlContent);
+        huPiScript.setUtilDto(utilDto);
+        huPiScript.run();
+        getHuPi += huPiScript.getNum();
+        GoodsNumUtil numUtil = utilDto.goodsNumUtil;
+        goodsTakeout.setGoods("蒙汗药_" + (getHuPi / HU_NUM * MENG_NUM));
+        goodsTakeout.run();
+        numUtil.setNames("蒙汗药");
+        numUtil.run();
+        //物品里的蒙汗药数量
+        int ssmh = numUtil.map.get("蒙汗药");
+        System.out.println("物品里有:虎皮->" + getHuPi + ",冰魄珠->" + (bingPo * BING_NUM) + ",蒙汗药->" + ssmh);
+        if (ssmh >= MENG_NUM && getHuPi >= HU_NUM) {
             hecheng();
         }
     }
@@ -127,7 +105,6 @@ public class KuangBao extends SecondRefresh {
      * 合成强体
      */
     private void hecheng() {
-        runIng = false;
         htmlContent.linkName("功能菜单");
         htmlContent.linkName("神行千里");
         htmlContent.linkName("景阳岗");
@@ -139,6 +116,8 @@ public class KuangBao extends SecondRefresh {
         htmlContent.linkName("行者.武松");
         htmlContent.linkName("研制狂暴奇书");
         while (htmlContent.getDocument().text().contains("完成研制")) {
+            getHuPi -= HU_NUM;
+            bingPo -= 1;
             htmlContent.linkName("返回武松");
             htmlContent.linkName("研制狂暴奇书");
         }
@@ -146,9 +125,11 @@ public class KuangBao extends SecondRefresh {
         htmlContent.linkName("返回游戏");
         goodsSave.setGoods("狂暴奇书");
         goodsSave.run();
-        mengHan = 0;
-        huPi = 0;
-        bingPo = 0;
+        if (bingPo <= 0) {
+            runIng = false;
+            getHuPi = 0;
+        }
+
     }
 
 }

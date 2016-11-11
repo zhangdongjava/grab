@@ -22,6 +22,8 @@ public class HeiFeng extends FuBen {
         return "强体奇书";
     }
 
+    private int i = 0;
+
 
     @Override
     public void ready() {
@@ -55,8 +57,17 @@ public class HeiFeng extends FuBen {
         gjHml();
         htmlContent.linkName("右:乱石河边→");
         htmlContent.linkName("进入乱石河");
+        i = 0;
         while (htmlContent.getDocument().text().contains("从乱石河边->乱石河需要黑松果x5")) {
             getCl();
+            if(i>5){
+                htmlContent.linkName("返回游戏");
+                htmlContent.linkName("队伍");
+                htmlContent.linkName("退出队伍");
+                htmlContent.linkName("确定退出");
+                htmlContent.linkName("返回游戏");
+                return false;
+            }
         }
         htmlContent.linkName("巨型鲤鱼");
         htmlContent.linkName("攻击巨型鲤鱼");
@@ -126,6 +137,7 @@ public class HeiFeng extends FuBen {
      * 获取进去材料
      */
     public void getCl() {
+        i++;
         htmlContent.linkName("返回乱石河边");
         htmlContent.linkName("左:黑松林←");
         gjHml();

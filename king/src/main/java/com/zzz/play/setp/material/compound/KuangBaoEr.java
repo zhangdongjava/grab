@@ -68,9 +68,6 @@ public class KuangBaoEr extends SecondRefresh {
             return;
         }
         runIng = true;
-        int mengHanTotal = bingPo * MENG_NUM;
-        goodsTakeout.setGoods("蒙汗药_" + mengHanTotal);
-        goodsTakeout.run();
         numUtil.setNames("蒙汗药", "景阳岗虎皮");
         numUtil.run();
         getHuPi = numUtil.map.get("景阳岗虎皮");

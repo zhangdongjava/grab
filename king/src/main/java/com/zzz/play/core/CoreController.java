@@ -1,5 +1,6 @@
 package com.zzz.play.core;
 
+import com.zzz.play.bean.LinkBean;
 import com.zzz.play.exception.StopCurrStepException;
 import com.zzz.play.inter.Observer;
 import com.zzz.play.inter.Runable;
@@ -13,6 +14,7 @@ import com.zzz.play.ui.MainWindow;
 import com.zzz.play.util.GlobalUtil;
 import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.UtilDto;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.io.PipedReader;
@@ -26,6 +28,8 @@ import java.util.concurrent.Executors;
  * Created by dell_2 on 2016/10/29.
  */
 public class CoreController {
+
+    private static Logger logger = Logger.getLogger(CoreController.class);
 
     ExecutorService service = Executors.newFixedThreadPool(20);
     /**
@@ -67,7 +71,12 @@ public class CoreController {
         try {
             if (content != null && content.getDocument().text().contains("战斗已经结束!")) {
                 for (String good : goods) {
-                    content.linkName(good, true);
+                    LinkBean res = content.linkName(good, true);
+                    if(res.isSuccess()){
+                        logger.error(content.getDocument().text());
+                    }else{
+                        logger.error(good+"-->链接不存在!");
+                    }
                 }
             }
             utilDto.clearUtil.clear(content);

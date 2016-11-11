@@ -85,8 +85,12 @@ public class KuangBaoEr extends SecondRefresh {
         huPiScript.run();
         getHuPi += huPiScript.getNum();
         GoodsNumUtil numUtil = utilDto.goodsNumUtil;
-        goodsTakeout.setGoods("蒙汗药_" + (getHuPi / HU_NUM * MENG_NUM));
-        goodsTakeout.run();
+        int xymh = (getHuPi / HU_NUM * MENG_NUM);
+        if (xymh > 0) {
+            goodsTakeout.setGoods("蒙汗药_" + (getHuPi / HU_NUM * MENG_NUM));
+            goodsTakeout.run();
+        }
+
         numUtil.setNames("蒙汗药");
         numUtil.run();
         //物品里的蒙汗药数量

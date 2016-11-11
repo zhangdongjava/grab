@@ -122,7 +122,7 @@ public class KuangBaoEr extends SecondRefresh {
         }
         htmlContent.linkName("返回武松");
         htmlContent.linkName("返回游戏");
-        goodsSave.setGoods("狂暴奇书");
+        goodsSave.setGoods("狂暴二,蒙汗药");
         goodsSave.run();
         if (bingPo <= 0) {
             runIng = false;

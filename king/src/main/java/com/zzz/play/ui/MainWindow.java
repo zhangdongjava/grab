@@ -6,6 +6,7 @@ import com.zzz.play.ui.dialog.MyDialog;
 import com.zzz.play.ui.dialog.ShuQianDialog;
 import com.zzz.play.ui.dialog.ShuQianOpenDialog;
 import com.zzz.play.ui.dialog.SysSetDialog;
+import com.zzz.play.util.Resource;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,8 +25,8 @@ import java.util.concurrent.Executors;
  */
 public class MainWindow extends JFrame {
 
-    public static int width = 400;
-    public static int height = 550;
+    public static int width = Resource.UI_WIDTH;
+    public static int height = Resource.UI_HEIGHT;
 
     private JLabel L_img;
     private JLabel L_img2;

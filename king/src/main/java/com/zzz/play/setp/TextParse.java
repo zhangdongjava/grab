@@ -5,10 +5,7 @@ import com.zzz.play.core.CoreController;
 import com.zzz.play.exception.StepBackException;
 import com.zzz.play.inter.Runable;
 import com.zzz.play.mark.Global;
-import com.zzz.play.setp.copy.BingPoDong;
-import com.zzz.play.setp.copy.HeiFeng;
-import com.zzz.play.setp.copy.ShiRenGu;
-import com.zzz.play.setp.copy.TaiWei;
+import com.zzz.play.setp.copy.*;
 import com.zzz.play.setp.impl.config.ClearStep;
 import com.zzz.play.setp.impl.config.ManyStep;
 import com.zzz.play.setp.material.compound.JingGang;
@@ -173,6 +170,8 @@ public class TextParse implements Runable {
             step = new KuangBao();
         } else if (line.startsWith("kuangBaoEr")) {
             step = new KuangBaoEr();
+        } else if (line.startsWith("xueShan")) {
+            step = new XueShan();
         } else if (line.startsWith("taiwei")) {
             step = new TaiWei();
         } else if (line.startsWith("podong")) {

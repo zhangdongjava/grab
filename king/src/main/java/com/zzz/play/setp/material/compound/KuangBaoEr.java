@@ -89,6 +89,8 @@ public class KuangBaoEr extends SecondRefresh {
         if (xymh == 0) {
             return;
         }
+        goodsTakeout.setGoods("蒙汗药_"+xymh);
+        goodsTakeout.run();
         numUtil.setNames("蒙汗药");
         numUtil.run();
         //物品里的蒙汗药数量

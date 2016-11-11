@@ -48,7 +48,6 @@ public class ShiRenGu extends FuBen {
             logger.error(htmlContent.htmlPanel.name + "食人谷副本结束!");
             return false;
         }
-        gjSj();
         while (htmlContent.getDocument().text().contains("进入食人谷副本，必须攀下一个悬崖")) {
             htmlContent.linkName("返回食人谷悬崖");
             gjSj();

@@ -22,6 +22,7 @@ public class JingGang extends SecondRefresh {
 
     @Override
     public boolean run() {
+
         fresh();
         if (!ableIn) {
             return false;
@@ -49,9 +50,9 @@ public class JingGang extends SecondRefresh {
      * 初始化材料数量，从物品中获取到
      */
     public void init() {
+        GoodsNumUtil numUtil = utilDto.goodsNumUtil;
         goodsTakeout.setGoods("太尉秘图_100000");
         goodsTakeout.run();
-        GoodsNumUtil numUtil = utilDto.goodsNumUtil;
         numUtil.setNames("太尉秘图", "牛皮");
         numUtil.run();
         mitu = numUtil.map.get("太尉秘图") / 2;

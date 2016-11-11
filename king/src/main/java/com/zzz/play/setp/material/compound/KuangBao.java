@@ -86,7 +86,7 @@ public class KuangBao extends SecondRefresh {
         numUtil.setNames("蒙汗药", "景阳岗虎皮");
         numUtil.run();
         this.mengHan = mengHanTotal - numUtil.map.get("蒙汗药");
-        huPi = bingPo * 10 - numUtil.map.get("景阳岗虎皮");
+        huPi = bingPo * 16 - numUtil.map.get("景阳岗虎皮");
         System.out.println(numUtil.map);
         System.out.println("冰魄->" + bingPo*2);
         System.out.println("需要蒙汗->" + this.mengHan);

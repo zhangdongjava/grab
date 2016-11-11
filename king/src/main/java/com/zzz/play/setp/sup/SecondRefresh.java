@@ -29,6 +29,7 @@ public abstract class SecondRefresh extends BaseStep {
         buyDrug.setHtmlContent(htmlContent);
         goodsSale2.setHtmlContent(htmlContent);
         goodsSave.setHtmlContent(htmlContent);
+        goodsTakeout.setHtmlContent(htmlContent);
     }
 
     @Override
@@ -37,6 +38,7 @@ public abstract class SecondRefresh extends BaseStep {
         buyDrug.setUtilDto(utilDto);
         goodsSale2.setUtilDto(utilDto);
         goodsSave.setUtilDto(utilDto);
+        goodsTakeout.setUtilDto(utilDto);
     }
 
     /**

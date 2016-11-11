@@ -31,6 +31,10 @@ public class QiangXian extends BaseStep {
                     break;
                 }
             }
+            if(htmlContent.exitsName("万年灵芝")){
+                qianDao();
+            }
+            htmlContent.linkName("返回游戏",true);
             return true;
         }
         return false;
@@ -54,4 +58,18 @@ public class QiangXian extends BaseStep {
         htmlContent.linkName("给银两",true);
 
     }
+
+   public void qianDao(){
+       htmlContent.linkName("攻", true);
+       htmlContent.linkName("攻", true);
+       htmlContent.linkName("攻", true);
+       while (htmlContent.exitsName("万年灵芝")){
+           htmlContent.linkName("万年灵芝");
+       }
+       htmlContent.linkName("x",true);
+       htmlContent.linkName("x",true);
+       htmlContent.linkName("x",true);
+       htmlContent.linkName("x",true);
+       htmlContent.linkName("x",true);
+   }
 }

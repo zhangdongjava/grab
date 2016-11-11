@@ -28,9 +28,12 @@ public class GoodsTakeout extends BaseStep implements SaveMark {
         }
 
     }
-    public GoodsTakeout() {}
+
+    public GoodsTakeout() {
+    }
 
     public void setGoods(String line) {
+        maps.clear();
         String[] vals = line.split(",");
         for (String val : vals) {
             if (val != null && !"".equals(val.trim())) {

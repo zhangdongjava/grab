@@ -68,6 +68,8 @@ public class KuangBao extends SecondRefresh {
             ableIn = false;
             return;
         }
+        goodsTakeout.setGoods("景阳岗虎皮_"+(bingPo*HU_NUM));
+        goodsTakeout.run();
         runIng = true;
         numUtil.setNames("景阳岗虎皮");
         numUtil.run();

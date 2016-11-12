@@ -1,5 +1,7 @@
 package com.zzz.play.setp.copy.zhenfa;
 
+import java.util.Date;
+
 /**
  * 鹤翼
  * Created by Administrator on 2016/11/12 0012.
@@ -19,12 +21,19 @@ public class HeYi extends ZhenFa {
     public void ready() {
         buyDrug.setName("万年灵芝");
         buyDrug.setNum("300");
+        buyDrug.run();
     }
 
     @Override
     public boolean fbRun() {
         htmlContent.linkName("传送到鹤翼阵");
         htmlContent.linkName("确定传送");
+        if(htmlContent.getDocument().text().contains("今天你已进入")){
+            lastDate = new Date();
+            ableIn = false;
+            htmlContent.linkName("返回游戏");
+            return false;
+        }
         zhandou();
         while (true) {
             if (htmlContent.exitsName("鹤翼中心", true)) {

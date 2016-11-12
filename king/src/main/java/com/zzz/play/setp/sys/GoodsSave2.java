@@ -34,6 +34,9 @@ public class GoodsSave2 extends BaseStep {
 
     @Override
     public boolean run() {
+        if(sets.isEmpty()){
+            return false;
+        }
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("帮派");
         htmlContent.linkName("帮派管理");
@@ -109,6 +112,7 @@ public class GoodsSave2 extends BaseStep {
     }
 
     public void setGoods(String line) {
+        if (line == null) return;
         String[] vals = line.split(",");
         for (String val : vals) {
             if (val != null && !"".equals(val.trim())) {

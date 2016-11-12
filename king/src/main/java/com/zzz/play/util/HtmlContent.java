@@ -241,11 +241,6 @@ public class HtmlContent {
                 linkName("返回游戏");
                 throw new StopCurrStepException("事件容器已满！");
             }
-            if (Thread.currentThread().isInterrupted()) {
-                linkName("返回游戏");
-                throw new StopCurrStepException("当前线程中断!");
-            }
-
         } finally {
         }
     }
@@ -271,7 +266,9 @@ public class HtmlContent {
             String html = httpRequest.sendGet(url);
             document = Jsoup.parse(html);
             linkEnd();
-        } catch (IOException e) {
+        }catch (InterruptedException e) {
+           Thread.currentThread().interrupt();
+        }  catch (IOException e) {
             selfLinkUrl(url, count + 1);
         } catch (Exception e) {
             e.printStackTrace();
@@ -296,6 +293,8 @@ public class HtmlContent {
                 logger.error(document.text());
             }
             printfUrl(url);
+        } catch (InterruptedException e) {
+           Thread.currentThread().interrupt();
         } catch (IOException e) {
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);

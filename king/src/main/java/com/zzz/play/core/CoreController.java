@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * 核心控制器 整个运行把控
@@ -54,6 +55,8 @@ public class CoreController {
     private boolean execChange = false;
 
     private SysTextParse sysTextParse;
+
+    private Future<?> feture;
 
     public CoreController(GlobalUtil globalUtil, UtilDto utilDto) {
         this.globalUtil = globalUtil;
@@ -150,7 +153,7 @@ public class CoreController {
      * 启动脚本
      */
     private void run() {
-        service.submit(() -> {
+        feture = service.submit(() -> {
             while (!Thread.interrupted()) {
                 runParses.clear();
                 runParses.addAll(textParses);
@@ -169,6 +172,7 @@ public class CoreController {
                 }
                 System.gc();
             }
+            htmlPanel.killed();
         });
     }
 
@@ -198,4 +202,18 @@ public class CoreController {
         return utilDto.clearUtil.addMarkStep(step);
     }
 
+    /**
+     * 终止脚本
+     */
+    public void kill() {
+        feture.cancel(true);
+    }
+
+    /**
+     * 关闭这个选项卡
+     */
+    public void close() {
+        feture.cancel(true);
+        service.shutdownNow();
+    }
 }

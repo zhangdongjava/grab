@@ -37,7 +37,9 @@ public class HtmlPanel extends JFXPanel {
     public HtmlContent content;
     public GlobalUtil globalUtil;
     public WebView view;
-    private Button stop;
+    private Button pause;
+    //private Button closeBtn;
+    private Button kill;
     private Button go;
     private Button script;
     private Label showTime;
@@ -57,6 +59,7 @@ public class HtmlPanel extends JFXPanel {
     public UtilDto utilDto;
     //脚本选择弹窗
     private ScriptDialog scriptDialog;
+    private TabPanel tabPanel;
     //主窗口
     public MainWindow mainWindow;
     //脚本集合
@@ -68,6 +71,8 @@ public class HtmlPanel extends JFXPanel {
     public boolean ruing = false;
     public String shuQianUrl;
     public LoginUtil loginUtil;
+
+    public boolean isClose;
     /**
      * 角色名称
      */
@@ -77,7 +82,8 @@ public class HtmlPanel extends JFXPanel {
      */
     public String daqu;
 
-    public HtmlPanel(String url, MainWindow mainWindow, String name, String daqu, LinkedList<String> script) throws Exception {
+    public HtmlPanel(TabPanel tabPanel,String url, MainWindow mainWindow, String name, String daqu, LinkedList<String> script) throws Exception {
+        this.tabPanel = tabPanel;
         this.mainWindow = mainWindow;
         this.name = name;
         this.daqu = daqu;
@@ -110,6 +116,7 @@ public class HtmlPanel extends JFXPanel {
             interval.setPromptText("间隔");
             interval.setText(DEFAULT_WAIT.toString());
             setBtn = new Button("设置");
+            kill = new Button("停止");
             loadBtn = new Button("→");
             Group root = new Group();
             view.setFontScale(Resource.FONT_SIZE);
@@ -126,13 +133,14 @@ public class HtmlPanel extends JFXPanel {
             urlTextField.setText(url);
             view.getEngine().load(url);
             go = new Button("go");
-            stop = new Button("stop");
-            stop.setDisable(true);
+            pause = new Button("pause");
+           // closeBtn = new Button("关闭");
+            pause.setDisable(true);
             script = new Button("脚本");
             logBtn = new Button("log on");
             urlTextField.setPrefWidth(WIDTH - 20);
             box1.getChildren().addAll(urlTextField, loadBtn);
-            box2.getChildren().addAll(go, stop, script, logBtn);
+            box2.getChildren().addAll(go, pause, script, logBtn, kill);
             box3.getChildren().addAll(fontVal, interval, setBtn, showTime);
             view.setMinSize(widthDouble, heightDouble - 100);
             view.setMaxSize(widthDouble, heightDouble - 50);
@@ -143,14 +151,44 @@ public class HtmlPanel extends JFXPanel {
             box.getChildren().add(view);
             root.getChildren().add(box);
             go.setOnAction(event -> goScript());
-            stop.setOnAction(event -> stopGoon());
+            pause.setOnAction(event -> pauseGoon());
             script.setOnAction(event -> script());
             setBtn.setOnAction(event -> setProperty());
             logBtn.setOnAction(event -> logSet());
             loadBtn.setOnAction(event -> loadBtn());
+            kill.setOnAction(event -> kill());
+           // closeBtn.setOnAction(event -> close());
             HtmlPanel.this.init();
         });
         joinGame();
+    }
+
+    private void close() {
+        isClose = false;
+        controller.close();
+    }
+
+
+    private void kill() {
+        isClose = false;
+        controller.kill();
+    }
+
+    /**
+     * 运行脚本停止
+     */
+    public void killed() {
+//        if(isClose){
+//            tabPanel.remove(this);
+//            return;
+//        }
+        System.out.println(this.name+"->>脚本终止!");
+        Platform.runLater(() -> {
+            go.setDisable(false);
+            pause.setDisable(true);
+            utilDto.waitNotfiy.wait = false;
+            pause.setText("pause");
+        });
     }
 
     /**
@@ -197,7 +235,7 @@ public class HtmlPanel extends JFXPanel {
         controller.run(content);
         Platform.runLater(() -> {
             go.setDisable(true);
-            stop.setDisable(false);
+            pause.setDisable(false);
         });
     }
 
@@ -213,7 +251,7 @@ public class HtmlPanel extends JFXPanel {
     /**
      * 暂停或继续
      */
-    public void stopGoon() {
+    public void pauseGoon() {
 
         if (utilDto.waitNotfiy.wait) {
             isWait = false;
@@ -223,7 +261,7 @@ public class HtmlPanel extends JFXPanel {
             if (location != null && !"".equals(location)) {
                 content.linkUrl(location);
             }
-            text = ("stop");
+            text = ("pause");
             System.out.println("开始唤醒!");
             utilDto.waitNotfiy.anotfiy();
             System.out.println("唤醒成功!");
@@ -232,7 +270,7 @@ public class HtmlPanel extends JFXPanel {
             isWait = true;
             text = ("go on");
         }
-        Platform.runLater(() -> stop.setText(text));
+        Platform.runLater(() -> pause.setText(text));
     }
 
     public void init() {

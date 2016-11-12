@@ -69,7 +69,7 @@ public abstract class ZhenFa extends SecondRefresh {
      * 攻击将军
      */
     public void gjJiangJu() {
-        while (htmlContent.exitsName("将军部", true)) {
+        while (htmlContent.exitsName("将军部", true)&&htmlContent.exitsName("万年灵芝",true)) {
             htmlContent.linkName("万年灵芝");
         }
         zhandou();

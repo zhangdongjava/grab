@@ -17,6 +17,7 @@ public class Resource {
     public static String bootPath;
     public static Integer UI_WIDTH = 500;
     public static Integer UI_HEIGHT = 600;
+    public static double FONT_SIZE = 1.3;
     public static Properties properties = new Properties();
     /**
      * 书签
@@ -75,6 +76,7 @@ public class Resource {
                 ui.load(in);
                 UI_WIDTH = Integer.valueOf(ui.getProperty("width"));
                 UI_HEIGHT = Integer.valueOf(ui.getProperty("height"));
+                FONT_SIZE = Double.valueOf(ui.getProperty("fontSize"));
                 in.close();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -82,9 +84,12 @@ public class Resource {
             }
         } else {
             FileOutputStream outputStream = null;
+            ui.put("width", UI_WIDTH);
+            ui.put("width", UI_HEIGHT);
+            ui.put("fontSize", FONT_SIZE);
             try {
                 outputStream = new FileOutputStream(file);
-                ui.store(outputStream, "书签列表");
+                ui.store(outputStream, "界面配置");
                 outputStream.close();
             } catch (Exception e) {
 

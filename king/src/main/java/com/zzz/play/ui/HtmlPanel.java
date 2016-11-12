@@ -104,7 +104,7 @@ public class HtmlPanel extends JFXPanel {
             fontVal = new TextField();
             fontVal.setPrefWidth(40);
             fontVal.setPromptText("字体");
-            fontVal.setText("0.9");
+            fontVal.setText(Double.toString(Resource.FONT_SIZE));
             interval = new TextField();
             interval.setPrefWidth(50);
             interval.setPromptText("间隔");
@@ -112,7 +112,7 @@ public class HtmlPanel extends JFXPanel {
             setBtn = new Button("设置");
             loadBtn = new Button("→");
             Group root = new Group();
-            view.setFontScale(0.9);
+            view.setFontScale(Resource.FONT_SIZE);
             loginUtil = new LoginUtil(this);
             Scene scene1 = new Scene(root, WIDTH, HEIGHT);
             HtmlPanel.this.setScene(scene1);

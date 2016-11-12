@@ -7,6 +7,10 @@ import org.apache.log4j.Logger;
  * Created by Administrator on 2016/11/12 0012.
  */
 public abstract class ZhenFa extends SecondRefresh {
+    protected static int LEFT = 0;
+    protected static int DOWN = 1;
+    protected static int RIGHT = 2;
+    protected int ac;
 
     protected Logger logger = Logger.getLogger("副本");
 

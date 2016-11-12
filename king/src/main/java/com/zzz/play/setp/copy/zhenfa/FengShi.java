@@ -7,6 +7,9 @@ import java.util.Date;
  * Created by Administrator on 2016/11/12 0012.
  */
 public class FengShi extends ZhenFa {
+
+
+
     @Override
     public String inClearLine() {
         return null;
@@ -40,9 +43,18 @@ public class FengShi extends ZhenFa {
                 break;
             } else if (htmlContent.exitsName("下:锋矢阵↓")) {
                 zhandou("下:锋矢阵↓");
-            } else if (htmlContent.exitsName("右:锋矢阵→")) {
+            } else if (htmlContent.exitsName("左:锋矢阵←")&&ac!=RIGHT) {
+                ac = LEFT;
+                zhandou("左:锋矢阵←");
+            } else if(htmlContent.exitsName("右:锋矢阵→")&&ac!=LEFT) {
+                ac = RIGHT;
                 zhandou("右:锋矢阵→");
-            } else {
+            }
+            if(ac ==LEFT){
+                ac = RIGHT;
+                zhandou("右:锋矢阵→");
+            }else{
+                ac = LEFT;
                 zhandou("左:锋矢阵←");
             }
         }

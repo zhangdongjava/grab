@@ -1,8 +1,6 @@
 package com.zzz.play.setp.copy;
 
-import com.zzz.play.setp.copy.zhenfa.HeYi;
-import com.zzz.play.setp.copy.zhenfa.YuLin;
-import com.zzz.play.setp.copy.zhenfa.ZhenFa;
+import com.zzz.play.setp.copy.zhenfa.*;
 import com.zzz.play.setp.impl.config.BaseStep;
 import com.zzz.play.util.HtmlContent;
 
@@ -26,6 +24,13 @@ public class ZhenList extends BaseStep {
     public ZhenList() {
         zhenFas.add(new HeYi());
         zhenFas.add(new YuLin());
+        zhenFas.add(new ChangShe());
+        zhenFas.add(new CheXuan());
+        zhenFas.add(new Chonge());
+        zhenFas.add(new fangYuan());
+        zhenFas.add(new FengShi());
+        zhenFas.add(new YanXing());
+        zhenFas.add(new YanYue());
     }
 
     @Override

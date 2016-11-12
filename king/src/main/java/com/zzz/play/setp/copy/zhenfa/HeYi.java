@@ -46,13 +46,20 @@ public class HeYi extends ZhenFa {
             } else if(htmlContent.exitsName("右:鹤翼阵→")&&ac!=LEFT) {
                 ac = RIGHT;
                 zhandou("右:鹤翼阵→");
-            }
-            if(ac ==LEFT){
-                ac = RIGHT;
-                zhandou("右:鹤翼阵→");
-            }else{
-                ac = LEFT;
-                zhandou("左:鹤翼阵←");
+            }else {
+                if(ac ==LEFT){
+                    ac = RIGHT;
+                    zhandou("右:鹤翼阵→");
+                }else if(ac == RIGHT){
+                    ac = LEFT;
+                    zhandou("左:鹤翼阵←");
+                }else if(ac == DOWN){
+                    ac = UP;
+                    zhandou("上:鹤翼阵↑");
+                }else{
+                    ac = DOWN;
+                    zhandou("下:鹤翼阵↓");
+                }
             }
         }
         htmlContent.linkName("鹤翼中心", true);

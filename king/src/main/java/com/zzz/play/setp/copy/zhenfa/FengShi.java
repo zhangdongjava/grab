@@ -49,13 +49,20 @@ public class FengShi extends ZhenFa {
             } else if(htmlContent.exitsName("右:锋矢阵→")&&ac!=LEFT) {
                 ac = RIGHT;
                 zhandou("右:锋矢阵→");
-            }
-            if(ac ==LEFT){
-                ac = RIGHT;
-                zhandou("右:锋矢阵→");
-            }else{
-                ac = LEFT;
-                zhandou("左:锋矢阵←");
+            }else {
+                if(ac ==LEFT){
+                    ac = RIGHT;
+                    zhandou("右:锋矢阵→");
+                }else if(ac == RIGHT){
+                    ac = LEFT;
+                    zhandou("左:锋矢阵←");
+                }else if(ac == DOWN){
+                    ac = UP;
+                    zhandou("上:锋矢阵↑");
+                }else{
+                    ac = DOWN;
+                    zhandou("下:锋矢阵↓");
+                }
             }
         }
         htmlContent.linkName("锋矢中心", true);

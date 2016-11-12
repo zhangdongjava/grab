@@ -3,10 +3,13 @@ package com.zzz.play.setp.copy.zhenfa;
 import java.util.Date;
 
 /**
- * 鱼鳞
+ * 长蛇
  * Created by Administrator on 2016/11/12 0012.
  */
-public class YuLin extends ZhenFa {
+public class ChangShe extends ZhenFa {
+
+
+
     @Override
     public String inClearLine() {
         return null;
@@ -26,7 +29,7 @@ public class YuLin extends ZhenFa {
 
     @Override
     public boolean fbRun() {
-        htmlContent.linkName("传送到鱼鳞阵");
+        htmlContent.linkName("传送到长蛇阵");
         htmlContent.linkName("确定传送");
         if(htmlContent.getDocument().text().contains("今天你已进入")){
             lastDate = new Date();
@@ -36,34 +39,36 @@ public class YuLin extends ZhenFa {
         }
         zhandou();
         while (true) {
-            if (htmlContent.exitsName("鱼鳞中心", true)) {
+            if (htmlContent.exitsName("长蛇中心", true)) {
                 break;
-            } else if (htmlContent.exitsName("下:鱼鳞阵↓")) {
-                zhandou("下:鱼鳞阵↓");
-            } else if (htmlContent.exitsName("左:鱼鳞阵←")&&ac!=RIGHT) {
+            } else if (htmlContent.exitsName("下:长蛇阵↓")) {
+                ac = DOWN;
+                zhandou("下:长蛇阵↓");
+            } else if (htmlContent.exitsName("左:长蛇阵←")&&ac!=RIGHT) {
                 ac = LEFT;
-                zhandou("左:鱼鳞阵←");
-            } else if(htmlContent.exitsName("右:鱼鳞阵→")&&ac!=LEFT) {
+                zhandou("左:长蛇阵←");
+            } else if(htmlContent.exitsName("右:长蛇阵→")&&ac!=LEFT) {
                 ac = RIGHT;
-                zhandou("右:鱼鳞阵→");
+                zhandou("右:长蛇阵→");
             }else {
                 if(ac ==LEFT){
                     ac = RIGHT;
-                    zhandou("右:鱼鳞阵→");
+                    zhandou("右:长蛇阵→");
                 }else if(ac == RIGHT){
                     ac = LEFT;
-                    zhandou("左:鱼鳞阵←");
+                    zhandou("左:长蛇阵←");
                 }else if(ac == DOWN){
                     ac = UP;
-                    zhandou("上:鱼鳞阵↑");
+                    zhandou("上:长蛇阵↑");
                 }else{
                     ac = DOWN;
-                    zhandou("下:鱼鳞阵↓");
+                    zhandou("下:长蛇阵↓");
                 }
             }
+            
         }
-        htmlContent.linkName("鱼鳞中心", true);
-        htmlContent.linkName("鱼鳞将军");
+        htmlContent.linkName("长蛇中心", true);
+        htmlContent.linkName("长蛇将军");
         htmlContent.linkName("我要挑战");
         gjJiangJu();
         return true;

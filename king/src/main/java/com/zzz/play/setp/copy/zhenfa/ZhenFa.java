@@ -7,10 +7,11 @@ import org.apache.log4j.Logger;
  * Created by Administrator on 2016/11/12 0012.
  */
 public abstract class ZhenFa extends SecondRefresh {
-    protected static int LEFT = 0;
+    protected static int LEFT = 4;
     protected static int DOWN = 1;
     protected static int RIGHT = 2;
-    protected int ac;
+    protected static int UP = 3;
+    protected int ac = 0;
 
     protected Logger logger = Logger.getLogger("副本");
 
@@ -95,6 +96,9 @@ public abstract class ZhenFa extends SecondRefresh {
         htmlContent.linkName("x", true);
         htmlContent.linkName("x", true);
         htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
         htmlContent.linkName("返回游戏");
     }
 
@@ -102,5 +106,36 @@ public abstract class ZhenFa extends SecondRefresh {
         htmlContent.linkName(action);
         zhandou();
     }
+
+    /**
+     * 战斗
+     */
+    public void zhandou2() {
+        while (htmlContent.exitsName("万年灵芝")) {
+            htmlContent.linkName("万年灵芝");
+        }
+        while (htmlContent.exitsName("普通攻击")) {
+            htmlContent.linkName("普通攻击");
+        }
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("返回游戏");
+    }
+
+    public void zhandou2(String action) {
+        htmlContent.linkName(action);
+        zhandou2();
+    }
+
 
 }

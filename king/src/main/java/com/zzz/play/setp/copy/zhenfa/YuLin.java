@@ -40,9 +40,18 @@ public class YuLin extends ZhenFa {
                 break;
             } else if (htmlContent.exitsName("下:鱼鳞阵↓")) {
                 zhandou("下:鱼鳞阵↓");
-            } else if (htmlContent.exitsName("右:鱼鳞阵→")) {
+            } else if (htmlContent.exitsName("左:鱼鳞阵←")&&ac!=RIGHT) {
+                ac = LEFT;
+                zhandou("左:鱼鳞阵←");
+            } else if(htmlContent.exitsName("右:鱼鳞阵→")&&ac!=LEFT) {
+                ac = RIGHT;
                 zhandou("右:鱼鳞阵→");
-            } else {
+            }
+            if(ac ==LEFT){
+                ac = RIGHT;
+                zhandou("右:鱼鳞阵→");
+            }else{
+                ac = LEFT;
                 zhandou("左:鱼鳞阵←");
             }
         }

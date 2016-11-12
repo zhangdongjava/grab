@@ -158,6 +158,8 @@ public class TextParse implements Runable {
             step = new GoodsSave(line.substring(4));
         } else if (line.startsWith("heif")) {
             step = new HeiFeng();
+        } else if (line.equals("zhen")) {
+            step = new ZhenList();
         } else if (line.startsWith("shirengu")) {
             step = new ShiRenGu();
         } else if (line.startsWith("qiangXian")) {

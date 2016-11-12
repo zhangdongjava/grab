@@ -1,0 +1,50 @@
+package com.zzz.play.setp.copy.zhenfa;
+
+/**
+ * 鹤翼
+ * Created by Administrator on 2016/11/12 0012.
+ */
+public class HeYi extends ZhenFa {
+    @Override
+    public String inClearLine() {
+        return null;
+    }
+
+    @Override
+    public String saveLine() {
+        return null;
+    }
+
+    @Override
+    public void ready() {
+        buyDrug.setName("万年灵芝");
+        buyDrug.setNum("300");
+    }
+
+    @Override
+    public boolean fbRun() {
+        htmlContent.linkName("传送到鹤翼阵");
+        htmlContent.linkName("确定传送");
+        zhandou();
+        while (true) {
+            if (htmlContent.exitsName("鹤翼中心", true)) {
+                break;
+            } else if (htmlContent.exitsName("下:鹤翼阵↓")) {
+                zhandou("下:鹤翼阵↓");
+            } else if (htmlContent.exitsName("右:鹤翼阵→")) {
+                zhandou("右:鹤翼阵→");
+            } else {
+                zhandou("左:鹤翼阵←");
+            }
+        }
+        htmlContent.linkName("鹤翼中心", true);
+        htmlContent.linkName("鹤翼将军");
+        htmlContent.linkName("我要挑战");
+        gjJiangJu();
+        return true;
+    }
+
+
+
+
+}

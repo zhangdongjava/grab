@@ -21,6 +21,7 @@ public class GoodsSale2 extends BaseStep {
     private Map<String, String> maps = new HashMap<>();
 
     public GoodsSale2(String line) {
+        if(line==null)return;
         String[] vals = line.split(",");
         for (String val : vals) {
             if (val != null && !"".equals(val.trim())) {

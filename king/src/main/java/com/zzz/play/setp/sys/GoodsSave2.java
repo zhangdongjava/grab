@@ -19,6 +19,7 @@ public class GoodsSave2 extends BaseStep {
     private Set<String> sets = new HashSet<>();
 
     public GoodsSave2(String line) {
+        if(line==null)return;
         String[] vals = line.split(",");
         for (String val : vals) {
             if (val != null && !"".equals(val.trim())) {

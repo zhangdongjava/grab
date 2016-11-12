@@ -180,6 +180,8 @@ public class TextParse implements Runable {
             step = new BingPoDong();
         } else if (line.equals("dangkou")) {
             step = new DangKou();
+        } else if (line.equals("poSuiMengJingShi")) {
+            step = new PoSui();
         } else if (line.startsWith("take")) {
             step = new GoodsTakeout(line.substring(4));
         } else if (line.startsWith("home")) {

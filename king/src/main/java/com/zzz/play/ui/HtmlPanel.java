@@ -1,6 +1,6 @@
 package com.zzz.play.ui;
 
-import com.zzz.play.bean.User;
+import com.zzz.play.bean.UserInfo;
 import com.zzz.play.core.CoreController;
 import com.zzz.play.inter.impl.GlobalObserver;
 import com.zzz.play.ui.dialog.ScriptDialog;
@@ -70,13 +70,13 @@ public class HtmlPanel extends JFXPanel {
     private static ExecutorService exec = Executors.newFixedThreadPool(10);
     public boolean isWait = false;
     public boolean ruing = false;
-    public User user;
+    public UserInfo user;
     public LoginUtil loginUtil;
 
     public boolean isClose;
 
 
-    public HtmlPanel(TabPanel tabPanel, User user, MainWindow mainWindow) throws Exception {
+    public HtmlPanel(TabPanel tabPanel, UserInfo user, MainWindow mainWindow) throws Exception {
         this.tabPanel = tabPanel;
         this.mainWindow = mainWindow;
         this.setLayout(null);
@@ -333,16 +333,18 @@ public class HtmlPanel extends JFXPanel {
                     e.printStackTrace();
                 }
             }
-            if (user.getDaqu() != null) {
+            //如果需要登录就登录
+            if (user.isLogin()) {
                 try {
                     loginUtil.login();
-                    if (!user.getScritps1().isEmpty()) {
-                        controller.loadParse();
-                        goScript();
-                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+            }
+            //主脚本不为空就自动运行
+            if (!user.getScritps1().isEmpty()) {
+                controller.loadParse();
+                goScript();
             }
         });
     }
@@ -362,5 +364,13 @@ public class HtmlPanel extends JFXPanel {
      */
     public void resetScript() {
         controller.loadParse();
+    }
+
+    /**
+     * 将地址缓存上用于临时恢复
+     * @param url
+     */
+    public void addCache(String url){
+
     }
 }

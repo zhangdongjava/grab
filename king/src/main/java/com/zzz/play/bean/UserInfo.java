@@ -6,8 +6,12 @@ import java.util.LinkedList;
 /**
  * Created by Administrator on 2016/11/4 0004.
  */
-public class User implements Serializable {
-    private long serialVersionUID = 20161113;
+public class UserInfo implements Serializable {
+    private static long serialVersionUID = 20161113;
+    /**
+     * 是否登录
+     */
+    private boolean login;
     private String name;
     private String daqu;
     private String url;
@@ -52,5 +56,13 @@ public class User implements Serializable {
 
     public void setScritps2(LinkedList<String> scritps2) {
         this.scritps2 = scritps2;
+    }
+
+    public boolean isLogin() {
+        return login;
+    }
+
+    public void setLogin(boolean login) {
+        this.login = login;
     }
 }

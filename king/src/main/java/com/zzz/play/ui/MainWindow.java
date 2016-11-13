@@ -1,12 +1,13 @@
 package com.zzz.play.ui;
 
 
-import com.zzz.play.bean.User;
+import com.zzz.play.bean.UserInfo;
 import com.zzz.play.ui.dialog.MyDialog;
 import com.zzz.play.ui.dialog.ShuQianDialog;
 import com.zzz.play.ui.dialog.ShuQianOpenDialog;
 import com.zzz.play.ui.dialog.SysSetDialog;
 import com.zzz.play.util.Resource;
+import com.zzz.play.util.sys.Recovery;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +28,8 @@ public class MainWindow extends JFrame {
 
     public static int width = Resource.UI_WIDTH;
     public static int height = Resource.UI_HEIGHT;
-
+    //临时恢复使用工具
+    private Recovery recovery;
     private JLabel L_img;
     private JLabel L_img2;
     private PopupMenu pop;
@@ -39,7 +41,10 @@ public class MainWindow extends JFrame {
     private ShuQianDialog shuQianDialog;
     private ShuQianOpenDialog qianOpenDialog;
     private JFileChooser jChooser;
-    private LinkedList<HtmlPanel> htmlPanels;
+    /**
+     * 选项卡集合
+     */
+    public LinkedList<HtmlPanel> htmlPanels;
 
     private static MainWindow mainWindow;
     private static ExecutorService exec = Executors.newFixedThreadPool(2);
@@ -63,6 +68,7 @@ public class MainWindow extends JFrame {
         shuQianDialog = new ShuQianDialog(this);
         qianOpenDialog = new ShuQianOpenDialog(this);
         htmlPanels = new LinkedList<>();
+        recovery = new Recovery(this);
         initMenu();
         initToTray();
         this.setAlwaysOnTop(false);
@@ -123,8 +129,9 @@ public class MainWindow extends JFrame {
         if (file != null) {
             try {
                 ObjectInputStream stream = new ObjectInputStream(new FileInputStream(file));
-                LinkedList<User> list = (LinkedList<User>) stream.readObject();
-                for (User user : list) {
+                LinkedList<UserInfo> list = (LinkedList<UserInfo>) stream.readObject();
+                for (UserInfo user : list) {
+                    user.setLogin(true);
                     tabPanel.addPanel(user);
                 }
             } catch (Exception e) {
@@ -142,12 +149,13 @@ public class MainWindow extends JFrame {
         File file = jChooser.getSelectedFile();
         if (file != null) {
             try {
-                LinkedList<User> list = new LinkedList<>();
+                LinkedList<UserInfo> list = new LinkedList<>();
                 for (HtmlPanel htmlPanel : htmlPanels) {
                     if (htmlPanel.user.getName() != null
                             && htmlPanel.user.getDaqu() != null
                             && !htmlPanel.isWait) {
-                        list.add(htmlPanel.user);
+                        UserInfo userInfo = new UserInfo();
+                        list.add(userInfo);
                     }
                 }
                 if (list.size() > 0) {
@@ -234,7 +242,7 @@ public class MainWindow extends JFrame {
 
     public void addTab(String name, String url) {
         exec.submit(() -> {
-            User user = new User();
+            UserInfo user = new UserInfo();
             user.setName(name);
             user.setUrl(url);
             tabPanel.addPanel(user);
@@ -279,7 +287,7 @@ public class MainWindow extends JFrame {
     public void openShuQian(String line) {
         String[] lines = line.split("###");
         exec.submit(() -> {
-            User user = new User();
+            UserInfo user = new UserInfo();
             user.setName(lines[0]);
             user.setUrl(lines[2]);
             user.setDaqu(lines[1]);
@@ -290,5 +298,10 @@ public class MainWindow extends JFrame {
 
     public void addHtmlPanel(HtmlPanel panel) {
         htmlPanels.add(panel);
+    }
+
+    public void addCache(String name,String url){
+        recovery.addCache(name,url);
+
     }
 }

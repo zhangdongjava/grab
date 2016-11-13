@@ -1,7 +1,7 @@
 package com.zzz.play.core;
 
 import com.zzz.play.bean.LinkBean;
-import com.zzz.play.bean.User;
+import com.zzz.play.bean.UserInfo;
 import com.zzz.play.exception.StopCurrStepException;
 import com.zzz.play.inter.Observer;
 import com.zzz.play.inter.Runable;
@@ -45,7 +45,7 @@ public class CoreController {
      */
     public LinkedList<Observer> observers = new LinkedList<>();
     public HtmlContent content;
-    public User user;
+    public UserInfo user;
     public GlobalUtil globalUtil;
     public UtilDto utilDto;
     public HtmlPanel htmlPanel;

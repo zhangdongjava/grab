@@ -1,9 +1,8 @@
 package com.zzz.play.ui;
 
-import com.zzz.play.bean.User;
+import com.zzz.play.bean.UserInfo;
 
 import javax.swing.*;
-import java.util.LinkedList;
 
 /**
  * Created by dell_2 on 2016/11/1.
@@ -18,7 +17,7 @@ public class TabPanel extends JTabbedPane {
         this.mainWindow = mainWindow;
     }
 
-    public void addPanel(User user) {
+    public void addPanel(UserInfo user) {
         try {
             HtmlPanel panel = new HtmlPanel(this, user, mainWindow);
             this.add(user.getName(), panel);

@@ -7,6 +7,7 @@ import java.util.LinkedList;
  * Created by Administrator on 2016/11/4 0004.
  */
 public class User implements Serializable {
+    private long serialVersionUID = 20161113;
     private String name;
     private String daqu;
     private String url;

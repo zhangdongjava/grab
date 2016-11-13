@@ -18,8 +18,14 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ScriptDialog extends JDialog {
 
     public static String scriptRoot = null;
+    /**
+     * 名称映射地址
+     */
     private static Map<String, String> allScripts;
     private static Map<String, List<String>> mapList;
+    /**
+     * 地址映射名称
+     */
     private static Map<String, String> url_name;
     private HtmlPanel htmlPanel;
     private ScrollPane jScrollPane;
@@ -28,6 +34,10 @@ public class ScriptDialog extends JDialog {
     private JTabbedPane tabPanel;
     private JButton ok;
     private JButton reload;
+    /**
+     * 展示的脚本
+     */
+    private LinkedList<String> showList;
 
     private Set<String> selectList;
 
@@ -56,7 +66,6 @@ public class ScriptDialog extends JDialog {
     }
 
     private void init() {
-        JPanel panel = new JPanel();
         defaultListModel = new DefaultListModel<>();
         selectList = new HashSet<>();
         clickList = new JList(defaultListModel);
@@ -106,9 +115,9 @@ public class ScriptDialog extends JDialog {
         String value = clickList.getSelectedValue();
         System.out.println(value);
         if (selectList.contains(value)) {
-            System.out.println("存在!");
             defaultListModel.removeElement(value);
             selectList.remove(value);
+            showList.remove(allScripts.get(value));
         }
     }
 
@@ -118,20 +127,22 @@ public class ScriptDialog extends JDialog {
         if (!selectList.contains(value)) {
             defaultListModel.addElement(value);
             selectList.add(value);
+            showList.add(allScripts.get(value));
         }
     }
 
-    public void showUi() {
+    public void showUi(LinkedList<String> showList) {
+        this.showList = showList;
+        defaultListModel.clear();
+        for (String s : showList) {
+            defaultListModel.addElement(url_name.get(s));
+        }
         this.setVisible(true);
     }
 
     private void ok() {
-        htmlPanel.cleatScript();
-        for (int i = 0; i < defaultListModel.size(); i++) {
-            htmlPanel.addScript(allScripts.get(defaultListModel.get(i)));
-        }
+        htmlPanel.resetScript();
         this.setVisible(false);
-        htmlPanel.reloadScript();
     }
 
     public static void main(String[] args) throws Exception {

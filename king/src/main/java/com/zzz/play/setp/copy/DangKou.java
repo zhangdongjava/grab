@@ -45,7 +45,7 @@ public class DangKou extends FuBen {
         if (htmlContent.getDocument().text().contains("今天你已进入")) {
             ableIn = false;
             lastDate = new Date();
-            logger.error(htmlContent.htmlPanel.name + "荡寇副本结束!");
+            logger.error(htmlContent.htmlPanel.user.getDaqu()  + "荡寇副本结束!");
             htmlContent.linkName("返回游戏");
             return false;
         }

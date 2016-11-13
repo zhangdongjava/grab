@@ -45,7 +45,7 @@ public class ShiRenGu extends FuBen {
         if (htmlContent.getDocument().text().contains("今天你已进入食人谷副本")) {
             ableIn = false;
             lastDate = new Date();
-            logger.error(htmlContent.htmlPanel.name + "食人谷副本结束!");
+            logger.error(htmlContent.htmlPanel.user.getDaqu()  + "食人谷副本结束!");
             return false;
         }
         while (htmlContent.getDocument().text().contains("进入食人谷副本，必须攀下一个悬崖")) {
@@ -126,7 +126,7 @@ public class ShiRenGu extends FuBen {
     public void gjSj() {
         for (int i = 0; i < 5; i++) {
             if(!htmlContent.exitsName("巨蛇")){
-                logger.error(htmlContent.htmlPanel.name +"巨蛇不见了");
+                logger.error(htmlContent.htmlPanel.user.getDaqu()  +"巨蛇不见了");
                 throw new StopCurrStepException("巨蛇不见了");
             }
             htmlContent.linkName("巨蛇");

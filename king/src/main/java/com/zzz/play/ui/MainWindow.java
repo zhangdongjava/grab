@@ -1,7 +1,7 @@
 package com.zzz.play.ui;
 
 
-import com.zzz.play.bean.ShuQian;
+import com.zzz.play.bean.User;
 import com.zzz.play.ui.dialog.MyDialog;
 import com.zzz.play.ui.dialog.ShuQianDialog;
 import com.zzz.play.ui.dialog.ShuQianOpenDialog;
@@ -123,9 +123,9 @@ public class MainWindow extends JFrame {
         if (file != null) {
             try {
                 ObjectInputStream stream = new ObjectInputStream(new FileInputStream(file));
-                LinkedList<ShuQian> list = (LinkedList<ShuQian>) stream.readObject();
-                for (ShuQian shuQian : list) {
-                    tabPanel.addPanel(shuQian.getName(), shuQian.getUrl(), shuQian.getDaqu(), shuQian.getScritps());
+                LinkedList<User> list = (LinkedList<User>) stream.readObject();
+                for (User user : list) {
+                    tabPanel.addPanel(user);
                 }
             } catch (Exception e) {
                 JOptionPane.showConfirmDialog(this, "打开失败!" + e.toString());
@@ -142,18 +142,12 @@ public class MainWindow extends JFrame {
         File file = jChooser.getSelectedFile();
         if (file != null) {
             try {
-                LinkedList<ShuQian> list = new LinkedList<>();
+                LinkedList<User> list = new LinkedList<>();
                 for (HtmlPanel htmlPanel : htmlPanels) {
-                    if (htmlPanel.name != null
-                            && htmlPanel.daqu != null
-                            && !htmlPanel.isWait
-                            && !htmlPanel.scripts.isEmpty()) {
-                        ShuQian shuQian = new ShuQian();
-                        shuQian.setUrl(htmlPanel.shuQianUrl);
-                        shuQian.setName(htmlPanel.name);
-                        shuQian.setDaqu(htmlPanel.daqu);
-                        shuQian.setScritps(htmlPanel.scripts);
-                        list.add(shuQian);
+                    if (htmlPanel.user.getName() != null
+                            && htmlPanel.user.getDaqu() != null
+                            && !htmlPanel.isWait) {
+                        list.add(htmlPanel.user);
                     }
                 }
                 if (list.size() > 0) {
@@ -240,7 +234,10 @@ public class MainWindow extends JFrame {
 
     public void addTab(String name, String url) {
         exec.submit(() -> {
-            tabPanel.addPanel(name, url, null, null);
+            User user = new User();
+            user.setName(name);
+            user.setUrl(url);
+            tabPanel.addPanel(user);
         });
         count++;
     }
@@ -282,7 +279,11 @@ public class MainWindow extends JFrame {
     public void openShuQian(String line) {
         String[] lines = line.split("###");
         exec.submit(() -> {
-            tabPanel.addPanel(lines[0], lines[2], lines[1], null);
+            User user = new User();
+            user.setName(lines[0]);
+            user.setUrl(lines[2]);
+            user.setDaqu(lines[1]);
+            tabPanel.addPanel(user);
         });
 
     }

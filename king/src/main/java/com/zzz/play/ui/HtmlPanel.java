@@ -1,5 +1,6 @@
 package com.zzz.play.ui;
 
+import com.zzz.play.bean.User;
 import com.zzz.play.core.CoreController;
 import com.zzz.play.inter.impl.GlobalObserver;
 import com.zzz.play.ui.dialog.ScriptDialog;
@@ -41,7 +42,9 @@ public class HtmlPanel extends JFXPanel {
     //private Button closeBtn;
     private Button kill;
     private Button go;
+    private Button go2;
     private Button script;
+    private Button script2;
     private Label showTime;
     //字体大小
     private TextField fontVal;
@@ -62,37 +65,26 @@ public class HtmlPanel extends JFXPanel {
     private TabPanel tabPanel;
     //主窗口
     public MainWindow mainWindow;
-    //脚本集合
-    public LinkedList<String> scripts;
     private Object startLock = new Object();
     private TextField urlTextField;
     private static ExecutorService exec = Executors.newFixedThreadPool(10);
     public boolean isWait = false;
     public boolean ruing = false;
-    public String shuQianUrl;
+    public User user;
     public LoginUtil loginUtil;
 
     public boolean isClose;
-    /**
-     * 角色名称
-     */
-    public String name;
-    /**
-     * 大区名称
-     */
-    public String daqu;
 
-    public HtmlPanel(TabPanel tabPanel,String url, MainWindow mainWindow, String name, String daqu, LinkedList<String> script) throws Exception {
+
+    public HtmlPanel(TabPanel tabPanel, User user, MainWindow mainWindow) throws Exception {
         this.tabPanel = tabPanel;
         this.mainWindow = mainWindow;
-        this.name = name;
-        this.daqu = daqu;
-        this.shuQianUrl = url;
-        this.scripts = script;
         this.setLayout(null);
-        this.url = url;
+        this.user = user;
+        this.url = user.getUrl();
         run();
     }
+
 
     public void setHtml(String html) {
         Platform.runLater(() -> view.getEngine().loadContent(html));
@@ -133,14 +125,16 @@ public class HtmlPanel extends JFXPanel {
             urlTextField.setText(url);
             view.getEngine().load(url);
             go = new Button("go");
+            go2 = new Button("go2");
             pause = new Button("pause");
-           // closeBtn = new Button("关闭");
+            // closeBtn = new Button("关闭");
             pause.setDisable(true);
             script = new Button("脚本");
+            script2 = new Button("脚本2");
             logBtn = new Button("log on");
             urlTextField.setPrefWidth(WIDTH - 20);
             box1.getChildren().addAll(urlTextField, loadBtn);
-            box2.getChildren().addAll(go, pause, script, logBtn, kill);
+            box2.getChildren().addAll(go, go2, script, script2, pause, logBtn, kill);
             box3.getChildren().addAll(fontVal, interval, setBtn, showTime);
             view.setMinSize(widthDouble, heightDouble - 100);
             view.setMaxSize(widthDouble, heightDouble - 50);
@@ -151,24 +145,46 @@ public class HtmlPanel extends JFXPanel {
             box.getChildren().add(view);
             root.getChildren().add(box);
             go.setOnAction(event -> goScript());
+            go2.setOnAction(event -> goScript2());
             pause.setOnAction(event -> pauseGoon());
-            script.setOnAction(event -> script());
+            script.setOnAction(event -> script(user.getScritps1()));
+            script2.setOnAction(event -> script(user.getScritps2()));
             setBtn.setOnAction(event -> setProperty());
             logBtn.setOnAction(event -> logSet());
             loadBtn.setOnAction(event -> loadBtn());
             kill.setOnAction(event -> kill());
-           // closeBtn.setOnAction(event -> close());
+            // closeBtn.setOnAction(event -> close());
             HtmlPanel.this.init();
         });
         joinGame();
     }
 
-    private void close() {
-        isClose = false;
-        controller.close();
+    private void goScript2() {
+
+        if (user.getScritps2().isEmpty()) {
+            JOptionPane.showConfirmDialog(mainWindow, "没有选择脚本!");
+            return;
+        }
+        kill();
+        ruing = true;
+        WebEngine engine = view.getEngine();
+        String location = engine.getLocation();
+        if (location != null && !"".equals(location)) {
+            System.out.println(location);
+            content.setBaseUrl(location);
+            content.linkUrl(location);
+        }
+        controller.run2(content);
+        Platform.runLater(() -> {
+            go2.setDisable(true);
+            pause.setDisable(false);
+        });
     }
 
 
+    /**
+     * 停止当前运行脚本线程
+     */
     private void kill() {
         isClose = false;
         controller.kill();
@@ -178,13 +194,11 @@ public class HtmlPanel extends JFXPanel {
      * 运行脚本停止
      */
     public void killed() {
-//        if(isClose){
-//            tabPanel.remove(this);
-//            return;
-//        }
-        System.out.println(this.name+"->>脚本终止!");
+
+        System.out.println(this.user.getName() + "->>脚本终止!");
         Platform.runLater(() -> {
             go.setDisable(false);
+            go2.setDisable(false);
             pause.setDisable(true);
             utilDto.waitNotfiy.wait = false;
             pause.setText("pause");
@@ -220,10 +234,12 @@ public class HtmlPanel extends JFXPanel {
     }
 
     private void goScript() {
-        if (scripts.isEmpty()) {
+
+        if (user.getScritps1().isEmpty()) {
             JOptionPane.showConfirmDialog(mainWindow, "没有选择脚本!");
             return;
         }
+        kill();
         ruing = true;
         WebEngine engine = view.getEngine();
         String location = engine.getLocation();
@@ -242,8 +258,8 @@ public class HtmlPanel extends JFXPanel {
     /**
      * 弹出脚本功能窗口
      */
-    private void script() {
-        scriptDialog.showUi();
+    private void script(LinkedList<String> scripts) {
+        scriptDialog.showUi(scripts);
     }
 
     String text = null;
@@ -274,11 +290,14 @@ public class HtmlPanel extends JFXPanel {
     }
 
     public void init() {
-        if (scripts == null) {
-            scripts = new LinkedList<>();
+        if (user.getScritps1() == null) {
+            user.setScritps1(new LinkedList<>());
+        }
+        if (user.getScritps2() == null) {
+            user.setScritps2(new LinkedList<>());
         }
         scriptDialog = new ScriptDialog(this);
-        for (String s : scripts) {
+        for (String s : user.getScritps1()) {
             scriptDialog.addScript(s);
         }
         utilDto = new UtilDto();
@@ -289,6 +308,7 @@ public class HtmlPanel extends JFXPanel {
         controller = new CoreController(globalUtil, utilDto);
         controller.globalUtil = globalUtil;
         controller.htmlPanel = this;
+        controller.user = user;
         try {
             assemble();
         } catch (Exception e) {
@@ -313,11 +333,11 @@ public class HtmlPanel extends JFXPanel {
                     e.printStackTrace();
                 }
             }
-            if (daqu != null) {
+            if (user.getDaqu() != null) {
                 try {
                     loginUtil.login();
-                    if (!scripts.isEmpty()) {
-                        reloadScript();
+                    if (!user.getScritps1().isEmpty()) {
+                        controller.loadParse();
                         goScript();
                     }
                 } catch (InterruptedException e) {
@@ -336,23 +356,11 @@ public class HtmlPanel extends JFXPanel {
     }
 
     /**
-     * 添加脚本文件地址
+     * 更新脚本
      *
-     * @param url
+     * @param
      */
-    public void addScript(String url) {
-        scripts.add(url);
-    }
-
-    /**
-     * 清空脚本
-     */
-    public void cleatScript() {
-        scripts.clear();
-    }
-
-    public void reloadScript() {
-        controller.files = this.scripts;
+    public void resetScript() {
         controller.loadParse();
     }
 }

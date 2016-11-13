@@ -6,11 +6,12 @@ import java.util.LinkedList;
 /**
  * Created by Administrator on 2016/11/4 0004.
  */
-public class ShuQian implements Serializable {
+public class User implements Serializable {
     private String name;
     private String daqu;
     private String url;
-    private LinkedList<String> scritps;
+    private LinkedList<String> scritps1;
+    private LinkedList<String> scritps2;
 
     public String getName() {
         return name;
@@ -36,11 +37,19 @@ public class ShuQian implements Serializable {
         this.url = url;
     }
 
-    public LinkedList<String> getScritps() {
-        return scritps;
+    public LinkedList<String> getScritps1() {
+        return scritps1;
     }
 
-    public void setScritps(LinkedList<String> scritps) {
-        this.scritps = scritps;
+    public void setScritps1(LinkedList<String> scritps1) {
+        this.scritps1 = scritps1;
+    }
+
+    public LinkedList<String> getScritps2() {
+        return scritps2;
+    }
+
+    public void setScritps2(LinkedList<String> scritps2) {
+        this.scritps2 = scritps2;
     }
 }

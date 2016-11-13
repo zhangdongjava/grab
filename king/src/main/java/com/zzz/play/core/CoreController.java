@@ -1,6 +1,7 @@
 package com.zzz.play.core;
 
 import com.zzz.play.bean.LinkBean;
+import com.zzz.play.bean.User;
 import com.zzz.play.exception.StopCurrStepException;
 import com.zzz.play.inter.Observer;
 import com.zzz.play.inter.Runable;
@@ -10,14 +11,11 @@ import com.zzz.play.setp.impl.config.ManyStep;
 import com.zzz.play.setp.sys.GoodsSale;
 import com.zzz.play.setp.sys.SysTextParse;
 import com.zzz.play.ui.HtmlPanel;
-import com.zzz.play.ui.MainWindow;
 import com.zzz.play.util.GlobalUtil;
 import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.UtilDto;
 import org.apache.log4j.Logger;
 
-import javax.swing.*;
-import java.io.PipedReader;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -34,20 +32,20 @@ public class CoreController {
 
     ExecutorService service = Executors.newFixedThreadPool(20);
     /**
-     * 缓存集合
+     * 缓存集合1
      */
-    public LinkedList<Runable> textParses = new LinkedList<>();
+    public LinkedList<Runable> cache1 = new LinkedList<>();
     /**
-     * 运行中的集合
+     * 缓存集合2
      */
-    public LinkedList<Runable> runParses = new LinkedList<>();
+    public LinkedList<Runable> cache2 = new LinkedList<>();
 
     /**
      * 全局观察者
      */
     public LinkedList<Observer> observers = new LinkedList<>();
     public HtmlContent content;
-    public List<String> files;
+    public User user;
     public GlobalUtil globalUtil;
     public UtilDto utilDto;
     public HtmlPanel htmlPanel;
@@ -115,6 +113,17 @@ public class CoreController {
         //testRun(content)
     }
 
+    /**
+     * 开始运行
+     *
+     * @param content
+     */
+    public void run2(HtmlContent content) {
+        this.content = content;
+        run2();
+        //testRun(content)
+    }
+
 
     public void testRun(HtmlContent content) {
         new Thread(() -> {
@@ -130,17 +139,29 @@ public class CoreController {
      */
     public void loadParse() {
         if (content == null) return;
-        textParses.clear();
+        cache1.clear();
+        cache2.clear();
         if (sysTextParse == null) {
             sysTextParse = new SysTextParse(content);
         }
-        textParses.add(sysTextParse);
+        cache1.add(sysTextParse);
         TextParse textParse;
-        for (String file : files) {
+        for (String file : user.getScritps1()) {
             try {
                 textParse = TextParse.getInstance(file, content, utilDto, this);
                 textParse.setFileName(file);
-                textParses.add(textParse);
+                cache1.add(textParse);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println(file + "解析脚本 文件失败!" + e.toString());
+            }
+
+        }
+        for (String file : user.getScritps2()) {
+            try {
+                textParse = TextParse.getInstance(file, content, utilDto, this);
+                textParse.setFileName(file);
+                cache2.add(textParse);
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println(file + "解析脚本 文件失败!" + e.toString());
@@ -150,18 +171,44 @@ public class CoreController {
     }
 
     /**
-     * 启动脚本
+     * 启动主脚本
      */
     private void run() {
+        List<Runable> runParses = new LinkedList<>();
         feture = service.submit(() -> {
             while (!Thread.interrupted()) {
                 runParses.clear();
-                runParses.addAll(textParses);
+                runParses.addAll(cache1);
                 for (Runable parse : runParses) {
                     try {
                         if (parse.isClear()) {
                             utilDto.clearUtil.fzClear(content);
                         }
+                        parse.run();
+                    } catch (StopCurrStepException e) {
+                        System.out.println(parse.getFileName() + "->" + e.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(parse.getFileName() + "->运行脚本异常!" + e.toString());
+                    }
+                }
+                System.gc();
+            }
+            htmlPanel.killed();
+        });
+    }
+
+    /**
+     * 启动副脚本
+     */
+    private void run2() {
+        List<Runable> runParses = new LinkedList<>();
+        feture = service.submit(() -> {
+            while (!Thread.interrupted()) {
+                runParses.clear();
+                runParses.addAll(cache2);
+                for (Runable parse : runParses) {
+                    try {
                         parse.run();
                     } catch (StopCurrStepException e) {
                         System.out.println(parse.getFileName() + "->" + e.toString());
@@ -206,7 +253,9 @@ public class CoreController {
      * 终止脚本
      */
     public void kill() {
-        feture.cancel(true);
+        if(feture!= null){
+            feture.cancel(true);
+        }
     }
 
     /**

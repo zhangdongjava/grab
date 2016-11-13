@@ -312,7 +312,7 @@ public class HtmlContent {
     private void printfUrl(String url) {
         long currTime = System.currentTimeMillis();
         if (currTime - lastLogTime > 600000) {
-            logger.error(htmlPanel.name+"-->"+url);
+            logger.error(htmlPanel.user.getDaqu() +"-->"+url);
             lastLogTime = currTime;
         }
     }

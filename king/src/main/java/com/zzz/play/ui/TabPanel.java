@@ -1,5 +1,7 @@
 package com.zzz.play.ui;
 
+import com.zzz.play.bean.User;
+
 import javax.swing.*;
 import java.util.LinkedList;
 
@@ -16,11 +18,11 @@ public class TabPanel extends JTabbedPane {
         this.mainWindow = mainWindow;
     }
 
-    public void addPanel(String name, String url, String daqu, LinkedList<String> script) {
+    public void addPanel(User user) {
         try {
-            HtmlPanel panel = new HtmlPanel(this, url, mainWindow, name, daqu, script);
-            this.add(name, panel);
-           // this.setTabComponentAt(getIndex(panel), panel);//实现这个功能的就这一条最重要的语句
+            HtmlPanel panel = new HtmlPanel(this, user, mainWindow);
+            this.add(user.getName(), panel);
+            // this.setTabComponentAt(getIndex(panel), panel);//实现这个功能的就这一条最重要的语句
             mainWindow.addHtmlPanel(panel);
             Thread.sleep(10000);
         } catch (Exception e) {
@@ -33,7 +35,7 @@ public class TabPanel extends JTabbedPane {
 
     }
 
- //   public int getIndex(HtmlPanel htmlPanel) {
+    //   public int getIndex(HtmlPanel htmlPanel) {
 //        for (int i = 0; i < list.size(); i++) {
 //            if (list.get(i).equals(htmlPanel)) {
 //                return i;
@@ -41,5 +43,5 @@ public class TabPanel extends JTabbedPane {
 //
 //        }
 //        return 0;
- //   }
+    //   }
 }

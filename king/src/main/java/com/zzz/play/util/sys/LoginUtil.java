@@ -26,11 +26,10 @@ public class LoginUtil {
     public void login() throws InterruptedException {
 
         content = htmlPanel.content;
-        linkName(htmlPanel.daqu.trim());
-        LinkBean link = content.getUrl(htmlPanel.name.trim(), true);
+        linkName(htmlPanel.user.getDaqu().trim());
+        LinkBean link = content.getUrl(htmlPanel.user.getName().trim(), true);
         urlTemp = link.getUrl().replace("entry.yytou.com", "hero2.yytou.com");
         content.selfLinkUrl(urlTemp);
-        linkName(htmlPanel.daqu.trim());
         linkName("点击进入");
         do {
             TimeUnit.SECONDS.sleep(1);

@@ -76,7 +76,7 @@ public class ValidationKill {
         Elements forms = htmlContent.delForms;
         String action;
         if (forms.size() == 0) {
-            logger.error(htmlContent.htmlPanel.name + "没找到提交form表单");
+            logger.error(htmlContent.htmlPanel.user.getDaqu()  + "没找到提交form表单");
         } else {
             Element form = forms.get(0);
             action = htmlContent.cleckUrl(form.attr("action"));

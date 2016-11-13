@@ -91,6 +91,7 @@ public class MainWindow extends JFrame {
         JMenuItem shuqianOpen = new JMenuItem("打开");  //菜单项
         JMenuItem all = new JMenuItem("保存所有");  //菜单项
         JMenuItem open = new JMenuItem("打开所有");  //菜单项
+        JMenuItem openCache = new JMenuItem("打开缓存");  //菜单项
         addTab.addActionListener((e) -> addTab());
         scriptPath.addActionListener((e) -> scriptPath());
         shuqianAdd.addActionListener((e) -> shuqianAdd());
@@ -98,6 +99,7 @@ public class MainWindow extends JFrame {
         all.addActionListener((e) -> all());
         name.addActionListener((e) -> setName());
         open.addActionListener((e) -> exec.submit(() -> open()));
+        openCache.addActionListener((e) -> exec.submit(() -> openCache()));
         jm.add(addTab);   //将菜单项目添加到菜单
         set.add(scriptPath);   //将菜单项目添加到菜单
         set.add(name);   //将菜单项目添加到菜单
@@ -105,11 +107,30 @@ public class MainWindow extends JFrame {
         shuqian.add(shuqianOpen);   //将菜单项目添加到菜单
         shuqian.add(all);   //将菜单项目添加到菜单
         shuqian.add(open);   //将菜单项目添加到菜单
+        shuqian.add(openCache);   //将菜单项目添加到菜单
         JMenuBar br = new JMenuBar();  //创建菜单工具栏
         br.add(jm);      //将菜单增加到菜单工具栏
         br.add(set);      //将菜单增加到菜单工具栏
         br.add(shuqian);      //将菜单增加到菜单工具栏
         this.setJMenuBar(br);  //为 窗体设置  菜单工具栏
+    }
+
+    /**
+     * 打开缓存
+     */
+    private void openCache() {
+        jChooser = new JFileChooser();
+        jChooser.setCurrentDirectory(new File(""));//设置默认打开路径
+        jChooser.setDialogType(JFileChooser.OPEN_DIALOG);//设置保存对话框
+        jChooser.showDialog(this, "打开缓存");
+        File file = jChooser.getSelectedFile();
+        if (file != null) {
+            Map<String, UserInfo> map = recovery.open(file);
+            for (UserInfo user : map.values()) {
+                user.setLogin(false);
+                tabPanel.addPanel(user);
+            }
+        }
     }
 
     /**
@@ -124,7 +145,7 @@ public class MainWindow extends JFrame {
         jChooser = new JFileChooser();
         jChooser.setCurrentDirectory(new File(""));//设置默认打开路径
         jChooser.setDialogType(JFileChooser.OPEN_DIALOG);//设置保存对话框
-        jChooser.showDialog(this, "打开书签");
+        jChooser.showDialog(this, "打开所有");
         File file = jChooser.getSelectedFile();
         if (file != null) {
             try {
@@ -288,6 +309,7 @@ public class MainWindow extends JFrame {
         String[] lines = line.split("###");
         exec.submit(() -> {
             UserInfo user = new UserInfo();
+            user.setLogin(true);
             user.setName(lines[0]);
             user.setUrl(lines[2]);
             user.setDaqu(lines[1]);
@@ -300,8 +322,8 @@ public class MainWindow extends JFrame {
         htmlPanels.add(panel);
     }
 
-    public void addCache(String name,UserInfo userInfo){
-        recovery.addCache(name,userInfo);
+    public void addCache(String name, UserInfo userInfo) {
+        recovery.addCache(name, userInfo);
 
     }
 }

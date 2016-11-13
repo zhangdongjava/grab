@@ -41,7 +41,7 @@ public class Recovery {
         }
     }
 
-    public Map<String, UserInfo> open(String file) {
+    public Map<String, UserInfo> open(File file) {
         try {
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);

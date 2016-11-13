@@ -7,7 +7,7 @@ import java.util.LinkedList;
  * Created by Administrator on 2016/11/4 0004.
  */
 public class UserInfo implements Serializable {
-    private static long serialVersionUID = 20161113;
+    private static long serialVersionUID = 1L;
     /**
      * 是否登录
      */

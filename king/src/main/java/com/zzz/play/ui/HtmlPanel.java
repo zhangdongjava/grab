@@ -34,7 +34,7 @@ public class HtmlPanel extends JFXPanel {
     private String url;
     public static final int WIDTH = MainWindow.width - 100;
     public static final int HEIGHT = MainWindow.height - 100;
-    public static Integer DEFAULT_WAIT = 538;
+    public static Integer DEFAULT_WAIT = Resource.WAIT;
     public HtmlContent content;
     public GlobalUtil globalUtil;
     public WebView view;
@@ -42,9 +42,9 @@ public class HtmlPanel extends JFXPanel {
     //private Button closeBtn;
     private Button kill;
     private Button go;
-    private Button go2;
+    //private Button go2;
     private Button script;
-    private Button script2;
+   // private Button script2;
     private Label showTime;
     //字体大小
     private TextField fontVal;
@@ -125,16 +125,16 @@ public class HtmlPanel extends JFXPanel {
             urlTextField.setText(url);
             view.getEngine().load(url);
             go = new Button("go");
-            go2 = new Button("go2");
+           // go2 = new Button("go2");
             pause = new Button("pause");
             // closeBtn = new Button("关闭");
             pause.setDisable(true);
             script = new Button("脚本");
-            script2 = new Button("脚本2");
+           // script2 = new Button("脚本2");
             logBtn = new Button("log on");
             urlTextField.setPrefWidth(WIDTH - 20);
             box1.getChildren().addAll(urlTextField, loadBtn);
-            box2.getChildren().addAll(go, go2, script, script2, pause, logBtn, kill);
+            box2.getChildren().addAll(go, script, pause, logBtn, kill);
             box3.getChildren().addAll(fontVal, interval, setBtn, showTime);
             view.setMinSize(widthDouble, heightDouble - 100);
             view.setMaxSize(widthDouble, heightDouble - 50);
@@ -145,10 +145,10 @@ public class HtmlPanel extends JFXPanel {
             box.getChildren().add(view);
             root.getChildren().add(box);
             go.setOnAction(event -> goScript());
-            go2.setOnAction(event -> goScript2());
+           // go2.setOnAction(event -> goScript2());
             pause.setOnAction(event -> pauseGoon());
             script.setOnAction(event -> script(user.getScritps1()));
-            script2.setOnAction(event -> script(user.getScritps2()));
+           // script2.setOnAction(event -> script(user.getScritps2()));
             setBtn.setOnAction(event -> setProperty());
             logBtn.setOnAction(event -> logSet());
             loadBtn.setOnAction(event -> loadBtn());
@@ -159,27 +159,27 @@ public class HtmlPanel extends JFXPanel {
         joinGame();
     }
 
-    private void goScript2() {
-
-        if (user.getScritps2().isEmpty()) {
-            JOptionPane.showConfirmDialog(mainWindow, "没有选择脚本!");
-            return;
-        }
-        kill();
-        ruing = true;
-        WebEngine engine = view.getEngine();
-        String location = engine.getLocation();
-        if (location != null && !"".equals(location)) {
-            System.out.println(location);
-            content.setBaseUrl(location);
-            content.linkUrl(location);
-        }
-        controller.run2(content);
-        Platform.runLater(() -> {
-            go2.setDisable(true);
-            pause.setDisable(false);
-        });
-    }
+//    private void goScript2() {
+//
+//        if (user.getScritps2().isEmpty()) {
+//            JOptionPane.showConfirmDialog(mainWindow, "没有选择脚本!");
+//            return;
+//        }
+//        kill();
+//        ruing = true;
+//        WebEngine engine = view.getEngine();
+//        String location = engine.getLocation();
+//        if (location != null && !"".equals(location)) {
+//            System.out.println(location);
+//            content.setBaseUrl(location);
+//            content.linkUrl(location);
+//        }
+//        controller.run2(content);
+//        Platform.runLater(() -> {
+//           // go2.setDisable(true);
+//            pause.setDisable(false);
+//        });
+//    }
 
 
     /**
@@ -198,7 +198,7 @@ public class HtmlPanel extends JFXPanel {
         System.out.println(this.user.getName() + "->>脚本终止!");
         Platform.runLater(() -> {
             go.setDisable(false);
-            go2.setDisable(false);
+           // go2.setDisable(false);
             pause.setDisable(true);
             utilDto.waitNotfiy.wait = false;
             pause.setText("pause");

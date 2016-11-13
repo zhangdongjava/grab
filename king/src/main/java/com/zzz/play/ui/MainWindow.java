@@ -300,8 +300,8 @@ public class MainWindow extends JFrame {
         htmlPanels.add(panel);
     }
 
-    public void addCache(String name,String url){
-        recovery.addCache(name,url);
+    public void addCache(String name,UserInfo userInfo){
+        recovery.addCache(name,userInfo);
 
     }
 }

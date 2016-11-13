@@ -1,5 +1,6 @@
 package com.zzz.play.util.sys;
 
+import com.zzz.play.bean.UserInfo;
 import com.zzz.play.ui.MainWindow;
 import org.apache.log4j.Logger;
 
@@ -15,7 +16,7 @@ import java.util.Map;
 public class Recovery {
 
     private static Logger logger = Logger.getLogger(Recovery.class);
-    private Map<String, String> map = Collections.synchronizedMap(new LinkedHashMap<>());
+    private Map<String, UserInfo> map = Collections.synchronizedMap(new LinkedHashMap<>());
     private MainWindow mainWindow;
 
     public Recovery(MainWindow mainWindow) {
@@ -23,8 +24,9 @@ public class Recovery {
         this.mainWindow = mainWindow;
     }
 
-    public void addCache(String name, String url) {
-        map.put(name, url);
+    public void addCache(String name, UserInfo userInfo) {
+        userInfo.setLogin(false);
+        map.put(name, userInfo);
         save();
     }
 
@@ -39,11 +41,11 @@ public class Recovery {
         }
     }
 
-    public Map<String, String> open(String file) {
+    public Map<String, UserInfo> open(String file) {
         try {
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            map = (Map<String, String>) ois.readObject();
+            map = (Map<String, UserInfo>) ois.readObject();
             ois.close();
             return map;
         } catch (IOException e) {

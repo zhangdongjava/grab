@@ -368,9 +368,11 @@ public class HtmlPanel extends JFXPanel {
 
     /**
      * 将地址缓存上用于临时恢复
+     *
      * @param url
      */
-    public void addCache(String url){
-
+    public void addCache(String url) {
+        user.setUrl(url);
+        mainWindow.addCache(user.getName(), user);
     }
 }

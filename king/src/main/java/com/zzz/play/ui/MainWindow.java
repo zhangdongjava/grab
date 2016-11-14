@@ -178,8 +178,7 @@ public class MainWindow extends JFrame {
                     if (htmlPanel.user.getName() != null
                             && htmlPanel.user.getDaqu() != null
                             && !htmlPanel.isWait) {
-                        UserInfo userInfo = new UserInfo();
-                        list.add(userInfo);
+                        list.add(htmlPanel.user);
                     }
                 }
                 if (list.size() > 0) {

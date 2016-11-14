@@ -89,7 +89,7 @@ public class KuangBao extends SecondRefresh {
         huPiScript.run();
         getHuPi += huPiScript.getNum();
         GoodsNumUtil numUtil = utilDto.goodsNumUtil;
-        int xymh = (getHuPi / HU_NUM * MENG_NUM);
+        int xymh = Math.min((getHuPi / HU_NUM * MENG_NUM),(bingPo * MENG_NUM));
         if (xymh == 0) {
             return;
         }

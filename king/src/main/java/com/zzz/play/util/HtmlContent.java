@@ -60,6 +60,8 @@ public class HtmlContent {
     private long lastTime;
     private long lastLogTime;
     LinkBean linkBean;
+    //副本
+    LinkBean copyLinkBean;
     private String text;
 
 
@@ -67,6 +69,7 @@ public class HtmlContent {
         lastTime = System.currentTimeMillis();
         this.controller = controller;
         linkBean = new LinkBean();
+        copyLinkBean = new LinkBean();
         initUtil();
         setBaseUrl(url);
         this.htmlPanel = htmlPanel;
@@ -226,8 +229,7 @@ public class HtmlContent {
 
 
     public void vailte() {
-        LinkBean linkBean = new LinkBean();
-        linkBean.copy(this.linkBean);
+        copyLinkBean.copy(this.linkBean);
         try {
             if (exitsName("继续", false)) {
                 linkUrl(getUrl("继续", false).getUrl());
@@ -244,7 +246,7 @@ public class HtmlContent {
             }
         } finally {
         }
-        this.linkBean.copy(linkBean);
+        this.linkBean.copy(copyLinkBean);
     }
 
 

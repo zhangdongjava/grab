@@ -44,7 +44,7 @@ public class PoSui extends FuBen {
         if (htmlContent.getText().contains("今天你已进入")) {
             ableIn = false;
             lastDate = new Date();
-            logger.error(htmlContent.htmlPanel.user.getDaqu()  + "破碎梦晶石副本结束!");
+            logger.error(htmlContent.htmlPanel.user.getName()  + "破碎梦晶石副本结束!");
             htmlContent.linkName("返回游戏");
             return false;
         }

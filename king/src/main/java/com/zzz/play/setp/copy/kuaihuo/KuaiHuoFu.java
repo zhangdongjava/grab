@@ -72,10 +72,10 @@ public class KuaiHuoFu extends KuaiHuoFb {
             htmlContent.linkName("刷新");
         }
         htmlContent.linkName("进入厢房");
-        while (!htmlContent.exitsName(" VS 快活林长老",true)){
+        while (!htmlContent.exitsName("VS",true)){
             htmlContent.linkName("刷新");
         }
-        htmlContent.linkName(" VS 快活林长老",true);
+        htmlContent.linkName("VS",true);
         htmlContent.linkName("攻方");
         htmlContent.linkName("返回战场");
         while (!htmlContent.getText().contains("战斗已经结束")){

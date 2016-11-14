@@ -249,19 +249,24 @@ public class TextParse implements Runable {
         }
         config.countJian();
         htmlContent.setCurrParse(this);
+        boolean exec = false;
         for (currNormalIndex = 0; currNormalIndex < linkedList.size(); currNormalIndex++) {
             try {
                 //System.out.println("普通脚本:" + linkedList.get(currNormalIndex));
                 if (currNormalIndex < 0) currNormalIndex = 0;
                 Step step = linkedList.get(currNormalIndex);
                 controller.stepRunBefore();
-                step.run();
+                if (!exec) {
+                    exec = step.run();
+                } else {
+                    step.run();
+                }
                 controller.stepRunAfter();
             } catch (StepBackException e) {
                 currNormalIndex -= 2;
             }
         }
-        return false;
+        return exec;
     }
 
     public void baseRun() {

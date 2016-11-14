@@ -155,15 +155,16 @@ public class CoreController {
         List<Runable> runParses = new LinkedList<>();
         future = service.submit(() -> {
             runing = true;
+            boolean exec  = true;
             while (!Thread.interrupted()&&runing) {
                 runParses.clear();
                 runParses.addAll(cache1);
                 for (Runable parse : runParses) {
                     try {
-                        if (parse.isClear()) {
+                        if (parse.isClear()&&exec) {
                             utilDto.clearUtil.fzClear(content);
                         }
-                        parse.run();
+                        exec =  parse.run();
                     } catch (StopCurrStepException e) {
                         System.out.println(parse.getFileName() + "->" + e.toString());
                     } catch (Exception e) {
@@ -177,30 +178,7 @@ public class CoreController {
         });
     }
 
-//    /**
-//     * 启动副脚本
-//     */
-//    private void run2() {
-//        List<Runable> runParses = new LinkedList<>();
-//        future = service.submit(() -> {
-//            while (!Thread.interrupted()) {
-//                runParses.clear();
-//                runParses.addAll(cache2);
-//                for (Runable parse : runParses) {
-//                    try {
-//                        parse.run();
-//                    } catch (StopCurrStepException e) {
-//                        System.out.println(parse.getFileName() + "->" + e.toString());
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                        System.out.println(parse.getFileName() + "->运行脚本异常!" + e.toString());
-//                    }
-//                }
-//                System.gc();
-//            }
-//            htmlPanel.killed();
-//        });
-//    }
+
 
     /**
      * 添加全局脚本

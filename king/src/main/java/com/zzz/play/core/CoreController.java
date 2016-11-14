@@ -56,6 +56,8 @@ public class CoreController {
     private Future<?> future;
     public boolean runing = false;
 
+    private boolean scriptReload = false;
+
     public CoreController(GlobalUtil globalUtil, UtilDto utilDto) {
         this.globalUtil = globalUtil;
         this.utilDto = utilDto;
@@ -130,6 +132,7 @@ public class CoreController {
     public void loadParse() {
         if (content == null) return;
         cache1.clear();
+        scriptReload = true;
         if (sysTextParse == null) {
             sysTextParse = new SysTextParse(content);
         }
@@ -160,8 +163,10 @@ public class CoreController {
             runing = true;
             boolean exec  = true;
             while (!Thread.interrupted()&&runing) {
-                runParses.clear();
-                runParses.addAll(cache1);
+                if(scriptReload){//脚本重新加载了 才会拿来执行
+                    runParses.clear();
+                    runParses.addAll(cache1);
+                }
                 for (Runable parse : runParses) {
                     try {
                         if (parse.isClear()&&exec) {

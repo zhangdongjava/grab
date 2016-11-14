@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
  * Created by Administrator on 2016/11/6 0006.
  */
 public abstract class FuBen extends SecondRefresh {
-
     protected Logger logger = Logger.getLogger("副本");
 
 

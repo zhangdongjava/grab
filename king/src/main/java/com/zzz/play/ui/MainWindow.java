@@ -40,6 +40,7 @@ public class MainWindow extends JFrame {
     private SysSetDialog sysSetDialog;
     private ShuQianDialog shuQianDialog;
     private ShuQianOpenDialog qianOpenDialog;
+    private KuaiHuoDialog kuaiHuoDialog;
     private JFileChooser jChooser;
     /**
      * 选项卡集合
@@ -69,6 +70,7 @@ public class MainWindow extends JFrame {
         sysSetDialog = new SysSetDialog(this);
         shuQianDialog = new ShuQianDialog(this);
         qianOpenDialog = new ShuQianOpenDialog(this);
+        kuaiHuoDialog = new KuaiHuoDialog(this);
         htmlPanels = new LinkedList<>();
         recovery = new Recovery(this);
         initMenu();
@@ -88,6 +90,7 @@ public class MainWindow extends JFrame {
         JMenu shuqian = new JMenu("书签");     //创建JMenu菜单对象
         JMenuItem addTab = new JMenuItem("添加");  //菜单项
         JMenuItem scriptPath = new JMenuItem("脚本路径");  //菜单项
+        JMenuItem kuaiHuo = new JMenuItem("快活配对");  //菜单项
         JMenuItem name = new JMenuItem("名称");  //菜单项
         JMenuItem shuqianAdd = new JMenuItem("添加");  //菜单项
         JMenuItem shuqianOpen = new JMenuItem("打开");  //菜单项
@@ -104,8 +107,10 @@ public class MainWindow extends JFrame {
         open.addActionListener((e) -> exec.submit(() -> open()));
         openCache.addActionListener((e) -> exec.submit(() -> openCache()));
         openScript.addActionListener((e) -> exec.submit(() -> openScript()));
+        kuaiHuo.addActionListener((e) -> exec.submit(() -> addKuaiHuo()));
         jm.add(addTab);   //将菜单项目添加到菜单
         set.add(scriptPath);   //将菜单项目添加到菜单
+        set.add(kuaiHuo);   //将菜单项目添加到菜单
         set.add(name);   //将菜单项目添加到菜单
         shuqian.add(shuqianAdd);   //将菜单项目添加到菜单
         shuqian.add(shuqianOpen);   //将菜单项目添加到菜单
@@ -118,6 +123,13 @@ public class MainWindow extends JFrame {
         br.add(set);      //将菜单增加到菜单工具栏
         br.add(shuqian);      //将菜单增加到菜单工具栏
         this.setJMenuBar(br);  //为 窗体设置  菜单工具栏
+    }
+
+    /**
+     * 添加快活配对
+     */
+    private void addKuaiHuo() {
+        kuaiHuoDialog.setVisible(true);
     }
 
     private void openScript() {

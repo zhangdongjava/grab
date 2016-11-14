@@ -54,6 +54,7 @@ public class CoreController {
     private SysTextParse sysTextParse;
 
     private Future<?> future;
+    public boolean runing = false;
 
     public CoreController(GlobalUtil globalUtil, UtilDto utilDto) {
         this.globalUtil = globalUtil;
@@ -153,7 +154,8 @@ public class CoreController {
     private void run() {
         List<Runable> runParses = new LinkedList<>();
         future = service.submit(() -> {
-            while (!Thread.interrupted()) {
+            runing = true;
+            while (!Thread.interrupted()&&runing) {
                 runParses.clear();
                 runParses.addAll(cache1);
                 for (Runable parse : runParses) {
@@ -231,6 +233,7 @@ public class CoreController {
      */
     public void kill() {
         if(future != null){
+            runing = false;
             future.cancel(true);
         }
     }

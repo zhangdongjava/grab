@@ -8,7 +8,6 @@ import com.zzz.play.inter.Runable;
 import com.zzz.play.setp.Step;
 import com.zzz.play.setp.TextParse;
 import com.zzz.play.setp.impl.config.ManyStep;
-import com.zzz.play.setp.sys.GoodsSale;
 import com.zzz.play.setp.sys.SysTextParse;
 import com.zzz.play.ui.HtmlPanel;
 import com.zzz.play.util.GlobalUtil;
@@ -54,7 +53,7 @@ public class CoreController {
 
     private SysTextParse sysTextParse;
 
-    private Future<?> feture;
+    private Future<?> future;
 
     public CoreController(GlobalUtil globalUtil, UtilDto utilDto) {
         this.globalUtil = globalUtil;
@@ -154,7 +153,7 @@ public class CoreController {
      */
     private void run() {
         List<Runable> runParses = new LinkedList<>();
-        feture = service.submit(() -> {
+        future = service.submit(() -> {
             while (!Thread.interrupted()) {
                 runParses.clear();
                 runParses.addAll(cache1);
@@ -182,7 +181,7 @@ public class CoreController {
 //     */
 //    private void run2() {
 //        List<Runable> runParses = new LinkedList<>();
-//        feture = service.submit(() -> {
+//        future = service.submit(() -> {
 //            while (!Thread.interrupted()) {
 //                runParses.clear();
 //                runParses.addAll(cache2);
@@ -232,8 +231,8 @@ public class CoreController {
      * 终止脚本
      */
     public void kill() {
-        if(feture!= null){
-            feture.cancel(true);
+        if(future != null){
+            future.cancel(true);
         }
     }
 

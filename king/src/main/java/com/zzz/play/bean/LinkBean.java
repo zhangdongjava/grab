@@ -33,4 +33,11 @@ public class LinkBean {
     public void setClickName(String clickName) {
         this.clickName = clickName;
     }
+
+    public void reset() {
+        success = false;
+        clickName = null;
+        url = null;
+
+    }
 }

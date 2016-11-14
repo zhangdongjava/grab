@@ -15,16 +15,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by dell_2 on 2016/10/29.
@@ -65,12 +59,14 @@ public class HtmlContent {
 
     private long lastTime;
     private long lastLogTime;
+    LinkBean linkBean;
 
 
     public HtmlContent(String url, HtmlPanel htmlPanel, CoreController controller) {
         lastTime = System.currentTimeMillis();
         initUrlReplace();
         this.controller = controller;
+        linkBean = new LinkBean();
         initUtil();
         setBaseUrl(url);
         this.htmlPanel = htmlPanel;
@@ -93,7 +89,7 @@ public class HtmlContent {
      */
     public LinkBean getUrl(String name, boolean like) {
         String url;
-        LinkBean linkBean = new LinkBean();
+         linkBean.reset();
         Elements elements = document.getElementsByTag("a");
         Element element = getAelement(elements, like, name, linkBean);
         if (element != null) {
@@ -113,9 +109,10 @@ public class HtmlContent {
     private LinkBean getUrl(String name, String... notName) {
         LinkBean linkBean = urlMap.get(name + "_" + notName);
         if (linkBean != null) return linkBean;
-        linkBean = new LinkBean();
+        this.linkBean.reset();
+        linkBean = this.linkBean;
         Elements elements = document.getElementsByTag("a");
-        Element element = getAelementNotName(elements, name, linkBean, notName);
+        Element element = getAelementNotName(elements, name,linkBean, notName);
         if (element != null) {
             String url = element.attr("href");
             linkBean.setUrl(url);
@@ -338,7 +335,7 @@ public class HtmlContent {
         if (!validate) {
             vailte();
         }
-        LinkBean linkBean = new LinkBean();
+        linkBean.reset();
         Elements as = document.getElementsByTag("a");
         for (Element a : as) {
             if (!like && a.text().equals(name)) {

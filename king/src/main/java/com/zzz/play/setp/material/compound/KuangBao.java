@@ -36,6 +36,7 @@ public class KuangBao extends SecondRefresh {
         if (!ableIn) {
             return false;
         }
+        utilDto.clearUtil.clearPack(htmlContent);
         contrl();
         return super.run();
     }

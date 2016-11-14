@@ -28,6 +28,7 @@ public class QiangTi extends SecondRefresh {
         if (!ableIn) {
             return false;
         }
+        utilDto.clearUtil.clearPack(htmlContent);
         contrl();
         return super.run();
     }

@@ -194,7 +194,6 @@ public class HtmlPanel extends JFXPanel {
      * 运行脚本停止
      */
     public void killed() {
-
         System.out.println(this.user.getName() + "->>脚本终止!");
         Platform.runLater(() -> {
             go.setDisable(false);
@@ -202,6 +201,7 @@ public class HtmlPanel extends JFXPanel {
             utilDto.waitNotfiy.wait = false;
             pause.setText("pause");
         });
+        JOptionPane.showConfirmDialog(mainWindow,user.getName()+"-->脚本停止!");
     }
 
     /**
@@ -238,7 +238,6 @@ public class HtmlPanel extends JFXPanel {
             JOptionPane.showConfirmDialog(mainWindow, "没有选择脚本!");
             return;
         }
-        kill();
         ruing = true;
         WebEngine engine = view.getEngine();
         String location = engine.getLocation();

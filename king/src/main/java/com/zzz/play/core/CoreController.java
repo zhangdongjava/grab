@@ -113,26 +113,16 @@ public class CoreController {
         //testRun(content)
     }
 
-    /**
-     * 开始运行
-     *
-     * @param content
-     */
-    public void run2(HtmlContent content) {
-        this.content = content;
-        run2();
-        //testRun(content)
-    }
-
-
-    public void testRun(HtmlContent content) {
-        new Thread(() -> {
-            GoodsSale lcClear = new GoodsSale("柳虫_柳虫残骸");
-            lcClear.setHtmlContent(content);
-            lcClear.run();
-        }).start();
-
-    }
+//    /**
+//     * 开始运行
+//     *
+//     * @param content
+//     */
+//    public void run2(HtmlContent content) {
+//        this.content = content;
+//        run2();
+//        //testRun(content)
+//    }
 
     /**
      * 脚本
@@ -151,17 +141,6 @@ public class CoreController {
                 textParse = TextParse.getInstance(file, content, utilDto, this);
                 textParse.setFileName(file);
                 cache1.add(textParse);
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println(file + "解析脚本 文件失败!" + e.toString());
-            }
-
-        }
-        for (String file : user.getScritps2()) {
-            try {
-                textParse = TextParse.getInstance(file, content, utilDto, this);
-                textParse.setFileName(file);
-                cache2.add(textParse);
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println(file + "解析脚本 文件失败!" + e.toString());
@@ -198,30 +177,30 @@ public class CoreController {
         });
     }
 
-    /**
-     * 启动副脚本
-     */
-    private void run2() {
-        List<Runable> runParses = new LinkedList<>();
-        feture = service.submit(() -> {
-            while (!Thread.interrupted()) {
-                runParses.clear();
-                runParses.addAll(cache2);
-                for (Runable parse : runParses) {
-                    try {
-                        parse.run();
-                    } catch (StopCurrStepException e) {
-                        System.out.println(parse.getFileName() + "->" + e.toString());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        System.out.println(parse.getFileName() + "->运行脚本异常!" + e.toString());
-                    }
-                }
-                System.gc();
-            }
-            htmlPanel.killed();
-        });
-    }
+//    /**
+//     * 启动副脚本
+//     */
+//    private void run2() {
+//        List<Runable> runParses = new LinkedList<>();
+//        feture = service.submit(() -> {
+//            while (!Thread.interrupted()) {
+//                runParses.clear();
+//                runParses.addAll(cache2);
+//                for (Runable parse : runParses) {
+//                    try {
+//                        parse.run();
+//                    } catch (StopCurrStepException e) {
+//                        System.out.println(parse.getFileName() + "->" + e.toString());
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                        System.out.println(parse.getFileName() + "->运行脚本异常!" + e.toString());
+//                    }
+//                }
+//                System.gc();
+//            }
+//            htmlPanel.killed();
+//        });
+//    }
 
     /**
      * 添加全局脚本

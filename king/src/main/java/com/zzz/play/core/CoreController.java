@@ -34,10 +34,7 @@ public class CoreController {
      * 缓存集合1
      */
     public LinkedList<Runable> cache1 = new LinkedList<>();
-    /**
-     * 缓存集合2
-     */
-    public LinkedList<Runable> cache2 = new LinkedList<>();
+
 
     /**
      * 全局观察者

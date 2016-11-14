@@ -250,10 +250,6 @@ public class HtmlContent {
         return linkUrl(url, 0);
     }
 
-    public void linkNameNot(String name){
-
-    }
-
     public boolean selfLinkUrl(String url) {
         return selfLinkUrl(url, 0);
     }

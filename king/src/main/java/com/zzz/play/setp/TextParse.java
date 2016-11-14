@@ -112,23 +112,28 @@ public class TextParse implements Runable {
     }
 
     private Step addStep(String line) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, ClassNotFoundException {
-        Step step = null;
-        if (line.startsWith("base")) {
-            if (line.endsWith("{")) {
-                manyStep = StepUtil.getManny(line.substring(4));
-                if (buildMany()) {
-                    baseList.add(manyStep);
+        Step step = StepUtil.getClassSetp(line);
+        if (step == null) {
+            if (line.startsWith("class")) {
+                step = StepUtil.getClassNameSetp(line.substring(5));
+            } else if (line.startsWith("base")) {
+                if (line.endsWith("{")) {
+                    manyStep = StepUtil.getManny(line.substring(4));
+                    if (buildMany()) {
+                        baseList.add(manyStep);
+                    }
+                } else {
+                    step = StepUtil.getStep(line.substring(4));
+                    step.setHtmlContent(htmlContent);
+                    step.setStep(this);
+                    baseList.add(step);
                 }
-            } else {
-                step = StepUtil.getStep(line.substring(4));
-                step.setHtmlContent(htmlContent);
-                step.setStep(this);
-                baseList.add(step);
-            }
 
-        } else {
-            step = buildNotBaseStep(line);
+            } else {
+                step = buildNotBaseStep(line);
+            }
         }
+
         return step;
     }
 
@@ -156,32 +161,6 @@ public class TextParse implements Runable {
             step = new BuyDrug(line.substring(4));
         } else if (line.startsWith("save")) {
             step = new GoodsSave(line.substring(4));
-        } else if (line.startsWith("heif")) {
-            step = new HeiFeng();
-        } else if (line.equals("zhen")) {
-            step = new ZhenList();
-        } else if (line.startsWith("shirengu")) {
-            step = new ShiRenGu();
-        } else if (line.startsWith("qiangXian")) {
-            step = new QiangXian();
-        } else if (line.startsWith("qiangTi")) {
-            step = new QiangTi();
-        } else if (line.startsWith("jingGang")) {
-            step = new JingGang();
-        } else if (line.equals("kuangBao")) {
-            step = new KuangBao();
-        } else if (line.equals("kuangBaoEr")) {
-            step = new KuangBaoEr();
-        } else if (line.startsWith("xueShan")) {
-            step = new XueShan();
-        } else if (line.startsWith("taiwei")) {
-            step = new TaiWei();
-        } else if (line.startsWith("podong")) {
-            step = new BingPoDong();
-        } else if (line.equals("dangkou")) {
-            step = new DangKou();
-        } else if (line.equals("poSuiMengJingShi")) {
-            step = new PoSui();
         } else if (line.startsWith("take")) {
             step = new GoodsTakeout(line.substring(4));
         } else if (line.equals("home")) {
@@ -258,7 +237,7 @@ public class TextParse implements Runable {
                 if (currNormalIndex < 0) currNormalIndex = 0;
                 Step step = linkedList.get(currNormalIndex);
                 controller.stepRunBefore();
-                exec = step.run()||exec;
+                exec = step.run() || exec;
                 controller.stepRunAfter();
             } catch (StepBackException e) {
                 currNormalIndex -= 2;

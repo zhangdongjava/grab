@@ -258,11 +258,4 @@ public class CoreController {
         }
     }
 
-    /**
-     * 关闭这个选项卡
-     */
-    public void close() {
-        feture.cancel(true);
-        service.shutdownNow();
-    }
 }

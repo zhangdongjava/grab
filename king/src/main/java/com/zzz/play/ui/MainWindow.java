@@ -8,6 +8,7 @@ import com.zzz.play.ui.dialog.ShuQianOpenDialog;
 import com.zzz.play.ui.dialog.SysSetDialog;
 import com.zzz.play.util.Resource;
 import com.zzz.play.util.sys.Recovery;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,6 +56,8 @@ public class MainWindow extends JFrame {
     public static String[] scripts = {"scripts/材料/血印分身蒙汗药", "scripts/材料/大柳虫", "scripts/材料/大白菜"};
 
     public static int count = 0;
+
+    private static Logger logger = Logger.getLogger(MainWindow.class);
 
     public MainWindow() {
         this.setSize(width, height);
@@ -324,6 +327,6 @@ public class MainWindow extends JFrame {
 
     public void addCache(String name, UserInfo userInfo) {
         recovery.addCache(name, userInfo);
-
+        logger.error("内存占用->>"+Runtime.getRuntime().totalMemory());
     }
 }

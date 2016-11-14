@@ -1,5 +1,6 @@
 package com.zzz.play.ui.dialog;
 
+import com.zzz.play.bean.UserInfo;
 import com.zzz.play.ui.HtmlPanel;
 import com.zzz.play.ui.TabPanel;
 import com.zzz.play.util.Resource;
@@ -7,7 +8,7 @@ import com.zzz.play.util.Resource;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
-import java.io.File;
+import java.io.*;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -34,6 +35,9 @@ public class ScriptDialog extends JDialog {
     private JTabbedPane tabPanel;
     private JButton ok;
     private JButton reload;
+    private JButton open;
+    private JButton save;
+    private JFileChooser jChooser;
     /**
      * 展示的脚本
      */
@@ -42,6 +46,7 @@ public class ScriptDialog extends JDialog {
     private Set<String> selectList;
 
     private boolean is_init = false;
+
 
     static {
         allScripts = new LinkedHashMap<>();
@@ -53,6 +58,8 @@ public class ScriptDialog extends JDialog {
     public ScriptDialog(HtmlPanel htmlPanel) {
         super(htmlPanel.mainWindow);
         tabPanel = new JTabbedPane(JTabbedPane.LEFT);
+        jChooser = new JFileChooser();
+        jChooser.setCurrentDirectory(new File(""));//设置默认打开路径
         this.setModal(true);
         this.setLayout(null);
         this.setSize(400, 600);
@@ -71,19 +78,70 @@ public class ScriptDialog extends JDialog {
         clickList = new JList(defaultListModel);
         ok = new JButton("确定");
         reload = new JButton("重载");
+        open = new JButton("打开");
+        save = new JButton("保存");
         clickList.setBackground(Color.gray);
         clickList.addListSelectionListener((e) -> remove(e));
         clickList.setBounds(250, 0, 150, 500);
-        ok.setBounds(100, 520, 60, 30);
-        reload.setBounds(200, 520, 60, 30);
+        ok.setBounds(25, 520, 60, 30);
+        reload.setBounds(100, 520, 60, 30);
+        open.setBounds(175, 520, 60, 30);
+        save.setBounds(250, 520, 60, 30);
         ok.addActionListener((e) -> ok());
         reload.addActionListener((e) -> reload());
+        open.addActionListener((e) -> open());
+        save.addActionListener((e) -> save());
         tabPanel.setBounds(0, 0, 250, 500);
         addList();
         this.add(tabPanel);
         this.add(ok);
+        this.add(open);
+        this.add(save);
         this.add(reload);
         this.add(clickList);
+    }
+
+    /**
+     * 保存脚本
+     */
+    private void save() {
+        jChooser.setDialogType(JFileChooser.SAVE_DIALOG);//设置保存对话框
+        jChooser.showDialog(this, "保存脚本");
+        File file = jChooser.getSelectedFile();
+        if (file != null) {
+            try {
+                FileOutputStream fos = new FileOutputStream(file);
+                PrintStream stream = new PrintStream(fos);
+                for (String s : showList) {
+                    stream.println(url_name.get(s));
+                }
+                stream.close();
+                fos.close();
+            } catch (IOException e) {
+               JOptionPane.showConfirmDialog(this,"保存失败!"+e.toString());
+            }
+        }
+    }
+
+    private void open() {
+        jChooser.setDialogType(JFileChooser.OPEN_DIALOG);//设置保存对话框
+        jChooser.showDialog(this, "打开缓存");
+        File file = jChooser.getSelectedFile();
+        if (file != null) {
+            try {
+                FileInputStream fis  = new FileInputStream(file);
+                BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+                String line = br.readLine();
+                while(line!=null && allScripts.containsKey(line)){
+                    defaultListModel.addElement(line);
+                    selectList.add(line);
+                    showList.add(allScripts.get(line));
+                    line = br.readLine();
+                }
+            } catch (IOException e) {
+                JOptionPane.showConfirmDialog(this,"打开失败!"+e.toString());
+            }
+        }
     }
 
     private void addList() {

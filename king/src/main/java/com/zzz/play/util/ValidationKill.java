@@ -21,13 +21,10 @@ public class ValidationKill {
 
     private static int MAX_COUNT = 10;
 
-    private ValidationKill(HtmlContent htmlContent) {
+    public ValidationKill(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;
     }
 
-    public static ValidationKill getValidationKill(HtmlContent htmlContent) {
-        return new ValidationKill(htmlContent);
-    }
 
     public void kill() {
         count = 0;

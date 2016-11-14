@@ -63,11 +63,16 @@ public class HtmlContent {
     //副本
     LinkBean copyLinkBean;
     private String text;
+    /**
+     * 接触验证
+     */
+    private ValidationKill validationKill;
 
 
     public HtmlContent(String url, HtmlPanel htmlPanel, CoreController controller) {
         lastTime = System.currentTimeMillis();
         this.controller = controller;
+        validationKill = new ValidationKill(this);
         linkBean = new LinkBean();
         copyLinkBean = new LinkBean();
         initUtil();
@@ -235,7 +240,7 @@ public class HtmlContent {
                 linkUrl(getUrl("继续", false).getUrl());
             }
             if (exitsName("解除验证", false)) {
-                ValidationKill.getValidationKill(this).kill();
+                validationKill.kill();
             }
             if (document.text().contains("战斗中，不能参战")) {
                 zdz.run();

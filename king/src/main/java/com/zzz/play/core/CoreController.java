@@ -128,6 +128,7 @@ public class CoreController {
      */
     public void loadParse() {
         if (content == null) return;
+        globalUtil.clear();
         cache1.clear();
         scriptReload = true;
         if (sysTextParse == null) {
@@ -153,24 +154,24 @@ public class CoreController {
      */
     private void run() {
         List<Runable> runParses = new LinkedList<>();
-        if(cache1.isEmpty()){
+        if (cache1.isEmpty()) {
             loadParse();
         }
         future = service.submit(() -> {
             runing = true;
-            boolean exec  = true;
-            while (!Thread.interrupted()&&runing) {
-                if(scriptReload){//脚本重新加载了 才会拿来执行
+            boolean exec = true;
+            while (!Thread.interrupted() && runing) {
+                if (scriptReload) {//脚本重新加载了 才会拿来执行
                     runParses.clear();
                     runParses.addAll(cache1);
                     scriptReload = false;
                 }
                 for (Runable parse : runParses) {
                     try {
-                        if (parse.isClear()&&exec) {
+                        if (parse.isClear() && exec) {
                             utilDto.clearUtil.fzClear(content);
                         }
-                        exec =  parse.run();
+                        exec = parse.run();
                     } catch (StopCurrStepException e) {
                         System.out.println(parse.getFileName() + "->" + e.toString());
                     } catch (Exception e) {
@@ -183,7 +184,6 @@ public class CoreController {
             htmlPanel.killed();
         });
     }
-
 
 
     /**
@@ -216,7 +216,7 @@ public class CoreController {
      * 终止脚本
      */
     public void kill() {
-        if(future != null){
+        if (future != null) {
             runing = false;
             future.cancel(true);
         }

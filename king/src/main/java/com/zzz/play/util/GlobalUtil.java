@@ -16,6 +16,10 @@ public class GlobalUtil {
         steps = new LinkedList<>();
     }
 
+    public void clear(){
+        steps.clear();
+    }
+
     public void addStep(Step step) {
         if (step instanceof Global)
             steps.add(step);

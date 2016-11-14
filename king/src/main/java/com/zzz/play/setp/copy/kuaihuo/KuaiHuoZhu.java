@@ -1,5 +1,6 @@
 package com.zzz.play.setp.copy.kuaihuo;
 
+import com.sun.prism.impl.BaseMesh;
 import com.zzz.play.util.HtmlContent;
 
 /**
@@ -10,13 +11,14 @@ public class KuaiHuoZhu extends KuaiHuoFb {
 
     private String name;
 
+
     public KuaiHuoZhu(HtmlContent htmlContent, String name) {
         super(htmlContent);
         this.name = name;
     }
 
     @Override
-    public void run() {
+    public boolean run() {
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("队伍");
         while (!htmlContent.exitsName(name,true)) {
@@ -30,6 +32,9 @@ public class KuaiHuoZhu extends KuaiHuoFb {
         htmlContent.linkName("景阳岗");
         htmlContent.linkName("追星捕快");
         htmlContent.linkName("传送至快活林副本");
+        if(htmlContent.getText().contains("今天你已进入")){
+            return false ;
+        }
         zhanDouSwb();
         zhanDouSwb("进入防风林");
         zhanDouSwb("上:防风林↑");
@@ -86,6 +91,7 @@ public class KuaiHuoZhu extends KuaiHuoFb {
         htmlContent.linkName("史进",true);
         htmlContent.linkName("设为近身武将");
         htmlContent.linkName("返回游戏");
+        return true;
     }
 
 

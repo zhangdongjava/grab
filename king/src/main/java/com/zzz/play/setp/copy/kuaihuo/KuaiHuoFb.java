@@ -6,14 +6,14 @@ import com.zzz.play.util.HtmlContent;
 /**
  * Created by Administrator on 2016/11/14 0014.
  */
-public abstract class KuaiHuoFb {
+public abstract class KuaiHuoFb  {
     protected HtmlContent htmlContent;
 
     public KuaiHuoFb(HtmlContent htmlContent){
 
         this.htmlContent = htmlContent;
     }
-    public  abstract void run();
+    public  abstract boolean run();
     public void zhanDouSwb(String action){
         htmlContent.linkName(action);
         zhanDouSwb();

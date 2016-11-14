@@ -3,6 +3,8 @@ package com.zzz.play.setp.copy.kuaihuo;
 import com.zzz.play.setp.sup.SecondRefresh;
 import com.zzz.play.util.resource.KuaiHuoResource;
 
+import java.util.Date;
+
 /**
  * Created by Administrator on 2016/11/14 0014.
  */
@@ -32,7 +34,10 @@ public class KuaiHuo extends SecondRefresh {
 
     private void fbrun() {
         if (huoFb != null) {
-            huoFb.run();
+            if (!huoFb.run()) {
+                lastDate = new Date();
+                ableIn = false;
+            }
         }
     }
 

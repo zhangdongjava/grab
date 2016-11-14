@@ -18,7 +18,7 @@ public class KuaiHuoFu extends KuaiHuoFb {
     }
 
     @Override
-    public void run() {
+    public boolean run() {
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("队伍");
         htmlContent.linkName("提取");
@@ -41,6 +41,9 @@ public class KuaiHuoFu extends KuaiHuoFb {
         htmlContent.linkName("景阳岗");
         htmlContent.linkName("追星捕快");
         htmlContent.linkName("传送至快活林副本");
+        if(htmlContent.getText().contains("今天你已进入")){
+            return false ;
+        }
         zhanDouSwb();
         zhanDouSwb("进入防风林");
         zhanDouSwb("上:防风林↑");
@@ -87,6 +90,7 @@ public class KuaiHuoFu extends KuaiHuoFb {
         htmlContent.linkName("退出队伍");
         htmlContent.linkName("确定退出");
         htmlContent.linkName("返回游戏");
+        return true;
     }
 
 

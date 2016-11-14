@@ -129,7 +129,6 @@ public class CoreController {
     public void loadParse() {
         if (content == null) return;
         cache1.clear();
-        cache2.clear();
         if (sysTextParse == null) {
             sysTextParse = new SysTextParse(content);
         }

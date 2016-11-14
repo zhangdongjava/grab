@@ -273,10 +273,6 @@ public class HtmlContent {
         return true;
     }
 
-    private void setContext(String html) {
-        document = Jsoup.parse(html);
-        linkEnd();
-    }
 
     private boolean linkUrl(String url, int count) {
         if (count > LINE_COUNT) throw new RuntimeException("链接断开!");
@@ -301,7 +297,7 @@ public class HtmlContent {
     }
 
     /**
-     * 打印地址到文件中分钟一次
+     * 打印地址到文件中10分钟一次
      *
      * @param url
      */

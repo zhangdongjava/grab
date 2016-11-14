@@ -327,6 +327,6 @@ public class MainWindow extends JFrame {
 
     public void addCache(String name, UserInfo userInfo) {
         recovery.addCache(name, userInfo);
-        logger.error("内存占用->>"+Runtime.getRuntime().totalMemory());
+        logger.error("内存占用->>"+(Runtime.getRuntime().totalMemory()>>20));
     }
 }

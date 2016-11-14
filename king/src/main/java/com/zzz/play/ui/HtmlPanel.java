@@ -6,6 +6,7 @@ import com.zzz.play.inter.impl.GlobalObserver;
 import com.zzz.play.ui.dialog.ScriptDialog;
 import com.zzz.play.util.*;
 import com.zzz.play.util.page.ClearUtil;
+import com.zzz.play.util.resource.Resource;
 import com.zzz.play.util.sys.LoginUtil;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;

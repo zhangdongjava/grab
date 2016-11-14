@@ -1,4 +1,4 @@
-package com.zzz.play.util;
+package com.zzz.play.util.resource;
 
 import javax.swing.*;
 import java.io.*;

@@ -1,12 +1,11 @@
 package com.zzz.play.ui.dialog;
 
 import com.zzz.play.ui.MainWindow;
-import com.zzz.play.util.Resource;
+import com.zzz.play.util.resource.Resource;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 

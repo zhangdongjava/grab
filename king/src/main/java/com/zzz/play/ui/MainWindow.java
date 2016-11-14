@@ -3,7 +3,7 @@ package com.zzz.play.ui;
 
 import com.zzz.play.bean.UserInfo;
 import com.zzz.play.ui.dialog.*;
-import com.zzz.play.util.Resource;
+import com.zzz.play.util.resource.Resource;
 import com.zzz.play.util.sys.Recovery;
 import org.apache.log4j.Logger;
 

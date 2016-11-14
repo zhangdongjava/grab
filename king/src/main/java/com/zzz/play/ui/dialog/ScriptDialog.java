@@ -1,7 +1,7 @@
 package com.zzz.play.ui.dialog;
 
 import com.zzz.play.ui.HtmlPanel;
-import com.zzz.play.util.Resource;
+import com.zzz.play.util.resource.Resource;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;

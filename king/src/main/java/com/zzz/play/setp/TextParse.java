@@ -184,8 +184,10 @@ public class TextParse implements Runable {
             step = new PoSui();
         } else if (line.startsWith("take")) {
             step = new GoodsTakeout(line.substring(4));
-        } else if (line.startsWith("home")) {
+        } else if (line.equals("home")) {
             step = new HomeStep();
+        } else if (line.equals("home2")) {
+            step = new HomeStep2();
         } else if (line.endsWith("{")) {
             manyStep = StepUtil.getManny(line);
             if (buildMany()) {

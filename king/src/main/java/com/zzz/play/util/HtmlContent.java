@@ -95,6 +95,7 @@ public class HtmlContent {
         if (element != null) {
             url = element.attr("href");
             linkBean.setUrl(url);
+            linkBean.setClickName(element.text());
             return linkBean;
         }
         return linkBean;
@@ -116,6 +117,7 @@ public class HtmlContent {
         if (element != null) {
             String url = element.attr("href");
             linkBean.setUrl(url);
+            linkBean.setClickName(element.text());
             urlMap.put(name + "_" + notName, linkBean);
         }
         return linkBean;
@@ -344,6 +346,7 @@ public class HtmlContent {
                     String url = a.attr("href");
                     linkBean.setUrl(url);
                     linkBean.setSuccess(linkUrl(url));
+                    linkBean.setClickName(a.text());
                     return linkBean;
                 }
                 index--;
@@ -351,6 +354,7 @@ public class HtmlContent {
                 if (index == 0) {
                     String url = a.attr("href");
                     linkBean.setUrl(url);
+                    linkBean.setClickName(a.text());
                     linkBean.setSuccess(linkUrl(url));
                     return linkBean;
                 }

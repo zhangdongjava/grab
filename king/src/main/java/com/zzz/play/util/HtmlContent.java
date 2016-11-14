@@ -346,7 +346,7 @@ public class HtmlContent {
                     String url = a.attr("href");
                     linkBean.setUrl(url);
                     linkBean.setSuccess(linkUrl(url));
-                    break;
+                    return linkBean;
                 }
                 index--;
             } else if (like && a.text().contains(name)) {
@@ -354,7 +354,7 @@ public class HtmlContent {
                     String url = a.attr("href");
                     linkBean.setUrl(url);
                     linkBean.setSuccess(linkUrl(url));
-                    break;
+                    return linkBean;
                 }
                 index--;
             }

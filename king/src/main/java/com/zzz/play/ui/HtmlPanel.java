@@ -198,7 +198,6 @@ public class HtmlPanel extends JFXPanel {
         System.out.println(this.user.getName() + "->>脚本终止!");
         Platform.runLater(() -> {
             go.setDisable(false);
-           // go2.setDisable(false);
             pause.setDisable(true);
             utilDto.waitNotfiy.wait = false;
             pause.setText("pause");

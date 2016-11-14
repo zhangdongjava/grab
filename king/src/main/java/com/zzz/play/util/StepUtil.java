@@ -4,7 +4,7 @@ import com.zzz.play.setp.Step;
 import com.zzz.play.setp.copy.*;
 import com.zzz.play.setp.impl.config.*;
 import com.zzz.play.setp.material.compound.*;
-import com.zzz.play.setp.sys.QiangXian;
+import com.zzz.play.setp.sys.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -42,6 +42,7 @@ public class StepUtil {
     private static Map<String, Class<?>> map = new HashMap<>();
     private static Map<String, Class<?>> manymap = new HashMap<>();
     private static Map<String, Class<?>> classmap = new HashMap<>();
+    private static Map<String, Class<?>> classParammap = new HashMap<>();
 
     static {
         map.put("while1", WhileHasConditionStep.class);
@@ -68,6 +69,16 @@ public class StepUtil {
         classmap.put("podong", BingPoDong.class);
         classmap.put("dangkou", DangKou.class);
         classmap.put("poSuiMengJingShi", PoSui.class);
+        classmap.put("shenFenWenShu", ShenFenWenShu.class);
+        classmap.put("clear", ClearStep.class);
+        classmap.put("home", HomeStep.class);
+        classmap.put("home2", HomeStep2.class);
+        classParammap.put("sale", GoodsSale.class);
+        classParammap.put("form", FormSubmit.class);
+        classParammap.put("grug", BuyDrug.class);
+        classParammap.put("save", GoodsSave.class);
+        classParammap.put("take", GoodsTakeout.class);
+
     }
 
     public static Step getStep(String line) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -118,6 +129,14 @@ public class StepUtil {
         Class<?> cla = classmap.get(line);
         if(cla!= null){
             return (Step) cla.newInstance();
+        }
+        return null;
+    }
+
+    public static Step getClassFormParamSetp(String line) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+        Class<?> cla = classParammap.get(line.substring(0,4));
+        if(cla!= null){
+            return (Step) cla.getConstructor(String.class).newInstance(line.substring(4));
         }
         return null;
     }

@@ -112,72 +112,58 @@ public class TextParse implements Runable {
     }
 
     private Step addStep(String line) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, ClassNotFoundException {
-        Step step = StepUtil.getClassSetp(line);
-        if (step == null) {
-            if (line.startsWith("class")) {
-                step = StepUtil.getClassNameSetp(line.substring(5));
-            } else if (line.startsWith("base")) {
-                if (line.endsWith("{")) {
-                    manyStep = StepUtil.getManny(line.substring(4));
-                    if (buildMany()) {
-                        baseList.add(manyStep);
-                    }
-                } else {
-                    step = StepUtil.getStep(line.substring(4));
-                    step.setHtmlContent(htmlContent);
-                    step.setStep(this);
-                    baseList.add(step);
+        Step step = null;
+        if (line.startsWith("base")) {
+            if (line.endsWith("{")) {
+                manyStep = StepUtil.getManny(line.substring(4));
+                if (buildMany()) {
+                    baseList.add(manyStep);
                 }
-
             } else {
-                step = buildNotBaseStep(line);
+                step = StepUtil.getStep(line.substring(4));
+                step.setHtmlContent(htmlContent);
+                step.setStep(this);
+                baseList.add(step);
             }
+
+        } else {
+            step = buildNotBaseStep(line);
         }
 
         return step;
     }
 
     private Step buildNotBaseStep(String line) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, ClassNotFoundException, InstantiationException {
-        Step step = null;
-        if (line.startsWith("b")) {
-            step = StepUtil.getStep(line.substring(1));
-            step.setBase(true);
-        } else if (line.startsWith("mb")) {
-            step = StepUtil.getStep(line.substring(2));
-            step.setMb(true);
-        } else if (line.startsWith("shenFenWenShu")) {
-            step = new ShenFenWenShu();
-        } else if (line.startsWith("sale")) {
-            step = new GoodsSale(line.substring(4));
-        } else if (line.startsWith("sale2")) {
-            step = new GoodsSale(line.substring(5));
-        } else if (line.startsWith("save2")) {
-            step = new GoodsSave2(line.substring(5));
-        } else if (line.startsWith("clear")) {
-            step = new ClearStep();
-        } else if (line.startsWith("form")) {
-            step = new FormSubmit(line.substring(4));
-        } else if (line.startsWith("grug")) {
-            step = new BuyDrug(line.substring(4));
-        } else if (line.startsWith("save")) {
-            step = new GoodsSave(line.substring(4));
-        } else if (line.startsWith("take")) {
-            step = new GoodsTakeout(line.substring(4));
-        } else if (line.equals("home")) {
-            step = new HomeStep();
-        } else if (line.equals("home2")) {
-            step = new HomeStep2();
-        } else if (line.endsWith("{")) {
-            manyStep = StepUtil.getManny(line);
-            if (buildMany()) {
-                linkedList.add(manyStep);
-            }
-        } else if (line.equals("}")) {
-            inMang = false;
-            manyStep = null;
-        } else {
-            step = StepUtil.getStep(line);
+        Step step = StepUtil.getClassSetp(line);
+        if (step == null && line.length()>4) {
+            step = StepUtil.getClassFormParamSetp(line);
         }
+        if (step == null) {
+            if (line.startsWith("class")) {
+                step = StepUtil.getClassNameSetp(line.substring(5));
+            } else if (line.startsWith("b")) {
+                step = StepUtil.getStep(line.substring(1));
+                step.setBase(true);
+            } else if (line.startsWith("mb")) {
+                step = StepUtil.getStep(line.substring(2));
+                step.setMb(true);
+            }   else if (line.startsWith("sale2")) {
+                step = new GoodsSale2(line.substring(5));
+            } else if (line.startsWith("save2")) {
+                step = new GoodsSave2(line.substring(5));
+            } else if (line.endsWith("{")) {
+                manyStep = StepUtil.getManny(line);
+                if (buildMany()) {
+                    linkedList.add(manyStep);
+                }
+            } else if (line.equals("}")) {
+                inMang = false;
+                manyStep = null;
+            } else {
+                step = StepUtil.getStep(line);
+            }
+        }
+
         if (step != null) {
             step.setStep(this);
             step.setHtmlContent(htmlContent);

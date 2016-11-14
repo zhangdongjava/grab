@@ -256,7 +256,7 @@ public class TextParse implements Runable {
                 if (currNormalIndex < 0) currNormalIndex = 0;
                 Step step = linkedList.get(currNormalIndex);
                 controller.stepRunBefore();
-                exec =exec || step.run();
+                exec =exec |step.run();
                 controller.stepRunAfter();
             } catch (StepBackException e) {
                 currNormalIndex -= 2;

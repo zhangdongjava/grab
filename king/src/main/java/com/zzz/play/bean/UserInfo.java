@@ -15,6 +15,7 @@ public class UserInfo implements Serializable {
     private String name;
     private String daqu;
     private String url;
+    private String currUrl;
     private LinkedList<String> scritps1;
     private LinkedList<String> scritps2;
 
@@ -64,5 +65,14 @@ public class UserInfo implements Serializable {
 
     public void setLogin(boolean login) {
         this.login = login;
+    }
+
+
+    public String getCurrUrl() {
+        return currUrl;
+    }
+
+    public void setCurrUrl(String currUrl) {
+        this.currUrl = currUrl;
     }
 }

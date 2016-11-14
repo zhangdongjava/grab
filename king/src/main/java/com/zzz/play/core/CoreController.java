@@ -153,6 +153,9 @@ public class CoreController {
      */
     private void run() {
         List<Runable> runParses = new LinkedList<>();
+        if(cache1.isEmpty()){
+            loadParse();
+        }
         future = service.submit(() -> {
             runing = true;
             boolean exec  = true;

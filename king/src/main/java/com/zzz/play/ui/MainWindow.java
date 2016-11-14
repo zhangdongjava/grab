@@ -2,10 +2,7 @@ package com.zzz.play.ui;
 
 
 import com.zzz.play.bean.UserInfo;
-import com.zzz.play.ui.dialog.MyDialog;
-import com.zzz.play.ui.dialog.ShuQianDialog;
-import com.zzz.play.ui.dialog.ShuQianOpenDialog;
-import com.zzz.play.ui.dialog.SysSetDialog;
+import com.zzz.play.ui.dialog.*;
 import com.zzz.play.util.Resource;
 import com.zzz.play.util.sys.Recovery;
 import org.apache.log4j.Logger;
@@ -21,6 +18,8 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import static com.zzz.play.ui.dialog.ScriptDialog.allScripts;
 
 /**
  * Created by dell_2 on 2016/10/29.
@@ -95,6 +94,7 @@ public class MainWindow extends JFrame {
         JMenuItem all = new JMenuItem("保存所有");  //菜单项
         JMenuItem open = new JMenuItem("打开所有");  //菜单项
         JMenuItem openCache = new JMenuItem("打开缓存");  //菜单项
+        JMenuItem openScript = new JMenuItem("打开脚本");  //菜单项
         addTab.addActionListener((e) -> addTab());
         scriptPath.addActionListener((e) -> scriptPath());
         shuqianAdd.addActionListener((e) -> shuqianAdd());
@@ -103,6 +103,7 @@ public class MainWindow extends JFrame {
         name.addActionListener((e) -> setName());
         open.addActionListener((e) -> exec.submit(() -> open()));
         openCache.addActionListener((e) -> exec.submit(() -> openCache()));
+        openScript.addActionListener((e) -> exec.submit(() -> openScript()));
         jm.add(addTab);   //将菜单项目添加到菜单
         set.add(scriptPath);   //将菜单项目添加到菜单
         set.add(name);   //将菜单项目添加到菜单
@@ -111,11 +112,37 @@ public class MainWindow extends JFrame {
         shuqian.add(all);   //将菜单项目添加到菜单
         shuqian.add(open);   //将菜单项目添加到菜单
         shuqian.add(openCache);   //将菜单项目添加到菜单
+        shuqian.add(openScript);   //将菜单项目添加到菜单
         JMenuBar br = new JMenuBar();  //创建菜单工具栏
         br.add(jm);      //将菜单增加到菜单工具栏
         br.add(set);      //将菜单增加到菜单工具栏
         br.add(shuqian);      //将菜单增加到菜单工具栏
         this.setJMenuBar(br);  //为 窗体设置  菜单工具栏
+    }
+
+    private void openScript() {
+        jChooser = new JFileChooser();
+        jChooser.setCurrentDirectory(new File(""));//设置默认打开路径
+        jChooser.setDialogType(JFileChooser.OPEN_DIALOG);//设置保存对话框
+        jChooser.showDialog(this, "打开脚本");
+        File file = jChooser.getSelectedFile();
+        if (file != null) {
+            try {
+                FileInputStream fis  = new FileInputStream(file);
+                BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+                String line = br.readLine();
+                while(line!=null && ScriptDialog.allScripts.containsKey(line)){
+                    for (HtmlPanel htmlPanel : htmlPanels) {
+                        if( !htmlPanel.user.getScritps1().contains(allScripts.get(line))){
+                            htmlPanel.user.getScritps1().add(allScripts.get(line));
+                        }
+                    }
+                    line = br.readLine();
+                }
+            } catch (IOException e) {
+                JOptionPane.showConfirmDialog(this,"打开失败!"+e.toString());
+            }
+        }
     }
 
     /**
@@ -131,6 +158,7 @@ public class MainWindow extends JFrame {
             Map<String, UserInfo> map = recovery.open(file);
             for (UserInfo user : map.values()) {
                 user.setLogin(false);
+                user.setUrl(user.getCurrUrl());
                 tabPanel.addPanel(user);
             }
         }

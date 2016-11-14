@@ -1,8 +1,6 @@
 package com.zzz.play.ui.dialog;
 
-import com.zzz.play.bean.UserInfo;
 import com.zzz.play.ui.HtmlPanel;
-import com.zzz.play.ui.TabPanel;
 import com.zzz.play.util.Resource;
 
 import javax.swing.*;
@@ -11,7 +9,6 @@ import java.awt.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by dell_2 on 2016/11/1.
@@ -22,12 +19,12 @@ public class ScriptDialog extends JDialog {
     /**
      * 名称映射地址
      */
-    private static Map<String, String> allScripts;
-    private static Map<String, List<String>> mapList;
+    public static Map<String, String> allScripts;
+    public static Map<String, List<String>> mapList;
     /**
      * 地址映射名称
      */
-    private static Map<String, String> url_name;
+    public static Map<String, String> url_name;
     private HtmlPanel htmlPanel;
     private ScrollPane jScrollPane;
     private JList<String> clickList;
@@ -53,6 +50,7 @@ public class ScriptDialog extends JDialog {
         url_name = new HashMap<>();
         mapList = new HashMap<>();
         Resource.load();
+        build();
     }
 
     public ScriptDialog(HtmlPanel htmlPanel) {
@@ -65,7 +63,10 @@ public class ScriptDialog extends JDialog {
         this.setSize(400, 600);
         this.setLocationRelativeTo(null);
         this.htmlPanel = htmlPanel;
-        build();
+        if (!is_init) {
+            init();
+            is_init = true;
+        }
     }
 
     private ScriptDialog(Frame frame) {
@@ -133,9 +134,11 @@ public class ScriptDialog extends JDialog {
                 BufferedReader br = new BufferedReader(new InputStreamReader(fis));
                 String line = br.readLine();
                 while(line!=null && allScripts.containsKey(line)){
-                    defaultListModel.addElement(line);
-                    selectList.add(line);
-                    showList.add(allScripts.get(line));
+                    if(!selectList.contains(line)){
+                        defaultListModel.addElement(line);
+                        selectList.add(line);
+                        showList.add(allScripts.get(line));
+                    }
                     line = br.readLine();
                 }
             } catch (IOException e) {
@@ -193,7 +196,7 @@ public class ScriptDialog extends JDialog {
         this.showList = showList;
         defaultListModel.clear();
         for (String s : showList) {
-            defaultListModel.addElement(url_name.get(s));
+            addScript(s);
         }
         this.setVisible(true);
     }
@@ -215,10 +218,10 @@ public class ScriptDialog extends JDialog {
     }
 
 
-    public void build() {
+    public static void build() {
         scriptRoot = Resource.bootPath;
         if (scriptRoot == null) {
-            JOptionPane.showConfirmDialog(this.htmlPanel.mainWindow, "请设置脚本根路径!");
+            JOptionPane.showConfirmDialog(null, "请设置脚本根路径!");
             return;
         }
         File file = new File(scriptRoot);
@@ -229,13 +232,10 @@ public class ScriptDialog extends JDialog {
                 openDir(file1, file1.getName());
             }
         }
-        if (!is_init) {
-            init();
-            is_init = true;
-        }
+
     }
 
-    public void openDir(File dir, String name) {
+    public static void openDir(File dir, String name) {
         File[] files = dir.listFiles();
         for (File file1 : files) {
             if (file1.isFile()) {

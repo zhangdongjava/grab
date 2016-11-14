@@ -166,6 +166,7 @@ public class CoreController {
                 if(scriptReload){//脚本重新加载了 才会拿来执行
                     runParses.clear();
                     runParses.addAll(cache1);
+                    scriptReload = false;
                 }
                 for (Runable parse : runParses) {
                     try {

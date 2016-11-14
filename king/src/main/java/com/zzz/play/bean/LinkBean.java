@@ -40,4 +40,10 @@ public class LinkBean {
         url = null;
 
     }
+
+    public void copy(LinkBean linkBean) {
+        success = linkBean.isSuccess();
+        clickName = linkBean.getClickName();
+        url = linkBean.url;
+    }
 }

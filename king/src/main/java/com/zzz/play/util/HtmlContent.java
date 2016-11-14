@@ -75,7 +75,7 @@ public class HtmlContent {
         selfLinkUrl(url, 0);
     }
 
-    private void  initUtil(){
+    private void initUtil() {
         controller.utilDto.goodsNumUtil = new GoodsNumUtil();
         controller.utilDto.goodsNumUtil.setHtmlContent(this);
     }
@@ -89,7 +89,7 @@ public class HtmlContent {
      */
     public LinkBean getUrl(String name, boolean like) {
         String url;
-         linkBean.reset();
+        linkBean.reset();
         Elements elements = document.getElementsByTag("a");
         Element element = getAelement(elements, like, name, linkBean);
         if (element != null) {
@@ -113,7 +113,7 @@ public class HtmlContent {
         this.linkBean.reset();
         linkBean = this.linkBean;
         Elements elements = document.getElementsByTag("a");
-        Element element = getAelementNotName(elements, name,linkBean, notName);
+        Element element = getAelementNotName(elements, name, linkBean, notName);
         if (element != null) {
             String url = element.attr("href");
             linkBean.setUrl(url);
@@ -226,6 +226,8 @@ public class HtmlContent {
 
 
     public void vailte() {
+        LinkBean linkBean = new LinkBean();
+        linkBean.copy(this.linkBean);
         try {
             if (exitsName("继续", false)) {
                 linkUrl(getUrl("继续", false).getUrl());
@@ -242,6 +244,7 @@ public class HtmlContent {
             }
         } finally {
         }
+        this.linkBean.copy(linkBean);
     }
 
 
@@ -261,9 +264,9 @@ public class HtmlContent {
             String html = httpRequest.sendGet(url);
             document = Jsoup.parse(html);
             linkEnd();
-        }catch (InterruptedException e) {
-           Thread.currentThread().interrupt();
-        }  catch (IOException e) {
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } catch (IOException e) {
             selfLinkUrl(url, count + 1);
         } catch (Exception e) {
             e.printStackTrace();
@@ -285,7 +288,7 @@ public class HtmlContent {
             }
             printfUrl(url);
         } catch (InterruptedException e) {
-           Thread.currentThread().interrupt();
+            Thread.currentThread().interrupt();
         } catch (IOException e) {
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);
@@ -303,7 +306,7 @@ public class HtmlContent {
     private void printfUrl(String url) {
         long currTime = System.currentTimeMillis();
         if (currTime - lastLogTime > 600000) {
-            logger.error(htmlPanel.user.getName() +"-->"+url);
+            logger.error(htmlPanel.user.getName() + "-->" + url);
             lastLogTime = currTime;
             htmlPanel.addCache(url);
         }

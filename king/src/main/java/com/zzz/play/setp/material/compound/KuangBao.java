@@ -119,7 +119,7 @@ public class KuangBao extends SecondRefresh {
         htmlContent.linkName("上:景阳岗上↑");
         htmlContent.linkName("行者.武松");
         htmlContent.linkName("研制狂暴奇书");
-        while (htmlContent.getDocument().text().contains("完成研制")) {
+        while (htmlContent.getText().contains("完成研制")) {
             getHuPi -= HU_NUM;
             bingPo -= 1;
             htmlContent.linkName("返回武松");

@@ -60,6 +60,7 @@ public class HtmlContent {
     private long lastTime;
     private long lastLogTime;
     LinkBean linkBean;
+    private String text;
 
 
     public HtmlContent(String url, HtmlPanel htmlPanel, CoreController controller) {
@@ -309,6 +310,7 @@ public class HtmlContent {
 
     private void linkEnd() {
         delForms = document.getElementsByTag("form").remove();
+        text = document.text();
         document.getElementsByTag("img").remove();
         urlMap.clear();
         long currTime = System.currentTimeMillis();
@@ -414,7 +416,9 @@ public class HtmlContent {
         this.currParse = currParse;
     }
 
-
+    public String getText() {
+        return text;
+    }
 }
 
 

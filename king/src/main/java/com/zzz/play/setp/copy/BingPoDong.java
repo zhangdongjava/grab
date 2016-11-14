@@ -46,7 +46,7 @@ public class BingPoDong extends FuBen {
         htmlContent.linkName("冰封老人");
         htmlContent.linkName("进入冰魄洞副本");
         htmlContent.linkName("传送进冰魄洞");
-        if (htmlContent.getDocument().text().contains("今天你已进入")) {
+        if (htmlContent.getText().contains("今天你已进入")) {
             ableIn = false;
             lastDate = new Date();
             logger.error(htmlContent.htmlPanel.user.getDaqu() + "冰魄洞结束!");
@@ -55,7 +55,7 @@ public class BingPoDong extends FuBen {
             htmlContent.linkName("返回游戏");
             return false;
         }
-        if (htmlContent.getDocument().text().contains("对不起，需要提供红角兽王鬃毛x1")) {
+        if (htmlContent.getText().contains("对不起，需要提供红角兽王鬃毛x1")) {
             return false;
         }
         htmlContent.linkName("返回游戏");
@@ -167,7 +167,7 @@ public class BingPoDong extends FuBen {
      */
     public void zhanDouShizhe() {
         htmlContent.linkName("攻击", true);
-        while ((!htmlContent.getDocument().text().contains("冰洞守卫(0)"))
+        while ((!htmlContent.getText().contains("冰洞守卫(0)"))
                 && htmlContent.exitsName("万年灵芝")) {
             htmlContent.linkName("万年灵芝");
         }
@@ -203,7 +203,7 @@ public class BingPoDong extends FuBen {
     public void sd() {
         htmlContent.linkName("水洞守卫");
         htmlContent.linkName("攻击水洞守卫");
-        while ((!htmlContent.getDocument().text().contains("步兵(0)"))
+        while ((!htmlContent.getText().contains("步兵(0)"))
                 && htmlContent.exitsName("万年灵芝")) {
             htmlContent.linkName("万年灵芝");
         }
@@ -229,7 +229,7 @@ public class BingPoDong extends FuBen {
     public void md() {
         htmlContent.linkName("木洞守卫");
         htmlContent.linkName("攻击木洞守卫");
-        while ((!htmlContent.getDocument().text().contains("步兵(0)"))
+        while ((!htmlContent.getText().contains("步兵(0)"))
                 && htmlContent.exitsName("万年灵芝")) {
             htmlContent.linkName("万年灵芝");
         }
@@ -255,7 +255,7 @@ public class BingPoDong extends FuBen {
     public void bd() {
         htmlContent.linkName("冰洞守卫");
         htmlContent.linkName("攻击冰洞守卫");
-        while ((!htmlContent.getDocument().text().contains("步兵(0)"))
+        while ((!htmlContent.getText().contains("步兵(0)"))
                 && htmlContent.exitsName("万年灵芝")) {
             htmlContent.linkName("万年灵芝");
         }

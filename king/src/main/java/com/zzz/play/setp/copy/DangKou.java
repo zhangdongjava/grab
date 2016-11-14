@@ -42,7 +42,7 @@ public class DangKou extends FuBen {
         }
         htmlContent.linkName("御赐讨伐令箭",true);
         htmlContent.linkName("荡寇");
-        if (htmlContent.getDocument().text().contains("今天你已进入")) {
+        if (htmlContent.getText().contains("今天你已进入")) {
             ableIn = false;
             lastDate = new Date();
             logger.error(htmlContent.htmlPanel.user.getDaqu()  + "荡寇副本结束!");

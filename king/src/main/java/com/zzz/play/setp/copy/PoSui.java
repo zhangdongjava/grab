@@ -41,7 +41,7 @@ public class PoSui extends FuBen {
         htmlContent.linkName("上:北大街↑");
         htmlContent.linkName("古神兵传说");
         htmlContent.linkName("入梦(破碎梦晶石x1)");
-        if (htmlContent.getDocument().text().contains("今天你已进入")) {
+        if (htmlContent.getText().contains("今天你已进入")) {
             ableIn = false;
             lastDate = new Date();
             logger.error(htmlContent.htmlPanel.user.getDaqu()  + "破碎梦晶石副本结束!");

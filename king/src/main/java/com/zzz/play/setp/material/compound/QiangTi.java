@@ -99,7 +99,7 @@ public class QiangTi extends SecondRefresh {
         htmlContent.linkName("黑风岭");
         htmlContent.linkName("黑风岭砍柴老者");
         htmlContent.linkName("研制强体奇书");
-        while (htmlContent.getDocument().text().contains("完成研制")) {
+        while (htmlContent.getText().contains("完成研制")) {
             htmlContent.linkName("返回黑风岭砍柴老者");
             htmlContent.linkName("研制强体奇书");
         }

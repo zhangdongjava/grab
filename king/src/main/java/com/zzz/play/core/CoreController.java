@@ -72,11 +72,11 @@ public class CoreController {
         if (execChange) return;
         execChange = true;
         try {
-            if (content != null && content.getDocument().text().contains("战斗已经结束!")) {
+            if (content != null && content.getText().contains("战斗已经结束!")) {
                 for (String good : goods) {
                     LinkBean res = content.linkName(good, true);
                     if (res.isSuccess()) {
-                        logger.error(content.getDocument().text());
+                        logger.error(content.getText());
                     }
                 }
             }

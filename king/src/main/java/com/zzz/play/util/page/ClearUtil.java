@@ -62,7 +62,7 @@ public class ClearUtil {
 
     public void clear(HtmlContent htmlContent) {
         if (htmlContent == null) return;
-        if (htmlContent != null && htmlContent.getDocument().text().contains(LOAD)) {
+        if (htmlContent != null && htmlContent.getText().contains(LOAD)) {
             clearPack(htmlContent);
             clickFz(htmlContent);
             htmlContent.linkName("返回游戏");
@@ -78,7 +78,7 @@ public class ClearUtil {
     public void bulidFz(HtmlContent htmlContent) {
         htmlContent.linkName("返回", true);
         htmlContent.linkName("物品");
-        String lineStr = htmlContent.getDocument().text();
+        String lineStr = htmlContent.getText();
         String[] lines = lineStr.substring(0, 25).split("\\s");
         for (String line : lines) {
             if (line != null && !"".equals(line.trim())) {

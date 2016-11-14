@@ -56,7 +56,7 @@ public class QianChongSi extends BaseStep {
         htmlContent.linkName("史家庄");
         htmlContent.linkName("史家庄丁");
         htmlContent.linkName("配制千虫丝");
-        while (htmlContent.getDocument().text().contains("完成配")) {
+        while (htmlContent.getText().contains("完成配")) {
             num++;
             htmlContent.linkName("返回史家庄丁");
             htmlContent.linkName("配制千虫丝");

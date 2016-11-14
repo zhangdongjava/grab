@@ -85,7 +85,7 @@ public class HuPi extends BaseStep {
         while (htmlContent.exitsName("景阳岗虎皮", true)) {
             htmlContent.linkName("景阳岗虎皮", true);
         }
-        if (htmlContent.getDocument().text().contains("捡到景阳岗虎皮x1")) {
+        if (htmlContent.getText().contains("捡到景阳岗虎皮x1")) {
             num++;
         }
         htmlContent.linkName("返回游戏");

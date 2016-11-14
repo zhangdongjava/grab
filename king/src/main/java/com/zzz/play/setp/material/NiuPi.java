@@ -43,7 +43,7 @@ public class NiuPi extends BaseStep {
             htmlContent.linkName("普通攻击");
         }
         htmlContent.linkName("牛皮", true);
-        if (htmlContent.getDocument().text().contains("捡到牛皮x1")) {
+        if (htmlContent.getText().contains("捡到牛皮x1")) {
             num++;
         }
         htmlContent.linkName("返回游戏");

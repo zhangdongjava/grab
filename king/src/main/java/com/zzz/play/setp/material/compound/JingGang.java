@@ -100,7 +100,7 @@ public class JingGang extends SecondRefresh {
         htmlContent.linkName("上:北大街↑");
         htmlContent.linkName("游方和尚");
         htmlContent.linkName("研制金刚奇书");
-        while (htmlContent.getDocument().text().contains("完成研制")) {
+        while (htmlContent.getText().contains("完成研制")) {
             htmlContent.linkName("返回游方和尚");
             htmlContent.linkName("研制金刚奇书");
         }

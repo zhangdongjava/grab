@@ -56,7 +56,7 @@ public class ShenFenWenShu extends BaseStep {
         while (htmlContent.exitsName("普通攻击")) {
             htmlContent.linkName("普通攻击");
         }
-        if (htmlContent.getDocument().text().contains("[任务]身份文书:1/1")) {
+        if (htmlContent.getText().contains("[任务]身份文书:1/1")) {
             htmlContent.linkName("返回游戏");
             return true;
         }

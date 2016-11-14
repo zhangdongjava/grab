@@ -41,7 +41,7 @@ public class HeiFeng extends FuBen {
         htmlContent.linkName("黑风岭");
         htmlContent.linkName("黑风岭砍柴老者");
         htmlContent.linkName("进入黑风岭副本");
-        if (htmlContent.getDocument().text().contains("今天你已进入黑风岭副本")) {
+        if (htmlContent.getText().contains("今天你已进入黑风岭副本")) {
             ableIn = false;
             lastDate = new Date();
             logger.error(htmlContent.htmlPanel.user.getDaqu()  + "黑风副本结束!");
@@ -58,7 +58,7 @@ public class HeiFeng extends FuBen {
         htmlContent.linkName("右:乱石河边→");
         htmlContent.linkName("进入乱石河");
         i = 0;
-        while (htmlContent.getDocument().text().contains("从乱石河边->乱石河需要黑松果x5")) {
+        while (htmlContent.getText().contains("从乱石河边->乱石河需要黑松果x5")) {
             getCl();
             if(i>5){
                 htmlContent.linkName("返回游戏");

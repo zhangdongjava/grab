@@ -31,7 +31,7 @@ public class ChangShe extends ZhenFa {
     public boolean fbRun() {
         htmlContent.linkName("传送到长蛇阵");
         htmlContent.linkName("确定传送");
-        if(htmlContent.getDocument().text().contains("今天你已进入")){
+        if(htmlContent.getText().contains("今天你已进入")){
             lastDate = new Date();
             ableIn = false;
             htmlContent.linkName("返回游戏");

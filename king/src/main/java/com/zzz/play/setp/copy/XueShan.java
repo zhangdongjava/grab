@@ -40,7 +40,7 @@ public class XueShan extends FuBen {
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("少华山石匠");
         htmlContent.linkName("传送至落雪山副本");
-        if (htmlContent.getDocument().text().contains("今天你已进入")) {
+        if (htmlContent.getText().contains("今天你已进入")) {
             ableIn = false;
             lastDate = new Date();
             logger.error(htmlContent.htmlPanel.user.getDaqu()  + "落雪山副本结束!");

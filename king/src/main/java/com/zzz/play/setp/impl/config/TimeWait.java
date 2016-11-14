@@ -24,7 +24,7 @@ public class TimeWait extends BaseStep {
     }
 
     private void setDate() {
-        String text = htmlContent.getDocument().text();
+        String text = htmlContent.getText();
         String[] datas = text.split("\\s");
         for (String data : datas) {
             if (data.contains("分钟刷新")) {
@@ -43,7 +43,7 @@ public class TimeWait extends BaseStep {
 
     private void awaitTime() {
         if (!res) return;
-        while (htmlContent.getDocument().text().contains("分钟刷新")) {
+        while (htmlContent.getText().contains("分钟刷新")) {
             htmlContent.linkName("刷新");
         }
     }

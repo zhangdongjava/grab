@@ -23,7 +23,7 @@ public class PutVarStep extends BaseStep {
     public boolean run() {
         boolean val = false;
         if (type.equals("text")) {
-            val = htmlContent.getDocument().text().contains(value);
+            val = htmlContent.getText().contains(value);
         } else if ("val".equals(type)) {
             val = Boolean.valueOf(value);
         } else if ("a".equals(type)) {

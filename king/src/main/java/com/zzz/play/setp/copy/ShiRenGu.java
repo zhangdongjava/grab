@@ -42,13 +42,13 @@ public class ShiRenGu extends FuBen {
         htmlContent.linkName("神行千里");
         htmlContent.linkName("食人谷");
         htmlContent.linkName("进入食人谷副本");
-        if (htmlContent.getDocument().text().contains("今天你已进入食人谷副本")) {
+        if (htmlContent.getText().contains("今天你已进入食人谷副本")) {
             ableIn = false;
             lastDate = new Date();
             logger.error(htmlContent.htmlPanel.user.getDaqu()  + "食人谷副本结束!");
             return false;
         }
-        while (htmlContent.getDocument().text().contains("进入食人谷副本，必须攀下一个悬崖")) {
+        while (htmlContent.getText().contains("进入食人谷副本，必须攀下一个悬崖")) {
             htmlContent.linkName("返回食人谷悬崖");
             gjSj();
         }

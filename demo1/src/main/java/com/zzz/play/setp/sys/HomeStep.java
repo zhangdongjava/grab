@@ -131,7 +131,7 @@ public class HomeStep extends BaseStep {
         htmlContent.linkName("间", i, true);
         do {
             upgradeIndex = 0;
-            String text = htmlContent.getDocument().text();
+            String text = htmlContent.getText();
             String[] lines = text.split("\\s");
             for (String line : lines) {
                 if (line != null && !"".equals(line.trim()))
@@ -165,7 +165,7 @@ public class HomeStep extends BaseStep {
      * 构建分析数据
      */
     public void build() {
-        text = htmlContent.getDocument().text();
+        text = htmlContent.getText();
         String[] lines = text.split("\\s");
         for (String line : lines) {
             if (line != null && !"".equals(line.trim()))

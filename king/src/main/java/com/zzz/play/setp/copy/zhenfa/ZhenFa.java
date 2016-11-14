@@ -62,7 +62,7 @@ public abstract class ZhenFa extends SecondRefresh {
      * 去阵法大师
      */
     public void goTo() {
-        if(!htmlContent.getDocument().text().contains("[沧州广场]")){
+        if(!htmlContent.getText().contains("[沧州广场]")){
             htmlContent.linkName("功能菜单");
             htmlContent.linkName("神行千里");
             htmlContent.linkName("上沧州");

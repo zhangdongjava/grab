@@ -39,14 +39,14 @@ public class TaiWei extends FuBen {
         htmlContent.linkName("神行千里");
         htmlContent.linkName("太尉宝库");
         htmlContent.linkName("进入太尉宝库副本");
-        if (htmlContent.getDocument().text().contains("今天你已进入太尉宝库副")) {
+        if (htmlContent.getText().contains("今天你已进入太尉宝库副")) {
             ableIn = false;
             lastDate = new Date();
             logger.error(htmlContent.htmlPanel.user.getDaqu()  + "太尉宝库结束!");
             htmlContent.linkName("返回游戏");
             return false;
         }
-        while (htmlContent.getDocument().text().contains("需要使用宝库白银钥匙x1")) {
+        while (htmlContent.getText().contains("需要使用宝库白银钥匙x1")) {
             htmlContent.linkName("返回太尉宝库玄铁大门");
             getMenPiao();
         }

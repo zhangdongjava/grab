@@ -41,7 +41,7 @@ public class TimeStep extends ManyStep {
     }
 
     private void setDate() {
-        String text = htmlContent.getDocument().text();
+        String text = htmlContent.getText();
         String[] datas = text.split("\\s");
         for (String data : datas) {
             if (data.contains("分钟刷新")) {

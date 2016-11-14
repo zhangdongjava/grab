@@ -53,7 +53,7 @@ public class HtmlContent {
      */
     private CoreController controller;
 
-    private Map<String, String> urlReplace = new HashMap<>();
+    //private Map<String, String> urlReplace = new HashMap<>();
 
     private HttpRequest httpRequest;
 
@@ -64,7 +64,6 @@ public class HtmlContent {
 
     public HtmlContent(String url, HtmlPanel htmlPanel, CoreController controller) {
         lastTime = System.currentTimeMillis();
-        initUrlReplace();
         this.controller = controller;
         linkBean = new LinkBean();
         initUtil();
@@ -413,10 +412,6 @@ public class HtmlContent {
 
     public void setCurrParse(TextParse currParse) {
         this.currParse = currParse;
-    }
-
-    private void initUrlReplace() {
-        urlReplace.put("&amp;", "&");
     }
 
 

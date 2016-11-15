@@ -365,6 +365,9 @@ public class MainWindow extends JFrame {
     }
 
     public void addHtmlPanel(HtmlPanel panel) {
+        if(htmlPanels.isEmpty()){
+            trayicon.setToolTip(panel.user.getName());
+        }
         htmlPanels.add(panel);
     }
 

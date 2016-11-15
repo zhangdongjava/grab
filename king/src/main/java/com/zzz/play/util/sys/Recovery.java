@@ -32,7 +32,7 @@ public class Recovery {
 
     private void save() {
         try {
-            FileOutputStream fos = new FileOutputStream("res/"+mainWindow.htmlPanels.get(0).user.getName());
+            FileOutputStream fos = new FileOutputStream("cache/"+mainWindow.htmlPanels.get(0).user.getName());
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(map);
             oos.close();

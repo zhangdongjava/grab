@@ -23,7 +23,7 @@ public class TabPanel extends JTabbedPane {
             this.add(user.getName(), panel);
             // this.setTabComponentAt(getIndex(panel), panel);//实现这个功能的就这一条最重要的语句
             mainWindow.addHtmlPanel(panel);
-            Thread.sleep(10000);
+            //Thread.sleep(10000);
         } catch (Exception e) {
             e.printStackTrace();
         }

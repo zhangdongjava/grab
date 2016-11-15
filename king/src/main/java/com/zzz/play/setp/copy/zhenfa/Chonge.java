@@ -38,7 +38,7 @@ public class Chonge extends ZhenFa {
             return false;
         }
         zhandou();
-        while (true) {
+        while (true&&!Thread.currentThread().isInterrupted()) {
             if (htmlContent.exitsName("冲轭中心", true)) {
                 break;
             } else if (htmlContent.exitsName("下:冲轭阵↓")) {

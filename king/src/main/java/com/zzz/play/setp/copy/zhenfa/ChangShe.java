@@ -38,7 +38,7 @@ public class ChangShe extends ZhenFa {
             return false;
         }
         zhandou();
-        while (true) {
+        while (true&&!Thread.currentThread().isInterrupted()) {
             if (htmlContent.exitsName("长蛇中心", true)) {
                 break;
             } else if (htmlContent.exitsName("下:长蛇阵↓")) {

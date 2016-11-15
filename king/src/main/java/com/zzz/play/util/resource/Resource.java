@@ -9,9 +9,9 @@ import java.util.Properties;
  */
 public class Resource {
 
-    private static String fileName = "systemKing.txt";
-    private static String SHU_QIAN_FILE_NAME = "shuQianKing.properties";
-    private static String UI = "ui.properties";
+    private static String fileName = "res/systemKing.txt";
+    private static String SHU_QIAN_FILE_NAME = "res/shuQianKing.properties";
+    private static String UI = "res/ui.properties";
     public static String bootPathName = "bootPath";
 
     public static String bootPath;

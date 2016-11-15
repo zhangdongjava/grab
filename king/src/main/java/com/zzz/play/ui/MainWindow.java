@@ -215,6 +215,10 @@ public class MainWindow extends JFrame {
             try {
                 LinkedList<UserInfo> list = new LinkedList<>();
                 for (HtmlPanel htmlPanel : htmlPanels) {
+                    if(!htmlPanel.user.isLogin()){
+                        JOptionPane.showConfirmDialog(this, "这是缓存!!");
+                        return;
+                    }
                     if (htmlPanel.user.getName() != null
                             && htmlPanel.user.getDaqu() != null
                             && !htmlPanel.isWait) {

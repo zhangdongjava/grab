@@ -88,6 +88,8 @@ public class ShiRenGu extends FuBen {
         htmlContent.linkName("食人谷果农");
         htmlContent.linkName("配置狂暴一");
         htmlContent.linkName("返回", true);
+        htmlContent.linkName("配置狂暴一");
+        htmlContent.linkName("返回", true);
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("下:巨型峡谷↓");
         htmlContent.linkName("进入谷内小屋");

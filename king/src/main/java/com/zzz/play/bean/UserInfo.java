@@ -75,4 +75,17 @@ public class UserInfo implements Serializable {
     public void setCurrUrl(String currUrl) {
         this.currUrl = currUrl;
     }
+
+    public UserInfo copy() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.login = login;
+        userInfo.name = name;
+        userInfo.daqu = daqu;
+        userInfo.url = url;
+        userInfo.currUrl = currUrl;
+        userInfo.scritps1 = scritps1;
+        userInfo.scritps2 = scritps2;
+        return userInfo;
+
+    }
 }

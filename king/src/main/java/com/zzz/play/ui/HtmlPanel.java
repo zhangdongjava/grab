@@ -372,6 +372,6 @@ public class HtmlPanel extends JFXPanel {
      */
     public void addCache(String url) {
         user.setCurrUrl(url);
-        mainWindow.addCache(user.getName(), user);
+        mainWindow.addCache(user.getName(), user.copy());
     }
 }

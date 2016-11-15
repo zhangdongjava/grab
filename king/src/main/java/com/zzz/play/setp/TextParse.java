@@ -135,7 +135,7 @@ public class TextParse implements Runable {
 
     private Step buildNotBaseStep(String line) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, ClassNotFoundException, InstantiationException {
         Step step = StepUtil.getClassSetp(line);
-        if (step == null && line.length()>4) {
+        if (step == null && line.length()>3) {
             step = StepUtil.getClassFormParamSetp(line);
         }
         if (step == null) {

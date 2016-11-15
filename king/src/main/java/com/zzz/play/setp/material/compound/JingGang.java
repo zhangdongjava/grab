@@ -27,7 +27,6 @@ public class JingGang extends SecondRefresh {
         if (!ableIn) {
             return false;
         }
-        utilDto.clearUtil.clearPack(htmlContent);
         contrl();
         return super.run();
     }

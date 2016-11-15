@@ -37,8 +37,11 @@ public class KuaiHuo extends SecondRefresh {
             if (!huoFb.run()) {
                 lastDate = new Date();
                 ableIn = false;
+            }else{
+                goodsSave.setGoods("负重,快活,烈炎");
+                goodsSave.run();
             }
-            goodsSave.setGoods("负重,快活");
+
         }
     }
 

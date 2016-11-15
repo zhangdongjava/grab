@@ -81,6 +81,10 @@ public class KuaiHuoFu extends KuaiHuoFb {
         htmlContent.linkName("VS",true);
         htmlContent.linkName("攻方");
         htmlContent.linkName("返回战场");
+        try {
+            //等待主把小兵清完
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {Thread.currentThread().interrupt();}
         while (!htmlContent.getText().contains("战斗已经结束")){
             htmlContent.linkName("普通攻击");
         }

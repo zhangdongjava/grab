@@ -27,7 +27,11 @@ public class KuaiHuoFu extends KuaiHuoFb {
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("好友");
         htmlContent.linkName(name,true);
-        htmlContent.linkName(name,true);
+        while (!htmlContent.exitsName(name+"队")){
+            htmlContent.linkName("返回好友列表");
+            htmlContent.linkName(name,true);
+        }
+        htmlContent.linkName(name+"队",true);
         htmlContent.linkName("加入队伍");
         htmlContent.linkName("返回游戏");
         while (!htmlContent.getText().contains(name+"允许了你加入队伍")) {

@@ -21,6 +21,7 @@ public class KuaiHuoZhu extends KuaiHuoFb {
     public boolean run() {
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("队伍");
+        htmlContent.linkName("创建队伍");
         while (!htmlContent.exitsName(name,true)) {
             htmlContent.linkName("返回游戏");
             htmlContent.linkName("队伍");

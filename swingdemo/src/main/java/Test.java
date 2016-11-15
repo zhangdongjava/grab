@@ -7,10 +7,8 @@ public class Test {
 
     public static void main(String[] args) throws Exception {
         HttpRequest request = new HttpRequest();
-        String rr =request.sendGet("http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2750528_168356B5E42F88B253906780BE6DC864&qd=");
-        System.out.println(rr);
-//        request.executeGet("http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2750528_168356B5E42F88B253906780BE6DC864&qd=");
-//        String ss = request.executeGet("http://entry.yytou.com/entryGame.do?appId=g518.2&qd=");
-//        System.out.println(ss);
+        request.sendGet("http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2750528_168356B5E42F88B253906780BE6DC864&qd=");
+        String ss = request.sendGet("http://entry.yytou.com/entryGame.do?appId=g518.2&qd=");
+        System.out.println(ss);
     }
 }

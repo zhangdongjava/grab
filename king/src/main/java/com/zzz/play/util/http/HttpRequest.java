@@ -4,9 +4,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class HttpRequest {
 
+    StringBuffer cookie = null;
 
     public String sendGet(String url) throws IOException {
         StringBuilder result = new StringBuilder();
@@ -21,6 +25,9 @@ public class HttpRequest {
             connection.setRequestProperty("connection", "Keep-Alive");
             connection.setRequestProperty("user-agent",
                     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            if (cookie != null) {
+                connection.setRequestProperty("Cookie", cookie.toString());
+            }
             // 建立实际的连接
             connection.connect();
             // 获取所有响应头字段
@@ -32,6 +39,8 @@ public class HttpRequest {
                 result.append("\r\n");
                 result.append(line);
             }
+            buildCookie(connection.getHeaderFields());
+            System.out.println(connection.getContent());
         }
         // 使用finally块来关闭输入流
         finally {
@@ -45,4 +54,20 @@ public class HttpRequest {
         }
         return result.toString();
     }
+
+
+    private void buildCookie(Map<String, List<String>> maps) {
+        String cookieskey = "Set-Cookie";
+        List<String> coolist = maps.get(cookieskey);
+        Iterator<String> it = coolist.iterator();
+        if (cookie == null) {
+            cookie = new StringBuffer();
+            cookie.append("");
+            while (it.hasNext()) {
+                cookie.append(it.next());
+            }
+            System.out.println(cookie);
+        }
+    }
+
 }

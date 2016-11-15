@@ -40,7 +40,6 @@ public class HttpRequest {
                 result.append(line);
             }
             buildCookie(connection.getHeaderFields());
-            System.out.println(connection.getContent());
         }
         // 使用finally块来关闭输入流
         finally {
@@ -59,6 +58,7 @@ public class HttpRequest {
     private void buildCookie(Map<String, List<String>> maps) {
         String cookieskey = "Set-Cookie";
         List<String> coolist = maps.get(cookieskey);
+        if(coolist==null)return;
         Iterator<String> it = coolist.iterator();
         if (cookie == null) {
             cookie = new StringBuffer();

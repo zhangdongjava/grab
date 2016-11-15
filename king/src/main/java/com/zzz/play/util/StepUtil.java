@@ -60,7 +60,7 @@ public class StepUtil {
         classmap.put("zhen", ZhenList.class);
         classmap.put("shirengu", ShiRenGu.class);
         classmap.put("qiangXian", QiangXian.class);
-        classmap.put("QiangTi", QiangTi.class);
+        classmap.put("qiangTi", QiangTi.class);
         classmap.put("jingGang", JingGang.class);
         classmap.put("kuangBao", KuangBao.class);
         classmap.put("kuangBaoEr", KuangBaoEr.class);

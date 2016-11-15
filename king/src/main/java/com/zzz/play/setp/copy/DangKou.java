@@ -122,6 +122,8 @@ public class DangKou extends FuBen {
                 htmlContent.linkName("下:密道↓");
             } else if(htmlContent.exitsName("右:密道→")){
                 htmlContent.linkName("右:密道→");
+            }else{
+                break;
             }
             zhanDou();
         }

@@ -46,6 +46,12 @@ public class KuaiHuoFu extends KuaiHuoFb {
         htmlContent.linkName("追星捕快");
         htmlContent.linkName("传送至快活林副本");
         if(htmlContent.getText().contains("今天你已进入")){
+            htmlContent.linkName("返回游戏");
+            htmlContent.linkName("队伍");
+            htmlContent.linkName("提取");
+            htmlContent.linkName("退出队伍");
+            htmlContent.linkName("确定退出");
+            htmlContent.linkName("返回游戏");
             return false ;
         }
         zhanDouSwb();

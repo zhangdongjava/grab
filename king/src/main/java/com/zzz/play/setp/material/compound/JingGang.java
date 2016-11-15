@@ -14,6 +14,7 @@ public class JingGang extends SecondRefresh {
 
     private int mitu;
     private int niupi;
+    private int du;
     private NiuPi niuPi = new NiuPi();
     /**
      * 是否运行中
@@ -63,9 +64,8 @@ public class JingGang extends SecondRefresh {
         }
         runIng = true;
         niupi = numUtil.map.get("牛皮");
-        int du = mitu * 4;
-        goodsTakeout.setGoods("变异菜青虫毒液_" + du);
-        goodsTakeout.run();
+        du = mitu * 4;
+
         niupi = mitu * 20 - niupi;
         System.out.println(numUtil.map);
         System.out.println("太尉->" + mitu);
@@ -92,6 +92,8 @@ public class JingGang extends SecondRefresh {
      * 合成强体
      */
     private void hecheng() {
+        goodsTakeout.setGoods("变异菜青虫毒液_" + du);
+        goodsTakeout.run();
         runIng = false;
         htmlContent.linkName("功能菜单");
         htmlContent.linkName("神行千里");

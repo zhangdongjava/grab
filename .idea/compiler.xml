@@ -22,12 +22,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="demo1" />
         <module name="king" />
         <module name="logger" />
         <module name="swingdemo" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="king" target="1.5" />
+      <module name="logger" target="1.5" />
+      <module name="swingdemo" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

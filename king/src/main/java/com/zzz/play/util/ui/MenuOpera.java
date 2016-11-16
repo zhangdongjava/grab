@@ -4,13 +4,16 @@ import com.zzz.play.bean.UserInfo;
 import com.zzz.play.ui.HtmlPanel;
 import com.zzz.play.ui.MainWindow;
 import com.zzz.play.ui.TabPanel;
+import com.zzz.play.ui.dialog.ScriptDialog;
 import com.zzz.play.util.resource.UiResourceUtil;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 import java.util.LinkedList;
 import java.util.Map;
+
+import static com.zzz.play.ui.dialog.ScriptDialog.allScripts;
 
 /**
  * 菜单操作
@@ -104,5 +107,39 @@ public class MenuOpera {
             }
 
         }
+    }
+
+    /**
+     * 打开脚本
+     */
+    public void openScript() {
+        jChooser.setDialogType(JFileChooser.OPEN_DIALOG);//设置保存对话框
+        jChooser.showDialog(mainWindow, "打开脚本");
+        File file = jChooser.getSelectedFile();
+        if (file != null) {
+            try {
+                FileInputStream fis = new FileInputStream(file);
+                BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+                String line = br.readLine();
+                while (line != null && ScriptDialog.allScripts.containsKey(line)) {
+                    for (HtmlPanel htmlPanel : mainWindow.htmlPanels) {
+                        if (!htmlPanel.user.getScritps1().contains(allScripts.get(line))) {
+                            htmlPanel.user.getScritps1().add(allScripts.get(line));
+                        }
+                    }
+                    line = br.readLine();
+                }
+            } catch (IOException e) {
+                JOptionPane.showConfirmDialog(mainWindow, "打开失败!" + e.toString());
+            }
+        }
+    }
+
+    /**
+     * 设置托盘名称
+     */
+    public void setName(TrayIcon trayicon) {
+        String name = (String) JOptionPane.showInputDialog(null, "请输入窗口名称：", "title", JOptionPane.PLAIN_MESSAGE, null, null, "在这输入");
+        trayicon.setToolTip(name);
     }
 }

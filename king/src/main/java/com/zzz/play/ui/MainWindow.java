@@ -41,7 +41,6 @@ public class MainWindow extends JFrame {
     private ShuQianDialog shuQianDialog;
     private ShuQianOpenDialog qianOpenDialog;
     private KuaiHuoDialog kuaiHuoDialog;
-    private JFileChooser jChooser;
     /**
      * 菜单操作类
      */
@@ -55,9 +54,6 @@ public class MainWindow extends JFrame {
     private static ExecutorService exec = Executors.newFixedThreadPool(2);
 
     private JLabel jLabel = new JLabel("暂无物品!");
-
-    // public static String[] scripts = {"scripts/材料/大柳虫"};
-    public static String[] scripts = {"scripts/材料/血印分身蒙汗药", "scripts/材料/大柳虫", "scripts/材料/大白菜"};
 
     public static int count = 0;
 
@@ -108,10 +104,10 @@ public class MainWindow extends JFrame {
         shuqianAdd.addActionListener((e) -> shuqianAdd());
         shuqianOpen.addActionListener((e) -> shuqianOpen());
         all.addActionListener((e) -> menuOpera.saveManyBookMark());
-        name.addActionListener((e) -> setName());
+        name.addActionListener((e) -> menuOpera.setName(trayicon));
         open.addActionListener((e) -> exec.submit(() -> menuOpera.openManyBookMark()));
         openCache.addActionListener((e) -> exec.submit(() -> menuOpera.openCache()));
-        openScript.addActionListener((e) -> exec.submit(() -> openScript()));
+        openScript.addActionListener((e) -> exec.submit(() -> menuOpera.openScript()));
         kuaiHuo.addActionListener((e) -> exec.submit(() -> addKuaiHuo()));
         jm.add(addTab);   //将菜单项目添加到菜单
         set.add(scriptPath);   //将菜单项目添加到菜单
@@ -137,43 +133,103 @@ public class MainWindow extends JFrame {
         kuaiHuoDialog.setVisible(true);
     }
 
-    private void openScript() {
-        jChooser = new JFileChooser();
-        jChooser.setCurrentDirectory(new File(""));//设置默认打开路径
-        jChooser.setDialogType(JFileChooser.OPEN_DIALOG);//设置保存对话框
-        jChooser.showDialog(this, "打开脚本");
-        File file = jChooser.getSelectedFile();
-        if (file != null) {
-            try {
-                FileInputStream fis = new FileInputStream(file);
-                BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-                String line = br.readLine();
-                while (line != null && ScriptDialog.allScripts.containsKey(line)) {
-                    for (HtmlPanel htmlPanel : htmlPanels) {
-                        if (!htmlPanel.user.getScritps1().contains(allScripts.get(line))) {
-                            htmlPanel.user.getScritps1().add(allScripts.get(line));
-                        }
-                    }
-                    line = br.readLine();
-                }
-            } catch (IOException e) {
-                JOptionPane.showConfirmDialog(this, "打开失败!" + e.toString());
-            }
-        }
+
+    private void addTab() {
+        myDialog.setVisible(true);
     }
 
+
+    public void addTab(String name, String url) {
+        exec.submit(() -> {
+            UserInfo user = new UserInfo();
+            user.setName(name);
+            user.setUrl(url);
+            tabPanel.addPanel(user);
+        });
+        count++;
+    }
 
 
     /**
-     * 设置名称
+     * 添加书签
      */
-    private void setName() {
-        String name = (String) JOptionPane.showInputDialog(null, "请输入窗口名称：/n", "title", JOptionPane.PLAIN_MESSAGE, null, null, "在这输入");
-        trayicon.setToolTip(name);
+    private void shuqianAdd() {
+        shuQianDialog.setVisible(true);
+    }
+
+    private void shuqianOpen() {
+        qianOpenDialog.setVisible(true);
+    }
+
+    private void scriptPath() {
+        sysSetDialog.setVisible(true);
+    }
+
+    /**
+     * 添加书签
+     *
+     * @param s
+     */
+    public void addShuQian(String s) {
+        qianOpenDialog.addShuQian(s);
+    }
+
+    /**
+     * 打开一个书签
+     *
+     * @param line
+     */
+    public void openShuQian(String line) {
+        String[] lines = line.split("###");
+        exec.submit(() -> {
+            UserInfo user = new UserInfo();
+            user.setLogin(true);
+            user.setName(lines[0]);
+            user.setUrl(lines[2]);
+            user.setDaqu(lines[1]);
+            tabPanel.addPanel(user);
+        });
+
+    }
+
+    /**
+     * 调价HtmlPanel到集合中
+     *
+     * @param panel
+     */
+    public void addHtmlPanel(HtmlPanel panel) {
+        if (htmlPanels.isEmpty()) {
+            trayicon.setToolTip(panel.user.getName());
+        }
+        htmlPanels.add(panel);
+    }
+
+    /**
+     * 添加临时
+     *
+     * @param name
+     * @param userInfo
+     */
+    public void addCache(String name, UserInfo userInfo) {
+        recovery.addCache(name, userInfo);
+        logger.error("内存占用->>" + (Runtime.getRuntime().totalMemory() >> 20));
     }
 
 
+    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+        UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");//Nimbus风格，jdk6
+        new MainWindow();
+    }
 
+    public void showGoods(Map<String, Integer> goods) {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (Map.Entry<String, Integer> entry : goods.entrySet()) {
+            stringBuffer.append(entry.getKey() + ":" + entry.getValue() + ",");
+        }
+        if (stringBuffer.length() > 0)
+            stringBuffer.deleteCharAt(stringBuffer.length() - 1);
+        jLabel.setText(stringBuffer.toString());
+    }
 
     /**
      * 初始化最小化托盘
@@ -224,36 +280,6 @@ public class MainWindow extends JFrame {
         });
     }
 
-    private void addTab() {
-        myDialog.setVisible(true);
-    }
-
-    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
-        UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");//Nimbus风格，jdk6
-        new MainWindow();
-    }
-
-
-    public void showGoods(Map<String, Integer> goods) {
-        StringBuffer stringBuffer = new StringBuffer();
-        for (Map.Entry<String, Integer> entry : goods.entrySet()) {
-            stringBuffer.append(entry.getKey() + ":" + entry.getValue() + ",");
-        }
-        if (stringBuffer.length() > 0)
-            stringBuffer.deleteCharAt(stringBuffer.length() - 1);
-        jLabel.setText(stringBuffer.toString());
-    }
-
-    public void addTab(String name, String url) {
-        exec.submit(() -> {
-            UserInfo user = new UserInfo();
-            user.setName(name);
-            user.setUrl(url);
-            tabPanel.addPanel(user);
-        });
-        count++;
-    }
-
     /**
      * 从托盘显示出来
      */
@@ -264,52 +290,4 @@ public class MainWindow extends JFrame {
         setExtendedState(JFrame.NORMAL);
     }
 
-    /**
-     * 添加书签
-     */
-    private void shuqianAdd() {
-        shuQianDialog.setVisible(true);
-    }
-
-    private void shuqianOpen() {
-        qianOpenDialog.setVisible(true);
-    }
-
-    private void scriptPath() {
-        sysSetDialog.setVisible(true);
-    }
-
-    /**
-     * 添加书签
-     *
-     * @param s
-     */
-    public void addShuQian(String s) {
-        qianOpenDialog.addShuQian(s);
-    }
-
-    public void openShuQian(String line) {
-        String[] lines = line.split("###");
-        exec.submit(() -> {
-            UserInfo user = new UserInfo();
-            user.setLogin(true);
-            user.setName(lines[0]);
-            user.setUrl(lines[2]);
-            user.setDaqu(lines[1]);
-            tabPanel.addPanel(user);
-        });
-
-    }
-
-    public void addHtmlPanel(HtmlPanel panel) {
-        if (htmlPanels.isEmpty()) {
-            trayicon.setToolTip(panel.user.getName());
-        }
-        htmlPanels.add(panel);
-    }
-
-    public void addCache(String name, UserInfo userInfo) {
-        recovery.addCache(name, userInfo);
-        logger.error("内存占用->>" + (Runtime.getRuntime().totalMemory() >> 20));
-    }
 }

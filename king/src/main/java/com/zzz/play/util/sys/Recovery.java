@@ -5,7 +5,7 @@ import com.zzz.play.ui.MainWindow;
 import com.zzz.play.util.resource.UiResourceUtil;
 import org.apache.log4j.Logger;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -39,19 +39,5 @@ public class Recovery {
         }
     }
 
-    public Map<String, UserInfo> open(File file) {
-        try {
-            FileInputStream fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            map = (Map<String, UserInfo>) ois.readObject();
-            ois.close();
-            return map;
-        } catch (IOException e) {
-            logger.error("临时恢复读取失败!" + e.toString());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
 }

@@ -55,8 +55,6 @@ public class MenuOpera {
      * 保存多个标签
      */
     public void saveManyBookMark() {
-        jChooser = new JFileChooser();
-        jChooser.setCurrentDirectory(new File(""));//设置默认打开路径
         jChooser.setDialogType(JFileChooser.SAVE_DIALOG);//设置保存对话框
         jChooser.showDialog(mainWindow, "保存书签");
         File file = jChooser.getSelectedFile();
@@ -89,8 +87,6 @@ public class MenuOpera {
      * 打开缓存
      */
     public void openCache() {
-        jChooser = new JFileChooser();
-        jChooser.setCurrentDirectory(new File(""));//设置默认打开路径
         jChooser.setDialogType(JFileChooser.OPEN_DIALOG);//设置保存对话框
         jChooser.showDialog(mainWindow, "打开缓存");
         File file = jChooser.getSelectedFile();

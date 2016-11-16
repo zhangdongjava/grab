@@ -18,6 +18,8 @@ import java.util.Date;
 public abstract class SecondRefresh extends BaseStep {
 
     protected BuyDrug buyDrug = new BuyDrug();
+    Calendar c1 = Calendar.getInstance();
+    Calendar c2 = Calendar.getInstance();
 
     protected GoodsSale2 goodsSale2 = new GoodsSale2();
     protected GoodsSave2 goodsSave = new GoodsSave2();
@@ -56,9 +58,8 @@ public abstract class SecondRefresh extends BaseStep {
         if (lastDate == null) {
             return;
         }
-        Calendar c1 = Calendar.getInstance();
+
         c1.setTime(lastDate);
-        Calendar c2 = Calendar.getInstance();
         c2.setTime(new Date());
         if (c1.get(Calendar.DAY_OF_MONTH) != c2.get(Calendar.DAY_OF_MONTH)) {
             ableIn = true;

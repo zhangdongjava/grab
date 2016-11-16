@@ -47,6 +47,7 @@ public class KuaiHuoResource {
 
     public static void add(String zhuName,String fuName) throws IOException {
         zhu.put(zhuName,fuName);
+        fu.put(fuName,zhuName);
         FileOutputStream fos = new FileOutputStream(FILE_NAME);
         zhu.store(fos,"快活列表");
         fos.close();

@@ -30,6 +30,7 @@ public class KuaiHuo extends SecondRefresh {
         goodsSale2.run();
         buyDrug.setName("万年灵芝");
         buyDrug.setNum("300");
+        buyDrug.run();
     }
 
     private void fbrun() {

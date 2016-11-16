@@ -135,8 +135,15 @@ public class TextParse implements Runable {
 
     private Step buildNotBaseStep(String line) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, ClassNotFoundException, InstantiationException {
         Step step = StepUtil.getClassSetp(line);
-        if (step == null && line.length()>3) {
-            step = StepUtil.getClassFormParamSetp(line);
+        if (step == null && line.length() > 3) {
+            if (line.startsWith("sale2")) {
+                step = new GoodsSale2(line.substring(5));
+            } else if (line.startsWith("save2")) {
+                step = new GoodsSave2(line.substring(5));
+            } else {
+                step = StepUtil.getClassFormParamSetp(line);
+            }
+
         }
         if (step == null) {
             if (line.startsWith("class")) {
@@ -147,10 +154,6 @@ public class TextParse implements Runable {
             } else if (line.startsWith("mb")) {
                 step = StepUtil.getStep(line.substring(2));
                 step.setMb(true);
-            }   else if (line.startsWith("sale2")) {
-                step = new GoodsSale2(line.substring(5));
-            } else if (line.startsWith("save2")) {
-                step = new GoodsSave2(line.substring(5));
             } else if (line.endsWith("{")) {
                 manyStep = StepUtil.getManny(line);
                 if (buildMany()) {

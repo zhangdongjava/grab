@@ -3,8 +3,10 @@ package com.zzz.play.ui;
 
 import com.zzz.play.bean.UserInfo;
 import com.zzz.play.ui.dialog.*;
+import com.zzz.play.util.resource.BookmarkUtil;
 import com.zzz.play.util.resource.Resource;
 import com.zzz.play.util.sys.Recovery;
+import com.zzz.play.util.ui.MenuOpera;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -14,8 +16,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -42,6 +43,10 @@ public class MainWindow extends JFrame {
     private ShuQianOpenDialog qianOpenDialog;
     private KuaiHuoDialog kuaiHuoDialog;
     private JFileChooser jChooser;
+    /**
+     * 菜单操作类
+     */
+    private MenuOpera menuOpera;
     /**
      * 选项卡集合
      */
@@ -72,6 +77,7 @@ public class MainWindow extends JFrame {
         qianOpenDialog = new ShuQianOpenDialog(this);
         kuaiHuoDialog = new KuaiHuoDialog(this);
         htmlPanels = new LinkedList<>();
+        menuOpera = new MenuOpera(this, tabPanel);
         recovery = new Recovery(this);
         initMenu();
         initToTray();
@@ -102,9 +108,9 @@ public class MainWindow extends JFrame {
         scriptPath.addActionListener((e) -> scriptPath());
         shuqianAdd.addActionListener((e) -> shuqianAdd());
         shuqianOpen.addActionListener((e) -> shuqianOpen());
-        all.addActionListener((e) -> all());
+        all.addActionListener((e) -> menuOpera.saveManyBookMark());
         name.addActionListener((e) -> setName());
-        open.addActionListener((e) -> exec.submit(() -> open()));
+        open.addActionListener((e) -> exec.submit(() -> menuOpera.openManyBookMark()));
         openCache.addActionListener((e) -> exec.submit(() -> openCache()));
         openScript.addActionListener((e) -> exec.submit(() -> openScript()));
         kuaiHuo.addActionListener((e) -> exec.submit(() -> addKuaiHuo()));
@@ -140,19 +146,19 @@ public class MainWindow extends JFrame {
         File file = jChooser.getSelectedFile();
         if (file != null) {
             try {
-                FileInputStream fis  = new FileInputStream(file);
+                FileInputStream fis = new FileInputStream(file);
                 BufferedReader br = new BufferedReader(new InputStreamReader(fis));
                 String line = br.readLine();
-                while(line!=null && ScriptDialog.allScripts.containsKey(line)){
+                while (line != null && ScriptDialog.allScripts.containsKey(line)) {
                     for (HtmlPanel htmlPanel : htmlPanels) {
-                        if( !htmlPanel.user.getScritps1().contains(allScripts.get(line))){
+                        if (!htmlPanel.user.getScritps1().contains(allScripts.get(line))) {
                             htmlPanel.user.getScritps1().add(allScripts.get(line));
                         }
                     }
                     line = br.readLine();
                 }
             } catch (IOException e) {
-                JOptionPane.showConfirmDialog(this,"打开失败!"+e.toString());
+                JOptionPane.showConfirmDialog(this, "打开失败!" + e.toString());
             }
         }
     }
@@ -184,58 +190,7 @@ public class MainWindow extends JFrame {
         trayicon.setToolTip(name);
     }
 
-    private void open() {
-        jChooser = new JFileChooser();
-        jChooser.setCurrentDirectory(new File(""));//设置默认打开路径
-        jChooser.setDialogType(JFileChooser.OPEN_DIALOG);//设置保存对话框
-        jChooser.showDialog(this, "打开所有");
-        File file = jChooser.getSelectedFile();
-        if (file != null) {
-            try {
-                ObjectInputStream stream = new ObjectInputStream(new FileInputStream(file));
-                LinkedList<UserInfo> list = (LinkedList<UserInfo>) stream.readObject();
-                for (UserInfo user : list) {
-                    user.setLogin(true);
-                    tabPanel.addPanel(user);
-                }
-            } catch (Exception e) {
-                JOptionPane.showConfirmDialog(this, "打开失败!" + e.toString());
-                e.printStackTrace();
-            }
-        }
-    }
 
-    private void all() {
-        jChooser = new JFileChooser();
-        jChooser.setCurrentDirectory(new File(""));//设置默认打开路径
-        jChooser.setDialogType(JFileChooser.SAVE_DIALOG);//设置保存对话框
-        jChooser.showDialog(this, "保存书签");
-        File file = jChooser.getSelectedFile();
-        if (file != null) {
-            try {
-                LinkedList<UserInfo> list = new LinkedList<>();
-                for (HtmlPanel htmlPanel : htmlPanels) {
-                    if(!htmlPanel.user.isLogin()){
-                        JOptionPane.showConfirmDialog(this, "这是缓存!!");
-                        return;
-                    }
-                    if (htmlPanel.user.getName() != null
-                            && htmlPanel.user.getDaqu() != null
-                            && !htmlPanel.isWait) {
-                        list.add(htmlPanel.user);
-                    }
-                }
-                if (list.size() > 0) {
-                    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
-                    out.writeObject(list);
-                    out.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
 
 
     /**
@@ -365,7 +320,7 @@ public class MainWindow extends JFrame {
     }
 
     public void addHtmlPanel(HtmlPanel panel) {
-        if(htmlPanels.isEmpty()){
+        if (htmlPanels.isEmpty()) {
             trayicon.setToolTip(panel.user.getName());
         }
         htmlPanels.add(panel);
@@ -373,6 +328,6 @@ public class MainWindow extends JFrame {
 
     public void addCache(String name, UserInfo userInfo) {
         recovery.addCache(name, userInfo);
-        logger.error("内存占用->>"+(Runtime.getRuntime().totalMemory()>>20));
+        logger.error("内存占用->>" + (Runtime.getRuntime().totalMemory() >> 20));
     }
 }

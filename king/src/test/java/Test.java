@@ -15,10 +15,10 @@ import java.util.Map;
 public class Test {
 
     public static void main(String[] args) throws Exception {
-        File file = new File("C:\\Users\\dell_2\\Desktop\\xiaoxiong\\cache/大嘴哥");
+        File file = new File("C:\\Users\\dell_2\\Desktop\\xiaoxiong\\cache/yy2");
         File file2 = new File("C:\\Users\\dell_2\\Documents\\axiao/shuqian/yy2");
-        //zhuanHuan(file,file2);
-        cache(file);
+        zhuanHuan(file,file2);
+        //cache(file);
         //test(file2);
     }
 
@@ -45,7 +45,6 @@ public class Test {
 
     public static void cache(File resource) throws Exception {
         ObjectInputStream stream = new ObjectInputStream(new FileInputStream(resource));
-        // FileOutputStream fos = new FileOutputStream(target);
         Map<String,UserInfo> map = ( Map<String,UserInfo>) stream.readObject();
         for (Map.Entry<String, UserInfo> entry : map.entrySet()) {
             UserInfo user = entry.getValue();
@@ -55,8 +54,6 @@ public class Test {
         }
         String json = JSON.toJSONString(map, SerializerFeature.PrettyFormat);
         System.out.println(json);
-//        fos.write(json.getBytes());
-//        fos.close();
     }
 
     private static void buildScripts(LinkedList<String> strings) {

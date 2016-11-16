@@ -277,7 +277,6 @@ public class TextParse implements Runable {
         System.out.println(config);
     }
 
-
 }
 
 

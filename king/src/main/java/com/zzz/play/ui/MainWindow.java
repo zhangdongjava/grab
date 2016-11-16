@@ -3,7 +3,6 @@ package com.zzz.play.ui;
 
 import com.zzz.play.bean.UserInfo;
 import com.zzz.play.ui.dialog.*;
-import com.zzz.play.util.resource.BookmarkUtil;
 import com.zzz.play.util.resource.Resource;
 import com.zzz.play.util.sys.Recovery;
 import com.zzz.play.util.ui.MenuOpera;
@@ -111,7 +110,7 @@ public class MainWindow extends JFrame {
         all.addActionListener((e) -> menuOpera.saveManyBookMark());
         name.addActionListener((e) -> setName());
         open.addActionListener((e) -> exec.submit(() -> menuOpera.openManyBookMark()));
-        openCache.addActionListener((e) -> exec.submit(() -> openCache()));
+        openCache.addActionListener((e) -> exec.submit(() -> menuOpera.openCache()));
         openScript.addActionListener((e) -> exec.submit(() -> openScript()));
         kuaiHuo.addActionListener((e) -> exec.submit(() -> addKuaiHuo()));
         jm.add(addTab);   //将菜单项目添加到菜单
@@ -163,24 +162,7 @@ public class MainWindow extends JFrame {
         }
     }
 
-    /**
-     * 打开缓存
-     */
-    private void openCache() {
-        jChooser = new JFileChooser();
-        jChooser.setCurrentDirectory(new File(""));//设置默认打开路径
-        jChooser.setDialogType(JFileChooser.OPEN_DIALOG);//设置保存对话框
-        jChooser.showDialog(this, "打开缓存");
-        File file = jChooser.getSelectedFile();
-        if (file != null) {
-            Map<String, UserInfo> map = recovery.open(file);
-            for (UserInfo user : map.values()) {
-                user.setLogin(false);
-                user.setUrl(user.getCurrUrl());
-                tabPanel.addPanel(user);
-            }
-        }
-    }
+
 
     /**
      * 设置名称

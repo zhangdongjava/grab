@@ -4,12 +4,13 @@ import com.zzz.play.bean.UserInfo;
 import com.zzz.play.ui.HtmlPanel;
 import com.zzz.play.ui.MainWindow;
 import com.zzz.play.ui.TabPanel;
-import com.zzz.play.util.resource.BookmarkUtil;
+import com.zzz.play.util.resource.UiResourceUtil;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * 菜单操作
@@ -37,7 +38,7 @@ public class MenuOpera {
         File file = jChooser.getSelectedFile();
         if (file != null) {
             try {
-                java.util.List<UserInfo> list = BookmarkUtil.load(file);
+                java.util.List<UserInfo> list = UiResourceUtil.bookManyload(file);
                 for (UserInfo user : list) {
                     user.setLogin(true);
                     tabPanel.addPanel(user);
@@ -74,11 +75,36 @@ public class MenuOpera {
                     }
                 }
                 if (list.size() > 0) {
-                    BookmarkUtil.save(file, list);
+                    UiResourceUtil.bookManysave(file, list);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
                 JOptionPane.showConfirmDialog(mainWindow, e.toString());
+            }
+
+        }
+    }
+
+    /**
+     * 打开缓存
+     */
+    public void openCache() {
+        jChooser = new JFileChooser();
+        jChooser.setCurrentDirectory(new File(""));//设置默认打开路径
+        jChooser.setDialogType(JFileChooser.OPEN_DIALOG);//设置保存对话框
+        jChooser.showDialog(mainWindow, "打开缓存");
+        File file = jChooser.getSelectedFile();
+        if (file != null) {
+            try {
+                Map<String, UserInfo> map = UiResourceUtil.openCache(file);
+                for (UserInfo user : map.values()) {
+                    user.setLogin(false);
+                    user.setUrl(user.getCurrUrl());
+                    tabPanel.addPanel(user);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showConfirmDialog(mainWindow, "打开失败!" + e.toString());
             }
 
         }

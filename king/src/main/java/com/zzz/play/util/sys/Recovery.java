@@ -2,6 +2,7 @@ package com.zzz.play.util.sys;
 
 import com.zzz.play.bean.UserInfo;
 import com.zzz.play.ui.MainWindow;
+import com.zzz.play.util.resource.UiResourceUtil;
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -32,10 +33,7 @@ public class Recovery {
 
     private void save() {
         try {
-            FileOutputStream fos = new FileOutputStream("cache/"+mainWindow.htmlPanels.get(0).user.getName());
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(map);
-            oos.close();
+            UiResourceUtil.cacheSave(map,"cache/"+mainWindow.htmlPanels.get(0).user.getName());
         } catch (IOException e) {
             logger.error("临时恢复保存失败!" + map);
         }

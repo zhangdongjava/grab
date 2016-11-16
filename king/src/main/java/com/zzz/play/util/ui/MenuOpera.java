@@ -10,6 +10,7 @@ import com.zzz.play.util.resource.UiResourceUtil;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
 

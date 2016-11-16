@@ -1,12 +1,15 @@
 package com.zzz.play.util.resource;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.zzz.play.bean.UserInfo;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +59,12 @@ public class UiResourceUtil {
      * @throws IOException
      */
     public static Map<String, UserInfo> openCache(File file) throws IOException {
-        return JSON.parseObject(loadJson(file), Map.class);
+        JSONObject jo = JSON.parseObject(loadJson(file));
+        Map<String, UserInfo> map2 = new HashMap<>();
+        for (Map.Entry<String, Object> entry : jo.entrySet()) {
+            map2.put(entry.getKey(), JSON.parseObject(entry.getValue().toString(), UserInfo.class));
+        }
+        return map2;
     }
 
 

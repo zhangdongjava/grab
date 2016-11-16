@@ -10,6 +10,7 @@ import com.zzz.play.setp.TextParse;
 import com.zzz.play.setp.impl.config.ManyStep;
 import com.zzz.play.setp.sys.SysTextParse;
 import com.zzz.play.ui.HtmlPanel;
+import com.zzz.play.ui.dialog.ScriptDialog;
 import com.zzz.play.util.GlobalUtil;
 import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.UtilDto;
@@ -138,9 +139,11 @@ public class CoreController {
         TextParse textParse;
         for (String file : user.getScritps1()) {
             try {
-                textParse = TextParse.getInstance(file, content, utilDto, this);
-                textParse.setFileName(file);
-                cache1.add(textParse);
+                if (ScriptDialog.allScripts.containsKey(file)) {
+                    textParse = TextParse.getInstance(ScriptDialog.allScripts.get(file), content, utilDto, this);
+                    textParse.setFileName(file);
+                    cache1.add(textParse);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println(file + "解析脚本 文件失败!" + e.toString());

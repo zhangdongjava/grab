@@ -114,12 +114,12 @@ public class ScriptDialog extends JDialog {
                 FileOutputStream fos = new FileOutputStream(file);
                 PrintStream stream = new PrintStream(fos);
                 for (String s : showList) {
-                    stream.println(url_name.get(s));
+                    stream.println(s);
                 }
                 stream.close();
                 fos.close();
             } catch (IOException e) {
-               JOptionPane.showConfirmDialog(this,"保存失败!"+e.toString());
+                JOptionPane.showConfirmDialog(this, "保存失败!" + e.toString());
             }
         }
     }
@@ -130,19 +130,19 @@ public class ScriptDialog extends JDialog {
         File file = jChooser.getSelectedFile();
         if (file != null) {
             try {
-                FileInputStream fis  = new FileInputStream(file);
+                FileInputStream fis = new FileInputStream(file);
                 BufferedReader br = new BufferedReader(new InputStreamReader(fis));
                 String line = br.readLine();
-                while(line!=null && allScripts.containsKey(line)){
-                    if(!selectList.contains(line)){
+                while (line != null && allScripts.containsKey(line)) {
+                    if (!selectList.contains(line)) {
                         defaultListModel.addElement(line);
                         selectList.add(line);
-                        showList.add(allScripts.get(line));
+                        showList.add(line);
                     }
                     line = br.readLine();
                 }
             } catch (IOException e) {
-                JOptionPane.showConfirmDialog(this,"打开失败!"+e.toString());
+                JOptionPane.showConfirmDialog(this, "打开失败!" + e.toString());
             }
         }
     }
@@ -178,7 +178,7 @@ public class ScriptDialog extends JDialog {
         if (selectList.contains(value)) {
             defaultListModel.removeElement(value);
             selectList.remove(value);
-            showList.remove(allScripts.get(value));
+            showList.remove(value);
         }
     }
 
@@ -188,7 +188,7 @@ public class ScriptDialog extends JDialog {
         if (!selectList.contains(value)) {
             defaultListModel.addElement(value);
             selectList.add(value);
-            showList.add(allScripts.get(value));
+            showList.add(value);
         }
     }
 
@@ -246,8 +246,7 @@ public class ScriptDialog extends JDialog {
         }
     }
 
-    public void addScript(String url) {
-        String name = url_name.get(url);
+    public void addScript(String name) {
         defaultListModel.addElement(name);
         selectList.add(name);
     }

@@ -253,7 +253,6 @@ public class TextParse implements Runable {
 
     public void ontStepRun(Step step) {
         step.mbRun();
-        step.await();
     }
 
 

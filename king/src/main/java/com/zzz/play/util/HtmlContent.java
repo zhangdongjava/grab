@@ -32,7 +32,7 @@ public class HtmlContent {
     public String baseUrl;
     public int TIME_WAIT = HtmlPanel.DEFAULT_WAIT;
     public static long CLICK_TIME = System.currentTimeMillis();
-    private boolean validate = false;
+
     private Map<String, LinkBean> urlMap = new HashMap<>();
     public HtmlPanel htmlPanel;
 
@@ -46,14 +46,11 @@ public class HtmlContent {
      */
     private Step zdz;
 
-    private TextParse currParse;
 
     /**
      * 核心控制器
      */
     private CoreController controller;
-
-    //private Map<String, String> urlReplace = new HashMap<>();
 
     private HttpRequest httpRequest;
 
@@ -345,9 +342,7 @@ public class HtmlContent {
      * @return
      */
     public LinkBean linkName(String name, int index, boolean like) {
-        if (!validate) {
-            vailte();
-        }
+
         linkBean.reset();
         Elements as = document.getElementsByTag("a");
         for (Element a : as) {
@@ -422,13 +417,6 @@ public class HtmlContent {
         return document;
     }
 
-    public TextParse getCurrParse() {
-        return currParse;
-    }
-
-    public void setCurrParse(TextParse currParse) {
-        this.currParse = currParse;
-    }
 
     public String getText() {
         return text;

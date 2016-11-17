@@ -69,19 +69,19 @@ public class KuaiHuoFu extends KuaiHuoFb {
         zhanDouDz("进入西冲","快活林六弟子");
         zhanDouDz("进入西山","快活林五弟子");
         htmlContent.linkName("进入会合点");
-        while (htmlContent.exitsName("快活林大师兄")){
+        while (htmlContent.exitsName("快活林大师兄")||htmlContent.exitsName(name)){
             htmlContent.linkName("刷新");
         }
         htmlContent.linkName("进入快活牌坊");
-        while (htmlContent.exitsName("快活林三当家")){
+        while (htmlContent.exitsName("快活林三当家")||htmlContent.exitsName(name)){
             htmlContent.linkName("刷新");
         }
         htmlContent.linkName("进入快活隘口");
-        while (htmlContent.exitsName("快活林二当家")){
+        while (htmlContent.exitsName("快活林二当家")||htmlContent.exitsName(name)){
             htmlContent.linkName("刷新");
         }
         htmlContent.linkName("进入快活客栈");
-        while (htmlContent.exitsName("快活林大当家")){
+        while (htmlContent.exitsName("快活林大当家")||htmlContent.exitsName(name)){
             htmlContent.linkName("刷新");
         }
         htmlContent.linkName("进入厢房");

@@ -2,6 +2,7 @@ package com.zzz.play.core;
 
 import com.zzz.play.bean.LinkBean;
 import com.zzz.play.bean.UserInfo;
+import com.zzz.play.exception.RunStopException;
 import com.zzz.play.exception.StopCurrStepException;
 import com.zzz.play.inter.Observer;
 import com.zzz.play.inter.Runable;
@@ -163,6 +164,7 @@ public class CoreController {
         future = service.submit(() -> {
             runing = true;
             boolean exec = true;
+            run:
             while (!Thread.interrupted() && runing) {
                 if (scriptReload) {//脚本重新加载了 才会拿来执行
                     runParses.clear();
@@ -177,6 +179,8 @@ public class CoreController {
                         exec = parse.run();
                     } catch (StopCurrStepException e) {
                         System.out.println(parse.getFileName() + "->" + e.toString());
+                    } catch (RunStopException e) {
+                        break run;
                     } catch (Exception e) {
                         e.printStackTrace();
                         System.out.println(parse.getFileName() + "->运行脚本异常!" + e.toString());

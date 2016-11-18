@@ -3,6 +3,7 @@ package com.zzz.play.ui;
 
 import com.zzz.play.bean.UserInfo;
 import com.zzz.play.ui.dialog.*;
+import com.zzz.play.util.ThreadPoolUtil;
 import com.zzz.play.util.resource.Resource;
 import com.zzz.play.util.sys.Recovery;
 import com.zzz.play.util.ui.MenuOpera;
@@ -14,12 +15,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.*;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import static com.zzz.play.ui.dialog.ScriptDialog.allScripts;
+import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * Created by dell_2 on 2016/10/29.
@@ -51,7 +48,6 @@ public class MainWindow extends JFrame {
     public LinkedList<HtmlPanel> htmlPanels;
 
     private static MainWindow mainWindow;
-    private static ExecutorService exec = Executors.newFixedThreadPool(2);
 
     private JLabel jLabel = new JLabel("暂无物品!");
 
@@ -76,9 +72,7 @@ public class MainWindow extends JFrame {
         recovery = new Recovery(this);
         initMenu();
         initToTray();
-        this.setAlwaysOnTop(false);
         this.setVisible(true);
-        mainWindow = this;
     }
 
     public static MainWindow getWindow() {
@@ -105,10 +99,10 @@ public class MainWindow extends JFrame {
         shuqianOpen.addActionListener((e) -> shuqianOpen());
         all.addActionListener((e) -> menuOpera.saveManyBookMark());
         name.addActionListener((e) -> menuOpera.setName(trayicon));
-        open.addActionListener((e) -> exec.submit(() -> menuOpera.openManyBookMark()));
-        openCache.addActionListener((e) -> exec.submit(() -> menuOpera.openCache()));
-        openScript.addActionListener((e) -> exec.submit(() -> menuOpera.openScript()));
-        kuaiHuo.addActionListener((e) -> exec.submit(() -> addKuaiHuo()));
+        open.addActionListener((e) -> ThreadPoolUtil.addThread((() -> menuOpera.openManyBookMark())));
+        openCache.addActionListener((e) -> ThreadPoolUtil.addThread(() -> menuOpera.openCache()));
+        openScript.addActionListener((e) -> ThreadPoolUtil.addThread(() -> menuOpera.openScript()));
+        kuaiHuo.addActionListener((e) -> ThreadPoolUtil.addThread(() -> addKuaiHuo()));
         jm.add(addTab);   //将菜单项目添加到菜单
         set.add(scriptPath);   //将菜单项目添加到菜单
         set.add(kuaiHuo);   //将菜单项目添加到菜单
@@ -140,7 +134,7 @@ public class MainWindow extends JFrame {
 
 
     public void addTab(String name, String url) {
-        exec.submit(() -> {
+        ThreadPoolUtil.addThread(() -> {
             UserInfo user = new UserInfo();
             user.setName(name);
             user.setUrl(url);
@@ -181,7 +175,7 @@ public class MainWindow extends JFrame {
      */
     public void openShuQian(String line) {
         String[] lines = line.split("###");
-        exec.submit(() -> {
+        ThreadPoolUtil.addThread(() -> {
             UserInfo user = new UserInfo();
             user.setLogin(true);
             user.setName(lines[0]);
@@ -216,9 +210,9 @@ public class MainWindow extends JFrame {
     }
 
 
-    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+    public static void main(String[] args) throws Exception {
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");//Nimbus风格，jdk6
-        new MainWindow();
+        mainWindow = new MainWindow();
     }
 
     public void showGoods(Map<String, Integer> goods) {

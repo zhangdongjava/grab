@@ -14,6 +14,7 @@ import com.zzz.play.ui.HtmlPanel;
 import com.zzz.play.ui.dialog.ScriptDialog;
 import com.zzz.play.util.GlobalUtil;
 import com.zzz.play.util.HtmlContent;
+import com.zzz.play.util.ThreadPoolUtil;
 import com.zzz.play.util.UtilDto;
 import org.apache.log4j.Logger;
 
@@ -30,8 +31,6 @@ import java.util.concurrent.Future;
 public class CoreController {
 
     private static Logger logger = Logger.getLogger(CoreController.class);
-
-    ExecutorService service = Executors.newFixedThreadPool(20);
     /**
      * 缓存集合1
      */
@@ -161,7 +160,7 @@ public class CoreController {
         if (cache1.isEmpty()) {
             loadParse();
         }
-        future = service.submit(() -> {
+        future = ThreadPoolUtil.addThread(() -> {
             runing = true;
             boolean exec = true;
             run:

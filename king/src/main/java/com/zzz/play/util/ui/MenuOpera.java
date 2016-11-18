@@ -125,7 +125,7 @@ public class MenuOpera {
                 while (line != null && ScriptDialog.allScripts.containsKey(line)) {
                     for (HtmlPanel htmlPanel : mainWindow.htmlPanels) {
                         if (!htmlPanel.user.getScritps1().contains(allScripts.get(line))) {
-                            htmlPanel.user.getScritps1().add(allScripts.get(line));
+                            htmlPanel.user.getScritps1().add(line);
                         }
                     }
                     line = br.readLine();

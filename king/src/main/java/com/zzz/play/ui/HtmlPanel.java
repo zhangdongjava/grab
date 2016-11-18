@@ -68,7 +68,6 @@ public class HtmlPanel extends JFXPanel {
     public MainWindow mainWindow;
     private Object startLock = new Object();
     private TextField urlTextField;
-    private static ExecutorService exec = Executors.newFixedThreadPool(10);
     public boolean isWait = false;
     public boolean ruing = false;
     public UserInfo user;
@@ -324,7 +323,7 @@ public class HtmlPanel extends JFXPanel {
      * 加入游戏 等待页面初始化唤醒
      */
     private void joinGame() {
-        exec.submit(() -> {
+        ThreadPoolUtil.addThread(() -> {
             synchronized (startLock) {
                 try {
                     startLock.wait();

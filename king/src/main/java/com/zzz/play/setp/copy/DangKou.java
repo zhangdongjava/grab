@@ -115,15 +115,13 @@ public class DangKou extends FuBen {
     public void loginIn(){
         htmlContent.linkName("进入密道");
         htmlContent.linkName("确定进入");
-        while (true&&!Thread.currentThread().isInterrupted()){
+        while (!Thread.currentThread().isInterrupted()){
             if(htmlContent.exitsName("下:毒虫殿↓")){
                 break;
             }else if(htmlContent.exitsName("下:密道↓")){
                 htmlContent.linkName("下:密道↓");
             } else if(htmlContent.exitsName("右:密道→")){
                 htmlContent.linkName("右:密道→");
-            }else{
-                break;
             }
             zhanDou();
         }

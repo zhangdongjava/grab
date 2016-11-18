@@ -285,7 +285,8 @@ public class HtmlContent {
         try {
             await();
             url = cleckUrl(url);
-            document = Jsoup.parse(new URL(url), 2000);
+            String html = httpRequest.sendGet(url);
+            document = Jsoup.parse(html);
             linkEnd();
             if (printLog) {
                 logger.error(document.text());

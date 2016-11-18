@@ -11,9 +11,10 @@ import java.util.Map;
 public class HttpRequest {
 
     StringBuffer cookie = null;
+    StringBuilder result = new StringBuilder();
 
     public String sendGet(String url) throws IOException {
-        StringBuilder result = new StringBuilder();
+        result.delete(0,result.length());
         BufferedReader in = null;
         try {
             String urlNameString = url;
@@ -25,6 +26,7 @@ public class HttpRequest {
             connection.setRequestProperty("connection", "Keep-Alive");
             connection.setRequestProperty("user-agent",
                     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            connection.setConnectTimeout(2000);
             if (cookie != null) {
                 connection.setRequestProperty("Cookie", cookie.toString());
             }
@@ -69,5 +71,6 @@ public class HttpRequest {
             System.out.println(cookie);
         }
     }
+
 
 }

@@ -74,7 +74,7 @@ public class KuaiHuoZhu extends KuaiHuoFb {
         while (!htmlContent.getText().contains("快剑手(0)")){
             htmlContent.linkName("万年灵芝");
         }
-        while (!htmlContent.getText().contains("战斗已经结束")){
+        while (htmlContent.exitsName("普通攻击")){
             htmlContent.linkName("刷新");
         }
         htmlContent.linkName("x",true);

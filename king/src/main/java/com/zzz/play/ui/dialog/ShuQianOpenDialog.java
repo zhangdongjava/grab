@@ -4,6 +4,7 @@ import com.zzz.play.ui.MainWindow;
 import com.zzz.play.util.resource.Resource;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Map;
@@ -49,8 +50,11 @@ public class ShuQianOpenDialog extends JDialog {
     private void initList() {
         defaultListModel = new DefaultListModel();
         jList = new JList<>(defaultListModel);
+        ScrollPane jScrollPane = new ScrollPane();
+        jScrollPane.setBounds(0,0,350,height-120);
         jList.setBounds(0,0,350,height-120);
-        this.add(jList);
+        jScrollPane.add(jList);
+        this.add(jScrollPane);
         Resource.load();
         Properties properties = Resource.shuqian;
         for (Map.Entry<Object, Object> entry : properties.entrySet()) {

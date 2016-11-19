@@ -1,6 +1,5 @@
-{clear:true}
+{clear:false}
 刷新
-basewait1
 basefirst{
 like血印分身
 普通攻击while2
@@ -15,7 +14,7 @@ like血印分身
 likexwhile2
 返回游戏
 }
-timeGlobal_90_{
+timeNormal_1_{
 神行
 万剑宝塔
 右:万剑塔一(1,1)→
@@ -27,7 +26,7 @@ timeGlobal_90_{
 上:万剑塔一(4,4)↑
 b刷新
 }
-timeGlobal_90_{
+timeNormal_1_{
 神行
 万剑宝塔
 守剑老人
@@ -41,7 +40,7 @@ timeGlobal_90_{
 上:万剑塔二(4,4)↑
 b刷新
 }
-timeGlobal_90_{
+timeNormal_1_{
 神行
 万剑宝塔
 守剑老人
@@ -55,7 +54,7 @@ timeGlobal_90_{
 上:万剑塔三(4,4)↑
 b刷新
 }
-timeGlobal_90_{
+timeNormal_1_{
 神行
 万剑宝塔
 守剑老人
@@ -69,7 +68,7 @@ timeGlobal_90_{
 上:万剑塔四(4,4)↑
 b刷新
 }
-timeGlobal_90_{
+timeNormal_1_{
 神行
 万剑宝塔
 守剑老人
@@ -83,7 +82,7 @@ timeGlobal_90_{
 上:万剑塔五(4,4)↑
 b刷新
 }
-timeGlobal_90_{
+timeNormal_1_{
 神行
 万剑宝塔
 守剑老人
@@ -97,7 +96,7 @@ timeGlobal_90_{
 上:万剑塔六(4,4)↑
 b刷新
 }
-timeGlobal_90_{
+timeNormal_1_{
 神行
 万剑宝塔
 守剑老人
@@ -111,7 +110,7 @@ timeGlobal_90_{
 上:万剑塔七(4,4)↑
 b刷新
 }
-timeGlobal_90_{
+timeNormal_1_{
 神行
 万剑宝塔
 守剑老人
@@ -125,7 +124,7 @@ timeGlobal_90_{
 上:万剑塔八(4,4)↑
 b刷新
 }
-timeGlobal_90_{
+timeNormal_1_{
 神行
 万剑宝塔
 守剑老人
@@ -139,7 +138,7 @@ timeGlobal_90_{
 上:万剑塔九(4,4)↑
 b刷新
 }
-timeGlobal_90_{
+timeNormal_1_{
 神行
 黄泥冈
 右:泥土路→

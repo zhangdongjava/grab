@@ -49,9 +49,9 @@ public class DiXiaGuCheng extends FuBen {
 
     @Override
     public boolean fbRun() {
-       // htmlContent.linkName("功能菜单");
-      //  htmlContent.linkName("神行千里");
-       // htmlContent.linkName("地下古城");
+        htmlContent.linkName("功能菜单");
+        htmlContent.linkName("神行千里");
+        htmlContent.linkName("地下古城");
         if (htmlContent.getText().contains("今天你已进入")) {
             ableIn = false;
             lastDate = new Date();

@@ -53,7 +53,7 @@ public class HtmlPanel extends JFXPanel {
     private TextField interval;
     //设置刷新间隔字体大小按钮
     private Button setBtn;
-    //是否显示日志按钮
+    //是否html刷新
     private Button logBtn;
     //加载地址
     private Button loadBtn;
@@ -131,7 +131,7 @@ public class HtmlPanel extends JFXPanel {
             pause.setDisable(true);
             script = new Button("脚本");
            // script2 = new Button("脚本2");
-            logBtn = new Button("log on");
+            logBtn = new Button("ui on");
             urlTextField.setPrefWidth(WIDTH - 20);
             box1.getChildren().addAll(urlTextField, loadBtn);
             box2.getChildren().addAll(go, script, pause, logBtn, kill);
@@ -215,10 +215,10 @@ public class HtmlPanel extends JFXPanel {
         Platform.runLater(() -> {
             if (content.printLog) {
                 content.printLog = !content.printLog;
-                logBtn.setText("log on");
+                logBtn.setText("ui on");
             } else {
                 content.printLog = !content.printLog;
-                logBtn.setText("log off");
+                logBtn.setText("ui off");
             }
         });
     }

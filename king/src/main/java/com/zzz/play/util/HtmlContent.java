@@ -268,6 +268,7 @@ public class HtmlContent {
             String html = httpRequest.sendGet(url);
             document = Jsoup.parse(html);
             linkEnd();
+            htmlPanel.setHtml(document.html());
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         } catch (IOException e) {
@@ -288,10 +289,10 @@ public class HtmlContent {
             String html = httpRequest.sendGet(url);
             document = Jsoup.parse(html);
             linkEnd();
-            if (printLog) {
-                logger.error(document.text());
-            }
             printfUrl(url);
+            if (printLog) {
+                htmlPanel.setHtml(document.html());
+            }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         } catch (IOException e) {
@@ -327,7 +328,7 @@ public class HtmlContent {
         htmlPanel.setShowTime(currTime - lastTime);
         lastTime = currTime;
         buildAelements();
-        htmlPanel.setHtml(document.html());
+
         vailte();
         controller.pageChange();
     }

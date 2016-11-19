@@ -21,7 +21,7 @@ public class SysTextParse implements Runable {
         this.htmlContent = htmlContent;
         steps = new LinkedList<>();
         steps.add(new XiuShen(htmlContent));
-        steps.add(new GeiXingGuang(htmlContent));
+        //steps.add(new GeiXingGuang(htmlContent));
     }
 
 

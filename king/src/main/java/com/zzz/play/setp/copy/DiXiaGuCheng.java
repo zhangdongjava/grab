@@ -49,9 +49,9 @@ public class DiXiaGuCheng extends FuBen {
 
     @Override
     public boolean fbRun() {
-        htmlContent.linkName("功能菜单");
-        htmlContent.linkName("神行千里");
-        htmlContent.linkName("地下古城");
+       // htmlContent.linkName("功能菜单");
+      //  htmlContent.linkName("神行千里");
+       // htmlContent.linkName("地下古城");
         if (htmlContent.getText().contains("今天你已进入")) {
             ableIn = false;
             lastDate = new Date();
@@ -59,8 +59,8 @@ public class DiXiaGuCheng extends FuBen {
             htmlContent.linkName("返回游戏");
             return false;
         }
-        htmlContent.linkName("返回游戏");
-        htmlContent.linkName("上:古城北街↑");
+        htmlContent.linkName("进入古城中心");
+        gcdb("上:古城北街↑");
         gcdb("上:废墟↑");
         gcdb("上:废墟↑");
         gcdb("下:废墟↓");

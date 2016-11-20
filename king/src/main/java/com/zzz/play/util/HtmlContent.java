@@ -242,6 +242,9 @@ public class HtmlContent {
             if (document.text().contains("战斗中，不能参战")) {
                 zdz.run();
             }
+            if (document.text().contains("负重不够")) {
+                htmlPanel.utilDto.clearUtil.clearPack(this);
+            }
             if (document.text().contains("事件容器已满")) {
                 linkName("返回游戏");
                 throw new StopCurrStepException("事件容器已满！");

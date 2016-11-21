@@ -81,6 +81,7 @@ public class HtmlPanel extends JPanel {
 
     public void setShowTime(long time,String url) {
         urlTextField.setText(url);
+        view.url = url;
         showTime.setText(Long.toString(time));
     }
 

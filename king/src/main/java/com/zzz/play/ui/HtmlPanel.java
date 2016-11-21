@@ -21,7 +21,7 @@ import java.util.LinkedList;
 public class HtmlPanel extends JPanel {
 
     private String url;
-    public static final int WIDTH = MainWindow.width - 118;
+    public static final int WIDTH = MainWindow.width - 80;
     public static final int HEIGHT = MainWindow.height - 62;
     public static Integer DEFAULT_WAIT = Resource.WAIT;
     public HtmlContent content;

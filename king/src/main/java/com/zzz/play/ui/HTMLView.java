@@ -14,8 +14,14 @@ public class HtmlView extends JPanel implements HyperlinkListener {
 
     public String url;
 
+    /**
+     * 字体
+     */
+    private Font font;
+
     public HtmlView(int w, int h) throws Exception {
         editorPane = new JEditorPane();
+        font=new Font("宋体",Font.PLAIN,10);
         this.setLayout(null);
         //放到滚动窗格中才能滚动查看所有内容
         JScrollPane scrollPane = new JScrollPane(editorPane);
@@ -25,6 +31,7 @@ public class HtmlView extends JPanel implements HyperlinkListener {
         editorPane.setEditable(false);
         //要能响应网页中的链接，则必须加上超链监听器
         editorPane.addHyperlinkListener(this);
+        editorPane.setFont(font);
         //让editorPane总是填满整个窗体
         scrollPane.setBounds(0, 0, w, h);
         this.add(scrollPane);
@@ -53,6 +60,11 @@ public class HtmlView extends JPanel implements HyperlinkListener {
                 }
             }
         }
+    }
+
+    public void setFont(int size){
+        font =new Font("宋体",Font.PLAIN,size);
+        editorPane.setFont(font);
     }
 
 }  

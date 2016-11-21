@@ -272,7 +272,6 @@ public class HtmlContent {
             String html = httpRequest.sendGet(url);
             document = Jsoup.parse(html);
             linkEnd(url);
-            htmlPanel.setHtml(document.html());
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         } catch (IOException e) {
@@ -294,9 +293,6 @@ public class HtmlContent {
             lastUrl = url;
             linkEnd(url);
             printfUrl(url);
-            if (printLog) {
-                htmlPanel.setHtml(document.html());
-            }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         } catch (IOException e) {
@@ -332,7 +328,7 @@ public class HtmlContent {
         htmlPanel.setShowTime(currTime - lastTime, url);
         lastTime = currTime;
         buildAelements();
-
+        htmlPanel.setHtml(document.html());
         vailte();
         controller.pageChange();
     }

@@ -10,6 +10,7 @@ import com.zzz.play.util.resource.Resource;
 import com.zzz.play.util.sys.LoginUtil;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
@@ -61,11 +62,17 @@ public class HtmlPanel extends JPanel {
     public LoginUtil loginUtil;
 
     public boolean isClose;
+    /**
+     * 字体
+     */
+    private Font font;
+
 
 
     public HtmlPanel(TabPanel tabPanel, UserInfo user, MainWindow mainWindow) throws Exception {
         this.tabPanel = tabPanel;
         this.mainWindow = mainWindow;
+        font=new Font("宋体",Font.PLAIN,10);
         this.setLayout(null);
        // this.setBounds(100, 0, WIDTH, HEIGHT);
         this.user = user;
@@ -75,7 +82,7 @@ public class HtmlPanel extends JPanel {
 
 
     public void setHtml(String html) {
-        System.out.println(html);
+       // System.out.println(html);
         view.setHtml(html);
     }
 
@@ -100,7 +107,7 @@ public class HtmlPanel extends JPanel {
         urlTextField = new JTextField();
         go = new JButton("go");
         // go2 = new Button("go2");
-        pause = new JButton("pause");
+        pause = new JButton("暂停");
         // closeBtn = new Button("关闭");
         pause.setEnabled(false);
         script = new JButton("脚本");
@@ -121,15 +128,23 @@ public class HtmlPanel extends JPanel {
         urlTextField.setBounds(0, 0, WIDTH - 100, 30);
         showTime.setBounds(WIDTH - 80, 0, 70, 30);
         //第二排
-        go.setBounds(0, 30, 60, 30);
-        pause.setBounds(70, 30, 80, 30);
-        script.setBounds(160, 30, 60, 30);
-        logBtn.setBounds(230, 30, 80, 30);
+        go.setFont(font);
+        go.setBounds(0, 30, 50, 30);
+        pause.setFont(font);
+        pause.setBounds(70, 30, 50, 30);
+        script.setFont(font);
+        script.setBounds(160, 30, 50, 30);
+        logBtn.setFont(font);
+        logBtn.setBounds(230, 30, 50, 30);
         //第三排
-        fontVal.setBounds(0, 60, 60, 30);
-        interval.setBounds(70, 60, 60, 30);
-        setBtn.setBounds(140, 60, 60, 30);
-        kill.setBounds(210, 60, 60, 30);
+        fontVal.setFont(font);
+        fontVal.setBounds(0, 60, 50, 30);
+        interval.setFont(font);
+        interval.setBounds(70, 60, 50, 30);
+        setBtn.setFont(font);
+        setBtn.setBounds(140, 60, 50, 30);
+        kill.setFont(font);
+        kill.setBounds(210, 60, 50, 30);
         //html显示
         view.setBounds(0, 90, WIDTH, HEIGHT - 90);
         this.add(urlTextField);
@@ -164,7 +179,7 @@ public class HtmlPanel extends JPanel {
         go.setEnabled(true);
         pause.setEnabled(false);
         utilDto.waitNotfiy.wait = false;
-        pause.setText("pause");
+        pause.setText("暂停");
         JOptionPane.showConfirmDialog(mainWindow, user.getName() + "-->脚本停止!");
     }
 
@@ -228,14 +243,14 @@ public class HtmlPanel extends JPanel {
             if (location != null && !"".equals(location)) {
                 content.linkUrl(location);
             }
-            text = ("pause");
+            text = ("暂停");
             System.out.println("开始唤醒!");
             utilDto.waitNotfiy.anotfiy();
             System.out.println("唤醒成功!");
         } else {
             utilDto.waitNotfiy.wait = true;
             isWait = true;
-            text = ("go on");
+            text = ("继续");
         }
         pause.setText(text);
     }

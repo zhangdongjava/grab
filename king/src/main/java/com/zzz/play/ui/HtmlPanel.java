@@ -112,7 +112,7 @@ public class HtmlPanel extends JPanel {
         pause.setEnabled(false);
         script = new JButton("脚本");
         // script2 = new Button("脚本2");
-        logBtn = new JButton("ui off");
+       // logBtn = new JButton("ui off");
 
         go.addActionListener(event -> goScript());
         // go2.setOnAction(event -> goScript2());
@@ -120,7 +120,7 @@ public class HtmlPanel extends JPanel {
         script.addActionListener(event -> script(user.getScritps1()));
         // script2.setOnAction(event -> script(user.getScritps2()));
         setBtn.addActionListener(event -> setProperty());
-        logBtn.addActionListener(event -> logSet());
+       // logBtn.addActionListener(event -> logSet());
         loadBtn.addActionListener(event -> loadBtn());
         kill.addActionListener(event -> kill());
         // closeBtn.setOnAction(event -> close());
@@ -134,8 +134,8 @@ public class HtmlPanel extends JPanel {
         pause.setBounds(70, 30, 50, 30);
         script.setFont(font);
         script.setBounds(160, 30, 50, 30);
-        logBtn.setFont(font);
-        logBtn.setBounds(230, 30, 50, 30);
+       // logBtn.setFont(font);
+       // logBtn.setBounds(230, 30, 50, 30);
         //第三排
         fontVal.setFont(font);
         fontVal.setBounds(0, 60, 50, 30);

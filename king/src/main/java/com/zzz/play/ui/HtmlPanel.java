@@ -105,7 +105,7 @@ public class HtmlPanel extends JPanel {
         pause.setEnabled(false);
         script = new JButton("脚本");
         // script2 = new Button("脚本2");
-        logBtn = new JButton("ui on");
+        logBtn = new JButton("ui off");
 
         go.addActionListener(event -> goScript());
         // go2.setOnAction(event -> goScript2());

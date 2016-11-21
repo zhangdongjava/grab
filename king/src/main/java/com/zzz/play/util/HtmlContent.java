@@ -26,7 +26,7 @@ import java.util.Map;
 public class HtmlContent {
 
     private Logger logger = Logger.getLogger(HtmlContent.class);
-    public boolean printLog = false;
+    public boolean printLog = true;
     private static int LINE_COUNT = 120;
     private Document document;
     public String baseUrl;

@@ -131,20 +131,20 @@ public class HtmlPanel extends JPanel {
         go.setFont(font);
         go.setBounds(0, 30, 50, 30);
         pause.setFont(font);
-        pause.setBounds(70, 30, 50, 30);
+        pause.setBounds(60, 30, 50, 30);
         script.setFont(font);
-        script.setBounds(160, 30, 50, 30);
+        script.setBounds(120, 30, 50, 30);
        // logBtn.setFont(font);
        // logBtn.setBounds(230, 30, 50, 30);
         //第三排
         fontVal.setFont(font);
         fontVal.setBounds(0, 60, 50, 30);
         interval.setFont(font);
-        interval.setBounds(70, 60, 50, 30);
+        interval.setBounds(60, 60, 50, 30);
         setBtn.setFont(font);
-        setBtn.setBounds(140, 60, 50, 30);
+        setBtn.setBounds(120, 60, 50, 30);
         kill.setFont(font);
-        kill.setBounds(210, 60, 50, 30);
+        kill.setBounds(180, 60, 50, 30);
         //html显示
         view.setBounds(0, 90, WIDTH, HEIGHT - 90);
         this.add(urlTextField);
@@ -152,7 +152,7 @@ public class HtmlPanel extends JPanel {
         this.add(go);
         this.add(pause);
         this.add(script);
-        this.add(logBtn);
+       // this.add(logBtn);
         this.add(kill);
         this.add(fontVal);
         this.add(interval);

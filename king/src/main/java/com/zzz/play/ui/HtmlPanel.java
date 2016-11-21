@@ -201,6 +201,7 @@ public class HtmlPanel extends JPanel {
     }
 
     private void setProperty() {
+        view.setFont(Integer.valueOf(fontVal.getText()));
         int in = Integer.valueOf(interval.getText());
         content.TIME_WAIT = in;
     }

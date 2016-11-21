@@ -66,6 +66,12 @@ public class QiangXian extends BaseStep {
        while (htmlContent.exitsName("万年灵芝")){
            htmlContent.linkName("万年灵芝");
        }
+       while (htmlContent.exitsName("普通攻击")){
+           htmlContent.linkName("普通攻击");
+       }
+       htmlContent.linkName("x",true);
+       htmlContent.linkName("x",true);
+       htmlContent.linkName("x",true);
        htmlContent.linkName("x",true);
        htmlContent.linkName("x",true);
        htmlContent.linkName("x",true);

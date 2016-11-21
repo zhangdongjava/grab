@@ -20,7 +20,7 @@ import java.util.LinkedList;
 public class HtmlPanel extends JPanel {
 
     private String url;
-    public static final int WIDTH = MainWindow.width - 18;
+    public static final int WIDTH = MainWindow.width - 118;
     public static final int HEIGHT = MainWindow.height - 62;
     public static Integer DEFAULT_WAIT = Resource.WAIT;
     public HtmlContent content;
@@ -67,7 +67,7 @@ public class HtmlPanel extends JPanel {
         this.tabPanel = tabPanel;
         this.mainWindow = mainWindow;
         this.setLayout(null);
-        this.setBounds(0, 0, WIDTH, HEIGHT);
+       // this.setBounds(100, 0, WIDTH, HEIGHT);
         this.user = user;
         this.url = user.getUrl();
         run();

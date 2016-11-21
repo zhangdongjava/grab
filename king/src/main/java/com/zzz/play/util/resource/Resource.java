@@ -17,7 +17,7 @@ public class Resource {
     public static String bootPath;
     public static Integer UI_WIDTH = 500;
     public static Integer UI_HEIGHT = 600;
-    public static double FONT_SIZE = 1.3;
+    public static int FONT_SIZE = 16;
     public static Integer WAIT = 550;
     public static Properties properties = new Properties();
     /**
@@ -77,7 +77,7 @@ public class Resource {
                 ui.load(in);
                 UI_WIDTH = Integer.valueOf(ui.getProperty("width"));
                 UI_HEIGHT = Integer.valueOf(ui.getProperty("height"));
-                FONT_SIZE = Double.valueOf(ui.getProperty("fontSize"));
+                FONT_SIZE = Integer.valueOf(ui.getProperty("fontSize"));
                 WAIT = Integer.valueOf(ui.getProperty("wait"));
                 in.close();
             } catch (Exception e) {

@@ -52,7 +52,7 @@ public class CoreController {
     private SysTextParse sysTextParse;
 
     private Future<?> future;
-    public boolean runing = false;
+    public boolean runing = true;
 
     private boolean scriptReload = false;
 

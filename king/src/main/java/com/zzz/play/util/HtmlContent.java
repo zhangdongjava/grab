@@ -97,8 +97,8 @@ public class HtmlContent {
         linkBean.reset();
         Elements elements = document.getElementsByTag("a");
         Element element = getAelement(elements, like, name, linkBean);
-        if (element == null && !"刷新".equals(name)) {
-            linkName("刷新");
+        if (element == null) {
+            clickFresh();
             elements = document.getElementsByTag("a");
             element = getAelement(elements, like, name, linkBean);
         }
@@ -124,8 +124,8 @@ public class HtmlContent {
         linkBean = this.linkBean;
         Elements elements = document.getElementsByTag("a");
         Element element = getAelementNotName(elements, name, linkBean, notName);
-        if (element == null && !"刷新".equals(name)) {
-            linkName("刷新");
+        if (element == null) {
+            clickFresh();
             elements = document.getElementsByTag("a");
             element = getAelementNotName(elements, name, linkBean, notName);
         }
@@ -382,6 +382,13 @@ public class HtmlContent {
             }
         }
         return linkBean;
+    }
+
+    private void clickFresh() {
+        Elements elements = document.getElementsByTag("a");
+        Element el = getAelement(elements, false, "刷新", new LinkBean());
+        if (el == null) return;
+        linkUrl(el.attr("href"));
     }
 
 

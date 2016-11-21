@@ -219,6 +219,7 @@ public class TextParse implements Runable {
         }
         config.countJian();
         boolean exec = false;
+        htmlContent.clickFresh();
         for (currNormalIndex = 0; currNormalIndex < linkedList.size(); currNormalIndex++) {
             try {
                 //System.out.println("普通脚本:" + linkedList.get(currNormalIndex));

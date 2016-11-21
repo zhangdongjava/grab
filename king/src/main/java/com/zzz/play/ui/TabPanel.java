@@ -15,6 +15,7 @@ public class TabPanel extends JTabbedPane {
     public TabPanel(MainWindow mainWindow) {
         super(JTabbedPane.LEFT);
         this.mainWindow = mainWindow;
+        this.setLayout(null);
     }
 
     public void addPanel(UserInfo user) {

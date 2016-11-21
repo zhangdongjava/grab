@@ -8,55 +8,42 @@ import com.zzz.play.util.*;
 import com.zzz.play.util.page.ClearUtil;
 import com.zzz.play.util.resource.Resource;
 import com.zzz.play.util.sys.LoginUtil;
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created by dell_2 on 2016/10/29.
  */
-public class HtmlPanel extends JFXPanel {
+public class HtmlPanel extends JPanel {
 
     private String url;
-    public static final int WIDTH = MainWindow.width - 100;
-    public static final int HEIGHT = MainWindow.height - 100;
+    public static final int WIDTH = MainWindow.width - 18;
+    public static final int HEIGHT = MainWindow.height - 62;
     public static Integer DEFAULT_WAIT = Resource.WAIT;
     public HtmlContent content;
     public GlobalUtil globalUtil;
-    public WebView view;
-    private Button pause;
+    public HtmlView view;
+    private JButton pause;
     //private Button closeBtn;
-    private Button kill;
-    private Button go;
+    private JButton kill;
+    private JButton go;
     //private Button go2;
-    private Button script;
-   // private Button script2;
-    private Label showTime;
+    private JButton script;
+    // private Button script2;
+    private JLabel showTime;
     //字体大小
-    private TextField fontVal;
+    private JTextField fontVal;
     //刷新间隔
-    private TextField interval;
+    private JTextField interval;
     //设置刷新间隔字体大小按钮
-    private Button setBtn;
+    private JButton setBtn;
     //是否html刷新
-    private Button logBtn;
+    private JButton logBtn;
     //加载地址
-    private Button loadBtn;
+    private JButton loadBtn;
     //核心控制器
     public CoreController controller;
     //工具载体
@@ -67,7 +54,7 @@ public class HtmlPanel extends JFXPanel {
     //主窗口
     public MainWindow mainWindow;
     private Object startLock = new Object();
-    private TextField urlTextField;
+    private JTextField urlTextField;
     public boolean isWait = false;
     public boolean ruing = false;
     public UserInfo user;
@@ -80,6 +67,7 @@ public class HtmlPanel extends JFXPanel {
         this.tabPanel = tabPanel;
         this.mainWindow = mainWindow;
         this.setLayout(null);
+        this.setBounds(0, 0, WIDTH, HEIGHT);
         this.user = user;
         this.url = user.getUrl();
         run();
@@ -87,99 +75,76 @@ public class HtmlPanel extends JFXPanel {
 
 
     public void setHtml(String html) {
-        Platform.runLater(() -> view.getEngine().loadContent(html));
+        System.out.println(html);
+        view.setHtml(html);
     }
 
-    public void setShowTime(long time) {
-        Platform.runLater(() -> showTime.setText(Long.toString(time)));
+    public void setShowTime(long time,String url) {
+        urlTextField.setText(url);
+        showTime.setText(Long.toString(time));
     }
 
 
-    public void run() throws InterruptedException {
-        Platform.runLater(() -> {
-            view = new WebView();
-            showTime = new Label();
-            fontVal = new TextField();
-            fontVal.setPrefWidth(40);
-            fontVal.setPromptText("字体");
-            fontVal.setText(Double.toString(Resource.FONT_SIZE));
-            interval = new TextField();
-            interval.setPrefWidth(50);
-            interval.setPromptText("间隔");
-            interval.setText(DEFAULT_WAIT.toString());
-            setBtn = new Button("设置");
-            kill = new Button("停止");
-            loadBtn = new Button("→");
-            Group root = new Group();
-            view.setFontScale(Resource.FONT_SIZE);
-            loginUtil = new LoginUtil(this);
-            Scene scene1 = new Scene(root, WIDTH, HEIGHT);
-            HtmlPanel.this.setScene(scene1);
-            Double widthDouble = new Integer(WIDTH).doubleValue();
-            Double heightDouble = new Integer(HEIGHT).doubleValue();
-            VBox box = new VBox(10);
-            HBox box1 = new HBox(10);
-            HBox box2 = new HBox(10);
-            HBox box3 = new HBox(10);
-            urlTextField = new TextField();
-            urlTextField.setText(url);
-            view.getEngine().load(url);
-            go = new Button("go");
-           // go2 = new Button("go2");
-            pause = new Button("pause");
-            // closeBtn = new Button("关闭");
-            pause.setDisable(true);
-            script = new Button("脚本");
-           // script2 = new Button("脚本2");
-            logBtn = new Button("ui on");
-            urlTextField.setPrefWidth(WIDTH - 20);
-            box1.getChildren().addAll(urlTextField, loadBtn);
-            box2.getChildren().addAll(go, script, pause, logBtn, kill);
-            box3.getChildren().addAll(fontVal, interval, setBtn, showTime);
-            view.setMinSize(widthDouble, heightDouble - 100);
-            view.setMaxSize(widthDouble, heightDouble - 50);
-            view.setPrefSize(widthDouble, heightDouble - 50);
-            box.getChildren().add(box1);
-            box.getChildren().add(box2);
-            box.getChildren().add(box3);
-            box.getChildren().add(view);
-            root.getChildren().add(box);
-            go.setOnAction(event -> goScript());
-           // go2.setOnAction(event -> goScript2());
-            pause.setOnAction(event -> pauseGoon());
-            script.setOnAction(event -> script(user.getScritps1()));
-           // script2.setOnAction(event -> script(user.getScritps2()));
-            setBtn.setOnAction(event -> setProperty());
-            logBtn.setOnAction(event -> logSet());
-            loadBtn.setOnAction(event -> loadBtn());
-            kill.setOnAction(event -> kill());
-            // closeBtn.setOnAction(event -> close());
-            HtmlPanel.this.init();
-        });
+    public void run() throws Exception {
+        view = new HtmlView(WIDTH, HEIGHT - 90);
+        showTime = new JLabel("showTime");
+        fontVal = new JTextField();
+        fontVal.setText(Double.toString(Resource.FONT_SIZE));
+        interval = new JTextField();
+        interval.setText(DEFAULT_WAIT.toString());
+        setBtn = new JButton("设置");
+        kill = new JButton("停止");
+        loadBtn = new JButton("→");
+        loginUtil = new LoginUtil(this);
+        urlTextField = new JTextField();
+        go = new JButton("go");
+        // go2 = new Button("go2");
+        pause = new JButton("pause");
+        // closeBtn = new Button("关闭");
+        pause.setEnabled(false);
+        script = new JButton("脚本");
+        // script2 = new Button("脚本2");
+        logBtn = new JButton("ui on");
+
+        go.addActionListener(event -> goScript());
+        // go2.setOnAction(event -> goScript2());
+        pause.addActionListener(event -> pauseGoon());
+        script.addActionListener(event -> script(user.getScritps1()));
+        // script2.setOnAction(event -> script(user.getScritps2()));
+        setBtn.addActionListener(event -> setProperty());
+        logBtn.addActionListener(event -> logSet());
+        loadBtn.addActionListener(event -> loadBtn());
+        kill.addActionListener(event -> kill());
+        // closeBtn.setOnAction(event -> close());
+        //第一排
+        urlTextField.setBounds(0, 0, WIDTH - 100, 30);
+        showTime.setBounds(WIDTH - 80, 0, 70, 30);
+        //第二排
+        go.setBounds(0, 30, 60, 30);
+        pause.setBounds(70, 30, 80, 30);
+        script.setBounds(160, 30, 60, 30);
+        logBtn.setBounds(230, 30, 80, 30);
+        kill.setBounds(320, 30, 60, 30);
+        //第三排
+        fontVal.setBounds(0, 60, 60, 30);
+        interval.setBounds(70, 60, 60, 30);
+        setBtn.setBounds(140, 60, 60, 30);
+        //html显示
+        view.setBounds(0, 90, WIDTH, HEIGHT - 90);
+        this.add(urlTextField);
+        this.add(showTime);
+        this.add(go);
+        this.add(pause);
+        this.add(script);
+        this.add(logBtn);
+        this.add(kill);
+        this.add(fontVal);
+        this.add(interval);
+        this.add(setBtn);
+        this.add(view);
+        HtmlPanel.this.init();
         joinGame();
     }
-
-//    private void goScript2() {
-//
-//        if (user.getScritps2().isEmpty()) {
-//            JOptionPane.showConfirmDialog(mainWindow, "没有选择脚本!");
-//            return;
-//        }
-//        kill();
-//        ruing = true;
-//        WebEngine engine = view.getEngine();
-//        String location = engine.getLocation();
-//        if (location != null && !"".equals(location)) {
-//            System.out.println(location);
-//            content.setBaseUrl(location);
-//            content.linkUrl(location);
-//        }
-//        controller.run2(content);
-//        Platform.runLater(() -> {
-//           // go2.setDisable(true);
-//            pause.setDisable(false);
-//        });
-//    }
 
 
     /**
@@ -195,13 +160,11 @@ public class HtmlPanel extends JFXPanel {
      */
     public void killed() {
         System.out.println(this.user.getName() + "->>脚本终止!");
-        Platform.runLater(() -> {
-            go.setDisable(false);
-            pause.setDisable(true);
-            utilDto.waitNotfiy.wait = false;
-            pause.setText("pause");
-        });
-        JOptionPane.showConfirmDialog(mainWindow,user.getName()+"-->脚本停止!");
+        go.setEnabled(true);
+        pause.setEnabled(false);
+        utilDto.waitNotfiy.wait = false;
+        pause.setText("pause");
+        JOptionPane.showConfirmDialog(mainWindow, user.getName() + "-->脚本停止!");
     }
 
     /**
@@ -212,24 +175,18 @@ public class HtmlPanel extends JFXPanel {
     }
 
     private void logSet() {
-        Platform.runLater(() -> {
-            if (content.printLog) {
-                content.printLog = !content.printLog;
-                logBtn.setText("ui on");
-            } else {
-                content.printLog = !content.printLog;
-                logBtn.setText("ui off");
-            }
-        });
+        if (content.printLog) {
+            content.printLog = !content.printLog;
+            logBtn.setText("ui on");
+        } else {
+            content.printLog = !content.printLog;
+            logBtn.setText("ui off");
+        }
     }
 
     private void setProperty() {
-        Platform.runLater(() -> {
-            double font = Double.valueOf(fontVal.getText());
-            view.setFontScale(font);
-            int in = Integer.valueOf(interval.getText());
-            content.TIME_WAIT = in;
-        });
+        int in = Integer.valueOf(interval.getText());
+        content.TIME_WAIT = in;
     }
 
     private void goScript() {
@@ -239,18 +196,14 @@ public class HtmlPanel extends JFXPanel {
             return;
         }
         ruing = true;
-        WebEngine engine = view.getEngine();
-        String location = engine.getLocation();
+        String location = view.url;
         if (location != null && !"".equals(location)) {
-            System.out.println(location);
             content.setBaseUrl(location);
             content.linkUrl(location);
         }
         controller.run(content);
-        Platform.runLater(() -> {
-            go.setDisable(true);
-            pause.setDisable(false);
-        });
+        go.setEnabled(false);
+        pause.setEnabled(true);
     }
 
     /**
@@ -270,8 +223,7 @@ public class HtmlPanel extends JFXPanel {
         if (utilDto.waitNotfiy.wait) {
             isWait = false;
             utilDto.waitNotfiy.wait = false;
-            WebEngine engine = view.getEngine();
-            String location = engine.getLocation();
+            String location = view.url;
             if (location != null && !"".equals(location)) {
                 content.linkUrl(location);
             }
@@ -284,7 +236,7 @@ public class HtmlPanel extends JFXPanel {
             isWait = true;
             text = ("go on");
         }
-        Platform.runLater(() -> pause.setText(text));
+        pause.setText(text);
     }
 
     public void init() {
@@ -312,10 +264,6 @@ public class HtmlPanel extends JFXPanel {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException();
-        } finally {
-            synchronized (startLock) {
-                startLock.notifyAll();
-            }
         }
     }
 
@@ -324,13 +272,6 @@ public class HtmlPanel extends JFXPanel {
      */
     private void joinGame() {
         ThreadPoolUtil.addThread(() -> {
-            synchronized (startLock) {
-                try {
-                    startLock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
             //如果需要登录就登录
             if (user.isLogin()) {
                 try {
@@ -348,7 +289,7 @@ public class HtmlPanel extends JFXPanel {
     }
 
     public void assemble() throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
-        content = new HtmlContent(urlTextField.getText(), this, controller);
+        content = new HtmlContent(user.getUrl(), this, controller);
         controller.content = content;
 
         GlobalObserver globalObserver = new GlobalObserver(globalUtil);

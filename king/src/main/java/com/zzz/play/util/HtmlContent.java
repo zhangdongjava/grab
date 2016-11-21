@@ -270,7 +270,7 @@ public class HtmlContent {
             url = cleckUrl(url);
             String html = httpRequest.sendGet(url);
             document = Jsoup.parse(html);
-            linkEnd();
+            linkEnd(url);
             htmlPanel.setHtml(document.html());
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -291,7 +291,7 @@ public class HtmlContent {
             url = cleckUrl(url);
             String html = httpRequest.sendGet(url);
             document = Jsoup.parse(html);
-            linkEnd();
+            linkEnd(url);
             printfUrl(url);
             if (printLog) {
                 htmlPanel.setHtml(document.html());
@@ -322,13 +322,13 @@ public class HtmlContent {
     }
 
 
-    private void linkEnd() {
+    private void linkEnd(String url) {
         delForms = document.getElementsByTag("form").remove();
         text = document.text();
         document.getElementsByTag("img").remove();
         urlMap.clear();
         long currTime = System.currentTimeMillis();
-        htmlPanel.setShowTime(currTime - lastTime);
+        htmlPanel.setShowTime(currTime - lastTime,url);
         lastTime = currTime;
         buildAelements();
 

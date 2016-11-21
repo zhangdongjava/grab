@@ -2,6 +2,7 @@ package com.zzz.play.util;
 
 import com.zzz.play.bean.LinkBean;
 import com.zzz.play.core.CoreController;
+import com.zzz.play.exception.RunStopException;
 import com.zzz.play.exception.StopCurrStepException;
 import com.zzz.play.setp.Step;
 import com.zzz.play.setp.TextParse;
@@ -245,6 +246,8 @@ public class HtmlContent {
             }
             if (document.text().contains("负重不够")) {
                 htmlPanel.utilDto.clearUtil.clearPack(this);
+            }if (!controller.runing) {
+                throw new RunStopException("停止!~");
             }
             if (document.text().contains("事件容器已满")) {
                 linkName("返回游戏");

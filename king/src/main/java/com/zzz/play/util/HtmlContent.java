@@ -65,6 +65,7 @@ public class HtmlContent {
      */
     private ValidationKill validationKill;
 
+    private String lastUrl;
 
     public HtmlContent(String url, HtmlPanel htmlPanel, CoreController controller) {
         lastTime = System.currentTimeMillis();
@@ -299,8 +300,8 @@ public class HtmlContent {
         try {
             await();
             url = cleckUrl(url);
-            String html = httpRequest.sendGet(url);
-            document = Jsoup.parse(html);
+            document = Jsoup.parse(new URL(url), 2000);
+            lastUrl = url;
             linkEnd(url);
             printfUrl(url);
             if (printLog) {
@@ -387,8 +388,11 @@ public class HtmlContent {
     private void clickFresh() {
         Elements elements = document.getElementsByTag("a");
         Element el = getAelement(elements, false, "刷新", new LinkBean());
-        if (el == null) return;
-        linkUrl(el.attr("href"));
+        if (el == null) {
+            linkUrl(lastUrl);
+        } else {
+            linkUrl(el.attr("href"));
+        }
     }
 
 

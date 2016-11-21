@@ -125,11 +125,11 @@ public class HtmlPanel extends JPanel {
         pause.setBounds(70, 30, 80, 30);
         script.setBounds(160, 30, 60, 30);
         logBtn.setBounds(230, 30, 80, 30);
-        kill.setBounds(320, 30, 60, 30);
         //第三排
         fontVal.setBounds(0, 60, 60, 30);
         interval.setBounds(70, 60, 60, 30);
         setBtn.setBounds(140, 60, 60, 30);
+        kill.setBounds(210, 60, 60, 30);
         //html显示
         view.setBounds(0, 90, WIDTH, HEIGHT - 90);
         this.add(urlTextField);

@@ -97,6 +97,11 @@ public class HtmlContent {
         linkBean.reset();
         Elements elements = document.getElementsByTag("a");
         Element element = getAelement(elements, like, name, linkBean);
+        if (element == null && !"刷新".equals(name)) {
+            linkName("刷新");
+            elements = document.getElementsByTag("a");
+            element = getAelement(elements, like, name, linkBean);
+        }
         if (element != null) {
             url = element.attr("href");
             linkBean.setUrl(url);
@@ -119,6 +124,11 @@ public class HtmlContent {
         linkBean = this.linkBean;
         Elements elements = document.getElementsByTag("a");
         Element element = getAelementNotName(elements, name, linkBean, notName);
+        if (element == null && !"刷新".equals(name)) {
+            linkName("刷新");
+            elements = document.getElementsByTag("a");
+            element = getAelementNotName(elements, name, linkBean, notName);
+        }
         if (element != null) {
             String url = element.attr("href");
             linkBean.setUrl(url);
@@ -328,7 +338,7 @@ public class HtmlContent {
         document.getElementsByTag("img").remove();
         urlMap.clear();
         long currTime = System.currentTimeMillis();
-        htmlPanel.setShowTime(currTime - lastTime,url);
+        htmlPanel.setShowTime(currTime - lastTime, url);
         lastTime = currTime;
         buildAelements();
 

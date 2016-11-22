@@ -1,6 +1,5 @@
 package com.zzz.play.setp.copy.kuaihuo;
 
-import com.sun.prism.impl.BaseMesh;
 import com.zzz.play.util.HtmlContent;
 
 /**

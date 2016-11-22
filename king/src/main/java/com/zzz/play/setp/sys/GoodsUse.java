@@ -91,6 +91,7 @@ public class GoodsUse extends BaseStep implements SaleMark {
             res = htmlContent.linkName(name, getNotNames());
             htmlContent.linkName("使用");
         }
+        maps.remove(name);
         liuNames.add(res.getClickName());
     }
 

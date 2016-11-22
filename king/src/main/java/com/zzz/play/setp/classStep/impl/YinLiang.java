@@ -37,9 +37,9 @@ public class YinLiang extends SecondRefresh {
         Calendar calendar = Calendar.getInstance();
         int h = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
-//        if ((h < 23 || min < 40)) {
-//            return false;
-//        }
+        if ((h < 23 || min < 30)) {
+            return false;
+        }
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("功能菜单");
         htmlContent.linkName("神行千里");

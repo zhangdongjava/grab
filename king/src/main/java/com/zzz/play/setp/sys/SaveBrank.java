@@ -21,7 +21,7 @@ public class SaveBrank extends BaseStep {
 
     private Set<String> notSave = new HashSet<>();
     private long lastTime;
-    private long jiange = 3600000;
+    private long jiange = 600000;
 
     public SaveBrank(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;

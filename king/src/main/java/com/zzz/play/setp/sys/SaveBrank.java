@@ -20,6 +20,8 @@ public class SaveBrank extends BaseStep {
     private FormSubmit formSubmit;
 
     private Set<String> notSave = new HashSet<>();
+    private long lastTime;
+    private long jiange = 3600000;
 
     public SaveBrank(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;
@@ -31,7 +33,7 @@ public class SaveBrank extends BaseStep {
 
 
     public boolean run() {
-        if (notSave.contains(htmlContent.htmlPanel.user.getName())) {
+        if (notSave.contains(htmlContent.htmlPanel.user.getName())&&System.currentTimeMillis()-lastTime<jiange) {
             return false;
         }
         htmlContent.linkName("返回游戏");
@@ -47,7 +49,7 @@ public class SaveBrank extends BaseStep {
             formSubmit.run();
         }
         htmlContent.linkName("返回游戏");
-
+        lastTime = System.currentTimeMillis();
         return true;
     }
 

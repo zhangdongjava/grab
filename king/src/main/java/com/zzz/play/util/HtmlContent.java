@@ -455,7 +455,6 @@ public class HtmlContent {
             }
         } catch (NoSuchElementException e) {
             linkBean = new LinkBean();
-            linkBeens.addFirst(linkBean);
         }
         return linkBean;
     }

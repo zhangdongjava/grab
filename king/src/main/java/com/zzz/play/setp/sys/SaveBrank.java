@@ -6,6 +6,8 @@ import com.zzz.play.setp.sup.SecondRefresh;
 import com.zzz.play.util.HtmlContent;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 保存金币
@@ -17,16 +19,21 @@ public class SaveBrank extends BaseStep {
 
     private FormSubmit formSubmit;
 
+    private Set<String> notSave = new HashSet<>();
+
     public SaveBrank(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;
         formSubmit = new FormSubmit();
         formSubmit.setHtmlContent(htmlContent);
         formSubmit.setValue("10000000");
+        notSave.add("大嘴哥");
     }
 
 
     public boolean run() {
-
+        if (notSave.contains(htmlContent.htmlPanel.user.getName())) {
+            return false;
+        }
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("帮派");
         htmlContent.linkName("帮派管理");

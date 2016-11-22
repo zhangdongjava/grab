@@ -19,7 +19,9 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 /**
  * Created by dell_2 on 2016/10/29.
@@ -57,9 +59,6 @@ public class HtmlContent {
 
     private long lastTime;
     private long lastLogTime;
-    LinkBean linkBean;
-    //副本
-    LinkBean copyLinkBean;
     private String text;
     /**
      * 接触验证
@@ -68,12 +67,14 @@ public class HtmlContent {
 
     private String lastUrl;
 
+    private LinkedList<LinkBean> linkBeens;
+
     public HtmlContent(String url, HtmlPanel htmlPanel, CoreController controller) {
+        linkBeens = new LinkedList<>();
+        initLinkBean();
         lastTime = System.currentTimeMillis();
         this.controller = controller;
         validationKill = new ValidationKill(this);
-        linkBean = new LinkBean();
-        copyLinkBean = new LinkBean();
         initUtil();
         setBaseUrl(url);
         this.htmlPanel = htmlPanel;
@@ -96,7 +97,7 @@ public class HtmlContent {
      */
     public LinkBean getUrl(String name, boolean like) {
         String url;
-        linkBean.reset();
+        LinkBean linkBean = new LinkBean();
         Elements elements = document.getElementsByTag("a");
         Element element = getAelement(elements, like, name, linkBean);
         if (element != null) {
@@ -117,8 +118,7 @@ public class HtmlContent {
     private LinkBean getUrl(String name, String... notName) {
         LinkBean linkBean = urlMap.get(name + "_" + notName);
         if (linkBean != null) return linkBean;
-        this.linkBean.reset();
-        linkBean = this.linkBean;
+        linkBean = new LinkBean();
         Elements elements = document.getElementsByTag("a");
         Element element = getAelementNotName(elements, name, linkBean, notName);
         if (element != null) {
@@ -233,7 +233,6 @@ public class HtmlContent {
 
 
     public void vailte() {
-        copyLinkBean.copy(this.linkBean);
         try {
             if (exitsName("继续", false)) {
                 linkUrl(getUrl("继续", false).getUrl());
@@ -246,7 +245,8 @@ public class HtmlContent {
             }
             if (document.text().contains("负重不够")) {
                 htmlPanel.utilDto.clearUtil.clearPack(this);
-            }if (!controller.runing) {
+            }
+            if (!controller.runing) {
                 throw new RunStopException("停止!~");
             }
             if (document.text().contains("事件容器已满")) {
@@ -255,7 +255,6 @@ public class HtmlContent {
             }
         } finally {
         }
-        this.linkBean.copy(copyLinkBean);
     }
 
 
@@ -348,7 +347,7 @@ public class HtmlContent {
      */
     public LinkBean linkName(String name, int index, boolean like) {
 
-        linkBean.reset();
+        LinkBean linkBean = new LinkBean();
         Elements as = document.getElementsByTag("a");
         for (Element a : as) {
             if (!like && a.text().equals(name)) {
@@ -376,14 +375,16 @@ public class HtmlContent {
 
     public void clickFresh() {
         Elements elements = document.getElementsByTag("a");
-        Element el = getAelement(elements, false, "刷新", new LinkBean());
+        LinkBean linkBean = new LinkBean();
+        Element el = getAelement(elements, false, "刷新", linkBean);
         if (el == null) {
-            if(lastUrl!=null){
+            if (lastUrl != null) {
                 linkUrl(lastUrl);
             }
         } else {
             linkUrl(el.attr("href"));
         }
+        linkBeens.addLast(linkBean);
     }
 
 
@@ -438,6 +439,14 @@ public class HtmlContent {
     public String getText() {
         return text;
     }
+
+    private void initLinkBean() {
+        for (int i = 0; i < 18; i++) {
+            linkBeens.add(new LinkBean());
+        }
+    }
+
+
 }
 
 

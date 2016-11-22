@@ -14,6 +14,7 @@ public class KeywordLogger implements Logger {
 
     @Override
     public void run(HtmlContent htmlContent) {
+        if(htmlContent==null)return;
         String text = htmlContent.getText();
         if(text.length()>50){
             text = text.substring(0,50);

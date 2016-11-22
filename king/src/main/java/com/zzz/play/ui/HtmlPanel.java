@@ -97,7 +97,7 @@ public class HtmlPanel extends JPanel {
         view = new HtmlView(WIDTH, HEIGHT - 90);
         showTime = new JLabel("showTime");
         fontVal = new JTextField();
-        fontVal.setText(Double.toString(Resource.FONT_SIZE));
+        fontVal.setText(Integer.toString(Resource.FONT_SIZE));
         interval = new JTextField();
         interval.setText(DEFAULT_WAIT.toString());
         setBtn = new JButton("设置");

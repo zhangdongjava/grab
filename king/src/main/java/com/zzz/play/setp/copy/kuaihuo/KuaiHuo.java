@@ -39,7 +39,7 @@ public class KuaiHuo extends SecondRefresh {
                 lastDate = new Date();
                 ableIn = false;
             }else{
-                goodsSave.setGoods("负重,快活,烈炎");
+                goodsSave.setGoods("快活,烈炎");
                 goodsSave.run();
             }
 

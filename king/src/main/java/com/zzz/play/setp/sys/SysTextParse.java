@@ -4,6 +4,7 @@ import com.zzz.play.inter.Runable;
 import com.zzz.play.setp.Step;
 import com.zzz.play.setp.activity.GeiXingGuang;
 import com.zzz.play.setp.classStep.impl.XiuShen;
+import com.zzz.play.setp.classStep.impl.YinLiang;
 import com.zzz.play.util.HtmlContent;
 
 import java.util.LinkedList;
@@ -22,6 +23,7 @@ public class SysTextParse implements Runable {
         steps = new LinkedList<>();
         steps.add(new XiuShen(htmlContent));
         steps.add(new SaveBrank(htmlContent));
+        steps.add(new YinLiang(htmlContent));
         //steps.add(new GeiXingGuang(htmlContent));
     }
 

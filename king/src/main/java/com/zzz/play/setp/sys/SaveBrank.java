@@ -33,7 +33,7 @@ public class SaveBrank extends BaseStep {
 
 
     public boolean run() {
-        if (notSave.contains(htmlContent.htmlPanel.user.getName())&&System.currentTimeMillis()-lastTime<jiange) {
+        if (notSave.contains(htmlContent.htmlPanel.user.getName())||System.currentTimeMillis()-lastTime<jiange) {
             return false;
         }
         htmlContent.linkName("返回游戏");
@@ -44,7 +44,8 @@ public class SaveBrank extends BaseStep {
         //你目前有银两60984868。请输入你要捐献的银两数量
         int index1 = htmlContent.getText().indexOf("银两");
         int index2 = htmlContent.getText().indexOf("。");
-        int yin = Integer.valueOf(htmlContent.getText().substring(index1 + 1, index2));
+        String val = htmlContent.getText().substring(index1 + 2, index2);
+        int yin = Integer.valueOf(val);
         if (yin > 20000000) {
             formSubmit.run();
         }

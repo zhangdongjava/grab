@@ -17,9 +17,11 @@ public class YinLiang extends SecondRefresh {
 
     private GoodsUse goodsUse;
 
+    private int num = 12;
+
     public YinLiang(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;
-        goodsUse = new GoodsUse("双倍银两卡_5");
+        goodsUse = new GoodsUse("双倍银两卡_"+num);
         goodsUse.setHtmlContent(htmlContent);
     }
 
@@ -47,7 +49,7 @@ public class YinLiang extends SecondRefresh {
         htmlContent.linkName("上:北大街↑");
         htmlContent.linkName("活动大使");
         htmlContent.linkName("回馈点", true);
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < num; i++) {
             htmlContent.linkName("倍银两卡(绑)", true);
             htmlContent.linkName("回馈点兑换奖励");
         }

@@ -106,6 +106,7 @@ public class HtmlContent {
             linkBean.setClickName(element.text());
             return linkBean;
         }
+        addLinkBean(linkBean);
         return linkBean;
     }
 
@@ -118,7 +119,7 @@ public class HtmlContent {
     private LinkBean getUrl(String name, String... notName) {
         LinkBean linkBean = urlMap.get(name + "_" + notName);
         if (linkBean != null) return linkBean;
-        linkBean = new LinkBean();
+        linkBean = getFirst();
         Elements elements = document.getElementsByTag("a");
         Element element = getAelementNotName(elements, name, linkBean, notName);
         if (element != null) {
@@ -127,6 +128,7 @@ public class HtmlContent {
             linkBean.setClickName(element.text());
             urlMap.put(name + "_" + notName, linkBean);
         }
+        addLinkBean(linkBean);
         return linkBean;
     }
 
@@ -370,6 +372,7 @@ public class HtmlContent {
                 index--;
             }
         }
+        addLinkBean(linkBean);
         return linkBean;
     }
 
@@ -384,7 +387,7 @@ public class HtmlContent {
         } else {
             linkUrl(el.attr("href"));
         }
-        linkBeens.addLast(linkBean);
+       addLinkBean(linkBean);
     }
 
 
@@ -457,6 +460,12 @@ public class HtmlContent {
             linkBean = new LinkBean();
         }
         return linkBean;
+    }
+
+    public void addLinkBean(LinkBean linkBean){
+        if(!linkBeens.contains(linkBean)){
+            linkBeens.addLast(linkBean);
+        }
     }
 }
 

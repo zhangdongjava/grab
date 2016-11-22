@@ -16,6 +16,7 @@ import com.zzz.play.util.GlobalUtil;
 import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.ThreadPoolUtil;
 import com.zzz.play.util.UtilDto;
+import com.zzz.play.util.sys.LoggerUtil;
 import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
@@ -78,6 +79,8 @@ public class CoreController {
                     }
                 }
             }
+            //日志记录
+            LoggerUtil.loggerUtil.run(content);
             utilDto.clearUtil.clear(content);
         } finally {
             execChange = false;

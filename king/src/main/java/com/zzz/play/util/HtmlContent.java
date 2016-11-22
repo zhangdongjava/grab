@@ -97,7 +97,7 @@ public class HtmlContent {
      */
     public LinkBean getUrl(String name, boolean like) {
         String url;
-        LinkBean linkBean = new LinkBean();
+        LinkBean linkBean = getFirst();
         Elements elements = document.getElementsByTag("a");
         Element element = getAelement(elements, like, name, linkBean);
         if (element != null) {
@@ -347,7 +347,7 @@ public class HtmlContent {
      */
     public LinkBean linkName(String name, int index, boolean like) {
 
-        LinkBean linkBean = new LinkBean();
+        LinkBean linkBean = getFirst();
         Elements as = document.getElementsByTag("a");
         for (Element a : as) {
             if (!like && a.text().equals(name)) {
@@ -375,7 +375,7 @@ public class HtmlContent {
 
     public void clickFresh() {
         Elements elements = document.getElementsByTag("a");
-        LinkBean linkBean = new LinkBean();
+        LinkBean linkBean = getFirst();
         Element el = getAelement(elements, false, "刷新", linkBean);
         if (el == null) {
             if (lastUrl != null) {
@@ -441,12 +441,24 @@ public class HtmlContent {
     }
 
     private void initLinkBean() {
-        for (int i = 0; i < 18; i++) {
+        for (int i = 0; i < 5; i++) {
             linkBeens.add(new LinkBean());
         }
     }
 
-
+    public LinkBean getFirst() {
+        LinkBean linkBean;
+        try {
+            linkBean = linkBeens.removeFirst();
+            if (linkBeens.size() > 4) {
+                linkBeens.removeFirst();
+            }
+        } catch (NoSuchElementException e) {
+            linkBean = new LinkBean();
+            linkBeens.addFirst(linkBean);
+        }
+        return linkBean;
+    }
 }
 
 

@@ -79,8 +79,7 @@ public class UiResourceUtil {
         byte[] buf = new byte[fis.available()];
         fis.read(buf);
         fis.close();
-        String json = new String(buf);
-        return json;
+        return new String(buf);
     }
 }
 

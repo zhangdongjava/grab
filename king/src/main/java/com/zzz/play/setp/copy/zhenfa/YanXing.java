@@ -38,7 +38,7 @@ public class YanXing extends ZhenFa {
             return false;
         }
         zhandou();
-        while (true&&!Thread.currentThread().isInterrupted()) {
+        for (int i=0;i<1000&&!Thread.currentThread().isInterrupted();i++){
             if (htmlContent.exitsName("雁形中心", true)) {
                 break;
             } else if (htmlContent.exitsName("下:雁形阵↓")&&ac!=UP) {

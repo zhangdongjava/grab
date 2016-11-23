@@ -37,7 +37,7 @@ public class YanYue extends ZhenFa {
             return false;
         }
         zhandou();
-        while (true&&!Thread.currentThread().isInterrupted()) {
+        for (int i=0;i<1000&&!Thread.currentThread().isInterrupted();i++){
             if (htmlContent.exitsName("偃月中心", true)) {
                 break;
             } else if (htmlContent.exitsName("下:偃月阵↓") && ac != UP) {

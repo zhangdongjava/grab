@@ -16,7 +16,7 @@ public class QiangXian extends BaseStep {
         int h = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
         System.out.println("抢仙->>"+h+":"+min);
-        if ((h >= 18 && min >= 50) || h > 18) {
+        if ((h == 18 && min >= 50)) {
             go();
             while (!htmlContent.exitsName("VS", true)) {
                 htmlContent.linkName("刷新");

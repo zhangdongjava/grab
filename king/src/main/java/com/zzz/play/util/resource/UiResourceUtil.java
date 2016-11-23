@@ -70,7 +70,7 @@ public class UiResourceUtil {
 
     private static void saveJson(Object map, File file) throws IOException {
         FileOutputStream fos = new FileOutputStream(file);
-        fos.write(JSON.toJSONString(map).getBytes());
+        fos.write(JSON.toJSONString(map,true).getBytes());
         fos.close();
     }
 

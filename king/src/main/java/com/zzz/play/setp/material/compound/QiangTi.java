@@ -105,8 +105,6 @@ public class QiangTi extends SecondRefresh {
         }
         htmlContent.linkName("返回黑风岭砍柴老者");
         htmlContent.linkName("返回游戏");
-        goodsSale2.setGoods(".虎骨");
-        goodsSale2.run();
         goodsSave.setGoods("强体奇书");
         goodsSave.run();
         qian = 0;

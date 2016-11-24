@@ -1,5 +1,7 @@
 package com.zzz.play.ui;
 
+import com.zzz.play.util.resource.Resource;
+
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
@@ -7,20 +9,20 @@ import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLFrameHyperlinkEvent;
 import java.awt.*;
 
-public class HtmlView extends JPanel implements HyperlinkListener {
+public class WebView extends JPanel implements HyperlinkListener {
 
     private JEditorPane editorPane;
 
     public String url;
 
     /**
-     * 字体
+     * 字体aaa
      */
     private Font font;
 
-    public HtmlView(int w, int h) throws Exception {
+    public WebView(int w, int h) throws Exception {
         editorPane = new JEditorPane();
-        font=new Font("宋体",Font.PLAIN,10);
+        font=new Font("宋体",Font.PLAIN, Resource.FONT_SIZE);
         this.setLayout(null);
         //放到滚动窗格中才能滚动查看所有内容
         JScrollPane scrollPane = new JScrollPane(editorPane);

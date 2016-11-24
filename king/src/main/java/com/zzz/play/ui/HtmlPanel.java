@@ -26,7 +26,7 @@ public class HtmlPanel extends JPanel {
     public static Integer DEFAULT_WAIT = Resource.WAIT;
     public HtmlContent content;
     public GlobalUtil globalUtil;
-    public HtmlView view;
+    public WebView view;
     private JButton pause;
     //private Button closeBtn;
     private JButton kill;
@@ -94,7 +94,7 @@ public class HtmlPanel extends JPanel {
 
 
     public void run() throws Exception {
-        view = new HtmlView(WIDTH, HEIGHT - 90);
+        view = new WebView(WIDTH, HEIGHT - 90);
         showTime = new JLabel("showTime");
         fontVal = new JTextField();
         fontVal.setText(Integer.toString(Resource.FONT_SIZE));

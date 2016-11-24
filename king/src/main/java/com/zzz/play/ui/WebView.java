@@ -40,6 +40,7 @@ public class WebView extends JPanel implements HyperlinkListener {
 
 
     public void setHtml(String html) {
+        editorPane.setContentType("text/html");
         editorPane.setText(html);
     }
 

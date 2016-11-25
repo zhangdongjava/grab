@@ -39,7 +39,7 @@ public class DiXiaGuCheng extends FuBen {
 
     @Override
     public String saveLine() {
-        return "魂魄";
+        return "魂魄,带兵符";
     }
 
     @Override

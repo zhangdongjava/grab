@@ -248,6 +248,10 @@ public class DiXiaGuCheng extends FuBen {
         htmlContent.linkName("x", true);
         htmlContent.linkName("x", true);
         htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
+        htmlContent.linkName("x", true);
         htmlContent.linkName("返回游戏");
     }
 

@@ -52,6 +52,7 @@ public class XiuLi extends BaseStep {
         htmlContent.linkName("武将");
         for (String name : names) {
             if (!htmlContent.linkName(name, true).isSuccess()) {
+                htmlContent.linkName("返回游戏");
                 return;
             }
         }

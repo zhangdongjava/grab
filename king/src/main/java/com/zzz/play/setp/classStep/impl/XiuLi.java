@@ -27,7 +27,7 @@ public class XiuLi extends BaseStep {
     }
 
     public boolean run() {
-        if (System.currentTimeMillis()-lastTime<jiange) {
+        if (System.currentTimeMillis() - lastTime < jiange) {
             return false;
         }
         htmlContent.linkName("返回游戏");
@@ -35,23 +35,25 @@ public class XiuLi extends BaseStep {
         htmlContent.linkName("装备");
         htmlContent.linkName("修理所有");
         htmlContent.linkName("返回游戏");
-        xiuLili("周武师","仙兵");
-        xiuLili("周武师","禁军侍卫");
-        xiuLili("周武师","御林剑客");
-        xiuLili("史进","御林剑客");
-        xiuLili("史进","禁军侍卫");
-        xiuLili("史进","仙兵");
-        xiuLili("柴进","仙兵");
-        xiuLili("鲁智深","仙兵");
+        xiuLili("周武师", "仙兵");
+        xiuLili("周武师", "禁军侍卫");
+        xiuLili("周武师", "御林剑客");
+        xiuLili("史进", "御林剑客");
+        xiuLili("史进", "禁军侍卫");
+        xiuLili("史进", "仙兵");
+        xiuLili("柴进", "仙兵");
+        xiuLili("鲁智深", "仙兵");
         htmlContent.linkName("返回游戏");
         lastTime = System.currentTimeMillis();
         return true;
     }
 
-    private void xiuLili(String... names){
+    private void xiuLili(String... names) {
         htmlContent.linkName("武将");
         for (String name : names) {
-            htmlContent.linkName(name,true);
+            if (!htmlContent.linkName(name, true).isSuccess()) {
+                return;
+            }
         }
         htmlContent.linkName("装备");
         htmlContent.linkName("修理所有");

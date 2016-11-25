@@ -132,8 +132,8 @@ public abstract class ZhenFa extends SecondRefresh {
         htmlContent.linkName("x", true);
         htmlContent.linkName("x", true);
         htmlContent.linkName("x", true);
-        htmlContent.linkName("退出副本");
         htmlContent.linkName("返回游戏");
+        htmlContent.linkName("退出副本");
     }
 
     public void zhandou2(String action) {

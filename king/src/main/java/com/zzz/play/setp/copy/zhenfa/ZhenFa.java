@@ -76,9 +76,9 @@ public abstract class ZhenFa extends SecondRefresh {
      * 攻击将军
      */
     public void gjJiangJu() {
-        while (htmlContent.exitsName("将军部", true)&&htmlContent.exitsName("万年灵芝",true)) {
-            htmlContent.linkName("万年灵芝");
-        }
+//        while (htmlContent.exitsName("将军部", true)&&htmlContent.exitsName("万年灵芝",true)) {
+//            htmlContent.linkName("万年灵芝");
+//        }
         zhandou();
     }
 
@@ -102,6 +102,7 @@ public abstract class ZhenFa extends SecondRefresh {
         htmlContent.linkName("x", true);
         htmlContent.linkName("x", true);
         htmlContent.linkName("返回游戏");
+        htmlContent.linkName("退出副本");
     }
 
     public void zhandou(String action) {
@@ -113,9 +114,9 @@ public abstract class ZhenFa extends SecondRefresh {
      * 战斗
      */
     public void zhandou2() {
-        while (htmlContent.exitsName("万年灵芝")) {
-            htmlContent.linkName("万年灵芝");
-        }
+//        while (htmlContent.exitsName("万年灵芝")) {
+//            htmlContent.linkName("万年灵芝");
+//        }
         while (htmlContent.exitsName("普通攻击")) {
             htmlContent.linkName("普通攻击");
         }
@@ -131,6 +132,7 @@ public abstract class ZhenFa extends SecondRefresh {
         htmlContent.linkName("x", true);
         htmlContent.linkName("x", true);
         htmlContent.linkName("x", true);
+        htmlContent.linkName("退出副本");
         htmlContent.linkName("返回游戏");
     }
 

@@ -23,7 +23,7 @@ public class YanYue extends ZhenFa {
     public void ready() {
         buyDrug.setName("万年灵芝");
         buyDrug.setNum("300");
-        buyDrug.run();
+       // buyDrug.run();
     }
 
     @Override

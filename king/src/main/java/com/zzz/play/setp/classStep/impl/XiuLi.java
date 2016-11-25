@@ -37,6 +37,8 @@ public class XiuLi extends BaseStep {
         htmlContent.linkName("返回游戏");
         xiuLili("周武师","仙兵");
         xiuLili("周武师","禁军侍卫");
+        xiuLili("周武师","御林剑客");
+        xiuLili("史进","御林剑客");
         xiuLili("史进","禁军侍卫");
         xiuLili("史进","仙兵");
         xiuLili("柴进","仙兵");

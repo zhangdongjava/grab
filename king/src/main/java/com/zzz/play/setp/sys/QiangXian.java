@@ -60,9 +60,9 @@ public class QiangXian extends BaseStep {
     }
 
    public void qianDao(){
-       htmlContent.linkName("攻", true);
-       htmlContent.linkName("攻", true);
-       htmlContent.linkName("攻", true);
+       htmlContent.linkName("攻方", true);
+       htmlContent.linkName("攻方", true);
+       htmlContent.linkName("攻方", true);
        while (htmlContent.exitsName("万年灵芝")){
            htmlContent.linkName("万年灵芝");
        }

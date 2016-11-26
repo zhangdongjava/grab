@@ -61,6 +61,7 @@ public class HeiFeng extends FuBen {
         while (htmlContent.getText().contains("从乱石河边->乱石河需要黑松果x5")) {
             getCl();
             if(i>5){
+                htmlContent.linkName("返回乱石河边");
                 htmlContent.linkName("返回游戏");
                 htmlContent.linkName("队伍");
                 htmlContent.linkName("退出队伍");

@@ -17,7 +17,7 @@ public class YinLiang extends SecondRefresh {
 
     private GoodsUse goodsUse;
 
-    private int num = 12;
+    private int num = 3;
 
     public YinLiang(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;

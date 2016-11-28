@@ -64,11 +64,7 @@ public class BaZhenTu extends FuBen {
         htmlContent.linkName("右:黄泥冈→");
         htmlContent.linkName("右:悬崖→");
         inwujiang();
-        for (int i = 0; i < 5; i++) {
-            if (!shua()) {
-               break;
-            }
-        }
+        while (shua());
         outwujiang();
         return true;
     }

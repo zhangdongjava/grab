@@ -216,7 +216,7 @@ public class DiXiaGuCheng extends FuBen {
         gcdb("右:废墟→");
         gcdb("下:城墙↓");
         gcdb("进入朱雀");
-        return false;
+        return true;
     }
 
     private void gcdb(String action) {

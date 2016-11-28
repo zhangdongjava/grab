@@ -3,6 +3,7 @@ package com.zzz.play.setp.sys;
 import com.zzz.play.inter.Runable;
 import com.zzz.play.setp.Step;
 import com.zzz.play.setp.activity.GeiXingGuang;
+import com.zzz.play.setp.classStep.impl.BaiYinYaoShi;
 import com.zzz.play.setp.classStep.impl.XiuLi;
 import com.zzz.play.setp.classStep.impl.XiuShen;
 import com.zzz.play.setp.classStep.impl.YinLiang;
@@ -26,6 +27,7 @@ public class SysTextParse implements Runable {
         steps.add(new SaveBrank(htmlContent));
         steps.add(new YinLiang(htmlContent));
         steps.add(new XiuLi(htmlContent));
+        steps.add(new BaiYinYaoShi(htmlContent));
         //steps.add(new GeiXingGuang(htmlContent));
     }
 

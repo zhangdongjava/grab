@@ -22,8 +22,12 @@ public class QiangXian extends BaseStep {
                 htmlContent.linkName("刷新");
             }
             htmlContent.linkName("VS", true);
+            boolean qianDao = false;
             while (true) {
-                if (htmlContent.exitsName("攻", true)) {
+                if(htmlContent.exitsName("普通攻击")){
+                    qianDao = true;
+                    break;
+                }else if (htmlContent.exitsName("攻", true)) {
                     htmlContent.linkName("攻", true);
                 } else if (htmlContent.exitsName("返回", true)) {
                     htmlContent.linkName("返回", true);
@@ -31,7 +35,7 @@ public class QiangXian extends BaseStep {
                     break;
                 }
             }
-            if(htmlContent.exitsName("万年灵芝")){
+            if(qianDao){
                 qianDao();
             }
             htmlContent.linkName("返回游戏",true);
@@ -60,9 +64,9 @@ public class QiangXian extends BaseStep {
     }
 
    public void qianDao(){
-       htmlContent.linkName("攻方", true);
-       htmlContent.linkName("攻方", true);
-       htmlContent.linkName("攻方", true);
+       htmlContent.linkName("攻方");
+       htmlContent.linkName("攻方");
+       htmlContent.linkName("攻方");
        while (htmlContent.exitsName("万年灵芝")){
            htmlContent.linkName("万年灵芝");
        }

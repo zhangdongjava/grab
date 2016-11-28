@@ -1,0 +1,28 @@
+<html>
+<body>
+<h2>Hello World!</h2>
+<div align="center">
+    <input style="width: 340px" id="url" value="http://hero2.yytou.com/gCmd.do?cmd=56736&sid=g5dwaj3cq6158u1lvihivt">
+    <button style="width: 38px;margin: 5px;" onclick="linkUrl()" id="link">go</button>
+    <br/>
+    <br/>
+    <div>
+        <button id="content">content</button>
+    </div>
+    <br/>
+    <iframe id="frame" style="width: 400px;height: 700px;"></iframe>
+</div>
+</body>
+<script src="js/jquery.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $("#frame").attr("src", $("#url").val());
+    });
+    $("#link").click(function () {
+        $("#frame").attr("src", $("#url").val());
+    });
+    $("#content").click(function () {
+        console.info($("#frame")[0].context.contentWindow.document.body);
+    });
+</script>
+</html>

@@ -23,10 +23,16 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="king" />
+        <module name="kingweb" />
         <module name="logger" />
         <module name="swingdemo" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="king" target="1.5" />
+      <module name="kingweb" target="1.5" />
+      <module name="logger" target="1.5" />
+      <module name="swingdemo" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

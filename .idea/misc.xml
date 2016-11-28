@@ -3,12 +3,16 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/kingweb" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/king/pom.xml" />
         <option value="$PROJECT_DIR$/swingdemo/pom.xml" />
         <option value="$PROJECT_DIR$/logger/pom.xml" />
+        <option value="$PROJECT_DIR$/kingweb/pom.xml" />
       </list>
     </option>
   </component>

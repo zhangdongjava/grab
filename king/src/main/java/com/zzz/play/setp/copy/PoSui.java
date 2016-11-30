@@ -10,7 +10,7 @@ public class PoSui extends FuBen {
 
     @Override
     public String inClearLine() {
-        return "柳虫,青蛇皮,金创药,蜂王浆,龙皮";
+        return "柳虫,青蛇皮,金创药";
     }
 
     @Override

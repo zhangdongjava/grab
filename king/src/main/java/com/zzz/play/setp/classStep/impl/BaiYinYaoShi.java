@@ -24,6 +24,7 @@ public class BaiYinYaoShi extends SecondRefresh {
         goodsSave.setHtmlContent(htmlContent);
         goodsSave.setGoods(".白银钥匙");
         notSave.add("大嘴哥");
+        notSave.add("哈嘿");
     }
 
     @Override

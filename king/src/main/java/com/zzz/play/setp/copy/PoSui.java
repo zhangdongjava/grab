@@ -41,7 +41,7 @@ public class PoSui extends FuBen {
         htmlContent.linkName("上:北大街↑");
         htmlContent.linkName("古神兵传说");
         htmlContent.linkName("入梦(破碎梦晶石x1)");
-        if (htmlContent.getText().contains("今天你已进入")) {
+        if (htmlContent.getText().contains("今天你已进入")||htmlContent.getText().contains("你不能入梦，需要消耗")) {
             ableIn = false;
             lastDate = new Date();
             logger.error(htmlContent.htmlPanel.user.getName()  + "破碎梦晶石副本结束!");
@@ -130,35 +130,6 @@ public class PoSui extends FuBen {
         htmlContent.linkName("x", true);
         htmlContent.linkName("返回游戏");
     }
-
-    public void loginIn(){
-        htmlContent.linkName("进入密道");
-        htmlContent.linkName("确定进入");
-        while (true){
-            if(htmlContent.exitsName("下:毒虫殿↓")){
-                break;
-            }else if(htmlContent.exitsName("下:密道↓")){
-                htmlContent.linkName("下:密道↓");
-                zhanDou();
-            } else if(htmlContent.exitsName("右:密道→")){
-                htmlContent.linkName("右:密道→");
-                zhanDou();
-            }
-        }
-        htmlContent.linkName("下:毒虫殿↓");
-        htmlContent.linkName("恶毒蝎子王");
-        zhanDou();
-        htmlContent.linkName("巨型青蛙王");
-        zhanDou();
-        htmlContent.linkName("奇异毒蛇王");
-        zhanDou();
-        htmlContent.linkName("吸血蝙蝠王");
-        zhanDou();
-        htmlContent.linkName("进入巫婆殿");
-        htmlContent.linkName("巫婆.叶比亚");
-        zhanDou();
-    }
-
 }
 
 

@@ -1,20 +1,37 @@
 package com.zzz.play.setp.copy.gaoji;
 
+import com.sun.corba.se.impl.logging.ActivationSystemException;
 import com.zzz.play.setp.copy.FuBen;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by dell_2 on 2016/11/28.
  */
 public class JinGangQuan extends FuBen {
 
-    private static String LEFT = "左:伏魔圈←";
-    private static String RIGHT = "右:伏魔圈→";
-    private static String UP = "上:伏魔圈↑";
-    private static String DOWN = "下:伏魔圈↓";
+    private static String LEFT = "左:金刚圈←";
+    private static String RIGHT = "右:金刚圈→";
+    private static String UP = "上:金刚圈↑";
+    private static String DOWN = "下:金刚圈↓";
     private static String[] actions = {UP, RIGHT, DOWN, LEFT};
-    private int count = 0;
+    private static Map<String, String> map = new HashMap<>();
+    private static Map<String, String[]> map2 = new HashMap<>();
+
+    private int len = 10;
+
+    static {
+        map.put(UP, DOWN);
+        map.put(RIGHT, LEFT);
+        map.put(DOWN, UP);
+        map.put(LEFT, RIGHT);
+        map2.put(LEFT, new String[]{UP, DOWN});
+        map2.put(RIGHT, new String[]{UP, DOWN});
+        map2.put(UP, new String[]{LEFT, RIGHT});
+        map2.put(DOWN, new String[]{LEFT, RIGHT});
+    }
 
     @Override
     public String inClearLine() {
@@ -49,30 +66,32 @@ public class JinGangQuan extends FuBen {
 
     @Override
     public boolean fbRun() {
+        htmlContent.linkName("功能菜单");
+        htmlContent.linkName("神行千里");
+        htmlContent.linkName("上东京");
+        htmlContent.linkName("下:南大街↓");
+        htmlContent.linkName("红发侏儒");
+        htmlContent.linkName("传送到金刚伏魔副本");
+        htmlContent.linkName("确定传送");
+        htmlContent.linkName("天灵子");
+        htmlContent.linkName("进入金刚圈");
+        zhanDou1();
         go();
         return true;
     }
 
     private void go() {
+        boolean isOut = false;
         xh:
         while (true) {
             for (String action : actions) {
-                if (action.equals(UP) || action.equals(DOWN)) {
-                    count++;
-                }
-                for (int i = 0; i < count; i++) {
-                    for (String s : actions) {
-                        if (!htmlContent.exitsName(s)) {
-                            System.out.println(s + "->不存在!");
-                            break xh;
-                        }
-                    }
-                    htmlContent.linkName(action);
-                    zhanDou1();
+                if (isAction(action)) {
+                    isOut = true;
+                    break xh;
                 }
             }
         }
-        while (true) {
+        while (isOut) {
             htmlContent.linkName("刷新");
         }
     }
@@ -93,6 +112,74 @@ public class JinGangQuan extends FuBen {
         htmlContent.linkName("x", true);
         htmlContent.linkName("x", true);
         htmlContent.linkName("返回游戏");
+    }
+
+    /**
+     * 是否有出路
+     *
+     * @return
+     */
+    private boolean isout() {
+        for (String s : actions) {
+            if (!htmlContent.exitsName(s)) {
+                System.out.println(s + "->不存在!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isAction(String action) {
+        String[] acs = map2.get(action);
+        String action1 = acs[0];
+        String action2 = acs[1];
+        String fAction = map.get(action);
+        for (int i = 0; i < len; i++) {
+            if (clickAction(action1)) {
+                return true;
+            }
+            for (int j = 0; j < len; j++) {
+                if (clickAction(action)) {
+                    return true;
+                }
+            }
+            for (int j = 0; j < len; j++) {
+                if (clickAction(fAction)) {
+                    return true;
+                }
+            }
+        }
+        for (int i = 0; i < len; i++) {
+            htmlContent.linkName(action2);
+        }
+        for (int i = 0; i < len; i++) {
+            if (clickAction(action2)) {
+                return true;
+            }
+            for (int j = 0; j < len; j++) {
+                if (clickAction(action)) {
+                    return true;
+                }
+            }
+            for (int j = 0; j < len; j++) {
+                if (clickAction(fAction)) {
+                    return true;
+                }
+            }
+        }
+        for (int i = 0; i < len; i++) {
+            htmlContent.linkName(action1);
+        }
+        return false;
+    }
+
+    private boolean clickAction(String action) {
+        if (isout()) {
+            return true;
+        }
+        htmlContent.linkName(action);
+        zhanDou1();
+        return false;
     }
 
 
@@ -178,5 +265,9 @@ public class JinGangQuan extends FuBen {
         htmlContent.linkName("进入中军阵");
         zhanDou("中军元帅");
         return true;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(20 << 1);
     }
 }

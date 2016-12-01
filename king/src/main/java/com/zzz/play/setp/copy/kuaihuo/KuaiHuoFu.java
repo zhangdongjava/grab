@@ -44,6 +44,8 @@ public class KuaiHuoFu extends KuaiHuoFb {
         htmlContent.linkName("神行千里");
         htmlContent.linkName("景阳岗");
         htmlContent.linkName("追星捕快");
+        htmlContent.linkName("返回游戏");
+        htmlContent.linkName("追星捕快");
         htmlContent.linkName("传送至快活林副本");
         if(htmlContent.getText().contains("今天你已进入")){
             htmlContent.linkName("返回游戏");

@@ -26,7 +26,7 @@ public class KuaiHuo extends SecondRefresh {
     private void ready() {
         goodsSave.setGoods("蒙汗药,虎皮");
         goodsSave.run();
-        goodsSale2.setGoods("柳皮,蜂刺,蛇皮");
+        goodsSale2.setGoods("柳虫皮,蜂刺,蛇皮");
         goodsSale2.run();
         buyDrug.setName("万年灵芝");
         buyDrug.setNum("300");

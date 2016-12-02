@@ -61,13 +61,13 @@ public class QiangTi extends SecondRefresh {
         if (hu > huang) {
             hu = huang;
         }
-        if (hu == 0) {
+        if (hu<2) {
             lastDate = new Date();
             ableIn = false;
             return;
         }
         runIng = true;
-        qian = (hu * 3) - qian;
+        qian = (hu/2 * 6) - qian;
         System.out.println(numUtil.map);
         System.out.println("虎骨->" + hu);
         System.out.println("需要千虫丝->" + qian);

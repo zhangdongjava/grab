@@ -3,10 +3,13 @@ package com.zzz.play.setp.classStep.impl;
 import com.zzz.play.bean.LinkBean;
 import com.zzz.play.setp.sup.SecondRefresh;
 import com.zzz.play.util.HtmlContent;
+import com.zzz.play.util.ValidationKill;
+import com.zzz.play.util.resource.DaTiUtil;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * 答题
@@ -19,8 +22,15 @@ public class DaTi extends SecondRefresh {
     private int total = 0;
     private int sure = 0;
 
+    private String wen = null;
+    private String danan = null;
+    private String key = null;
+    private Map<String, String> map = new HashMap<>();
+    private Map<String, String> newMap = new HashMap<>();
+
     public DaTi(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;
+        map.putAll(DaTiUtil.hashMap);
     }
 
     @Override
@@ -48,24 +58,77 @@ public class DaTi extends SecondRefresh {
         htmlContent.linkName("返回游戏");
         ableIn = false;
         lastDate = new Date();
-        goodsSave.run();
+        DaTiUtil.putMap(newMap);
         return true;
     }
 
     private boolean dati() {
-        htmlContent.linkName("确认继续答题");
-        LinkBean res = htmlContent.linkName("、", 1, true);
-        System.out.println(res.getClickName());
-        if(htmlContent.getText().contains("对不起")){
-            total++;
-        }else if(htmlContent.getText().contains("恭喜你")){
-            total++;
-            sure ++;
-            System.out.println("正确率:"+(double)(sure/total));
-        }else{
+        String text = htmlContent.getText();
+        if (text.contains("你今天已经回答了") && !htmlContent.exitsName("确认继续答题")) {
             return false;
+        }
+        wen = null;
+        danan = null;
+        try {
+            htmlContent.linkName("确认继续答题");
+            String[] datas = text.split("\\s");
+            if (datas.length > 3) {
+                wen = getWen(datas);
+            }
+            String da = getDan(wen);
+            if (da != null) {
+                htmlContent.linkName(da, true);
+            } else {
+                LinkBean res = htmlContent.linkName("、", 1, true);
+                if (htmlContent.getText().contains("恭喜你")) {
+                    danan = res.getClickName().substring(2);
+                }
+            }
+            count();
+        } catch (Exception e) {
+
         }
         return true;
     }
 
+    private void save() {
+        if (wen != null && danan != null) {
+            if (wen.length() > 5) {
+                map.put(wen.substring(1, wen.length() - 1), danan.trim());
+                newMap.put(wen.substring(1, wen.length() - 1), danan.trim());
+            }
+        }
+    }
+
+    private void count() {
+        if (htmlContent.getText().contains("对不起")) {
+            total++;
+            if (wen != null && danan != null) {
+                DaTiUtil.addError(wen, danan);
+            }
+        } else if (htmlContent.getText().contains("恭喜你")) {
+            total++;
+            sure++;
+            save();
+        }
+        System.out.println("正确率:" + ((double) sure / total));
+    }
+
+    private String getWen(String[] datas) {
+        for (int i = 0; i < datas.length; i++) {
+            if (datas[i].contains("今天的第")) {
+                return datas[i + 1];
+            }
+        }
+        return null;
+    }
+
+    private String getDan(String wen) {
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (wen.equals(entry.getKey())||wen.contains(entry.getKey())) {
+                return entry.getValue();
+            }
+        }
+        return null;
+    }
 }

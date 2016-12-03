@@ -20,11 +20,11 @@ public class SysTextParse implements Runable {
     public SysTextParse(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;
         steps = new LinkedList<>();
-//        steps.add(new XiuShen(htmlContent));
-//        steps.add(new SaveBrank(htmlContent));
-//        steps.add(new YinLiang(htmlContent));
-//        steps.add(new XiuLi(htmlContent));
-//        steps.add(new BaiYinYaoShi(htmlContent));
+        steps.add(new XiuShen(htmlContent));
+        steps.add(new SaveBrank(htmlContent));
+        steps.add(new YinLiang(htmlContent));
+        steps.add(new XiuLi(htmlContent));
+        steps.add(new BaiYinYaoShi(htmlContent));
         steps.add(new DaTi(htmlContent));
     }
 

@@ -84,7 +84,9 @@ public class DaTi extends SecondRefresh {
             } else {
                 String[] errors = getError(wen);
                 res = htmlContent.linkName("、", errors);
-                danan = res.getClickName().substring(2);
+                if (res.getClickName() != null) {
+                    danan = res.getClickName().substring(2).trim();
+                }
             }
             count();
             System.out.println(res.getClickName());
@@ -113,8 +115,8 @@ public class DaTi extends SecondRefresh {
     private void save() {
         if (wen != null && danan != null) {
             if (wen.length() > 5) {
-                map.put(wen.substring(1, wen.length() - 1), danan.trim());
-                DaTiUtil.hashMap.put(wen.substring(1, wen.length() - 1), danan.trim());
+                map.put(wen.substring(1, wen.length() - 1), danan);
+                DaTiUtil.hashMap.put(wen.substring(1, wen.length() - 1), danan);
             }
         }
     }

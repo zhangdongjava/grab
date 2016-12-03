@@ -26,7 +26,6 @@ public class DaTi extends SecondRefresh {
     private String danan = null;
     private String key = null;
     private Map<String, String> map = new HashMap<>();
-    private Map<String, String> newMap = new HashMap<>();
 
     public DaTi(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;
@@ -58,7 +57,8 @@ public class DaTi extends SecondRefresh {
         htmlContent.linkName("返回游戏");
         ableIn = false;
         lastDate = new Date();
-        DaTiUtil.putMap(newMap);
+        DaTiUtil.saveMap();
+        DaTiUtil.saveError();
         return true;
     }
 
@@ -95,7 +95,7 @@ public class DaTi extends SecondRefresh {
         if (wen != null && danan != null) {
             if (wen.length() > 5) {
                 map.put(wen.substring(1, wen.length() - 1), danan.trim());
-                newMap.put(wen.substring(1, wen.length() - 1), danan.trim());
+                DaTiUtil.hashMap.put(wen.substring(1, wen.length() - 1), danan.trim());
             }
         }
     }
@@ -125,7 +125,7 @@ public class DaTi extends SecondRefresh {
 
     private String getDan(String wen) {
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            if (wen.equals(entry.getKey())||wen.contains(entry.getKey())) {
+            if (wen.equals(entry.getKey()) || wen.contains(entry.getKey())) {
                 return entry.getValue();
             }
         }

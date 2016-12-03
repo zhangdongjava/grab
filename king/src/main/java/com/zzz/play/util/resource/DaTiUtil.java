@@ -14,10 +14,16 @@ public class DaTiUtil {
     public static final String ERROR_NAME = "res/datiError.txt";
     public static Map<String, String> hashMap = new ConcurrentHashMap<>();
     public static Map<String, LinkedList<String>> errorMap = new ConcurrentHashMap<>();
+    static StringBuilder sb = new StringBuilder();
 
     static {
         try {
             initDati();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            initError();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,7 +45,7 @@ public class DaTiUtil {
     }
 
     private static void initError() throws IOException {
-        File file = new File(FILE_NAME);
+        File file = new File(ERROR_NAME);
         if (file.exists()) {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line = br.readLine();
@@ -75,9 +81,8 @@ public class DaTiUtil {
 
     }
 
-    public static void putMap(Map<String, String> map) {
+    public static void saveMap() {
         synchronized (DaTiUtil.class) {
-            hashMap.putAll(map);
             try {
                 FileOutputStream fos = new FileOutputStream(FILE_NAME);
                 PrintStream printStream = new PrintStream(fos);
@@ -98,6 +103,33 @@ public class DaTiUtil {
             errorMap.put(key, strings);
         }
         strings.add(val);
+    }
+
+    public static void saveError() {
+        synchronized (DaTiUtil.class) {
+            try {
+                FileOutputStream fos = new FileOutputStream(ERROR_NAME);
+                PrintStream printStream = new PrintStream(fos);
+                for (Map.Entry<String, LinkedList<String>> entry : errorMap.entrySet()) {
+                    printStream.println(entry.getKey() + "=" + getVal(entry.getValue()));
+                }
+                fos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static String getVal(LinkedList<String> list) {
+        sb.delete(0, sb.length());
+        for (String s : list) {
+            sb.append(s);
+            sb.append(",");
+        }
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        return sb.toString();
     }
 }
 

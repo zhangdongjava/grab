@@ -31,9 +31,9 @@ public class DaTi extends SecondRefresh {
     public DaTi(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;
         map.putAll(DaTiUtil.hashMap);
-        System.out.println("正确个数:"+map.size());
+        System.out.println("正确个数:" + map.size());
         error.putAll(DaTiUtil.errorMap);
-        System.out.println("错误个数:"+error.size());
+        System.out.println("错误个数:" + error.size());
     }
 
     @Override
@@ -75,8 +75,9 @@ public class DaTi extends SecondRefresh {
         wen = null;
         danan = null;
         try {
-            LinkBean res;
+            LinkBean res = null;
             htmlContent.linkName("确认继续答题");
+            text = htmlContent.getText();
             String[] datas = text.split("\\s");
             if (datas.length > 3) {
                 wen = getWen(datas);
@@ -84,11 +85,19 @@ public class DaTi extends SecondRefresh {
             String da = getDan(wen);
             if (da != null) {
                 res = htmlContent.linkName(da, true);
-            } else {
+                if (!res.isSuccess()) {
+                    DaTiUtil.hashMap.remove(key);
+                }
+            }
+            if (res == null || !res.isSuccess()) {
                 String[] errors = getError(wen);
+                System.out.println("errors:" + Arrays.toString(errors));
                 res = htmlContent.linkName("、", errors);
+                if (res.getUrl() == null) {
+                    res = htmlContent.linkName("、", 0);
+                }
                 if (res.getClickName() != null) {
-                    danan = res.getClickName().substring(2).trim();
+                    danan = res.getClickName().substring(1).trim();
                 }
             }
             count();
@@ -149,6 +158,7 @@ public class DaTi extends SecondRefresh {
     private String getDan(String wen) {
         for (Map.Entry<String, String> entry : map.entrySet()) {
             if (wen.equals(entry.getKey()) || wen.contains(entry.getKey())) {
+                key = entry.getKey();
                 return entry.getValue();
             }
         }

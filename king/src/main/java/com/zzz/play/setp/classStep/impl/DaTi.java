@@ -26,10 +26,12 @@ public class DaTi extends SecondRefresh {
     private String danan = null;
     private String key = null;
     private Map<String, String> map = new HashMap<>();
+    private Map<String, LinkedList<String>> error = new HashMap<>();
 
     public DaTi(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;
         map.putAll(DaTiUtil.hashMap);
+        error.putAll(DaTiUtil.errorMap);
     }
 
     @Override
@@ -79,6 +81,7 @@ public class DaTi extends SecondRefresh {
             if (da != null) {
                 htmlContent.linkName(da, true);
             } else {
+                String[] errors = getError(wen);
                 LinkBean res = htmlContent.linkName("、", 1, true);
                 if (htmlContent.getText().contains("恭喜你")) {
                     danan = res.getClickName().substring(2);
@@ -89,6 +92,22 @@ public class DaTi extends SecondRefresh {
 
         }
         return true;
+    }
+
+    /**
+     * 根据问题获取错误答案
+     *
+     * @param wen
+     * @return
+     */
+    private String[] getError(String wen) {
+        String[] errors = {};
+        for (Map.Entry<String, LinkedList<String>> entry : error.entrySet()) {
+            if (wen.equals(entry.getKey()) || wen.contains(entry.getKey())) {
+                return entry.getValue().toArray(errors);
+            }
+        }
+        return errors;
     }
 
     private void save() {

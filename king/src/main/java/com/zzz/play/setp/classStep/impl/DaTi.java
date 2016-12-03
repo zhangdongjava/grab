@@ -62,6 +62,8 @@ public class DaTi extends SecondRefresh {
             total++;
             sure ++;
             System.out.println("正确率:"+(double)(sure/total));
+        }else{
+            return false;
         }
         return true;
     }

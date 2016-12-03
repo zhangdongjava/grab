@@ -31,7 +31,9 @@ public class DaTi extends SecondRefresh {
     public DaTi(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;
         map.putAll(DaTiUtil.hashMap);
+        System.out.println("正确个数:"+map.size());
         error.putAll(DaTiUtil.errorMap);
+        System.out.println("错误个数:"+error.size());
     }
 
     @Override
@@ -61,6 +63,7 @@ public class DaTi extends SecondRefresh {
         lastDate = new Date();
         DaTiUtil.saveMap();
         DaTiUtil.saveError();
+        System.out.println("正确率:" + ((double) sure / total));
         return true;
     }
 
@@ -89,7 +92,6 @@ public class DaTi extends SecondRefresh {
                 }
             }
             count();
-            System.out.println(res.getClickName());
         } catch (Exception e) {
 
         }
@@ -132,7 +134,7 @@ public class DaTi extends SecondRefresh {
             sure++;
             save();
         }
-        System.out.println("正确率:" + ((double) sure / total));
+
     }
 
     private String getWen(String[] datas) {

@@ -63,7 +63,7 @@ public class DaTiUtil {
         String[] lines = line.split("=");
         if (lines.length == 2) {
             LinkedList<String> list = new LinkedList<>();
-            for (String s : lines[0].split(",")) {
+            for (String s : lines[1].split(",")) {
                 if (s != null && !s.trim().equals("")) {
                     list.add(s);
                 }

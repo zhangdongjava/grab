@@ -29,6 +29,7 @@ public class SaveBrank extends BaseStep {
         formSubmit.setHtmlContent(htmlContent);
         formSubmit.setValue("10000000");
         notSave.add("大嘴哥");
+        notSave.add("哈嘿");
     }
 
 

@@ -17,11 +17,11 @@ public class YinLiang extends SecondRefresh {
 
     private GoodsUse goodsUse;
 
-    private int num = 3;
+    private int num = 1;
 
     public YinLiang(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;
-        goodsUse = new GoodsUse("双倍银两卡_"+num);
+        goodsUse = new GoodsUse("双倍银两卡_"+(num+1));
         goodsUse.setHtmlContent(htmlContent);
     }
 

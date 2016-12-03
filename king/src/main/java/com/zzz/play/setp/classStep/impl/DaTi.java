@@ -72,6 +72,7 @@ public class DaTi extends SecondRefresh {
         wen = null;
         danan = null;
         try {
+            LinkBean res;
             htmlContent.linkName("确认继续答题");
             String[] datas = text.split("\\s");
             if (datas.length > 3) {
@@ -79,15 +80,14 @@ public class DaTi extends SecondRefresh {
             }
             String da = getDan(wen);
             if (da != null) {
-                htmlContent.linkName(da, true);
+                res = htmlContent.linkName(da, true);
             } else {
                 String[] errors = getError(wen);
-                LinkBean res = htmlContent.linkName("、", 1, true);
-                if (htmlContent.getText().contains("恭喜你")) {
-                    danan = res.getClickName().substring(2);
-                }
+                res = htmlContent.linkName("、", errors);
+                danan = res.getClickName().substring(2);
             }
             count();
+            System.out.println(res.getClickName());
         } catch (Exception e) {
 
         }

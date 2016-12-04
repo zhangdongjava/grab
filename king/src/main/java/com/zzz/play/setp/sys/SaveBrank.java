@@ -1,5 +1,6 @@
 package com.zzz.play.setp.sys;
 
+import com.zzz.play.bean.LinkBean;
 import com.zzz.play.setp.Step;
 import com.zzz.play.setp.impl.config.BaseStep;
 import com.zzz.play.setp.sup.SecondRefresh;
@@ -38,7 +39,10 @@ public class SaveBrank extends BaseStep {
             return false;
         }
         htmlContent.linkName("返回游戏");
-        htmlContent.linkName("帮派");
+        LinkBean res = htmlContent.linkName("帮派");
+        if(!res.isSuccess()){
+            return false;
+        }
         htmlContent.linkName("帮派管理");
         htmlContent.linkName("帮派资源");
         htmlContent.linkName("捐献银两");

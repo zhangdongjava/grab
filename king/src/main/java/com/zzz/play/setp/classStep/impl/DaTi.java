@@ -69,9 +69,10 @@ public class DaTi extends SecondRefresh {
 
     private boolean dati() {
         String text = htmlContent.getText();
-        if (text.contains("你今天已经回答了") && !htmlContent.exitsName("确认继续答题")) {
+        if ((text.contains("你今天已经回答了")||text.contains("你已经没有足够的银两答题")) && !htmlContent.exitsName("确认继续答题")) {
             return false;
         }
+
         wen = null;
         danan = null;
         try {

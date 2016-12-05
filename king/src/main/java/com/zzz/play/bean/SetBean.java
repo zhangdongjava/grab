@@ -3,7 +3,7 @@ package com.zzz.play.bean;
 public class SetBean {
     private boolean yinzi;
     private boolean baiyin;
-    private long xiuli;
+    private long xiuli = 36000000;
 
     public boolean isYinzi() {
         return yinzi;

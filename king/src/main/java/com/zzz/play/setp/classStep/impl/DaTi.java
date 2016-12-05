@@ -95,7 +95,7 @@ public class DaTi extends SecondRefresh {
                 System.out.println("errors:" + Arrays.toString(errors));
                 res = htmlContent.linkName("、", errors);
                 if (!res.isSuccess()) {
-                    res = htmlContent.linkName("、", 1);
+                    res = htmlContent.linkName("、", 1,true);
                     DaTiUtil.errorMap.remove(wen);
                 }
                 if (res.getClickName() != null) {

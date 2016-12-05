@@ -65,6 +65,9 @@ public class DaTiUtil {
             LinkedList<String> list = new LinkedList<>();
             for (String s : lines[1].split(",")) {
                 if (s != null && !s.trim().equals("")) {
+                    if (!s.startsWith("、")) {
+                        s = "、" + s;
+                    }
                     list.add(s);
                 }
             }

@@ -94,8 +94,9 @@ public class DaTi extends SecondRefresh {
                 String[] errors = getError(wen);
                 System.out.println("errors:" + Arrays.toString(errors));
                 res = htmlContent.linkName("、", errors);
-                if (res.getUrl() == null) {
+                if (!res.isSuccess()) {
                     res = htmlContent.linkName("、", 1);
+                    DaTiUtil.errorMap.remove(wen);
                 }
                 if (res.getClickName() != null) {
                     danan = res.getClickName().substring(1).trim();

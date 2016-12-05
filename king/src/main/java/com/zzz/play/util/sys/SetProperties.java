@@ -41,6 +41,7 @@ public class SetProperties {
         SetBean setBean = new SetBean();
         setBean.setBaiyin(true);
         setBean.setYinzi(true);
+        setBean.setXiuli(36000000);
         SetProperties.setBean = setBean;
     }
 

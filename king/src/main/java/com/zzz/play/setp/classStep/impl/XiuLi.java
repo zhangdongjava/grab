@@ -20,7 +20,7 @@ public class XiuLi extends BaseStep {
     private HtmlContent htmlContent;
 
     private long lastTime;
-    private long jiange = 7200000;
+    private long jiange = 36000000;
 
     public XiuLi(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;

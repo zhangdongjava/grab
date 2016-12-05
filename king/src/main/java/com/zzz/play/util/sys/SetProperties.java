@@ -1,5 +1,6 @@
 package com.zzz.play.util.sys;
 
+import com.alibaba.fastjson.JSON;
 import com.zzz.play.bean.SetBean;
 import com.zzz.play.util.resource.UiResourceUtil;
 
@@ -19,6 +20,7 @@ public class SetProperties {
             if (file.exists()) {
                 try {
                     String json = UiResourceUtil.loadJson(file);
+                    setBean = JSON.parseObject(json,SetBean.class);
                 } catch (IOException e) {
                     e.printStackTrace();
                     setDefault();

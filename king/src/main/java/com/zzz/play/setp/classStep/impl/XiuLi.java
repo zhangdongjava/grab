@@ -5,6 +5,7 @@ import com.zzz.play.setp.sup.SecondRefresh;
 import com.zzz.play.setp.sys.FormSubmit;
 import com.zzz.play.setp.sys.GoodsUse;
 import com.zzz.play.util.HtmlContent;
+import com.zzz.play.util.sys.SetProperties;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -20,7 +21,7 @@ public class XiuLi extends BaseStep {
     private HtmlContent htmlContent;
 
     private long lastTime;
-    private long jiange = 36000000;
+    private long jiange = SetProperties.getSetBean().getXiuli();
 
     public XiuLi(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;

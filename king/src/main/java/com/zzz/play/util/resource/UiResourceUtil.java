@@ -68,13 +68,13 @@ public class UiResourceUtil {
     }
 
 
-    private static void saveJson(Object map, File file) throws IOException {
+    public static void saveJson(Object map, File file) throws IOException {
         FileOutputStream fos = new FileOutputStream(file);
         fos.write(JSON.toJSONString(map,true).getBytes());
         fos.close();
     }
 
-    private static String loadJson(File file) throws IOException {
+    public static String loadJson(File file) throws IOException {
         FileInputStream fis = new FileInputStream(file);
         byte[] buf = new byte[fis.available()];
         fis.read(buf);

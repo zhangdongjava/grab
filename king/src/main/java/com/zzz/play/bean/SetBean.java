@@ -1,5 +1,8 @@
 package com.zzz.play.bean;
 
+/**
+ * 属性配置类
+ */
 public class SetBean {
     private boolean yinzi;
     private boolean baiyin;

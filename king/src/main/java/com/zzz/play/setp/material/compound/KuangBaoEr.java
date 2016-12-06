@@ -92,7 +92,7 @@ public class KuangBaoEr extends SecondRefresh {
         if (xymh == 0) {
             return;
         }
-        goodsTakeout.setGoods("蒙汗药_"+xymh);
+        goodsTakeout.setGoods("蒙汗药_"+xymh+",冰魄珠_"+(bingPo * BING_NUM));
         goodsTakeout.run();
         numUtil.setNames("蒙汗药");
         numUtil.run();

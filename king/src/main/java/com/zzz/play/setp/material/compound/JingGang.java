@@ -92,7 +92,7 @@ public class JingGang extends SecondRefresh {
      * 合成强体
      */
     private void hecheng() {
-        goodsTakeout.setGoods("变异菜青虫毒液_" + du);
+        goodsTakeout.setGoods("太尉秘图_20,变异菜青虫毒液_" + du);
         goodsTakeout.run();
         runIng = false;
         htmlContent.linkName("功能菜单");

@@ -69,9 +69,13 @@ public class KuaiHuoZhu extends KuaiHuoFb {
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("快活林长老");
         htmlContent.linkName("攻击快活林长老");
-        while (!htmlContent.getText().contains("快剑手(0)")){
-            htmlContent.linkName("万年灵芝");
-        }
+        htmlContent.linkName("刷新");
+        htmlContent.linkName("刷新");
+        htmlContent.linkName("刷新");
+        htmlContent.linkName("刷新");
+        htmlContent.linkName("刷新");
+        htmlContent.linkName("刷新");
+        htmlContent.linkName("刷新");
         while (htmlContent.exitsName("普通攻击")){
             htmlContent.linkName("刷新");
         }

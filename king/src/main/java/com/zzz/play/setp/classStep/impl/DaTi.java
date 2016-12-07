@@ -76,7 +76,7 @@ public class DaTi extends SecondRefresh {
                 return false;
             }
         } else {
-            if (htmlContent.exitsName("确认继续答题")) {
+            if (htmlContent.exitsName("确认继续答题")||text.contains("你今天已经回答了")) {
                 return false;
             }
         }

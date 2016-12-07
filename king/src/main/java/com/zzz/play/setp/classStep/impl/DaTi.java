@@ -5,6 +5,7 @@ import com.zzz.play.setp.sup.SecondRefresh;
 import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.ValidationKill;
 import com.zzz.play.util.resource.DaTiUtil;
+import com.zzz.play.util.sys.SetProperties;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -64,14 +65,22 @@ public class DaTi extends SecondRefresh {
         DaTiUtil.saveMap();
         DaTiUtil.saveError();
         System.out.println("正确率:" + ((double) sure / total));
+        htmlContent.linkName("返回游戏");
         return true;
     }
 
     private boolean dati() {
         String text = htmlContent.getText();
-        if ((text.contains("你今天已经回答了")||text.contains("你已经没有足够的银两答题")) && !htmlContent.exitsName("确认继续答题")) {
-            return false;
+        if (SetProperties.getSetBean().isDati()) {
+            if ((text.contains("你今天已经回答了") || text.contains("你已经没有足够的银两答题")) && !htmlContent.exitsName("确认继续答题")) {
+                return false;
+            }
+        } else {
+            if (htmlContent.exitsName("确认继续答题")) {
+                return false;
+            }
         }
+
 
         wen = null;
         danan = null;
@@ -95,7 +104,7 @@ public class DaTi extends SecondRefresh {
                 System.out.println("errors:" + Arrays.toString(errors));
                 res = htmlContent.linkName("、", errors);
                 if (!res.isSuccess()) {
-                    res = htmlContent.linkName("、", 1,true);
+                    res = htmlContent.linkName("、", 1, true);
                     DaTiUtil.errorMap.remove(wen);
                 }
                 if (res.getClickName() != null) {

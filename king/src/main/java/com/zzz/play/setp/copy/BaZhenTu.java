@@ -171,7 +171,7 @@ public class BaZhenTu extends FuBen {
         htmlContent.linkName("八阵图道士");
         htmlContent.linkName("传送到八阵图(需金刚奇书x1)");
         htmlContent.linkName("刷新");
-        if (htmlContent.getText().contains("今天你已进入")) {
+        if (htmlContent.getText().contains("今天你已进入")||htmlContent.getText().contains("给我一本金刚奇书")) {
             ableIn = false;
             lastDate = new Date();
             logger.error(htmlContent.htmlPanel.user.getName() + "八阵图副本结束!");

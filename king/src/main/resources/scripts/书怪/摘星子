@@ -89,7 +89,6 @@ wait1
 天字老大
 攻击天字老大
 普通攻击while2
-like新月
 返回游戏
 刷新
 }
@@ -109,7 +108,6 @@ take流花河地图_1
 流花河鱼鹰
 攻击流花河鱼鹰
 普通攻击while2
-like寒铁
 返回游戏
 刷新
 }
@@ -130,7 +128,6 @@ take流花河地图_1
 流花河巨兽
 攻击流花河巨兽
 普通攻击while2
-like寒铁
 返回游戏
 刷新
 }
@@ -146,10 +143,6 @@ timeNormal_10_{
 红树林飞贼头领
 攻击红树林飞贼头领
 普通攻击while2
-likex
-likex
-likex
-likex
 返回游戏
 刷新
 }
@@ -165,10 +158,6 @@ timeNormal_10_{
 红树林飞贼
 攻击红树林飞贼
 普通攻击while2
-likex
-likex
-likex
-likex
 返回游戏
 刷新
 }

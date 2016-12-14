@@ -50,8 +50,8 @@ public class SaveBrank extends BaseStep {
         int index1 = htmlContent.getText().indexOf("银两");
         int index2 = htmlContent.getText().indexOf("。");
         String val = htmlContent.getText().substring(index1 + 2, index2);
-        int yin = Integer.valueOf(val);
-        if (yin > 20000000) {
+        long yin = Long.valueOf(val);
+        if (yin > 20000000L) {
             formSubmit.run();
         }
         htmlContent.linkName("返回游戏");

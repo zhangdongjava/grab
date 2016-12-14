@@ -1,1 +1,98 @@
-[{"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=20&sid=qizjqu3cbmigu7zi1rpsi","daqu":"微信2区","login":true,"name":"大嘴哥","scritps1":["副本/快活副本","材料/金刚罩1"],"scritps2":[],"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638010_A459C1EB1904BDF636912019E395A0A1&qd="},{"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=21&sid=fl2sq63cbmij22zi80es7","daqu":"微信2区","login":true,"name":"酱油哥","scritps1":["副本/快活副本","材料/金刚罩1"],"scritps2":[],"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638050_CDDCF405206239A1E2F6DCCF36F7F634&qd="},{"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=22&sid=hggv0f3cbmimthzif8da6","daqu":"微信2区","login":true,"name":"狂战","scritps1":["副本/快活副本","材料/金刚罩1"],"scritps2":[],"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638474_8DB38C892703E49128F8070A18C5FD2A&qd="},{"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=25&sid=yomu873cbmiribzij8uim","daqu":"微信2区","login":true,"name":"剑者","scritps1":["副本/快活副本","材料/金刚罩1"],"scritps2":[],"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638469_264F90A4F975EB929F9E677D86523B31&qd="},{"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=1f&sid=5o6qnr3cbmiu5dziqhwbo","daqu":"微信2区","login":true,"name":"汝鄢十二","scritps1":["副本/快活副本","材料/金刚罩1"],"scritps2":[],"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2735200_4204A2E8430EB97810994CE7BB3A076E&qd="},{"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=1d&sid=i5cras3cbmiy09ziymub5","daqu":"微信2区","login":true,"name":"苏十一","scritps1":["副本/快活副本","材料/金刚罩1"],"scritps2":[],"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2735177_7893ADA58F342C63D5FF21611C911577&qd="}]
+[
+    {
+        "currUrl": "http://hero2.yytou.com/gCmd.do?cmd=20&sid=qizjqu3cbmigu7zi1rpsi",
+        "daqu": "微信2区",
+        "login": true,
+        "name": "大嘴哥",
+        "scritps1": [
+            "副本/快活副本",
+            "材料/金刚罩1"
+        ],
+        "scritps2": [],
+        "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638010_A459C1EB1904BDF636912019E395A0A1&qd="
+    },
+    {
+        "currUrl": "http://hero2.yytou.com/gCmd.do?cmd=1f&sid=5o6qnr3cbmiu5dziqhwbo",
+        "daqu": "微信2区",
+        "login": true,
+        "name": "汝鄢十二",
+        "scritps1": [
+            "副本/快活副本",
+            "材料/金刚罩1"
+        ],
+        "scritps2": [],
+        "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2735200_4204A2E8430EB97810994CE7BB3A076E&qd="
+    },
+    {
+        "currUrl": "http://hero2.yytou.com/gCmd.do?cmd=21&sid=fl2sq63cbmij22zi80es7",
+        "daqu": "微信2区",
+        "login": true,
+        "name": "酱油哥",
+        "scritps1": [
+            "副本/快活副本",
+            "材料/金刚罩1"
+        ],
+        "scritps2": [],
+        "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638050_CDDCF405206239A1E2F6DCCF36F7F634&qd="
+    },
+    {
+        "currUrl": "http://hero2.yytou.com/gCmd.do?cmd=1d&sid=i5cras3cbmiy09ziymub5",
+        "daqu": "微信2区",
+        "login": true,
+        "name": "苏十一",
+        "scritps1": [
+            "副本/快活副本",
+            "材料/金刚罩1"
+        ],
+        "scritps2": [],
+        "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2735177_7893ADA58F342C63D5FF21611C911577&qd="
+    },
+    {
+        "currUrl": "http://hero2.yytou.com/gCmd.do?cmd=22&sid=hggv0f3cbmimthzif8da6",
+        "daqu": "微信2区",
+        "login": true,
+        "name": "狂战",
+        "scritps1": [
+            "副本/快活副本",
+            "材料/金刚罩1"
+        ],
+        "scritps2": [],
+        "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638474_8DB38C892703E49128F8070A18C5FD2A&qd="
+    },
+    {
+        "currUrl": "http://hero2.yytou.com/gCmd.do?cmd=25&sid=yomu873cbmiribzij8uim",
+        "daqu": "微信2区",
+        "login": true,
+        "name": "剑者",
+        "scritps1": [
+            "副本/快活副本",
+            "材料/金刚罩1"
+        ],
+        "scritps2": [],
+        "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638469_264F90A4F975EB929F9E677D86523B31&qd="
+    },
+    {
+        "currUrl": "http://hero2.yytou.com/gCmd.do?cmd=1d&sid=i5cras3cbmiy09ziymub5",
+        "daqu": "微信2区",
+        "login": true,
+        "name": "哈嘿",
+        "scritps1": [
+            "副本/快活副本",
+            "材料/金刚罩1"
+        ],
+        "scritps2": [],
+        "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638479_40173A93491CB901727305AE72BC1B01&qd="
+    },
+    {
+        "currUrl": "http://hero2.yytou.com/gCmd.do?cmd=1d&sid=i5cras3cbmiy09ziymub5",
+        "daqu": "微信2区",
+        "login": true,
+        "name": "艹死你个大嘴",
+        "scritps1": [
+            "副本/快活副本",
+            "材料/金刚罩1"
+        ],
+        "scritps2": [],
+        "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2456068_74BF0A0BD7595E6C1C194B60EAC2AEEF&qd="
+    }
+]

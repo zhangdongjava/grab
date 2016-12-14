@@ -1,108 +1,176 @@
 [
-    {
-        "currUrl": "http://hero2.yytou.com/gCmd.do?cmd=1b256&sid=v6yxhh3cfvvlrf14tka4vo",
-        "daqu": "微信2区",
-        "login": true,
-        "name": "酱油哥",
-        "scritps1": [
+	
+	{
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=cbab&sid=k6lk1e3cx0mwlo1shtzxua",
+		"daqu":"微信2区",
+		"login":true,
+		"name":"酱油哥",
+		"scritps1":[
 			"副本/冰魄洞",
-            "合成/金刚奇书",
-            "合成/狂暴奇书",
+			"合成/金刚奇书",
+			"合成/狂暴奇书",
+			"材料/虎皮",
 			"材料/万虫羹",
-            "材料/金刚罩1",
-            "材料/大白菜",
-            "材料/蒙汗药",
-            "测试/招募赤甲",
-            "书怪/单刷摘星子",
-            "材料/流花河图",
+			"材料/金刚罩1",
+			"材料/蒙汗药",
+			"测试/招募赤甲",
+			"书怪/单刷摘星子",
+			"材料/流花河图",
 			"银子/强盗银子"
-        ],
-        "scritps2": [],
-        "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638050_CDDCF405206239A1E2F6DCCF36F7F634&qd="
-    },
-    {
-        "currUrl": "http://hero2.yytou.com/gCmd.do?cmd=1e7eb&sid=7so3sf3cfvvt3b14tqompo",
-        "daqu": "微信2区",
-        "login": true,
-        "name": "狂战",
-        "scritps1": [
-            "副本/冰魄洞",
-            "材料/万虫羹",
-            "材料/金刚罩1",
-            "材料/大白菜",
-            "书怪/单刷摘星子",
-            "测试/招募赤甲",
+		],
+		"scritps2":[],
+		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638050_CDDCF405206239A1E2F6DCCF36F7F634&qd="
+	},
+	{
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=c9c5&sid=oiluma3cx0n4xl1shxip5o",
+		"daqu":"微信2区",
+		"login":true,
+		"name":"狂战",
+		"scritps1":[
+			"副本/冰魄洞",
+			"材料/万虫羹",
+			"材料/金刚罩1",
+			"材料/虎皮",
+			"书怪/单刷摘星子",
+			"测试/招募赤甲",
 			"银子/强盗银子"
-        ],
-        "scritps2": [],
-        "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638474_8DB38C892703E49128F8070A18C5FD2A&qd="
-    },
-    {
-        "currUrl": "http://hero2.yytou.com/gCmd.do?cmd=1faee&sid=kft0dl3cfvw0rs14trzj94",
-        "daqu": "微信2区",
-        "login": true,
-        "name": "剑者",
-        "scritps1": [
-            "副本/冰魄洞",
-            "材料/万虫羹",
-            "材料/金刚罩1",
-            "材料/大白菜",
-            "书怪/单刷摘星子",
-            "测试/招募赤甲",
+		],
+		"scritps2":[],
+		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638474_8DB38C892703E49128F8070A18C5FD2A&qd="
+	},
+	{
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=c644&sid=9rmbk3cx0nd5l1si5nhvu",
+		"daqu":"微信2区",
+		"login":true,
+		"name":"剑者",
+		"scritps1":[
+			"副本/冰魄洞",
+			"材料/万虫羹",
+			"材料/金刚罩1",
+			"材料/虎皮",
+			"书怪/单刷摘星子",
+			"测试/招募赤甲",
 			"银子/强盗银子"
-        ],
-        "scritps2": [],
-        "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638469_264F90A4F975EB929F9E677D86523B31&qd="
-    },
-    {
-        "currUrl": "http://hero2.yytou.com/gCmd.do?cmd=1f5f2&sid=ph4km33cfvw8wb14u3kh3w",
-        "daqu": "微信2区",
-        "login": true,
-        "name": "艹死你个大嘴",
-        "scritps1": [
-            "副本/冰魄洞",
-            "材料/万虫羹",
-            "材料/金刚罩1",
-            "材料/大白菜",
-            "书怪/单刷摘星子",
-            "测试/招募赤甲",
+		],
+		"scritps2":[],
+		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638469_264F90A4F975EB929F9E677D86523B31&qd="
+	},
+	{
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=cc19&sid=b9cb8a3cx0nljo1siarjlp",
+		"daqu":"微信2区",
+		"login":true,
+		"name":"艹死你个大嘴",
+		"scritps1":[
+			"副本/冰魄洞",
+			"材料/万虫羹",
+			"材料/金刚罩1",
+			"材料/虎皮",
+			"书怪/单刷摘星子",
+			"测试/招募赤甲",
 			"银子/强盗银子"
-        ],
-        "scritps2": [],
-        "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2456068_74BF0A0BD7595E6C1C194B60EAC2AEEF&qd="
-    },
-    {
-        "currUrl": "http://hero2.yytou.com/gCmd.do?cmd=1f631&sid=l014kl3cfvwgnu14ujdk42",
-        "daqu": "微信2区",
-        "login": true,
-        "name": "哈嘿",
-        "scritps1": [
-            "副本/冰魄洞",
-            "材料/万虫羹",
-            "材料/金刚罩1",
-            "材料/大白菜",
-            "书怪/单刷摘星子",
-            "测试/招募赤甲",
+		],
+		"scritps2":[],
+		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2456068_74BF0A0BD7595E6C1C194B60EAC2AEEF&qd="
+	},
+	{
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=c564&sid=mwe2rt3cx0ntuq1siiubea",
+		"daqu":"微信2区",
+		"login":true,
+		"name":"zzz",
+		"scritps1":[
+			"副本/冰魄洞",
+			"材料/万虫羹",
+			"材料/金刚罩1",
+			"材料/大白菜",
+			"书怪/单刷摘星子",
+			"测试/招募赤甲",
 			"银子/强盗银子"
-        ],
-        "scritps2": [],
-        "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638479_40173A93491CB901727305AE72BC1B01&qd="
-    },
-    {
-        "currUrl": "http://hero2.yytou.com/gCmd.do?cmd=1e973&sid=juzkkq3cfvwob014urqo6l",
-        "daqu": "微信2区",
-        "login": true,
-        "name": "zzz",
-        "scritps1": [
-            "副本/冰魄洞",
-            "材料/万虫羹",
-            "材料/金刚罩1",
-            "材料/大白菜",
-            "书怪/单刷摘星子",
-            "测试/招募赤甲",
+		],
+		"scritps2":[],
+		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638507_8D6641AE6B968987CE82EAE01F8790BD&qd="
+	},{
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=8dffe&sid=kynbs13d5lvvxv21su66e1",
+		"daqu":"微信2区",
+		"login":true,
+		"name":"毛戊八",
+		"scritps1":[
+			"副本/冰魄洞",
+			"材料/万虫羹",
+			"材料/金刚罩1",
+			"材料/大白菜",
+			"书怪/单刷摘星子",
+			"测试/招募赤甲",
 			"银子/强盗银子"
-        ],
-        "scritps2": [],
-        "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638507_8D6641AE6B968987CE82EAE01F8790BD&qd="
-    }
+		],
+		"scritps2":[],
+		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2735182_6B652A4FA9FBB3C5DFB6F51B6985BD1E"
+	},
+	{
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=8f027&sid=cvjb3q3d5lw45v21sw6zit",
+		"daqu":"微信2区",
+		"login":true,
+		"name":"余辛九",
+		"scritps1":[
+			"副本/冰魄洞",
+			"材料/万虫羹",
+			"材料/金刚罩1",
+			"材料/虎皮",
+			"书怪/单刷摘星子",
+			"测试/招募赤甲",
+			"银子/强盗银子"
+		],
+		"scritps2":[],
+		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2735243_F2267EF7C8820EDEF871019A8B58F8DC"
+	},
+	{
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=9272f&sid=grz2nf3d5lwcmz21sypkb5",
+		"daqu":"微信2区",
+		"login":true,
+		"name":"任十",
+		"scritps1":[
+			"副本/冰魄洞",
+			"材料/万虫羹",
+			"材料/金刚罩1",
+			"材料/虎皮",
+			"书怪/单刷摘星子",
+			"测试/招募赤甲",
+			"银子/强盗银子"
+		],
+		"scritps2":[],
+		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2735221_C95CCCC88FEE610AEA3577B00FD7EEB5"
+	},
+	{
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=8e598&sid=482fyj3d5lwky121t7tie8",
+		"daqu":"微信2区",
+		"login":true,
+		"name":"苏十一",
+		"scritps1":[
+			"副本/冰魄洞",
+			"材料/万虫羹",
+			"材料/金刚罩1",
+			"材料/虎皮",
+			"书怪/单刷摘星子",
+			"测试/招募赤甲",
+			"银子/强盗银子"
+		],
+		"scritps2":[],
+		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2735177_7893ADA58F342C63D5FF21611C911577&qd="
+	},
+	{
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=8e7ab&sid=7jpvds3d5lwtb921tgqxjs",
+		"daqu":"微信2区",
+		"login":true,
+		"name":"汝鄢十二",
+		"scritps1":[
+			"副本/冰魄洞",
+			"材料/万虫羹",
+			"材料/金刚罩1",
+			"材料/虎皮",
+			"书怪/单刷摘星子",
+			"测试/招募赤甲",
+			"银子/强盗银子"
+		],
+		"scritps2":[],
+		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2735200_4204A2E8430EB97810994CE7BB3A076E&qd="
+	}
 ]

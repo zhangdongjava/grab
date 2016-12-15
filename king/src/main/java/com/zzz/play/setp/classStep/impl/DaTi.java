@@ -54,7 +54,10 @@ public class DaTi extends SecondRefresh {
             htmlContent.linkName("神行千里");
             htmlContent.linkName("上东京");
         }
-
+        if (!htmlContent.getText().contains("[东京广场]")) {
+            htmlContent.linkName("返回游戏");
+            return false;
+        }
         htmlContent.linkName("长须老者");
         htmlContent.linkName("状元答题");
         htmlContent.linkName("在线时间兑换");

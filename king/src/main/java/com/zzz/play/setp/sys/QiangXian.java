@@ -18,7 +18,7 @@ public class QiangXian extends BaseStep {
         System.out.println("抢仙->>"+h+":"+min);
         if ((h == 18 && min >= 50)) {
             go();
-            while (!htmlContent.exitsName("VS", true)) {
+            while (!htmlContent.exitsName("VS", true)&&htmlContent.getText().contains("[紫禁之巅")) {
                 htmlContent.linkName("刷新");
             }
             htmlContent.linkName("VS", true);

@@ -58,6 +58,7 @@ public class TimeStep extends ManyStep {
         cd.setTime(curr);
         cd.add(Calendar.MINUTE, fen);
         date = cd.getTime();
+        System.out.println("fresh time ->"+fen);
     }
 
     public static void main(String[] args) throws InterruptedException {

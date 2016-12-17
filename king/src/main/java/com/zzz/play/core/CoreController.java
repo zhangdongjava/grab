@@ -17,6 +17,7 @@ import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.ThreadPoolUtil;
 import com.zzz.play.util.UtilDto;
 import com.zzz.play.util.sys.LoggerUtil;
+import com.zzz.play.util.sys.SetProperties;
 import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
@@ -135,10 +136,7 @@ public class CoreController {
         globalUtil.clear();
         cache1.clear();
         scriptReload = true;
-        if (sysTextParse == null) {
-            sysTextParse = new SysTextParse(content);
-        }
-        cache1.add(sysTextParse);
+        addSysScript();
         TextParse textParse;
         for (String file : user.getScritps1()) {
             try {
@@ -152,6 +150,15 @@ public class CoreController {
                 System.out.println(file + "解析脚本 文件失败!" + e.toString());
             }
 
+        }
+    }
+
+    private void addSysScript(){
+        if(SetProperties.getSetBean().isRunsys()){
+            if (sysTextParse == null) {
+                sysTextParse = new SysTextParse(content);
+            }
+            cache1.add(sysTextParse);
         }
     }
 

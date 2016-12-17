@@ -11,6 +11,10 @@ public class SetBean {
      */
     private boolean dati;
     private long xiuli = 36000000;
+    /**
+     * 是否执行系统脚本
+     */
+    private boolean runsys;
 
     public boolean isYinzi() {
         return yinzi;
@@ -42,5 +46,13 @@ public class SetBean {
 
     public void setDati(boolean dati) {
         this.dati = dati;
+    }
+
+    public boolean isRunsys() {
+        return runsys;
+    }
+
+    public void setRunsys(boolean runsys) {
+        this.runsys = runsys;
     }
 }

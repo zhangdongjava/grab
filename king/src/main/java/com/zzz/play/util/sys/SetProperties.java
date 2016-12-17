@@ -42,6 +42,8 @@ public class SetProperties {
         setBean.setBaiyin(true);
         setBean.setYinzi(true);
         setBean.setXiuli(36000000);
+        setBean.setDati(false);
+        setBean.setRunsys(true);
         SetProperties.setBean = setBean;
     }
 

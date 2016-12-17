@@ -24,6 +24,11 @@ public class SetProperties {
                 } catch (IOException e) {
                     e.printStackTrace();
                     setDefault();
+                    try {
+                        UiResourceUtil.saveJson(setBean, file);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
                 }
             } else {
                 setDefault();

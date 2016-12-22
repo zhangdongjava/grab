@@ -35,6 +35,7 @@ public class GoodsSave extends BaseStep implements SaveMark {
         htmlContent.linkName("存入物品");
         htmlContent.linkName("首页");
         htmlContent.linkName("上页");
+        liuNames.add(".*");
         do {
             savePage();
         } while (htmlContent.linkName("下.页").isSuccess());
@@ -88,7 +89,7 @@ public class GoodsSave extends BaseStep implements SaveMark {
     }
 
     public String[] getNotNames() {
-        String[] s = {};
+        String[] s = new String[liuNames.size()];
         return liuNames.toArray(s);
     }
 

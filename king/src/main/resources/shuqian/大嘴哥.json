@@ -1,6 +1,6 @@
 [
 	{
-		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=9077&sid=fkjpnm3d46gfk620dzwrcv",
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=74106&sid=b727if3dpkuo3b2m6w0pot",
 		"daqu":"微信2区",
 		"login":true,
 		"name":"大嘴哥",
@@ -24,8 +24,9 @@
 		],
 		"scritps2":[],
 		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638010_A459C1EB1904BDF636912019E395A0A1&qd="
-	},{
-		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=b045&sid=js7bxz3cx0mnx61shmemx1",
+	},
+	{
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=7a31c&sid=ykwpfn3dpkux642m72h1fa",
 		"daqu":"微信2区",
 		"login":true,
 		"name":"哈嘿",
@@ -41,12 +42,14 @@
 			"测试/庄园只有房屋",
 			"书怪/摘星子",
 			"银子/蟒蛇银子",
-			"书怪/抢仙"
+			"书怪/抢仙",
+			"材料/血印分身蒙汗药"
 		],
 		"scritps2":[],
 		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638479_40173A93491CB901727305AE72BC1B01&qd="
-	},{
-		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=4010&sid=q828013d46gnyp20e9au0u",
+	},
+	{
+		"currUrl":"http://hero2.yytou.com//gCmd.do?sid=vee2bc3dpkv5ek2m76i37d&cmd=77375",
 		"daqu":"微信2区",
 		"login":true,
 		"name":"屌爆",
@@ -63,7 +66,7 @@
 		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2791614_FA9A788692F4B88BA03113FAC0769416"
 	},
 	{
-		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=3fec&sid=3oyx2x3d46gwgo20eyourj",
+		"currUrl":"http://hero2.yytou.com//gCmd.do?sid=9f3s7s3dpkvdm52m7cwdg7&cmd=77d78",
 		"daqu":"微信2区",
 		"login":true,
 		"name":"黑色",
@@ -80,20 +83,17 @@
 		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2848190_D0D394CB829AC7452BD4A5A898CA1325"
 	},
 	{
-		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=85224&sid=upliyo3d5lx1wa21tmhyrz",
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=7c64e&sid=homsk23dpl8vrv2m99eefy",
 		"daqu":"微信2区",
 		"login":true,
 		"name":"呵呵哒",
 		"scritps1":[
-			"高级副本/荡寇",
-			"材料/流花河图",
-			"测试/庄园只有房屋",
-			"副本/冰魄洞",
-			"材料/金刚罩1",
-			"材料/虎皮",
 			"材料/高级万虫羹",
-			"书怪/单刷摘星子",
-			"银子/强盗银子",
+			"合成/狂暴二",
+			"材料/虎皮",
+			"材料/金刚罩2",
+			"书怪/摘星子",
+			"副本/冰魄洞",
 			"书怪/抢仙"
 		],
 		"scritps2":[],

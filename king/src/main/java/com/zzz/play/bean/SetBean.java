@@ -16,6 +16,16 @@ public class SetBean {
      */
     private boolean runsys;
 
+    private int ylNum;
+
+    public int getYlNum() {
+        return ylNum;
+    }
+
+    public void setYlNum(int ylNum) {
+        this.ylNum = ylNum;
+    }
+
     public boolean isYinzi() {
         return yinzi;
     }

@@ -3,6 +3,7 @@ package com.zzz.play.setp.classStep.impl;
 import com.zzz.play.setp.sup.SecondRefresh;
 import com.zzz.play.setp.sys.GoodsUse;
 import com.zzz.play.util.HtmlContent;
+import com.zzz.play.util.sys.SetProperties;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -19,7 +20,7 @@ public class YinLiang extends SecondRefresh {
 
     private GoodsUse goodsUse;
 
-    private int num = 1;
+    private int num = SetProperties.getSetBean().getYlNum();
     private Set<String> notSave = new HashSet<>();
 
     public YinLiang(HtmlContent htmlContent) {
@@ -43,9 +44,9 @@ public class YinLiang extends SecondRefresh {
         Calendar calendar = Calendar.getInstance();
         int h = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
-        if (((h != 8 && h != 9 && h != 10))) {
-            return false;
-        }
+//        if (((h != 8 && h != 9 && h != 10))) {
+//            return false;
+//        }
         if (!notSave.contains(htmlContent.htmlPanel.user.getName())) {
             htmlContent.linkName("返回游戏");
             htmlContent.linkName("功能菜单");

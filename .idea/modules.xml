@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/king/king.iml" filepath="$PROJECT_DIR$/king/king.iml" />
       <module fileurl="file://$PROJECT_DIR$/kingweb/kingweb.iml" filepath="$PROJECT_DIR$/kingweb/kingweb.iml" />
       <module fileurl="file://$PROJECT_DIR$/logger/logger.iml" filepath="$PROJECT_DIR$/logger/logger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/res/res.iml" filepath="$PROJECT_DIR$/res/res.iml" />
       <module fileurl="file://$PROJECT_DIR$/swingdemo/swingdemo.iml" filepath="$PROJECT_DIR$/swingdemo/swingdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
     </modules>

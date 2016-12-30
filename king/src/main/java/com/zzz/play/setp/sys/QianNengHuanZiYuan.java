@@ -20,15 +20,17 @@ public class QianNengHuanZiYuan extends BaseStep {
         }else{
             ten = "(100万:50万)";
         }
-        htmlContent.linkName("神行");
-        htmlContent.linkName("去郓城");
-        htmlContent.linkName("右:郓城西→");
-        htmlContent.linkName("右:小路→");
-        htmlContent.linkName("右:小路→");
-        htmlContent.linkName("右:小路→");
-        htmlContent.linkName("上:官道↑");
-        htmlContent.linkName("上:大门↑");
-        htmlContent.linkName("上:寒玉狮前厅↑");
+        if(!htmlContent.getText().contains("[寒玉狮前厅]")){
+            htmlContent.linkName("神行");
+            htmlContent.linkName("去郓城");
+            htmlContent.linkName("右:郓城西→");
+            htmlContent.linkName("右:小路→");
+            htmlContent.linkName("右:小路→");
+            htmlContent.linkName("右:小路→");
+            htmlContent.linkName("上:官道↑");
+            htmlContent.linkName("上:大门↑");
+            htmlContent.linkName("上:寒玉狮前厅↑");
+        }
         htmlContent.linkName("灵隐和尚");
         htmlContent.linkName("潜能转资源(100:50)");
         htmlContent.linkName("1潜能转化为粮草"+ten);

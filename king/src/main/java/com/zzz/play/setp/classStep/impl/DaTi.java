@@ -59,7 +59,8 @@ public class DaTi extends SecondRefresh {
             return false;
         }
         htmlContent.linkName("长须老者");
-        htmlContent.linkName("状元答题");
+        LinkBean res = htmlContent.linkName("状元答题");
+        if(!res.isSuccess())return true;
         htmlContent.linkName("在线时间兑换");
         while (dati()) ;
         htmlContent.linkName("返回游戏");

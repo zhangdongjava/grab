@@ -243,6 +243,7 @@ public class MainWindow extends JFrame {
         pop.add(close);
         if (SystemTray.isSupported()) {
             SystemTray tray = SystemTray.getSystemTray();
+            System.out.println(getClass().getResource("/"));
             Image icon = getToolkit().getImage(getClass().getResource("/image/icon.png"));
             trayicon = new TrayIcon(icon, "java swing", pop);
             trayicon.addMouseListener(new MouseAdapter() {

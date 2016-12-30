@@ -6,16 +6,6 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/kingweb" />
   </component>
-  <component name="MavenProjectsManager">
-    <option name="originalFiles">
-      <list>
-        <option value="$PROJECT_DIR$/king/pom.xml" />
-        <option value="$PROJECT_DIR$/swingdemo/pom.xml" />
-        <option value="$PROJECT_DIR$/logger/pom.xml" />
-        <option value="$PROJECT_DIR$/kingweb/pom.xml" />
-      </list>
-    </option>
-  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />

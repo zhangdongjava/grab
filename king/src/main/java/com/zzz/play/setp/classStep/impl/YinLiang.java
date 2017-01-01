@@ -28,6 +28,7 @@ public class YinLiang extends SecondRefresh {
         goodsUse = new GoodsUse("双倍银两卡_" + (num + 1));
         goodsUse.setHtmlContent(htmlContent);
         notSave.add("哈嘿");
+
     }
 
     @Override

@@ -10,6 +10,7 @@ import com.zzz.play.setp.sys.FinishCombat;
 import com.zzz.play.ui.HtmlPanel;
 import com.zzz.play.util.http.HttpRequest;
 import com.zzz.play.util.sys.GoodsNumUtil;
+import com.zzz.play.util.sys.HtmlTextUtil;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -236,7 +237,7 @@ public class HtmlContent {
 
     public void vailte() {
         try {
-            if (exitsName("继续", false)) {
+            if (exitsName("继续", false)&&document.getElementsByTag("a").size()<3) {
                 linkUrl(getUrl("继续", false).getUrl());
             }
             if (exitsName("解除验证", false)) {
@@ -293,7 +294,7 @@ public class HtmlContent {
         try {
             await();
             url = cleckUrl(url);
-            document = Jsoup.parse(new URL(url), 2000);
+            document = HtmlTextUtil.getdDocument(url);
             lastUrl = url;
             linkEnd(url);
             printfUrl(url);
@@ -336,6 +337,22 @@ public class HtmlContent {
         vailte();
         controller.pageChange();
     }
+
+
+    public void loadUrl(String url){
+        url = cleckUrl(url);
+        try {
+            document = HtmlTextUtil.getdDocument(url);
+            urlMap.clear();
+            text = document.text();
+            buildAelements();
+            htmlPanel.setHtml(document.html());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        lastUrl = url;
+    }
+
 
     public LinkBean linkName(String name, int index) {
         return linkName(name, index, false);

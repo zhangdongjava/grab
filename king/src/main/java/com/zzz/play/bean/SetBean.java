@@ -1,5 +1,7 @@
 package com.zzz.play.bean;
 
+import java.util.List;
+
 /**
  * 属性配置类
  */
@@ -15,8 +17,17 @@ public class SetBean {
      * 是否执行系统脚本
      */
     private boolean runsys;
+    private boolean xiangGuang;
 
     private int ylNum;
+
+    private List<String> saveYinZi;
+
+    private int interval;
+
+    public SetBean(){
+        interval = 10000;
+    }
 
     public int getYlNum() {
         return ylNum;
@@ -64,5 +75,29 @@ public class SetBean {
 
     public void setRunsys(boolean runsys) {
         this.runsys = runsys;
+    }
+
+    public List<String> getSaveYinZi() {
+        return saveYinZi;
+    }
+
+    public void setSaveYinZi(List<String> saveYinZi) {
+        this.saveYinZi = saveYinZi;
+    }
+
+    public boolean isXiangGuang() {
+        return xiangGuang;
+    }
+
+    public void setXiangGuang(boolean xiangGuang) {
+        this.xiangGuang = xiangGuang;
+    }
+
+    public int getInterval() {
+        return interval;
+    }
+
+    public void setInterval(int interval) {
+        this.interval = interval;
     }
 }

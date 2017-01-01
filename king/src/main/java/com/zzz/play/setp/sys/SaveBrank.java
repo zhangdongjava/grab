@@ -5,6 +5,7 @@ import com.zzz.play.setp.Step;
 import com.zzz.play.setp.impl.config.BaseStep;
 import com.zzz.play.setp.sup.SecondRefresh;
 import com.zzz.play.util.HtmlContent;
+import com.zzz.play.util.sys.SetProperties;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -31,6 +32,9 @@ public class SaveBrank extends BaseStep {
         formSubmit.setValue("10000000");
         notSave.add("大嘴哥");
         notSave.add("哈嘿");
+        if (SetProperties.getSetBean().getSaveYinZi() != null) {
+            notSave.addAll(SetProperties.getSetBean().getSaveYinZi());
+        }
     }
 
 

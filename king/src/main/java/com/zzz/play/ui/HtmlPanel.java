@@ -126,7 +126,8 @@ public class HtmlPanel extends JPanel {
         // closeBtn.setOnAction(event -> close());
         //第一排
         urlTextField.setBounds(0, 0, WIDTH - 100, 30);
-        showTime.setBounds(WIDTH - 80, 0, 70, 30);
+        showTime.setBounds(WIDTH - 80, 0, 50, 30);
+        loadBtn.setBounds(WIDTH - 30, 0, 30, 30);
         //第二排
         go.setFont(font);
         go.setBounds(0, 30, 50, 30);
@@ -152,7 +153,7 @@ public class HtmlPanel extends JPanel {
         this.add(go);
         this.add(pause);
         this.add(script);
-       // this.add(logBtn);
+        this.add(loadBtn);
         this.add(kill);
         this.add(fontVal);
         this.add(interval);
@@ -187,7 +188,7 @@ public class HtmlPanel extends JPanel {
      * 加载地址
      */
     private void loadBtn() {
-        content.linkUrl(urlTextField.getText());
+        content.loadUrl(urlTextField.getText());
     }
 
     private void logSet() {

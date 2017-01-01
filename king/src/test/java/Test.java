@@ -4,6 +4,9 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.zzz.play.bean.UserInfo;
 import com.zzz.play.ui.dialog.ScriptDialog;
 import com.zzz.play.util.resource.UiResourceUtil;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.io.*;
 import java.util.HashMap;
@@ -20,8 +23,18 @@ public class Test {
 
     public static void main(String[] args) throws Exception {
 
-
-       // File file = new File("C:\\Users\\dell_2\\Desktop\\xiaoxiong\\cache/yy2");
+       Connection str =  Jsoup.connect("http://hero2.yytou.com/gCmd.do?cmd=8&sid=bzkzdx3e2et65ab5ijxdl");
+        Document document = str.get();
+        String html  = document.html();
+        String newHtml  = document.html();
+        int index = html.indexOf("你看到:");
+        if(index!=-1){
+            int index2 = html.indexOf("<br>",index+1);
+            newHtml = html.substring(0,index)+html.substring(index2);
+        }
+        System.out.println(html);
+        System.out.println(newHtml);
+        // File file = new File("C:\\Users\\dell_2\\Desktop\\xiaoxiong\\cache/yy2");
        // File file2 = new File("C:\\Users\\dell_2\\Documents\\axiao/shuqian/yy2");
        // zhuanHuan(file,file2);
         //cache(file);

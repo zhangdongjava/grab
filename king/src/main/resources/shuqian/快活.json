@@ -94,5 +94,29 @@
         ],
         "scritps2": [],
         "url": "http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2456068_74BF0A0BD7595E6C1C194B60EAC2AEEF&qd="
-    }
+    },
+	{
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=9272f&sid=grz2nf3d5lwcmz21sypkb5",
+		"daqu":"微信2区",
+		"login":true,
+		"name":"任十",
+		"scritps1":[
+			 "副本/快活副本",
+            "材料/金刚罩1"
+		],
+		"scritps2":[],
+		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2735221_C95CCCC88FEE610AEA3577B00FD7EEB5"
+	},
+	{
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=9545&sid=lpdpfd3drraq772paj0c00",
+		"daqu":"微信2区",
+		"login":true,
+		"name":"呵呵哒",
+		"scritps1":[
+			 "副本/快活副本",
+            "材料/金刚罩1"
+		],
+		"scritps2":[],
+		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2750528_168356B5E42F88B253906780BE6DC864&qd="
+	}
 ]

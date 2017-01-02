@@ -25,7 +25,7 @@ public class YinLiang extends SecondRefresh {
 
     public YinLiang(HtmlContent htmlContent) {
         this.htmlContent = htmlContent;
-        goodsUse = new GoodsUse("双倍银两卡_" + (num + 1));
+        goodsUse = new GoodsUse("倍银两卡_" + (num + 1));
         goodsUse.setHtmlContent(htmlContent);
         notSave.add("哈嘿");
 

@@ -1,6 +1,6 @@
 [
 	{
-		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=74106&sid=b727if3dpkuo3b2m6w0pot",
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=9373&sid=m755bz3drr9srn2p9shx48",
 		"daqu":"微信2区",
 		"login":true,
 		"name":"大嘴哥",
@@ -12,8 +12,6 @@
 			"高级副本/阵法",
 			"高级副本/地下古城",
 			"测试/招募赤甲",
-			"合成/金刚奇书",
-			"合成/狂暴奇书",
 			"材料/虎皮",
 			"书怪/摘星子",
 			"材料/蒙汗药",
@@ -26,7 +24,7 @@
 		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638010_A459C1EB1904BDF636912019E395A0A1&qd="
 	},
 	{
-		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=7a31c&sid=ykwpfn3dpkux642m72h1fa",
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=93b8&sid=thu9ud3drra1342p9z05vm",
 		"daqu":"微信2区",
 		"login":true,
 		"name":"哈嘿",
@@ -43,13 +41,14 @@
 			"书怪/摘星子",
 			"银子/蟒蛇银子",
 			"书怪/抢仙",
-			"材料/血印分身蒙汗药"
+			"材料/血印分身蒙汗药",
+			"银子/强盗银子"
 		],
 		"scritps2":[],
 		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2638479_40173A93491CB901727305AE72BC1B01&qd="
 	},
 	{
-		"currUrl":"http://hero2.yytou.com//gCmd.do?sid=vee2bc3dpkv5ek2m76i37d&cmd=77375",
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=829e&sid=fzibuf3drra9ii2pa25p7r",
 		"daqu":"微信2区",
 		"login":true,
 		"name":"屌爆",
@@ -66,7 +65,7 @@
 		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2791614_FA9A788692F4B88BA03113FAC0769416"
 	},
 	{
-		"currUrl":"http://hero2.yytou.com//gCmd.do?sid=9f3s7s3dpkvdm52m7cwdg7&cmd=77d78",
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=82dc&sid=sihm6a3drrahtj2pafcnv5",
 		"daqu":"微信2区",
 		"login":true,
 		"name":"黑色",
@@ -83,7 +82,7 @@
 		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2848190_D0D394CB829AC7452BD4A5A898CA1325"
 	},
 	{
-		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=7c64e&sid=homsk23dpl8vrv2m99eefy",
+		"currUrl":"http://hero2.yytou.com/gCmd.do?cmd=9545&sid=lpdpfd3drraq772paj0c00",
 		"daqu":"微信2区",
 		"login":true,
 		"name":"呵呵哒",
@@ -94,7 +93,10 @@
 			"材料/金刚罩2",
 			"书怪/摘星子",
 			"副本/冰魄洞",
-			"书怪/抢仙"
+			"书怪/抢仙",
+			"材料/蒙汗药",
+			"合成/金刚奇书",
+			"银子/强盗银子"
 		],
 		"scritps2":[],
 		"url":"http://entry.yytou.com/choiceAreaInput.do?gameId=g518&key=2750528_168356B5E42F88B253906780BE6DC864&qd="

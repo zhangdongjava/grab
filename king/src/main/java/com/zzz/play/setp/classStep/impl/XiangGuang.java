@@ -21,7 +21,7 @@ public class XiangGuang extends SecondRefresh {
     @Override
     public boolean run() {
         fresh();
-        if (!ableIn&&!SetProperties.getSetBean().isXiangGuang()) {
+        if (!ableIn || !SetProperties.getSetBean().isXiangGuang()) {
             return false;
         }
         htmlContent.linkName("返回游戏");

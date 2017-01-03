@@ -24,6 +24,7 @@ public class SysTextParse implements Runable {
         SetBean sets = SetProperties.getSetBean();
         steps = new LinkedList<>();
         steps.add(new XiuShen(htmlContent));
+        steps.add(new XiangGuang(htmlContent));
         steps.add(new SaveBrank(htmlContent));
         steps.add(new XiuLi(htmlContent));
         if (sets.isBaiyin()) {

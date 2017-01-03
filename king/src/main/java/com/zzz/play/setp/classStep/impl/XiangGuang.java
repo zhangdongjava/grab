@@ -2,6 +2,7 @@ package com.zzz.play.setp.classStep.impl;
 
 import com.zzz.play.setp.sup.SecondRefresh;
 import com.zzz.play.util.HtmlContent;
+import com.zzz.play.util.sys.SetProperties;
 
 import java.util.Date;
 
@@ -20,7 +21,7 @@ public class XiangGuang extends SecondRefresh {
     @Override
     public boolean run() {
         fresh();
-        if (!ableIn) {
+        if (!ableIn&&!SetProperties.getSetBean().isXiangGuang()) {
             return false;
         }
         htmlContent.linkName("返回游戏");

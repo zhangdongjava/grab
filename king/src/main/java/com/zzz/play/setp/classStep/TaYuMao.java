@@ -27,6 +27,14 @@ public class TaYuMao extends BaseStep {
 
     private GoodsSave2 goodsSave;
     private GoodsSale2 goodsSale;
+    /**
+     * 武将次数
+     */
+    private int wujiang;
+    /**
+     * 士兵次数
+     */
+    private int shibing;
 
     public TaYuMao() {//踏云帽（士兵）(40级)
         formSubmit = new FormSubmit();
@@ -41,14 +49,22 @@ public class TaYuMao extends BaseStep {
         goodsSave.run();
         cfIndex = 0;
         cfNum = 0;
+        wujiang = 0;
+        shibing = 0;
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("庄院");
         htmlContent.linkName("庄院\\");
         buildCount();
+        if(shijian==0){
+            return false;
+        }
+        htmlContent.linkName("事件列表", true);
+        buildShiJian();
+        htmlContent.linkName("返回庄院管理");
         htmlContent.linkName("间", 6, true);
         paseCf();
         daZao();
-        return false;
+        return true;
     }
 
     @Override
@@ -59,15 +75,6 @@ public class TaYuMao extends BaseStep {
         goodsSave.setHtmlContent(htmlContent);
     }
 
-    private void buildCount() {
-        String[] lines = htmlContent.getText().split("\\s");
-        for (String line : lines) {
-            if (line.startsWith("事件:")) {
-                int index = line.indexOf("/");
-                shijian = (Integer.valueOf(line.substring(index + 1)) - Integer.valueOf(line.substring(3, index)));
-            }
-        }
-    }
 
     private void paseCf() {
         minLv = 100;
@@ -83,20 +90,31 @@ public class TaYuMao extends BaseStep {
         }
         num = minLv * 10;
         formSubmit.setValue(String.valueOf(num));
-        count = shijian / cfNum;
+    }
+
+
+    private void buildCount() {
+        String[] lines = htmlContent.getText().split("\\s");
+        for (String line : lines) {
+            if (line.startsWith("事件:")) {
+                int index = line.indexOf("/");
+                shijian = (Integer.valueOf(line.substring(index + 1)) - Integer.valueOf(line.substring(3, index)));
+            }
+        }
     }
 
 
     private void daZao() {
         for (int i = 0; i < cfNum; i++) {
             htmlContent.linkName("裁缝铺", i, true);
-            if (htmlContent.getText().contains("正在打造踏云帽")) {
-                return;
-            }
-            for (int j = 0; j < count; j++) {
-                if ((i + 1) % 6 == 0) {
+            for (int j = 0; j < 1000; j++) {
+                if ((double) wujiang / (shibing + 1) >= 5.5) {
+                    formSubmit.setValue("10");
+                    shibing++;
                     daZao("打造士兵防具");
                 } else {
+                    wujiang++;
+                    formSubmit.setValue("10");
                     daZao("打造武将防具");
                 }
                 if (!htmlContent.exitsName("打造士兵防具")) {
@@ -106,9 +124,9 @@ public class TaYuMao extends BaseStep {
             htmlContent.linkName("返回裁缝铺列表");
         }
         htmlContent.linkName("返回游戏");
-        if(cfNum>0){
-            goodsSale.run();
-        }
+//        if (cfNum > 0) {
+//            //goodsSale.run();
+//        }
     }
 
     private void daZao(String type) {
@@ -116,10 +134,36 @@ public class TaYuMao extends BaseStep {
         htmlContent.linkName("帽子");
         htmlContent.linkName("踏云帽", true);
         formSubmit.run();
+        //武将装备踏云帽78件,还差1122件
+        String text = htmlContent.getText();
+        if (text.contains("你没有足够的武将的防具.踏云帽，你现在只有")) {
+            int index1 = text.indexOf("武将装备踏云帽");
+            int index2 = text.indexOf("件,还");
+            int num = Integer.valueOf(text.substring(index1 + 7, index2));
+            if ((num / 24) > 0) {
+                htmlContent.linkName("返回上级");
+                formSubmit.setValue(String.valueOf(num / 24));
+                formSubmit.run();
+            }
+        }
+    }
+
+    private void buildShiJian() {
+        String text = htmlContent.getText();
+        String[] lines = text.split("\\s");
+        for (String line : lines) {
+            if (line.contains("正在打造踏云帽（士兵）")) {
+                shibing++;
+                //System.out.println("士兵->>"+line);
+            } else if (line.contains("正在打造踏云帽")) {
+               // System.out.println("武将->>"+line);
+                wujiang++;
+            }
+        }
     }
 
 
     public static void main(String[] args) {
-        new TaYuMao().buildCount();
+        new TaYuMao().buildShiJian();
     }
 }

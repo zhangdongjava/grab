@@ -237,7 +237,7 @@ public class HtmlContent {
 
     public void vailte() {
         try {
-            if (exitsName("继续", false)&&document.getElementsByTag("a").size()<3) {
+            if (exitsName("继续", false)&&document.getElementsByTag("a").size()<10) {
                 linkUrl(getUrl("继续", false).getUrl());
             }
             if (exitsName("解除验证", false)) {

@@ -37,7 +37,7 @@ public class DangKou extends FuBen {
         htmlContent.linkName("其它");
         htmlContent.linkName("上页");
         htmlContent.linkName("首页");
-        while (!htmlContent.exitsName("御赐讨伐令箭",true)){
+        while (!htmlContent.exitsName("御赐讨伐令箭",true)&&htmlContent.exitsName("下.页")){
             htmlContent.linkName("下.页");
         }
         htmlContent.linkName("御赐讨伐令箭",true);

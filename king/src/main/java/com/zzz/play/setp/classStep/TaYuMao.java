@@ -55,7 +55,7 @@ public class TaYuMao extends BaseStep {
         htmlContent.linkName("庄院");
         htmlContent.linkName("庄院\\");
         buildCount();
-        if(shijian==0){
+        if (shijian < 2) {
             return false;
         }
         htmlContent.linkName("事件列表", true);
@@ -108,6 +108,9 @@ public class TaYuMao extends BaseStep {
         for (int i = 0; i < cfNum; i++) {
             htmlContent.linkName("裁缝铺", i, true);
             for (int j = 0; j < 1000; j++) {
+                if (shijian == 1) {
+                    return;
+                }
                 if ((double) wujiang / (shibing + 1) >= 5.5) {
                     formSubmit.setValue("10");
                     shibing++;
@@ -119,6 +122,8 @@ public class TaYuMao extends BaseStep {
                 }
                 if (!htmlContent.exitsName("打造士兵防具")) {
                     break;
+                } else {
+                    shijian--;
                 }
             }
             htmlContent.linkName("返回裁缝铺列表");
@@ -156,7 +161,7 @@ public class TaYuMao extends BaseStep {
                 shibing++;
                 //System.out.println("士兵->>"+line);
             } else if (line.contains("正在打造踏云帽")) {
-               // System.out.println("武将->>"+line);
+                // System.out.println("武将->>"+line);
                 wujiang++;
             }
         }

@@ -64,6 +64,7 @@ public class TaYuMao extends BaseStep {
         htmlContent.linkName("间", 6, true);
         paseCf();
         daZao();
+        htmlContent.linkName("返回游戏");
         return true;
     }
 

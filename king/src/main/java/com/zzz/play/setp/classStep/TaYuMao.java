@@ -155,6 +155,14 @@ public class TaYuMao extends BaseStep {
     }
 
     private void buildShiJian() {
+        do {
+            buildCurrPage();
+        }while (htmlContent.linkName("下.页").isSuccess());
+        System.out.println("士兵->>"+shibing);
+        System.out.println("武将->>"+wujiang);
+    }
+
+    private void buildCurrPage() {
         String text = htmlContent.getText();
         String[] lines = text.split("\\s");
         for (String line : lines) {

@@ -111,7 +111,7 @@ public class TaYuMao extends BaseStep {
                 if (shijian == 1) {
                     return;
                 }
-                if ((double) wujiang / (shibing + 1) >= 3) {
+                if ((double) wujiang / (shibing + 1) >= 4) {
                     formSubmit.setValue("10");
                     shibing++;
                     daZao("打造士兵防具");

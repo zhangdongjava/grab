@@ -182,6 +182,7 @@ public class CoreController {
                     scriptReload = false;
                 }
                 for (Runable parse : runParses) {
+                    if(!runing)break run;
                     try {
                         if (parse.isClear() && exec) {
                             utilDto.clearUtil.fzClear(content);

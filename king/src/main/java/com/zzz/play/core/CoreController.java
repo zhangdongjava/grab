@@ -246,6 +246,9 @@ public class CoreController {
      */
     public void kill() {
         runing = false;
+        if(future != null){
+            future.cancel(true);
+        }
     }
 
 }

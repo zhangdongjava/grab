@@ -15,7 +15,6 @@ public class HomeStep2 extends BaseStep {
     private int homeLv;
 
 
-
     /**
      * 剩余建筑
      */
@@ -29,6 +28,8 @@ public class HomeStep2 extends BaseStep {
      * 升级下标
      */
     private int upgradeIndex;
+
+    private int shijian;
 
 
     @Override
@@ -47,6 +48,8 @@ public class HomeStep2 extends BaseStep {
         htmlContent.linkName("升级");
         htmlContent.linkName("确定升级");
         htmlContent.linkName("返回庄院管理");
+        buildCount();
+        if (shijian < 2) return;
         build();
         upgrade();
     }
@@ -89,6 +92,7 @@ public class HomeStep2 extends BaseStep {
             String text = htmlContent.getText();
             String[] lines = text.split("\\s");
             for (String line : lines) {
+                if (shijian < 2) return;
                 if (line != null && !"".equals(line.trim()))
                     upgradeBuild(line.trim());
             }
@@ -109,6 +113,7 @@ public class HomeStep2 extends BaseStep {
                 htmlContent.linkName("升级", upgradeIndex);
                 htmlContent.linkName("确定升级");
                 upgradeIndex--;
+                shijian--;
             }
             upgradeIndex++;
         }
@@ -147,6 +152,19 @@ public class HomeStep2 extends BaseStep {
         }
     }
 
+
+    /**
+     * 计算剩余事件
+     */
+    private void buildCount() {
+        String[] lines = htmlContent.getText().split("\\s");
+        for (String line : lines) {
+            if (line.startsWith("事件:")) {
+                int index = line.indexOf("/");
+                shijian = (Integer.valueOf(line.substring(index + 1)) - Integer.valueOf(line.substring(3, index)));
+            }
+        }
+    }
 
 
     @Override

@@ -113,12 +113,12 @@ public class TaYuMao extends BaseStep {
                     return;
                 }
                 if ((double) wujiang / (shibing + 1) >= 4) {
-                    formSubmit.setValue("10");
+                    formSubmit.setValue("20");
                     shibing++;
                     daZao("打造士兵防具");
                 } else {
                     wujiang++;
-                    formSubmit.setValue("10");
+                    formSubmit.setValue("20");
                     daZao("打造武将防具");
                 }
                 if (!htmlContent.exitsName("打造士兵防具")) {

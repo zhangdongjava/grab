@@ -68,13 +68,12 @@ public class HtmlPanel extends JPanel {
     private Font font;
 
 
-
     public HtmlPanel(TabPanel tabPanel, UserInfo user, MainWindow mainWindow) throws Exception {
         this.tabPanel = tabPanel;
         this.mainWindow = mainWindow;
-        font=new Font("宋体",Font.PLAIN,10);
+        font = new Font("宋体", Font.PLAIN, 10);
         this.setLayout(null);
-       // this.setBounds(100, 0, WIDTH, HEIGHT);
+        // this.setBounds(100, 0, WIDTH, HEIGHT);
         this.user = user;
         this.url = user.getUrl();
         run();
@@ -82,11 +81,11 @@ public class HtmlPanel extends JPanel {
 
 
     public void setHtml(String html) {
-       // System.out.println(html);
+        // System.out.println(html);
         view.setHtml(html);
     }
 
-    public void setShowTime(long time,String url) {
+    public void setShowTime(long time, String url) {
         urlTextField.setText(url);
         view.url = url;
         showTime.setText(Long.toString(time));
@@ -112,7 +111,7 @@ public class HtmlPanel extends JPanel {
         pause.setEnabled(false);
         script = new JButton("脚本");
         // script2 = new Button("脚本2");
-       // logBtn = new JButton("ui off");
+        // logBtn = new JButton("ui off");
 
         go.addActionListener(event -> goScript());
         // go2.setOnAction(event -> goScript2());
@@ -120,7 +119,7 @@ public class HtmlPanel extends JPanel {
         script.addActionListener(event -> script(user.getScritps1()));
         // script2.setOnAction(event -> script(user.getScritps2()));
         setBtn.addActionListener(event -> setProperty());
-       // logBtn.addActionListener(event -> logSet());
+        // logBtn.addActionListener(event -> logSet());
         loadBtn.addActionListener(event -> loadBtn());
         kill.addActionListener(event -> kill());
         // closeBtn.setOnAction(event -> close());
@@ -135,8 +134,8 @@ public class HtmlPanel extends JPanel {
         pause.setBounds(60, 30, 50, 30);
         script.setFont(font);
         script.setBounds(120, 30, 50, 30);
-       // logBtn.setFont(font);
-       // logBtn.setBounds(230, 30, 50, 30);
+        // logBtn.setFont(font);
+        // logBtn.setBounds(230, 30, 50, 30);
         //第三排
         fontVal.setFont(font);
         fontVal.setBounds(0, 60, 50, 30);
@@ -180,7 +179,7 @@ public class HtmlPanel extends JPanel {
         pause.setEnabled(false);
         utilDto.waitNotfiy.wait = false;
         pause.setText("暂停");
-        JOptionPane.showConfirmDialog(mainWindow, user.getName() + "-->脚本停止!");
+        System.out.println(user.getName() + "-->脚本停止!");
     }
 
     /**
@@ -213,6 +212,7 @@ public class HtmlPanel extends JPanel {
             return;
         }
         ruing = true;
+        controller.runing = true;
         String location = view.url;
         if (location != null && !"".equals(location)) {
             content.setBaseUrl(location);
@@ -236,25 +236,25 @@ public class HtmlPanel extends JPanel {
      * 暂停或继续
      */
     public void pauseGoon() {
-            ThreadPoolUtil.addThread(()->{
-                if (utilDto.waitNotfiy.wait) {
-                    isWait = false;
-                    utilDto.waitNotfiy.wait = false;
-                    String location = view.url;
-                    if (location != null && !"".equals(location)) {
-                        content.linkUrl(location);
-                    }
-                    text = ("暂停");
-                    System.out.println("开始唤醒!");
-                    utilDto.waitNotfiy.anotfiy();
-                    System.out.println("唤醒成功!");
-                } else {
-                    utilDto.waitNotfiy.wait = true;
-                    isWait = true;
-                    text = ("继续");
+        ThreadPoolUtil.addThread(() -> {
+            if (utilDto.waitNotfiy.wait) {
+                isWait = false;
+                utilDto.waitNotfiy.wait = false;
+                String location = view.url;
+                if (location != null && !"".equals(location)) {
+                    content.linkUrl(location);
                 }
-                pause.setText(text);
-            });
+                text = ("暂停");
+                System.out.println("开始唤醒!");
+                utilDto.waitNotfiy.anotfiy();
+                System.out.println("唤醒成功!");
+            } else {
+                utilDto.waitNotfiy.wait = true;
+                isWait = true;
+                text = ("继续");
+            }
+            pause.setText(text);
+        });
     }
 
     public void init() {

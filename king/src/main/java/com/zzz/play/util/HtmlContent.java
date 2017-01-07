@@ -250,6 +250,7 @@ public class HtmlContent {
                 htmlPanel.utilDto.clearUtil.clearPack(this);
             }
             if (!controller.runing) {
+                System.out.println(htmlPanel.user.getName() + "->>脚本终止!");
                 throw new RunStopException("停止!~");
             }
             if (document.text().contains("事件容器已满")) {
@@ -300,6 +301,7 @@ public class HtmlContent {
             printfUrl(url);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
+            throw  new RunStopException("线程中断!");
         } catch (IOException e) {
             System.out.println(count + 1 + "次尝试链接..." + url);
             linkUrl(url, count + 1);

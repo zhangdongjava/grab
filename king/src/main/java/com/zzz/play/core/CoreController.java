@@ -173,39 +173,45 @@ public class CoreController {
         }
         future = ThreadPoolUtil.addThread(() -> {
             runing = true;
-            boolean exec = true;
+
             System.out.println(user.getName() + "-->脚本开始!");
             run:
-            while (!Thread.interrupted() && runing) {
+            while (runing) {
                 System.out.println("运行一遍脚本!");
                 if (scriptReload || runParses.isEmpty()) {//脚本重新加载了 才会拿来执行
                     runParses.clear();
                     runParses.addAll(cache1);
                     scriptReload = false;
                 }
-                for (Runable parse : runParses) {
-                    System.out.println("运行一个脚本");
-                    if (!runing) break;
-                    try {
-                        if (parse.isClear() && exec) {
-                            utilDto.clearUtil.fzClear(content);
-                        }
-                        exec = parse.run();
-                    } catch (StopCurrStepException e) {
-                        System.out.println(parse.getFileName() + "->" + e.toString());
-                    } catch (RunStopException e) {
-                        System.out.println(htmlPanel.user.getName() + "->>脚本终止!");
-                        break;
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        System.out.println(parse.getFileName() + "->运行脚本异常!" + e.toString());
-                    }
-                }
+                runScripts(runParses);
                 System.gc();
             }
             htmlPanel.killed();
         });
 
+    }
+
+
+    private void runScripts(List<Runable> runParses) {
+        boolean exec = true;
+        for (Runable parse : runParses) {
+            System.out.println("运行一个脚本");
+            if (!runing) return;
+            try {
+                if (parse.isClear() && exec) {
+                    utilDto.clearUtil.fzClear(content);
+                }
+                exec = parse.run();
+            } catch (StopCurrStepException e) {
+                System.out.println(parse.getFileName() + "->" + e.toString());
+            } catch (RunStopException e) {
+                System.out.println(htmlPanel.user.getName() + "->>脚本终止!");
+                return;
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println(parse.getFileName() + "->运行脚本异常!" + e.toString());
+            }
+        }
     }
 
 
@@ -240,9 +246,6 @@ public class CoreController {
      */
     public void kill() {
         runing = false;
-        if (future != null) {
-            future.cancel(true);
-        }
     }
 
 }

@@ -168,7 +168,6 @@ public class HtmlPanel extends JPanel {
      * 停止当前运行脚本线程
      */
     private void kill() {
-        isClose = false;
         controller.kill();
     }
 
@@ -237,24 +236,25 @@ public class HtmlPanel extends JPanel {
      * 暂停或继续
      */
     public void pauseGoon() {
-
-        if (utilDto.waitNotfiy.wait) {
-            isWait = false;
-            utilDto.waitNotfiy.wait = false;
-            String location = view.url;
-            if (location != null && !"".equals(location)) {
-                content.linkUrl(location);
-            }
-            text = ("暂停");
-            System.out.println("开始唤醒!");
-            utilDto.waitNotfiy.anotfiy();
-            System.out.println("唤醒成功!");
-        } else {
-            utilDto.waitNotfiy.wait = true;
-            isWait = true;
-            text = ("继续");
-        }
-        pause.setText(text);
+            ThreadPoolUtil.addThread(()->{
+                if (utilDto.waitNotfiy.wait) {
+                    isWait = false;
+                    utilDto.waitNotfiy.wait = false;
+                    String location = view.url;
+                    if (location != null && !"".equals(location)) {
+                        content.linkUrl(location);
+                    }
+                    text = ("暂停");
+                    System.out.println("开始唤醒!");
+                    utilDto.waitNotfiy.anotfiy();
+                    System.out.println("唤醒成功!");
+                } else {
+                    utilDto.waitNotfiy.wait = true;
+                    isWait = true;
+                    text = ("继续");
+                }
+                pause.setText(text);
+            });
     }
 
     public void init() {

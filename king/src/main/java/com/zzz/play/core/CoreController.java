@@ -20,6 +20,7 @@ import com.zzz.play.util.sys.LoggerUtil;
 import com.zzz.play.util.sys.SetProperties;
 import org.apache.log4j.Logger;
 
+import javax.swing.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -153,8 +154,8 @@ public class CoreController {
         }
     }
 
-    private void addSysScript(){
-        if(SetProperties.getSetBean().isRunsys()){
+    private void addSysScript() {
+        if (SetProperties.getSetBean().isRunsys()) {
             if (sysTextParse == null) {
                 sysTextParse = new SysTextParse(content);
             }
@@ -199,6 +200,7 @@ public class CoreController {
             }
             htmlPanel.killed();
         });
+        JOptionPane.showConfirmDialog(htmlPanel.mainWindow,"脚本运行停止!");
     }
 
 
@@ -232,8 +234,8 @@ public class CoreController {
      * 终止脚本
      */
     public void kill() {
+        runing = false;
         if (future != null) {
-            runing = false;
             future.cancel(true);
         }
     }

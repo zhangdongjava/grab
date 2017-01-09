@@ -21,7 +21,7 @@ public class YouAnCi extends FuBen {
 
     @Override
     public String saveLine() {
-        return "四象符,星宿符,八卦符";
+        return "统帅奇书";
     }
 
     @Override

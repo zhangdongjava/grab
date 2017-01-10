@@ -1,13 +1,19 @@
 package com.zzz.play.setp.sys;
 
 import com.zzz.play.bean.SetBean;
+import com.zzz.play.core.CoreController;
 import com.zzz.play.inter.Runable;
 import com.zzz.play.setp.Step;
+import com.zzz.play.setp.TextParse;
 import com.zzz.play.setp.activity.GeiXingGuang;
 import com.zzz.play.setp.classStep.impl.*;
 import com.zzz.play.util.HtmlContent;
+import com.zzz.play.util.UtilDto;
 import com.zzz.play.util.sys.SetProperties;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 
 /**
@@ -19,10 +25,12 @@ public class SysTextParse implements Runable {
 
     private LinkedList<Step> steps;
 
-    public SysTextParse(HtmlContent htmlContent) {
+    public SysTextParse(HtmlContent htmlContent, UtilDto utilDto, CoreController controller) throws Exception {
         this.htmlContent = htmlContent;
         SetBean sets = SetProperties.getSetBean();
-
+        InputStream inputStream = this.getClass().getResourceAsStream("Systext");
+        TextParse textParse = TextParse.getInstance(inputStream, htmlContent, utilDto, controller);
+        textParse.run();
         steps = new LinkedList<>();
         steps.add(new XiuShen(htmlContent));
         steps.add(new XiangGuang(htmlContent));

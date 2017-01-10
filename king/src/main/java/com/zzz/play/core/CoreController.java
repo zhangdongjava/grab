@@ -157,7 +157,12 @@ public class CoreController {
     private void addSysScript() {
         if (SetProperties.getSetBean().isRunsys()) {
             if (sysTextParse == null) {
-                sysTextParse = new SysTextParse(content);
+                try {
+                    sysTextParse = new SysTextParse(content,this.utilDto,this);
+                } catch (Exception e) {
+                    System.out.println("sysTextParse初始化失败!!");
+                    return;
+                }
             }
             cache1.add(sysTextParse);
         }

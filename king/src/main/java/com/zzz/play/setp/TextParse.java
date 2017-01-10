@@ -17,10 +17,7 @@ import com.zzz.play.util.HtmlContent;
 import com.zzz.play.util.StepUtil;
 import com.zzz.play.util.UtilDto;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 
@@ -38,7 +35,7 @@ public class TextParse implements Runable {
     private LinkedList<Step> linkedList;
     private LinkedList<Step> baseList;
 
-    private File file;
+    private InputStream inputStream;
 
 
     private HtmlContent htmlContent;
@@ -83,7 +80,17 @@ public class TextParse implements Runable {
 
     public static TextParse getInstance(String file, HtmlContent htmlContent, UtilDto utilDto, CoreController controller) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         TextParse textParse = new TextParse();
-        textParse.file = new File(file);
+        textParse.inputStream = new FileInputStream(file);
+        textParse.htmlContent = htmlContent;
+        textParse.utilDto = utilDto;
+        textParse.controller = controller;
+        textParse.bulid();
+        return textParse;
+    }
+
+    public static TextParse getInstance(InputStream inputStream, HtmlContent htmlContent, UtilDto utilDto, CoreController controller) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+        TextParse textParse = new TextParse();
+        textParse.inputStream = inputStream;
         textParse.htmlContent = htmlContent;
         textParse.utilDto = utilDto;
         textParse.controller = controller;
@@ -93,7 +100,7 @@ public class TextParse implements Runable {
 
     private void bulid() throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, ClassNotFoundException, InstantiationException {
         linkedList.clear();
-        BufferedReader reader = new BufferedReader(new FileReader(file));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String line = reader.readLine();
         config = JSON.parseObject(line, RunConfig.class);
         int index = 1;

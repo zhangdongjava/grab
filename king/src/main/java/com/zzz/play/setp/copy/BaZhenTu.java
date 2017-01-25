@@ -140,17 +140,18 @@ public class BaZhenTu extends FuBen {
         htmlContent.linkName("撤消近身");
         htmlContent.linkName("撤消近身");
         htmlContent.linkName("撤消近身");
-        htmlContent.linkName("武松", true);
-        htmlContent.linkName("设为近身武将");
-        htmlContent.linkName("我的武将");
-        htmlContent.linkName("鲁智深", true);
-        htmlContent.linkName("设为近身武将");
-        htmlContent.linkName("我的武将");
-        htmlContent.linkName("周武师", true);
-        htmlContent.linkName("设为近身武将");
-        htmlContent.linkName("我的武将");
-        htmlContent.linkName("柴进", true);
-        htmlContent.linkName("设为近身武将");
+        htmlContent.linkName("我的军队");
+        htmlContent.linkName("炮灰", true);
+        htmlContent.linkName("设为近身军队");
+        htmlContent.linkName("我的军队");
+        htmlContent.linkName("防御", true);
+        htmlContent.linkName("设为近身军队");
+        htmlContent.linkName("我的军队");
+        htmlContent.linkName("辅2", true);
+        htmlContent.linkName("设为近身军队");
+        htmlContent.linkName("我的军队");
+        htmlContent.linkName("主C", true);
+        htmlContent.linkName("设为近身军队");
         htmlContent.linkName("我的武将");
         htmlContent.linkName("返回游戏");
     }
@@ -158,11 +159,22 @@ public class BaZhenTu extends FuBen {
     public void outwujiang() {
         htmlContent.linkName("返回游戏");
         htmlContent.linkName("武将");
-        htmlContent.linkName("武松", true);
-        htmlContent.linkName("撤销近身武将");
-        htmlContent.linkName("我的武将");
-        htmlContent.linkName("史进", true);
-        htmlContent.linkName("设为近身武将");
+        htmlContent.linkName("撤消近身");
+        htmlContent.linkName("撤消近身");
+        htmlContent.linkName("撤消近身");
+        htmlContent.linkName("撤消近身");
+        htmlContent.linkName("我的军队");
+        htmlContent.linkName("防御", true);
+        htmlContent.linkName("设为近身军队");
+        htmlContent.linkName("我的军队");
+        htmlContent.linkName("辅1", true);
+        htmlContent.linkName("设为近身军队");
+        htmlContent.linkName("我的军队");
+        htmlContent.linkName("辅2", true);
+        htmlContent.linkName("设为近身军队");
+        htmlContent.linkName("我的军队");
+        htmlContent.linkName("主C", true);
+        htmlContent.linkName("设为近身军队");
         htmlContent.linkName("我的武将");
         htmlContent.linkName("返回游戏");
     }

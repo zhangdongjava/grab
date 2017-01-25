@@ -28,21 +28,18 @@ public class SysTextParse implements Runable {
     public SysTextParse(HtmlContent htmlContent, UtilDto utilDto, CoreController controller) throws Exception {
         this.htmlContent = htmlContent;
         SetBean sets = SetProperties.getSetBean();
-        InputStream inputStream = this.getClass().getResourceAsStream("Systext");
-        TextParse textParse = TextParse.getInstance(inputStream, htmlContent, utilDto, controller);
-        textParse.run();
         steps = new LinkedList<>();
-        steps.add(new XiuShen(htmlContent));
-        steps.add(new XiangGuang(htmlContent));
-        steps.add(new SaveBrank(htmlContent));
+        //steps.add(new XiuShen(htmlContent));
+        //steps.add(new XiangGuang(htmlContent));
+       // steps.add(new SaveBrank(htmlContent));
         steps.add(new XiuLi(htmlContent));
-        if (sets.isBaiyin()) {
-            steps.add(new BaiYinYaoShi(htmlContent));
-        }
-        steps.add(new DaTi(htmlContent));
-        if (sets.isYinzi()) {
-            steps.add(new YinLiang(htmlContent));
-        }
+//        if (sets.isBaiyin()) {
+//            steps.add(new BaiYinYaoShi(htmlContent));
+//        }
+//        steps.add(new DaTi(htmlContent));
+//        if (sets.isYinzi()) {
+//            steps.add(new YinLiang(htmlContent));
+//        }
     }
 
 

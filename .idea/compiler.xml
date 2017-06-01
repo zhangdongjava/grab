@@ -22,6 +22,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="king" />
+        <module name="kingweb" />
+        <module name="logger" />
+        <module name="swingdemo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8" />

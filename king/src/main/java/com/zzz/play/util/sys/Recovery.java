@@ -35,7 +35,7 @@ public class Recovery {
         try {
             UiResourceUtil.cacheSave(map,"cache/"+mainWindow.htmlPanels.get(0).user.getName());
         } catch (IOException e) {
-            logger.error("临时恢复保存失败!" + map);
+            logger.error("临时恢复保存失败!" + map,e);
         }
     }
 
